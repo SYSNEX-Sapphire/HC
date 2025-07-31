@@ -17,5 +17,6 @@ namespace SapphireXR_App.Views
         {
             Util.ConfirmBeforeToggle(sender, e);
         }
+
     }
 }

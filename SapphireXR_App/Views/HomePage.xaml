@@ -307,10 +307,10 @@
 
                 <!-- #Region 4. 상태 모니터링(가스압력, 항온조, 반응기) -->
                 <!-- 공정가스 압력 모니터링 -->
-                <control:GasMonitor x:Name="gasMonitor_H2" Canvas.Left="30" Canvas.Top="20"  MonitorID="Gas1"/>
-                <control:GasMonitor x:Name="gasMonitor_N2" Canvas.Left="155" Canvas.Top="20"  MonitorID="Gas2"/>
-                <control:GasMonitor x:Name="gasMonitor_NH3" Canvas.Left="280" Canvas.Top="20"  MonitorID="Gas3"/>
-                <control:GasMonitor x:Name="gasMonitor_SiH4" Canvas.Left="574" Canvas.Top="20"  MonitorID="Gas4"/>
+                <control:GasMonitor x:Name="gasMonitor_N2" Canvas.Left="85" Canvas.Top="20"  MonitorID="Gas1"/>
+                <control:GasMonitor x:Name="gasMonitor_HCL" Canvas.Left="185" Canvas.Top="20"  MonitorID="Gas2"/>
+                <control:GasMonitor x:Name="gasMonitor_NH3" Canvas.Left="785" Canvas.Top="20"  MonitorID="Gas3"/>
+                <control:GasMonitor x:Name="gasMonitor_DCS" Canvas.Left="985" Canvas.Top="20"  MonitorID="Gas4"/>
 
                 <!-- 항온조 온도 모니터링 -->
                 <control:SourceMonitor x:Name="sourceMonitor_1" Canvas.Left="213" Canvas.Top="705" MonitorID="Source1" />
@@ -325,26 +325,26 @@
 
                 <Label Canvas.Left="758" Canvas.Top="33" Foreground="{StaticResource PrimaryFontColor}" Content="Temperature"
                 Width="80" HorizontalContentAlignment="Center"/>
-            <control:HomeFlowController x:Name="susceptorTemperature" Canvas.Left="763" Canvas.Top="60" ControllerID="Temperature" Type="Reactor"/>
-            <control:MonitoringMeter x:Name="heaterPowerRate" Canvas.Left="763" Canvas.Top="102" Type="HeaterPowerRate" />
+                <control:HomeFlowController x:Name="susceptorTemperature" Canvas.Left="763" Canvas.Top="60" ControllerID="Temperature" Type="Reactor"/>
+                <control:MonitoringMeter x:Name="heaterPowerRate" Canvas.Left="763" Canvas.Top="102" Type="HeaterPowerRate" />
 
                 <Label Canvas.Left="848" Canvas.Top="33" Foreground="{StaticResource PrimaryFontColor}" Content="Pressure"
                 Width="80" HorizontalContentAlignment="Center"/>
-            <control:HomeFlowController x:Name="reactorPressure" Canvas.Left="853" Canvas.Top="60" ControllerID="Pressure" Type="Reactor"/>
-            <control:MonitoringMeter x:Name="ultimatePressure" Canvas.Left="853" Canvas.Top="102" Type="UltimatePressure" />
+                <control:HomeFlowController x:Name="reactorPressure" Canvas.Left="853" Canvas.Top="60" ControllerID="Pressure" Type="Reactor"/>
+                <control:MonitoringMeter x:Name="ultimatePressure" Canvas.Left="853" Canvas.Top="102" Type="UltimatePressure" />
 
                 <Label Canvas.Left="938" Canvas.Top="33" Foreground="{StaticResource PrimaryFontColor}" Content="Rotation"
                 Width="80" HorizontalContentAlignment="Center"/>
-            <control:HomeFlowController x:Name="susceptorRotation" Canvas.Left="943" Canvas.Top="60" ControllerID="Rotation" Type="Reactor"/>
+                <control:HomeFlowController x:Name="susceptorRotation" Canvas.Left="943" Canvas.Top="60" ControllerID="Rotation" Type="Reactor"/>
 
                 <Label Canvas.Left="1220" Canvas.Top="92" Foreground="{StaticResource PrimaryFontColor}" Content="DOR"
                 Width="40" HorizontalContentAlignment="Center"/>
-            <control:MonitoringMeter x:Name="dorPressure" Canvas.Left="1205" Canvas.Top="74" Type="DorPressure"/>
-            <control:OnSwitch x:Name="dorState" Canvas.Left="1228" Canvas.Top="118"/>
+                <control:MonitoringMeter x:Name="dorPressure" Canvas.Left="1205" Canvas.Top="74" Type="DorPressure"/>
+                <control:OnSwitch x:Name="dorState" Canvas.Left="1228" Canvas.Top="118"/>
 
                 <Label Canvas.Left="1168" Canvas.Top="511" Foreground="{StaticResource PrimaryFontColor}" Content="Ext. Pressure"
                 Width="80" HorizontalContentAlignment="Center"/>
-            <control:MonitoringMeter x:Name="extPressure" Canvas.Left="1173" Canvas.Top="536"  Type="ExtPressure"/>
+                <control:MonitoringMeter x:Name="extPressure" Canvas.Left="1173" Canvas.Top="536"  Type="ExtPressure"/>
 
                 <!--#endregion-->
 
@@ -429,10 +429,14 @@
                 <control:BypassValve x:Name="V16" Canvas.Left="642" Canvas.Top="629" ValveID="V16" />
                 <control:BypassValve x:Name="V19" Canvas.Left="782" Canvas.Top="629" ValveID="V19" />
                 <control:BypassValve x:Name="V22" Canvas.Left="980" Canvas.Top="629" ValveID="V22" />
-                <control:SingleValve x:Name="V33" Canvas.Left="1116" Canvas.Top="522" ValveID="V33" />
+
+                <!-- HVPE 수정 2025 -->
+                <control:SingleValve x:Name="V33" Canvas.Left="108" Canvas.Top="138" ValveID="V33" />
                 <control:SingleValve x:Name="V34" Canvas.Left="1116" Canvas.Top="546" ValveID="V34" />
                 <control:SingleValve x:Name="V35" Canvas.Left="1228" Canvas.Top="178" ValveID="V35" />
                 <control:SingleValve x:Name="V36" Canvas.Left="1257" Canvas.Top="178" ValveID="V36" />
+
+
                 <!-- Button for Leak Test Valve -->
                 <Canvas Visibility="{Binding DataContext.OnLeakTestVisibility, ElementName=homePage}">
                     <control:LeakTestValve x:Name="V37" Canvas.Left="579" Canvas.Top="62" ValveID="V37" />
@@ -507,18 +511,18 @@
 
                 <!-- #Region 6. 가스 제어(MFC, EPC) -->
                 <!--MFC Contol Box!-->
-                <control:HomeFlowController x:Name="MFC01" Canvas.Left="126" Canvas.Top="344" ControllerID="MFC01" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC02" Canvas.Left="126" Canvas.Top="290" ControllerID="MFC02" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC03" Canvas.Left="348" Canvas.Top="191" ControllerID="MFC03" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC04" Canvas.Left="268" Canvas.Top="191" ControllerID="MFC04" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC05" Canvas.Left="562" Canvas.Top="141" ControllerID="MFC05" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC06" Canvas.Left="482" Canvas.Top="141" ControllerID="MFC06" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC07" Canvas.Left="562" Canvas.Top="191" ControllerID="MFC07" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC08" Canvas.Left="184" Canvas.Top="575" ControllerID="MFC08" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC09" Canvas.Left="324" Canvas.Top="575" ControllerID="MFC09" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC10" Canvas.Left="464" Canvas.Top="575" ControllerID="MFC10" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC11" Canvas.Left="604" Canvas.Top="575" ControllerID="MFC11" Type="MFC" />
-                <control:HomeFlowController x:Name="MFC12" Canvas.Left="744" Canvas.Top="575" ControllerID="MFC12" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC01" Canvas.Left="85" Canvas.Top="206" ControllerID="MFC01" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC02" Canvas.Left="185" Canvas.Top="206" ControllerID="MFC02" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC03" Canvas.Left="285" Canvas.Top="206" ControllerID="MFC03" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC04" Canvas.Left="385" Canvas.Top="206" ControllerID="MFC04" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC05" Canvas.Left="485" Canvas.Top="206" ControllerID="MFC05" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC06" Canvas.Left="585" Canvas.Top="206" ControllerID="MFC06" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC07" Canvas.Left="685" Canvas.Top="206" ControllerID="MFC07" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC08" Canvas.Left="785" Canvas.Top="206" ControllerID="MFC08" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC09" Canvas.Left="885" Canvas.Top="206" ControllerID="MFC09" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC10" Canvas.Left="985" Canvas.Top="206" ControllerID="MFC10" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC11" Canvas.Left="1085" Canvas.Top="206" ControllerID="MFC11" Type="MFC" />
+                <control:HomeFlowController x:Name="MFC12" Canvas.Left="1185" Canvas.Top="206" ControllerID="MFC12" Type="MFC" />
                 <control:HomeFlowController x:Name="MFC13" Canvas.Left="802" Canvas.Top="531" ControllerID="MFC13" Type="MFC" />
                 <control:HomeFlowController x:Name="MFC14" Canvas.Left="860" Canvas.Top="575" ControllerID="MFC14" Type="MFC" />
                 <control:HomeFlowController x:Name="MFC15" Canvas.Left="942" Canvas.Top="575" ControllerID="MFC15" Type="MFC" />
@@ -590,7 +594,7 @@
                 Width="40" HorizontalContentAlignment="Center" />
                     <Label Canvas.Left="320" Canvas.Top="103" Foreground="{StaticResource SecondaryFontColor}" Content="V04"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="162" Canvas.Top="485" Foreground="{StaticResource SecondaryFontColor}" Content="V05"
+                    <Label Canvas.Left="148" Canvas.Top="485" Foreground="{StaticResource SecondaryFontColor}" Content="V05"
                 Width="40" HorizontalContentAlignment="Center" />
                     <Label Canvas.Left="236" Canvas.Top="485" Foreground="{StaticResource SecondaryFontColor}" Content="V06"
                 Width="40" HorizontalContentAlignment="Center" />
@@ -646,7 +650,9 @@
                 Width="40" HorizontalContentAlignment="Center" />
                     <Label Canvas.Left="1125" Canvas.Top="405" Foreground="{StaticResource SecondaryFontColor}" Content="V32"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="1108" Canvas.Top="502" Foreground="{StaticResource SecondaryFontColor}" Content="V33"
+
+                    <!--HVPE 수정 2025-->
+                    <Label Canvas.Left="125" Canvas.Top="136" Foreground="{StaticResource SecondaryFontColor}" Content="V33"
                 Width="40" HorizontalContentAlignment="Center" />
                     <Label Canvas.Left="1108" Canvas.Top="565" Foreground="{StaticResource SecondaryFontColor}" Content="V34"
                 Width="40" HorizontalContentAlignment="Center" />
@@ -689,29 +695,29 @@
                     <Label Canvas.Left="1076" Canvas.Top="715" Foreground="{StaticResource SecondaryFontColor}" Content="V53"
                 Width="40" HorizontalContentAlignment="Center" Visibility="{Binding OnLeakTestVisibility}" />
 
-                    <Label Canvas.Left="190" Canvas.Top="339" Foreground="DimGray" Content="M01"
+                    <Label Canvas.Left="80" Canvas.Top="236" Foreground="DimGray" Content="M01"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="190" Canvas.Top="304" Foreground="DimGray" Content="M02"
+                    <Label Canvas.Left="180" Canvas.Top="236" Foreground="DimGray" Content="M02"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="412" Canvas.Top="186" Foreground="DimGray" Content="M03"
+                    <Label Canvas.Left="280" Canvas.Top="236" Foreground="DimGray" Content="M03"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="234" Canvas.Top="186" Foreground="DimGray" Content="M04"
+                    <Label Canvas.Left="380" Canvas.Top="236" Foreground="DimGray" Content="M04"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="626" Canvas.Top="136" Foreground="DimGray" Content="M05"
+                    <Label Canvas.Left="480" Canvas.Top="236" Foreground="DimGray" Content="M05"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="448" Canvas.Top="136" Foreground="DimGray" Content="M06"
+                    <Label Canvas.Left="580" Canvas.Top="236" Foreground="DimGray" Content="M06"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="528" Canvas.Top="186" Foreground="DimGray" Content="M07"
+                    <Label Canvas.Left="680" Canvas.Top="236" Foreground="DimGray" Content="M07"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="150" Canvas.Top="570" Foreground="DimGray" Content="M08"
+                    <Label Canvas.Left="780" Canvas.Top="236" Foreground="DimGray" Content="M08"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="290" Canvas.Top="570" Foreground="DimGray" Content="M09"
+                    <Label Canvas.Left="880" Canvas.Top="236" Foreground="DimGray" Content="M09"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="430" Canvas.Top="570" Foreground="DimGray" Content="M10"
+                    <Label Canvas.Left="980" Canvas.Top="236" Foreground="DimGray" Content="M10"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="570" Canvas.Top="570" Foreground="DimGray" Content="M11"
+                    <Label Canvas.Left="1080" Canvas.Top="236" Foreground="DimGray" Content="M11"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="710" Canvas.Top="570" Foreground="DimGray" Content="M12"
+                    <Label Canvas.Left="1180" Canvas.Top="236" Foreground="DimGray" Content="M12"
                 Width="40" HorizontalContentAlignment="Center" />
                     <Label Canvas.Left="866" Canvas.Top="526" Foreground="DimGray" Content="M13"
                 Width="40" HorizontalContentAlignment="Center" />
@@ -1157,7 +1163,7 @@
                                             <TextBox x:Name="btMotorReset" Text="{Binding RotationReset, Mode=OneWay}" Style="{StaticResource DefaultTextBox}" Height="26" IsReadOnly="True"/>
                                         </StackPanel>
                                     </Border>
-                                  
+
                                 </StackPanel>
                             </StackPanel>
                         </Border>
