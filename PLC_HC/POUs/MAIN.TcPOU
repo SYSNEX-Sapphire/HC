@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN" Id="{ce9c9fb1-bf4c-4067-9042-9f2638e29eb0}" SpecialFunc="None">
+    <Declaration><![CDATA[// SappireXR Ver1.3 HVPE Operation 2025.08.08
+PROGRAM MAIN
+VAR
+	bOperationMode	: BOOL; // False:Manual, True:RecipeControl
+	
+	(* IO_TEST *)
+	bTest1 : BOOL;
+	Test2 : BYTE;
+	Test3 : BYTE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[P11_Furnace();
+
+IF NOT(bOperationMode) THEN
+	//P30_ManualControl(state_Control := 10); //매뉴얼 콘트롤
+ELSE
+	//P50_RecipeControl(); //레시피 콘트론
+END_IF
+
+(* IO_TEST *)
+Test2 := GVL_IO.DigitalInputIO;
+GVL_IO.DigitalOutputIO := Test3; // Output Test
+GVL_IO.OutputSolValve.1 := bTest1;]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="8" Count="1" />
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
