@@ -126,7 +126,6 @@
                         <Label Canvas.Left="970" Canvas.Top="406" Foreground="{StaticResource PrimaryFontColor}" Content="Zone #6"
                         Width="80" HorizontalContentAlignment="Center"/>
 
-
                         <control:RecipeEditFlowController x:Name="furnaceZone1" Canvas.Left="375" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
                         <control:RecipeEditFlowController x:Name="furnaceZone2" Canvas.Left="495" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
                         <control:RecipeEditFlowController x:Name="furnaceZone3" Canvas.Left="615" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
@@ -197,7 +196,7 @@
                             <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Backside</TextBlock>
                         </Border>
 
-                        <!--MFC/EPC Label !-->
+                        <!--MFC Label !-->
                         <Label Canvas.Left="80" Canvas.Top="201" Foreground="DimGray" Content="M01" Width="40" HorizontalContentAlignment="Center" />
                         <Label Canvas.Left="180" Canvas.Top="201" Foreground="DimGray" Content="M02" Width="40" HorizontalContentAlignment="Center" />
                         <Label Canvas.Left="280" Canvas.Top="201" Foreground="DimGray" Content="M03" Width="40" HorizontalContentAlignment="Center" />
@@ -223,7 +222,7 @@
                         <Label Canvas.Left="525" Canvas.Top="111" Foreground="{StaticResource PrimaryFontColor}" Content="V05"
                                 Width="40" HorizontalContentAlignment="Center"/>
                         <Label Canvas.Left="625" Canvas.Top="111" Foreground="{StaticResource PrimaryFontColor}" Content="V06"
-                        Width="40" HorizontalContentAlignment="Center"/>
+                                Width="40" HorizontalContentAlignment="Center"/>
                         <Label Canvas.Left="725" Canvas.Top="111" Foreground="{StaticResource PrimaryFontColor}" Content="V07"
                                 Width="40" HorizontalContentAlignment="Center"/>
                         <Label Canvas.Left="825" Canvas.Top="111" Foreground="{StaticResource PrimaryFontColor}" Content="V08"
