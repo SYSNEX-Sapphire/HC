@@ -236,7 +236,7 @@
                Width="100" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                 <Border  Canvas.Left="50" Canvas.Top="380" BorderThickness="2" Background="Gray"  BorderBrush="{StaticResource NitrogenLineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">B/C</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">B/G</TextBlock>
                 </Border>
                 <Border  Canvas.Left="250" Canvas.Top="380" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource HClLineColor}" Width="140" Height="30">
                     <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Ga</TextBlock>
