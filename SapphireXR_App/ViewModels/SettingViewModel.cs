@@ -636,13 +636,9 @@ namespace SapphireXR_App.ViewModels
         {
             List<ValveDeviceIO> valveDeviceIO = new List<ValveDeviceIO>();
 
-            foreach(string valveID in PLCService.ValveIDtoOutputSolValveIdx1.Keys)
+            foreach(string valveID in PLCService.ValveIDtoOutputSolValveIdx.Keys)
             {
                 valveDeviceIO.Add(new () { ID = valveID, Name = valveID, SolValveID = valveID });
-            }
-            foreach (string valveID in PLCService.ValveIDtoOutputSolValveIdx2.Keys)
-            {
-                valveDeviceIO.Add(new() { ID = valveID, Name = valveID, SolValveID = valveID });
             }
 
             return valveDeviceIO;

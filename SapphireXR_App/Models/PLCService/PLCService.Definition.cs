@@ -115,7 +115,7 @@ namespace SapphireXR_App.Models
 
         public enum TriggerType { Alarm = 0, Warning };
 
-        public static readonly Dictionary<string, int> ValveIDtoOutputSolValveIdx1 = new Dictionary<string, int>
+        public static readonly Dictionary<string, int> ValveIDtoOutputSolValveIdx = new Dictionary<string, int>
         {
             { "V01", 0 }, { "V02", 1 }, { "V03", 2 }, { "V04", 3 }, { "V05", 4 },
             { "V06", 5 }, { "V07", 6 }, { "V08", 7 }, { "V09", 8 }, { "V10", 9 },
@@ -123,15 +123,6 @@ namespace SapphireXR_App.Models
             { "V16", 15 }, { "V37", 16 }, { "V38", 17 }, { "V39", 18 }, { "V40", 19 },
             { "V41", 20 }, { "V42", 21 }, { "V43", 22 }, { "V44", 23 },  { "V45", 24 },
             { "V46", 25 }
-        };
-        public static readonly Dictionary<string, int> ValveIDtoOutputSolValveIdx2 = new Dictionary<string, int>
-        {
-            { "V17", 0 }, { "V18", 1 }, { "V19", 2 }, { "V20", 3 }, { "V21", 4 },
-            { "V22", 5 }, { "V23", 6 }, { "V24", 7 }, { "V25", 8 }, { "V26", 9 },
-            { "V27", 10 }, { "V28", 11 }, { "V29", 12 }, { "V30", 13 }, { "V31", 14 },
-            { "V32", 15 }, { "V33", 16 }, { "V34", 17 }, { "V35", 18 }, { "V36", 19 },
-            { "V47", 20 }, { "V48", 21 }, { "V49", 22 }, { "V50", 23 },  { "V51", 24 },
-            { "V52", 25 }, { "V53", 26 }
         };
 
         public static readonly Dictionary<string, int> dIndexController = new Dictionary<string, int>
@@ -172,8 +163,7 @@ namespace SapphireXR_App.Models
         public const uint NumAnalogDevice = 29;
 
         // Variable handles to be connected plc variables
-        private static BitArray? baReadValveStatePLC1 = null;
-        private static BitArray? baReadValveStatePLC2 = null;
+        private static BitArray? baReadValveStatePLC = null;
         private static float[]? aDeviceCurrentValues = null;
         private static float[]? aDeviceControlValues = null;
         private static float[]? aMonitoring_PVs = null;
@@ -241,8 +231,7 @@ namespace SapphireXR_App.Models
         private static DispatcherTimer? connectionTryTimer = null;
 
         // Read from PLC State
-        private static uint hReadValveStatePLC1;
-        private static uint hReadValveStatePLC2;
+        private static uint hReadValveStatePLC;
         private static uint hDeviceMaxValuePLC;
         private static uint hDeviceControlValuePLC;
         private static uint hDeviceCurrentValuePLC;

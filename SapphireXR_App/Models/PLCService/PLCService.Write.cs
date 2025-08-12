@@ -7,12 +7,15 @@ namespace SapphireXR_App.Models
     {
         private static void DoWriteValveState(string valveID, bool onOff)
         {
-            (BitArray buffer, int index, uint variableHandle) = GetBuffer(valveID);
-            buffer[index] = onOff;
+            if (baReadValveStatePLC != null)
+            {
+                int index = ValveIDtoOutputSolValveIdx[valveID];
+                baReadValveStatePLC[index] = onOff;
 
-            uint[] sentBuffer = new uint[1];
-            buffer.CopyTo(sentBuffer, 0);
-            Ads.WriteAny(variableHandle, sentBuffer);
+                uint[] sentBuffer = new uint[1];
+                baReadValveStatePLC.CopyTo(sentBuffer, 0);
+                Ads.WriteAny(hReadValveStatePLC, sentBuffer);
+            }
         }
 
         public static void AddCoupledValves(string leftValveID, string rightValveID)
@@ -62,8 +65,7 @@ namespace SapphireXR_App.Models
                 Ads.WriteAny(variableHandle, buffer);
             };
 
-            doWrite(hReadValveStatePLC1, firstValveParts);
-            doWrite(hReadValveStatePLC2, secondValveParts);
+            doWrite(hReadValveStatePLC, firstValveParts);
         }
 
         public static void WriteDeviceMaxValue(List<AnalogDeviceIO>? analogDeviceIOs)

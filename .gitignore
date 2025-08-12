@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SapphireXR.tsproj.bak
+/SapphireXR.~u
+/PLC_HC/_CompileInfo/30F61046-201F-3336-1DC6-8450242308E9.compileinfo
+/PLC_HC/_CompileInfo/431C26E4-75B3-13F1-1BB4-C64EDC90017C.compileinfo
+/_Boot
+/_Boot/CurrentConfig/PLC_HC.tpzip
+/_Boot/TwinCAT RT (x64)/CurrentConfig/PLC_HC.tpzip
+/_Boot/TwinCAT RT (x64)/Plc/Port_852.app
+/_Boot/TwinCAT RT (x64)/Plc/Port_852.crc
+/_Boot/TwinCAT RT (x64)/Plc/Port_852_boot.tizip
+/_Boot/TwinCAT RT (x64)/CurrentConfig.tszip
+/_Boot/TwinCAT RT (x64)/CurrentConfig.xml

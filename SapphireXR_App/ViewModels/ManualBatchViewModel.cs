@@ -242,11 +242,7 @@ namespace SapphireXR_App.ViewModels
             {
                 newBatch.AnalogIOUserStates.Add(new AnalogIOUserState() { ID = flowController, MaxValue = (int)SettingViewModel.ReadMaxValue(fullName)!, FullIDName = Util.RecipeFlowControlFieldToControllerID[flowController] });
             }
-            foreach((string valve, int idx) in PLCService.ValveIDtoOutputSolValveIdx1)
-            {
-                newBatch.DigitalIOUserStates.Add(new DigitalIOUserState() { ID = valve });
-            }
-            foreach ((string valve, int idx) in PLCService.ValveIDtoOutputSolValveIdx2)
+            foreach((string valve, int idx) in PLCService.ValveIDtoOutputSolValveIdx)
             {
                 newBatch.DigitalIOUserStates.Add(new DigitalIOUserState() { ID = valve });
             }

@@ -1,7 +1,6 @@
 ﻿using SapphireXR_App.Common;
 using SapphireXR_App.Enums;
 using System.Collections;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
 using TwinCAT.Ads;
@@ -149,45 +148,44 @@ namespace SapphireXR_App.Models
             //Read and Write Max Value of PLC 
             hDeviceMaxValuePLC = Ads.CreateVariableHandle("GVL_IO.aMaxValueController");
 
-            hReadValveStatePLC1 = Ads.CreateVariableHandle("GVL_IO.aOutputSolValve[1]");
-            hReadValveStatePLC2 = Ads.CreateVariableHandle("GVL_IO.aOutputSolValve[2]");
+            hReadValveStatePLC = Ads.CreateVariableHandle("GVL_IO.OutputSolValve");
             hWriteDeviceTargetValuePLC = Ads.CreateVariableHandle("GVL_IO.aController_TV");
             hWriteDeviceRampTimePLC = Ads.CreateVariableHandle("GVL_IO.aController_RampTime");
 
-            hMonitoring_PV = Ads.CreateVariableHandle("GVL_IO.aMonitoring_PV");
-            hInputState = Ads.CreateVariableHandle("GVL_IO.aInputState");
-            hInputState4 = Ads.CreateVariableHandle("GVL_IO.aInputState[4]");
-            hDigitalOutput = Ads.CreateVariableHandle("GVL_IO.aDigitalOutputIO");
-            hDigitalOutput2 = Ads.CreateVariableHandle("GVL_IO.aDigitalOutputIO[2]");
-            hOutputCmd = Ads.CreateVariableHandle("GVL_IO.aOutputCmd");
-            hOutputCmd1 = Ads.CreateVariableHandle("GVL_IO.aOutputCmd[1]");
-            hOutputCmd2 = Ads.CreateVariableHandle("GVL_IO.aOutputCmd[2]");
-            for(uint arrayIndex = 0; arrayIndex < NumAlarmWarningArraySize; arrayIndex++)
-            {
-                hInterlockEnable[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlockEnable[" + (arrayIndex + 1) + "]");
-            }
-            for (uint arrayIndex = 0; arrayIndex < NumInterlockSet; arrayIndex++)
-            {
-                hInterlockset[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlockSet[" + (arrayIndex + 1) + "]");
-            }
-            for (uint arrayIndex = 0; arrayIndex < NumInterlock; ++arrayIndex)
-            {
-                hInterlock[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlock[" + (arrayIndex + 1) + "]");
-            }
+            //hMonitoring_PV = Ads.CreateVariableHandle("GVL_IO.aMonitoring_PV");
+            //hInputState = Ads.CreateVariableHandle("GVL_IO.aInputState");
+            //hInputState4 = Ads.CreateVariableHandle("GVL_IO.aInputState[4]");
+            //hDigitalOutput = Ads.CreateVariableHandle("GVL_IO.aDigitalOutputIO");
+            //hDigitalOutput2 = Ads.CreateVariableHandle("GVL_IO.aDigitalOutputIO[2]");
+            //hOutputCmd = Ads.CreateVariableHandle("GVL_IO.aOutputCmd");
+            //hOutputCmd1 = Ads.CreateVariableHandle("GVL_IO.aOutputCmd[1]");
+            //hOutputCmd2 = Ads.CreateVariableHandle("GVL_IO.aOutputCmd[2]");
+            //for(uint arrayIndex = 0; arrayIndex < NumAlarmWarningArraySize; arrayIndex++)
+            //{
+            //    hInterlockEnable[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlockEnable[" + (arrayIndex + 1) + "]");
+            //}
+            //for (uint arrayIndex = 0; arrayIndex < NumInterlockSet; arrayIndex++)
+            //{
+            //    hInterlockset[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlockSet[" + (arrayIndex + 1) + "]");
+            //}
+            //for (uint arrayIndex = 0; arrayIndex < NumInterlock; ++arrayIndex)
+            //{
+            //    hInterlock[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlock[" + (arrayIndex + 1) + "]");
+            //}
 
-            hRcp = Ads.CreateVariableHandle("RCP.aRecipe");
-            hRcpTotalStep = Ads.CreateVariableHandle("RCP.iRcpTotalStep");
-            hCmd_RcpOperation = Ads.CreateVariableHandle("RCP.cmd_RcpOperation");
-            hRcpStepN = Ads.CreateVariableHandle("RCP.iRcpStepN");
-            hTemperaturePV = Ads.CreateVariableHandle("GVL_IO.aLineHeater_rTemperaturePV");
-            hOperationMode = Ads.CreateVariableHandle("MAIN.bOperationMode");
-            hUserState = Ads.CreateVariableHandle("RCP.userState");
-            hRecipeControlHoldTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Hold_ET");
-            hRecipeControlRampTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Ramp_ET");
-            hRecipeControlPauseTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Pause_ET");
-            hE3508InputManAuto = Ads.CreateVariableHandle("GVL_IO.nE3508_nInputManAutoBytes");
-            hOutputSetType = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_SetType");
-            hOutputMode = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_Mode");
+            //hRcp = Ads.CreateVariableHandle("RCP.aRecipe");
+            //hRcpTotalStep = Ads.CreateVariableHandle("RCP.iRcpTotalStep");
+            //hCmd_RcpOperation = Ads.CreateVariableHandle("RCP.cmd_RcpOperation");
+            //hRcpStepN = Ads.CreateVariableHandle("RCP.iRcpStepN");
+            //hTemperaturePV = Ads.CreateVariableHandle("GVL_IO.aLineHeater_rTemperaturePV");
+            //hOperationMode = Ads.CreateVariableHandle("MAIN.bOperationMode");
+            //hUserState = Ads.CreateVariableHandle("RCP.userState");
+            //hRecipeControlHoldTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Hold_ET");
+            //hRecipeControlRampTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Ramp_ET");
+            //hRecipeControlPauseTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Pause_ET");
+            //hE3508InputManAuto = Ads.CreateVariableHandle("GVL_IO.nE3508_nInputManAutoBytes");
+            //hOutputSetType = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_SetType");
+            //hOutputMode = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_Mode");
         }
 
         private static void IntializePubSub()
@@ -218,11 +216,7 @@ namespace SapphireXR_App.Models
                 aMonitoringCurrentValueIssuers.Add(kv.Key, ObservableManager<float>.Get("MonitoringPresentValue." + kv.Key + ".CurrentValue"));
             }
             dValveStateIssuers = new Dictionary<string, ObservableManager<bool>.Publisher>();
-            foreach ((string valveID, int valveIndex) in ValveIDtoOutputSolValveIdx1)
-            {
-                dValveStateIssuers.Add(valveID, ObservableManager<bool>.Get("Valve.OnOff." + valveID + ".CurrentPLCState"));
-            }
-            foreach ((string valveID, int valveIndex) in ValveIDtoOutputSolValveIdx2)
+            foreach ((string valveID, int valveIndex) in ValveIDtoOutputSolValveIdx)
             {
                 dValveStateIssuers.Add(valveID, ObservableManager<bool>.Get("Valve.OnOff." + valveID + ".CurrentPLCState"));
             }
@@ -304,20 +298,14 @@ namespace SapphireXR_App.Models
                     dIOStateList?.Publish(new BitArray(ioList));
                 }
 
-                if (baReadValveStatePLC1 != null)
+                if (baReadValveStatePLC != null)
                 {
-                    foreach ((string valveID, int index) in ValveIDtoOutputSolValveIdx1)
+                    foreach ((string valveID, int index) in ValveIDtoOutputSolValveIdx)
                     {
-                        dValveStateIssuers?[valveID].Publish(baReadValveStatePLC1[index]);
+                        dValveStateIssuers?[valveID].Publish(baReadValveStatePLC[index]);
                     }
                 }
-                if (baReadValveStatePLC2 != null)
-                {
-                    foreach ((string valveID, int index) in ValveIDtoOutputSolValveIdx2)
-                    {
-                        dValveStateIssuers?[valveID].Publish(baReadValveStatePLC2[index]);
-                    }
-                }
+             
                 dLineHeaterTemperatureIssuers?.Publish(Ads.ReadAny<float[]>(hTemperaturePV, [(int)LineHeaterTemperature]));
 
                 byte[] digitalOutput = Ads.ReadAny<byte[]>(hDigitalOutput, [4]);
@@ -365,21 +353,13 @@ namespace SapphireXR_App.Models
                     }
                     exceptionStr += "aMonitoring_PVs is null in OnTick PLCService";
                 }
-                if (baReadValveStatePLC1 == null)
+                if (baReadValveStatePLC == null)
                 {
                     if (exceptionStr != string.Empty)
                     {
                         exceptionStr += "\r\n";
                     }
-                    exceptionStr += "baReadValveStatePLC1 is null in OnTick PLCService";
-                }
-                if (baReadValveStatePLC2 == null)
-                {
-                    if (exceptionStr != string.Empty)
-                    {
-                        exceptionStr += "\r\n";
-                    }
-                    exceptionStr += "baReadValveStatePLC2 is null in OnTick PLCService";
+                    exceptionStr += "baReadValveStatePLC is null in OnTick PLCService";
                 }
                 if (exceptionStr != string.Empty)
                 {
@@ -397,38 +377,6 @@ namespace SapphireXR_App.Models
             catch (Exception)
             {
                 Connected = PLCConnection.Disconnected;
-            }
-        }
-
-        private static (BitArray, int, uint) GetBuffer(string valveID)
-        {
-            int index = -1;
-            if (ValveIDtoOutputSolValveIdx1.TryGetValue(valveID, out index) == true)
-            {
-                if (baReadValveStatePLC1 == null)
-                {
-                    throw new ReadValveStateException("PLC Service: BaReadValveStatePLC1 accessed without initialization \r\n Call ReadValveStateFromPLC first");
-                }
-                else
-                {
-                    return (baReadValveStatePLC1, index, hReadValveStatePLC1);
-                }
-            }
-            else
-                if (ValveIDtoOutputSolValveIdx2.TryGetValue(valveID, out index) == true)
-            {
-                if (baReadValveStatePLC2 == null)
-                {
-                    throw new ReadValveStateException("PLC Service: baReadValveStatePLC1 accessed without initialization \r\n Call ReadValveStateFromPLC first");
-                }
-                else
-                {
-                    return (baReadValveStatePLC2, index, hReadValveStatePLC2);
-                }
-            }
-            else
-            {
-                throw new ReadValveStateException("PLC Service: non-exsiting valve ID entered to GetReadValveStateBuffer()");
             }
         }
     }
