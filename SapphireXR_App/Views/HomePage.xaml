@@ -66,31 +66,28 @@
 
                 <Polyline Points="120,362 120,680 280,680" Stroke="{StaticResource NitrogenLineColor}" StrokeThickness="3" />
                 <Polyline Points="1220,362 1220,600 1120,600" Stroke="{StaticResource NitrogenLineColor}" StrokeThickness="3" />
+                
                 <!-- Hydrochloride(HCl) Gas Line -->
-                <Polyline Points="220,54 220,110 620,110 620,138" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
+                <Polyline Points="220,54 220,110 820,110 820,138" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
+                <Line X1="820" Y1="162" X2="820" Y2="206" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
                 <Line X1="220" Y1="110" X2="220" Y2="138" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
-                <Line X1="420" Y1="110" X2="420" Y2="138" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
-
-                <Line X1="220" Y1="162" X2="220" Y2="206" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
-                <Line X1="420" Y1="162" X2="420" Y2="206" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
+                <Line X1="620" Y1="110" X2="620" Y2="138" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
+                <Line X1="220" Y1="162" X2="220" Y2="206" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />                
                 <Line X1="620" Y1="162" X2="620" Y2="206" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
-
                 <Polyline Points="220,240 220,290 320,290 320,338" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
                 <Polyline Points="320,362 320,425 140,425 140,660 280,660" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
-                <Polyline Points="420,240 420,290 520,290 520,338" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
-                <Polyline Points="520,362 520,445 160,445 160,640 280,640" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
+                <Polyline Points="820,240 820,290 920,290 920,338" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
+                <Polyline Points="920,362 920,485 200,485 200,600 280,600" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
                 <Polyline Points="620,240 620,290 720,289 720,338" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
                 <Polyline Points="720,362 720,462 180,465 180,620 280,620" Stroke="{StaticResource HClLineColor}" StrokeThickness="3" />
                 <!-- Ammonia Gas Line -->
-                <Line X1="820" Y1="54" X2="820" Y2="138" Stroke="{StaticResource NH3LineColor}" StrokeThickness="3" />
-                <Line X1="820" Y1="162" X2="820" Y2="206" Stroke="{StaticResource NH3LineColor}" StrokeThickness="3" />
-
-                <Polyline Points="820,240 820,290 920,290 920,338" Stroke="{StaticResource NH3LineColor}" StrokeThickness="3" />
-                <Polyline Points="920,362 920,485 200,485 200,600 280,600" Stroke="{StaticResource NH3LineColor}" StrokeThickness="3" />
+                <Line X1="420" Y1="162" X2="420" Y2="206" Stroke="{StaticResource NH3LineColor}" StrokeThickness="3" />                
+                <Line X1="420" Y1="54" X2="420" Y2="138" Stroke="{StaticResource NH3LineColor}" StrokeThickness="3" />
+                <Polyline Points="420,240 420,290 520,290 520,338" Stroke="{StaticResource NH3LineColor}" StrokeThickness="3" />
+                <Polyline Points="520,362 520,445 160,445 160,640 280,640" Stroke="{StaticResource NH3LineColor}" StrokeThickness="3" />
                 <!-- Dichlorosilane Gas Line -->
                 <Line X1="1020" Y1="54" X2="1020" Y2="138" Stroke="{StaticResource DCSLineColor}" StrokeThickness="3" />
                 <Line X1="1020" Y1="162" X2="1020" Y2="206" Stroke="{StaticResource DCSLineColor}" StrokeThickness="3" />
-
                 <Polyline Points="1020,240 1020,290 1120,290 1120,338" Stroke="{StaticResource DCSLineColor}" StrokeThickness="3" />
                 <Polyline Points="1120,362 1120,505 220,505 220,580 280,580" Stroke="{StaticResource DCSLineColor}" StrokeThickness="3" />
                 <!-- Drawing Chamber -->
@@ -168,7 +165,7 @@
                 <!-- 공정가스 압력 모니터링 -->
                 <control:GasMonitor x:Name="gasMonitor_N2" Canvas.Left="85" Canvas.Top="20"  MonitorID="Gas1"/>
                 <control:GasMonitor x:Name="gasMonitor_HCL" Canvas.Left="185" Canvas.Top="20"  MonitorID="Gas2"/>
-                <control:GasMonitor x:Name="gasMonitor_NH3" Canvas.Left="785" Canvas.Top="20"  MonitorID="Gas3"/>
+                <control:GasMonitor x:Name="gasMonitor_NH3" Canvas.Left="386" Canvas.Top="20"  MonitorID="Gas3"/>
                 <control:GasMonitor x:Name="gasMonitor_DCS" Canvas.Left="985" Canvas.Top="20"  MonitorID="Gas4"/>
 
                 <!-- 반응기 콘트롤러 -->
@@ -208,13 +205,14 @@
                 <control:SingleValve x:Name="V11" Canvas.Left="1108" Canvas.Top="138" ValveID="V11" />
                 <control:SingleValve x:Name="V12" Canvas.Left="1208" Canvas.Top="138" ValveID="V12" />
 
-                <control:SingleValve x:Name="V13" Canvas.Left="108" Canvas.Top="338" ValveID="V13" />
+ 
                 <control:SingleValve x:Name="V14" Canvas.Left="308" Canvas.Top="338" ValveID="V14" />
                 <control:SingleValve x:Name="V15" Canvas.Left="508" Canvas.Top="338" ValveID="V15" />
                 <control:SingleValve x:Name="V16" Canvas.Left="708" Canvas.Top="338" ValveID="V16" />
                 <control:SingleValve x:Name="V17" Canvas.Left="908" Canvas.Top="338" ValveID="V17" />
                 <control:SingleValve x:Name="V18" Canvas.Left="1108" Canvas.Top="338" ValveID="V18" />
                 <control:SingleValve x:Name="V19" Canvas.Left="1208" Canvas.Top="338" ValveID="V19" />
+                <control:SingleValve x:Name="V20" Canvas.Left="108" Canvas.Top="338" ValveID="V20" />
                 <!--#endregion-->
 
                 <!-- #Region 6. 가스 제어(MFC, EPC) -->
@@ -238,25 +236,25 @@
                Width="100" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                 <Border  Canvas.Left="50" Canvas.Top="380" BorderThickness="2" Background="Gray"  BorderBrush="{StaticResource NitrogenLineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Background</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">B/C</TextBlock>
                 </Border>
                 <Border  Canvas.Left="250" Canvas.Top="380" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource HClLineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Etching 1</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Ga</TextBlock>
                 </Border>
                 <Border  Canvas.Left="450" Canvas.Top="380" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource HClLineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Ga Boat</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">NH3</TextBlock>
                 </Border>
                 <Border  Canvas.Left="650" Canvas.Top="380" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource HClLineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Etching 2</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Al</TextBlock>
                 </Border>
                 <Border  Canvas.Left="850" Canvas.Top="380" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource NH3LineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Regent</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Etcing</TextBlock>
                 </Border>
                 <Border  Canvas.Left="1050" Canvas.Top="380" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource DCSLineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Doping</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">H2/O2</TextBlock>
                 </Border>
                 <Border  Canvas.Left="1150" Canvas.Top="426" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource DCSLineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Backside</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">B/F</TextBlock>
                 </Border>
                 <!--#endregion-->
 
@@ -288,19 +286,19 @@
                 Width="40" HorizontalContentAlignment="Center" />
                     <Label Canvas.Left="1225" Canvas.Top="136" Foreground="{StaticResource SecondaryFontColor}" Content="V12"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="125" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V13"
+                    <Label Canvas.Left="125" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V14"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="325" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V14"
+                    <Label Canvas.Left="325" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V15"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="525" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V15"
+                    <Label Canvas.Left="525" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V16"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="725" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V16"
+                    <Label Canvas.Left="725" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V17"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="925" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V17"
+                    <Label Canvas.Left="925" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V18"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="1125" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V18"
+                    <Label Canvas.Left="1125" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V19"
                 Width="40" HorizontalContentAlignment="Center" />
-                    <Label Canvas.Left="1225" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V19"
+                    <Label Canvas.Left="1225" Canvas.Top="336" Foreground="{StaticResource SecondaryFontColor}" Content="V20"
                 Width="40" HorizontalContentAlignment="Center" />
 
                     <Label Canvas.Left="80" Canvas.Top="236" Foreground="DimGray" Content="M01"
