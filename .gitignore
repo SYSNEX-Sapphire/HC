@@ -373,3 +373,5 @@ FodyWeavers.xsd
 /_Boot/TwinCAT RT (x64)/Plc/Port_852_boot.tizip
 /_Boot/TwinCAT RT (x64)/CurrentConfig.tszip
 /_Boot/TwinCAT RT (x64)/CurrentConfig.xml
+/PLC_HC/_CompileInfo/60E68293-DA59-9C4A-E975-5221E0FD6DA9.compileinfo
+/PLC_HC/_CompileInfo_Upload/6BD14C19-6C93-40F8-1E5E-F835F3AD708A.compileinfo
