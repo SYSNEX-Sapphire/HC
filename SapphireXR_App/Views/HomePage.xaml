@@ -248,7 +248,7 @@
                     <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Al</TextBlock>
                 </Border>
                 <Border  Canvas.Left="850" Canvas.Top="380" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource NH3LineColor}" Width="140" Height="30">
-                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Etcing</TextBlock>
+                    <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Etching</TextBlock>
                 </Border>
                 <Border  Canvas.Left="1050" Canvas.Top="380" BorderThickness="2" Background="Gray" BorderBrush="{StaticResource DCSLineColor}" Width="140" Height="30">
                     <TextBlock  Foreground="{StaticResource PrimaryFontColor}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">H2/O2</TextBlock>
