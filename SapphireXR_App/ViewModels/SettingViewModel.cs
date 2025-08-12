@@ -646,7 +646,7 @@ namespace SapphireXR_App.ViewModels
 
         private static List<Device> CreateDefaultGasIO()
         {
-            return [new() { ID = "Gas1", Name = "H2"}, new() { ID = "Gas2", Name = "N2" }, new() { ID = "Gas3", Name = "NH3" }, new() { ID = "Gas4", Name = "DCS" },
+            return [new() { ID = "Gas1", Name = "H2"}, new() { ID = "Gas2", Name = "N2" }, new() { ID = "Gas3", Name = "NH3" }, new() { ID = "Gas4", Name = "SiH4" },
                 new() { ID = "Source1", Name = "TEB" }, new() { ID = "Source2", Name = "TMAI"}, new() { ID = "Source3", Name = "TMIn"}, new() { ID = "Source4", Name = "TMGa"},
                 new() { ID = "Source5", Name = "DTMGa"}, new() { ID = "Source6", Name = "Cp2Mg"}];
         }

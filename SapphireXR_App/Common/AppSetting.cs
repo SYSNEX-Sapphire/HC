@@ -89,7 +89,7 @@ namespace SapphireXR_App.Common
         public static string PLCAddress = "Local";
         public static int PLCPort = 851;
         public static bool ConfigMode = false;
-        public static Dictionary<string, string> PrecursorSourceMonitorLabel = new Dictionary<string, string> { { "GasMonitor1", "H2" }, { "GasMonitor2", "N2" }, { "GasMonitor3", "DCS" }, { "GasMonitor4", "NH3" },
+        public static Dictionary<string, string> PrecursorSourceMonitorLabel = new Dictionary<string, string> { { "GasMonitor1", "H2" }, { "GasMonitor2", "N2" }, { "GasMonitor3", "SiH4" }, { "GasMonitor4", "NH3" },
             { "SourceMonitor1", "TEB" }, { "SourceMonitor2", "TMAl" }, { "SourceMonitor3", "TMIn" }, { "SourceMonitor4", "TMGa" },  { "SourceMonitor5", "DTMGa" }, { "SourceMonitor6", "Cp2Mg" }};
     }
 }
