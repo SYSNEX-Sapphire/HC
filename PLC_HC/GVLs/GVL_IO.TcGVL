@@ -15,12 +15,12 @@ VAR_GLOBAL
 	OutputSolValve AT %Q* : DWORD; //16열 32점
 	
 	(* Read and Write of Device Control Value*)
-	aMaxValueController		: ARRAY[1..12]OF REAL ; //Device Max Value from UI
-	//aController 			: ARRAY[1..12] OF FB_RampGenerator; //MFC 0 ~ 5V
-	aController_TV 			: ARRAY[1..12] OF REAL; //Target Value from UI
-	aController_RampTime 	: ARRAY[1..12] OF INT;
-	aController_PV 			: ARRAY[1..12] OF REAL; //Present Value from Device
-	aController_CV 			: ARRAY[1..12] OF REAL; //Current Value from RampingController
+	aMaxValueController		: ARRAY[1..nControllerNum]OF REAL ; //Device Max Value from UI
+	aController 			: ARRAY[1..nControllerNum] OF FB_RampGenerator; //MFC 0 ~ 5V
+	aController_TV 			: ARRAY[1..nControllerNum] OF REAL; //Target Value from UI
+	aController_RampTime 	: ARRAY[1..nControllerNum] OF INT;
+	aController_PV 			: ARRAY[1..nControllerNum] OF REAL; //Present Value from Device
+	aController_CV 			: ARRAY[1..nControllerNum] OF REAL; //Current Value from RampingController
 	
 	(* Present Value Meter Display*)
 	aInputState				: ARRAY[1..5] OF WORD; // Digital Input from Device (Switch)
@@ -43,8 +43,9 @@ VAR_GLOBAL CONSTANT
 	EL3064MaxValue 	: REAL := 32767; //0~10V
 	EL4004MaxValueH	: REAL := 16383; //0~5V Half Output
 	EL4004MaxValue 	: REAL := 32767; //4~20mA
-	KL3152MaxValue	: REAL := 65535; //4~20mA
-	KL3204MaxValue 	: REAL := 32767; //4~20mA
+// 	KL3152MaxValue	: REAL := 65535; //4~20mA
+// 	KL3204MaxValue 	: REAL := 32767; //4~20mA
+	nControllerNum	: INT :=18 ; //MFC 12EA, Eurotherm 6EA
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
