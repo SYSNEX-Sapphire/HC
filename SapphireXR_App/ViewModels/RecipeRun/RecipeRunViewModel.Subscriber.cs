@@ -134,7 +134,7 @@ namespace SapphireXR_App.ViewModels
             {
                 if (value[10] != prevValue)
                 {
-                    recipeRunViewModel.RecipeStartAvailableInterlock = value[10];
+                    //recipeRunViewModel.RecipeStartAvailableInterlock = value[10];
                     prevValue = value[10];
                 }
             }

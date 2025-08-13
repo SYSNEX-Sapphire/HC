@@ -84,13 +84,13 @@ namespace SapphireXR_App.ViewModels
                         }
                         break;
 
-                    case nameof(RecipeStartAvailableInterlock):
-                        if (RecipeStartAvailableInterlock == false && recipeRunning() == true)
-                        {
-                            RecipeStop();
-                        }
-                        RecipeStartCommand.NotifyCanExecuteChanged();
-                        break;
+                    //case nameof(RecipeStartAvailableInterlock):
+                    //    if (RecipeStartAvailableInterlock == false && recipeRunning() == true)
+                    //    {
+                    //        RecipeStop();
+                    //    }
+                    //    RecipeStartCommand.NotifyCanExecuteChanged();
+                    //    break;
 
                     case nameof(AlarmTriggered):
                         if(AlarmTriggered == true && recipeRunning() == true)
@@ -241,7 +241,8 @@ namespace SapphireXR_App.ViewModels
 
         private bool canStartStopCommadExecute()
         {
-            return PLCService.Connected == PLCConnection.Connected && CurrentRecipeUserState != RecipeUserState.Uninitialized && RecipeStartAvailableInterlock == true && AlarmTriggered == false;
+            return PLCService.Connected == PLCConnection.Connected && CurrentRecipeUserState != RecipeUserState.Uninitialized && AlarmTriggered == false;
+            //return PLCService.Connected == PLCConnection.Connected && CurrentRecipeUserState != RecipeUserState.Uninitialized && RecipeStartAvailableInterlock == true && AlarmTriggered == false;
         }
 
         [RelayCommand(CanExecute = nameof(canStartStopCommadExecute))]
@@ -407,8 +408,8 @@ namespace SapphireXR_App.ViewModels
             RecipeCleanCommand.NotifyCanExecuteChanged();
             if(connection == PLCConnection.Connected)
             {
-                RecipeStartAvailableInterlock = PLCService.ReadRecipeStartAvailable();
-                AlarmTriggered = PLCService.ReadAlarmTriggered();
+                //RecipeStartAvailableInterlock = PLCService.ReadRecipeStartAvailable();
+                //AlarmTriggered = PLCService.ReadAlarmTriggered();
             }
         }
 
@@ -510,10 +511,9 @@ namespace SapphireXR_App.ViewModels
                 RecipeSkipCommand.NotifyCanExecuteChanged();
             }
         }
-      
 
-        [ObservableProperty]
-        private bool recipeStartAvailableInterlock = false;
+        //[ObservableProperty]
+        //private bool recipeStartAvailableInterlock = true;
         [ObservableProperty]
         private bool alarmTriggered = false;
 

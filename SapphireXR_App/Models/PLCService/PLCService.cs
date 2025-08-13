@@ -158,34 +158,32 @@ namespace SapphireXR_App.Models
             //hMonitoring_PV = Ads.CreateVariableHandle("GVL_IO.aMonitoring_PV");
             //hInputState = Ads.CreateVariableHandle("GVL_IO.aInputState");
             //hInputState4 = Ads.CreateVariableHandle("GVL_IO.aInputState[4]");
-            //hDigitalOutput = Ads.CreateVariableHandle("GVL_IO.aDigitalOutputIO");
-            //hDigitalOutput2 = Ads.CreateVariableHandle("GVL_IO.aDigitalOutputIO[2]");
+            hDigitalOutput = Ads.CreateVariableHandle("GVL_IO.DigitalOutputIO");
             //hOutputCmd = Ads.CreateVariableHandle("GVL_IO.aOutputCmd");
             //hOutputCmd1 = Ads.CreateVariableHandle("GVL_IO.aOutputCmd[1]");
             //hOutputCmd2 = Ads.CreateVariableHandle("GVL_IO.aOutputCmd[2]");
-            //for(uint arrayIndex = 0; arrayIndex < NumAlarmWarningArraySize; arrayIndex++)
-            //{
-            //    hInterlockEnable[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlockEnable[" + (arrayIndex + 1) + "]");
-            //}
-            //for (uint arrayIndex = 0; arrayIndex < NumInterlockSet; arrayIndex++)
-            //{
-            //    hInterlockset[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlockSet[" + (arrayIndex + 1) + "]");
-            //}
+            for (uint arrayIndex = 0; arrayIndex < NumAlarmWarningArraySize; arrayIndex++)
+            {
+                hInterlockEnable[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlockEnable[" + (arrayIndex + 1) + "]");
+            }
+            for (uint arrayIndex = 0; arrayIndex < NumInterlockSet; arrayIndex++)
+            {
+                hInterlockset[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlockSet[" + (arrayIndex + 1) + "]");
+            }
             //for (uint arrayIndex = 0; arrayIndex < NumInterlock; ++arrayIndex)
             //{
             //    hInterlock[arrayIndex] = Ads.CreateVariableHandle("GVL_IO.aInterlock[" + (arrayIndex + 1) + "]");
             //}
 
-            //hRcp = Ads.CreateVariableHandle("RCP.aRecipe");
-            //hRcpTotalStep = Ads.CreateVariableHandle("RCP.iRcpTotalStep");
-            //hCmd_RcpOperation = Ads.CreateVariableHandle("RCP.cmd_RcpOperation");
-            //hRcpStepN = Ads.CreateVariableHandle("RCP.iRcpStepN");
+            hRcp = Ads.CreateVariableHandle("RCP.aRecipe");
+            hRcpTotalStep = Ads.CreateVariableHandle("RCP.iRcpTotalStep");
+            hCmd_RcpOperation = Ads.CreateVariableHandle("RCP.cmd_RcpOperation");
+            hRcpStepN = Ads.CreateVariableHandle("RCP.iRcpStepN");
             //hTemperaturePV = Ads.CreateVariableHandle("GVL_IO.aLineHeater_rTemperaturePV");
-            //hOperationMode = Ads.CreateVariableHandle("MAIN.bOperationMode");
-            //hUserState = Ads.CreateVariableHandle("RCP.userState");
-            //hRecipeControlHoldTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Hold_ET");
-            //hRecipeControlRampTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Ramp_ET");
-            //hRecipeControlPauseTime = Ads.CreateVariableHandle("GVL_IO.tRecipeControl_Pause_ET");
+            hOperationMode = Ads.CreateVariableHandle("MAIN.bOperationMode");
+            hUserState = Ads.CreateVariableHandle("RCP.userState");
+            hRecipeControlPauseTime = Ads.CreateVariableHandle("RCP.Pause_ET");
+            hRecipeRunET = Ads.CreateVariableHandle("RCP.RecipeRunET");
             //hE3508InputManAuto = Ads.CreateVariableHandle("GVL_IO.nE3508_nInputManAutoBytes");
             //hOutputSetType = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_SetType");
             //hOutputMode = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_Mode");
@@ -278,27 +276,27 @@ namespace SapphireXR_App.Models
                     }
                 }
 
-                if (aMonitoring_PVs != null)
-                {
-                    foreach (KeyValuePair<string, int> kv in dMonitoringMeterIndex)
-                    {
-                        aMonitoringCurrentValueIssuers?[kv.Key].Publish(aMonitoring_PVs[kv.Value]);
-                    }
-                }
+                //if (aMonitoring_PVs != null)
+                //{
+                //    foreach (KeyValuePair<string, int> kv in dMonitoringMeterIndex)
+                //    {
+                //        aMonitoringCurrentValueIssuers?[kv.Key].Publish(aMonitoring_PVs[kv.Value]);
+                //    }
+                //}
 
-                if (aInputState != null)
-                {
-                    short value = aInputState[0];
-                    baHardWiringInterlockStateIssuers?.Publish(new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(value) : BitConverter.GetBytes(value).Reverse().ToArray()));
-                    dThrottleValveStatusIssuer?.Publish(aInputState[4]);
+                //if (aInputState != null)
+                //{
+                //    short value = aInputState[0];
+                //    baHardWiringInterlockStateIssuers?.Publish(new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(value) : BitConverter.GetBytes(value).Reverse().ToArray()));
+                //    dThrottleValveStatusIssuer?.Publish(aInputState[4]);
 
-                    bool[] ioList = new bool[64];
-                    for (int inputState = 1; inputState < aInputState.Length; ++inputState)
-                    {
-                        new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(aInputState[inputState]) : BitConverter.GetBytes(aInputState[inputState]).Reverse().ToArray()).CopyTo(ioList, (inputState - 1) * sizeof(short) * 8);
-                    }
-                    dIOStateList?.Publish(new BitArray(ioList));
-                }
+                //    bool[] ioList = new bool[64];
+                //    for (int inputState = 1; inputState < aInputState.Length; ++inputState)
+                //    {
+                //        new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(aInputState[inputState]) : BitConverter.GetBytes(aInputState[inputState]).Reverse().ToArray()).CopyTo(ioList, (inputState - 1) * sizeof(short) * 8);
+                //    }
+                //    dIOStateList?.Publish(new BitArray(ioList));
+                //}
 
                 if (baReadValveStatePLC != null)
                 {
@@ -308,20 +306,20 @@ namespace SapphireXR_App.Models
                     }
                 }
              
-                dLineHeaterTemperatureIssuers?.Publish(Ads.ReadAny<float[]>(hTemperaturePV, [(int)LineHeaterTemperature]));
+                //dLineHeaterTemperatureIssuers?.Publish(Ads.ReadAny<float[]>(hTemperaturePV, [(int)LineHeaterTemperature]));
 
-                byte[] digitalOutput = Ads.ReadAny<byte[]>(hDigitalOutput, [4]);
-                dDigitalOutput2?.Publish(new BitArray(new byte[1] { digitalOutput[1] }));
-                dDigitalOutput3?.Publish(new BitArray(new byte[1] { digitalOutput[2] }));
-                short[] outputCmd = Ads.ReadAny<short[]>(hOutputCmd, [3]);
-                dOutputCmd1?.Publish(bOutputCmd1 = new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(outputCmd[0]) : BitConverter.GetBytes(outputCmd[0]).Reverse().ToArray()));
-                dThrottleValveControlMode?.Publish(outputCmd[1]);
-                ushort inputManAuto = Ads.ReadAny<ushort>(hE3508InputManAuto);
-                dInputManAuto?.Publish(new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(inputManAuto) : BitConverter.GetBytes(inputManAuto).Reverse().ToArray()));
-                dPressureControlModeIssuer?.Publish(Ads.ReadAny<ushort>(hOutputSetType));
+                //byte[] digitalOutput = Ads.ReadAny<byte[]>(hDigitalOutput, [4]);
+                //dDigitalOutput2?.Publish(new BitArray(new byte[1] { digitalOutput[1] }));
+                //dDigitalOutput3?.Publish(new BitArray(new byte[1] { digitalOutput[2] }));
+                //short[] outputCmd = Ads.ReadAny<short[]>(hOutputCmd, [3]);
+                //dOutputCmd1?.Publish(bOutputCmd1 = new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(outputCmd[0]) : BitConverter.GetBytes(outputCmd[0]).Reverse().ToArray()));
+                //dThrottleValveControlMode?.Publish(outputCmd[1]);
+                //ushort inputManAuto = Ads.ReadAny<ushort>(hE3508InputManAuto);
+                //dInputManAuto?.Publish(new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(inputManAuto) : BitConverter.GetBytes(inputManAuto).Reverse().ToArray()));
+                //dPressureControlModeIssuer?.Publish(Ads.ReadAny<ushort>(hOutputSetType));
 
-                int iterlock1 = Ads.ReadAny<int>(hInterlock[0]);
-                dLogicalInterlockStateIssuer?.Publish(new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(iterlock1) : BitConverter.GetBytes(iterlock1).Reverse().ToArray()));
+                //int iterlock1 = Ads.ReadAny<int>(hInterlock[0]);
+                //dLogicalInterlockStateIssuer?.Publish(new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(iterlock1) : BitConverter.GetBytes(iterlock1).Reverse().ToArray()));
             
                 string exceptionStr = string.Empty;
                 if (aDeviceControlValues == null)
@@ -344,14 +342,14 @@ namespace SapphireXR_App.Models
                     }
                     exceptionStr += "aDeviceTargetValues is null in OnTick PLCService";
                 }
-                if (aMonitoring_PVs == null)
-                {
-                    if (exceptionStr != string.Empty)
-                    {
-                        exceptionStr += "\r\n";
-                    }
-                    exceptionStr += "aMonitoring_PVs is null in OnTick PLCService";
-                }
+                //if (aMonitoring_PVs == null)
+                //{
+                //    if (exceptionStr != string.Empty)
+                //    {
+                //        exceptionStr += "\r\n";
+                //    }
+                //    exceptionStr += "aMonitoring_PVs is null in OnTick PLCService";
+                //}
                 if (baReadValveStatePLC == null)
                 {
                     if (exceptionStr != string.Empty)

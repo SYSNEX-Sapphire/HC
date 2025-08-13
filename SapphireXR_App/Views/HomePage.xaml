@@ -347,7 +347,7 @@
                 </Border>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1" Background="{StaticResource Gray_100}" Width="300">
+        <Grid Grid.Column="1" Background="{StaticResource Gray_100}" Width="300" IsEnabled="False">
             <Border BorderBrush="{StaticResource Gray_300}" Padding="{StaticResource p_3_sqrt}">
                 <Border.BorderThickness>
                     <Thickness Left="1" Top="1" />

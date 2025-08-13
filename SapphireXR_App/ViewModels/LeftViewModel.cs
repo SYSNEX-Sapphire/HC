@@ -7,8 +7,6 @@ using System.ComponentModel;
 using TwinCAT.Ads;
 using SapphireXR_App.Enums;
 using SapphireXR_App.Models;
-using CommunityToolkit.Mvvm.Input;
-using SapphireXR_App.WindowServices;
 
 namespace SapphireXR_App.ViewModels
 {
@@ -323,27 +321,12 @@ namespace SapphireXR_App.ViewModels
             {
                 case PLCConnection.Connected:
                     PLCConnectionStatus = "Connected";
-                    bool onOff = PLCService.ReadBuzzerOnOff();
-                    BuzzerImage = onOff == true ? BuzzerOnPath : BuzzerOffPath;
-                    PLCService.WriteInterlockEnableState(onOff, PLCService.InterlockEnableSetting.Buzzer);
                     break;
 
                 case PLCConnection.Disconnected:
                     PLCConnectionStatus = "Disconnected";
                     break;
             }
-        }
-
-        [RelayCommand]
-        public void ToggleBuzzerOnOff()
-        {
-            bool onOff = BuzzerImage == BuzzerOffPath;
-            if(ConfirmMessage.Show("Buzzer 상태 변경", "Buzzer" + (onOff == true ? " On" : " Off") + " 상태로 변경하시겠습니까?", WindowStartupLocation.Manual) == DialogResult.Ok)
-            {
-                PLCService.WriteBuzzerOnOff(onOff);
-                BuzzerImage = (onOff == true) ? BuzzerOnPath : BuzzerOffPath;
-            }
-            
         }
 
         [ObservableProperty]
@@ -392,9 +375,6 @@ namespace SapphireXR_App.ViewModels
 
         private static readonly Brush PLCConnectedFontColor = Application.Current.Resources.MergedDictionaries[0]["Sapphire_Blue"] as Brush ?? new SolidColorBrush(Color.FromRgb(0x60, 0xCD, 0xFF));
         private static readonly Brush PLCDisconnectedFontColor = Application.Current.Resources.MergedDictionaries[0]["Alert_Red_02"] as Brush ?? new SolidColorBrush(Color.FromRgb(0xEC, 0x3D, 0x3F));
-
-        private static readonly string BuzzerOnPath = "/Resources/icons/icon=buzzeron.png";
-        private static readonly string BuzzerOffPath = "/Resources/icons/icon=buzzeroff.png";
 
         private static readonly string SignalTowerRedPath = "/Resources/icons/icon=ani_signal_red.gif";
         private static readonly string SignalTowerBluePath = "/Resources/icons/icon=ani_signal_blue.gif";
@@ -477,8 +457,6 @@ namespace SapphireXR_App.ViewModels
         private string _pLCConnectionStatus = "Diconnected";
         [ObservableProperty]
         private Brush _pLCConnectionStatusColor = PLCDisconnectedFontColor;
-        [ObservableProperty]
-        private string _buzzerImage = BuzzerOffPath;
 
         [ObservableProperty]
         private SourceStatusViewModel _currentSourceStatusViewModel;

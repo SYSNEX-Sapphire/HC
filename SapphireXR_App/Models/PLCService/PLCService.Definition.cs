@@ -134,9 +134,7 @@ namespace SapphireXR_App.Models
             { "V01", 0 }, { "V02", 1 }, { "V03", 2 }, { "V04", 3 }, { "V05", 4 },
             { "V06", 5 }, { "V07", 6 }, { "V08", 7 }, { "V09", 8 }, { "V10", 9 },
             { "V11", 10 }, { "V12", 11 }, { "V13", 12 }, { "V14", 13 }, { "V15", 14 },
-            { "V16", 15 }, { "V37", 16 }, { "V38", 17 }, { "V39", 18 }, { "V40", 19 },
-            { "V41", 20 }, { "V42", 21 }, { "V43", 22 }, { "V44", 23 },  { "V45", 24 },
-            { "V46", 25 }
+            { "V16", 15 }, { "V17", 16 }, { "V18", 17 }, { "V19", 18 }, { "V20", 19 }
         };
 
         public static readonly Dictionary<string, int> dIndexController = new Dictionary<string, int>
@@ -170,8 +168,8 @@ namespace SapphireXR_App.Models
         };
 
         public const uint LineHeaterTemperature = 8;
-        private const uint NumAlarmWarningArraySize = 6;
-        private const uint NumInterlockSet = 16;
+        private const uint NumAlarmWarningArraySize = 3;
+        private const uint NumInterlockSet = 5;
         private const uint NumInterlock = 5;
         public const uint NumDigitalDevice = 14;
         public const uint NumAnalogDevice = 29;
@@ -180,9 +178,9 @@ namespace SapphireXR_App.Models
         private static BitArray? baReadValveStatePLC = null;
         private static float[]? aDeviceCurrentValues = null;
         private static float[]? aDeviceControlValues = null;
-        private static float[]? aMonitoring_PVs = null;
-        private static short[]? aInputState = null;
-        private static BitArray? bOutputCmd1 = null;
+        //private static float[]? aMonitoring_PVs = null;
+        //private static short[]? aInputState = null;
+        //private static BitArray? bOutputCmd1 = null;
         private static short[]? aDeviceRampTimes = new short[dIndexController.Count];
         private static float[]? aDeviceTargetValues = new float[dIndexController.Count];
         private static int[] InterlockEnables = Enumerable.Repeat<int>(0, (int)NumAlarmWarningArraySize).ToArray();
@@ -254,25 +252,25 @@ namespace SapphireXR_App.Models
         private static uint hRcpTotalStep;
         private static uint hCmd_RcpOperation;
         private static uint hRcpStepN;
-        private static uint hMonitoring_PV;
-        private static uint hInputState;
-        private static uint hInputState4;
-        private static uint hTemperaturePV;
+        //private static uint hMonitoring_PV;
+        //private static uint hInputState;
+        //private static uint hInputState4;
+        //private static uint hTemperaturePV;
         private static uint hOperationMode;
         private static uint hUserState;
-        private static uint hRecipeControlPauseTime;
         private static uint hDigitalOutput;
-        private static uint hDigitalOutput2;
-        private static uint hOutputCmd;
-        private static uint hE3508InputManAuto;
-        private static uint hOutputCmd1;
-        private static uint hOutputCmd2;
-        private static uint hOutputSetType;
-        private static uint hOutputMode;
+       // private static uint hDigitalOutput2;
+        //private static uint hOutputCmd;
+        //private static uint hE3508InputManAuto;
+        //private static uint hOutputCmd1;
+        //private static uint hOutputCmd2;
+        //private static uint hOutputSetType;
+        //private static uint hOutputMode;hDigitalOutput
         private static uint hRecipeRunET;
+        private static uint hRecipeControlPauseTime;
         private static uint[] hInterlockEnable = new uint[NumAlarmWarningArraySize];
         private static uint[] hInterlockset = new uint[NumInterlockSet];
-        private static uint[] hInterlock = new uint[NumInterlock];
+        //private static uint[] hInterlock = new uint[NumInterlock];
 
         private static bool RecipeRunEndNotified = false;
         private static bool LeakTestMode = true;

@@ -132,17 +132,17 @@ namespace SapphireXR_App.ViewModels
             {
                 try
                 {
-                    onPressureControlModeUpdated(PLCService.ReadPressureControlMode());
-                    ushort throttleValveMode = PLCService.ReadThrottleValveMode();
-                    if (throttleValveMode < ThrottleValveModeCmdToString.Length)
-                    {
-                        CurrentThrottleValveControlMode = ThrottleValveModeCmdToString[throttleValveMode];
-                        prevThrottleValveControlMode = CurrentThrottleValveControlMode;
-                    }
-                    BitArray outputCmd1 = PLCService.ReadOutputCmd1();
-                    IsInductionHeaterOn = outputCmd1[(int)PLCService.OutputCmd1Index.InductionHeaterControl];
-                    IsVaccumPumpOn = outputCmd1[(int)PLCService.OutputCmd1Index.VaccumPumpControl];
-                    InputManualAuto = PLCService.ReadInputManAuto(7) == false ? "Auto" : "Manual";
+                    //onPressureControlModeUpdated(PLCService.ReadPressureControlMode());
+                    //ushort throttleValveMode = PLCService.ReadThrottleValveMode();
+                    //if (throttleValveMode < ThrottleValveModeCmdToString.Length)
+                    //{
+                    //    CurrentThrottleValveControlMode = ThrottleValveModeCmdToString[throttleValveMode];
+                    //    prevThrottleValveControlMode = CurrentThrottleValveControlMode;
+                    //}
+                    //BitArray outputCmd1 = PLCService.ReadOutputCmd1();
+                    //IsInductionHeaterOn = outputCmd1[(int)PLCService.OutputCmd1Index.InductionHeaterControl];
+                    //IsVaccumPumpOn = outputCmd1[(int)PLCService.OutputCmd1Index.VaccumPumpControl];
+                    //InputManualAuto = PLCService.ReadInputManAuto(7) == false ? "Auto" : "Manual";
 
                     rightDashboardInitiated = true;
                 }
@@ -157,7 +157,7 @@ namespace SapphireXR_App.ViewModels
         {
             try
             {
-                PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.VaccumPumpControl, on);
+                //PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.VaccumPumpControl, on);
             }
             catch (Exception exception)
             {
@@ -179,10 +179,10 @@ namespace SapphireXR_App.ViewModels
         {
             try
             {
-                if (ValveOperationEx.Show("Vaccum Pump Reset", "Reset 하시겠습니까?") == Enums.DialogResult.Ok)
-                {
-                    PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.VaccumPumpReset, true);
-                }
+                //if (ValveOperationEx.Show("Vaccum Pump Reset", "Reset 하시겠습니까?") == Enums.DialogResult.Ok)
+                //{
+                //    PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.VaccumPumpReset, true);
+                //}
             }
             catch (Exception exception)
             {
@@ -204,13 +204,13 @@ namespace SapphireXR_App.ViewModels
         {
             try
             {
-                string nextState = InputManualAuto == "Auto" ? "Manual" : "Auto";
-                if (OutputCmd1ToggleConfirmService.Toggle(PLCService.OutputCmd1Index.TempControllerManAuto, "Induction Power Supply Manual/Auto", nextState + " 상태로 바꾸시겠습니까?", InputManualAuto,
-                    "Manual", "Auto") == true)
-                {
-                    SynchronizeExpected(InputManualAuto == "Auto" ? 1 : 0, () => (PLCService.ReadInputManAuto(7) == true ? 1 : 0), (int manualAuto) => InputManualAuto = (manualAuto == 0 ? "Auto" : "Manual"),
-                        null, 3000, "장비의 Input Heater Control Mode가 " + nextState + "로 설정되지 않았습니다. 프로그램과 장비 간에 Heater Control Mode 상태 동기화가 되지 않았습니다.");
-                }
+                //string nextState = InputManualAuto == "Auto" ? "Manual" : "Auto";
+                //if (OutputCmd1ToggleConfirmService.Toggle(PLCService.OutputCmd1Index.TempControllerManAuto, "Induction Power Supply Manual/Auto", nextState + " 상태로 바꾸시겠습니까?", InputManualAuto,
+                //    "Manual", "Auto") == true)
+                //{
+                //    SynchronizeExpected(InputManualAuto == "Auto" ? 1 : 0, () => (PLCService.ReadInputManAuto(7) == true ? 1 : 0), (int manualAuto) => InputManualAuto = (manualAuto == 0 ? "Auto" : "Manual"),
+                //        null, 3000, "장비의 Input Heater Control Mode가 " + nextState + "로 설정되지 않았습니다. 프로그램과 장비 간에 Heater Control Mode 상태 동기화가 되지 않았습니다.");
+                //}
             }
             catch(Exception exception)
             {
@@ -227,7 +227,7 @@ namespace SapphireXR_App.ViewModels
         {
             try
             {
-                PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.InductionHeaterControl, on);
+                //PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.InductionHeaterControl, on);
             }
             catch (Exception exception)
             {
@@ -251,7 +251,7 @@ namespace SapphireXR_App.ViewModels
             {
                 if (ValveOperationEx.Show("Vaccum Pump Reset", "Reset 하시겠습니까?") == Enums.DialogResult.Ok)
                 {
-                    PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.InductionHeaterReset, true);
+                    //PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.InductionHeaterReset, true);
                     //int timeout = 10000;
                     //SynchronizeExpected(0, () => PLCService.ReadDigitalOutputIO2(1) == true ? 1 : 0, null, null, timeout, "Induction Heater Reset 명령이 실패하였거나 본 프로그램의 timout 대기 시간 " +
                     //    timeout + "(MS)을 초과하셨습니다");
@@ -290,20 +290,20 @@ namespace SapphireXR_App.ViewModels
             {
                 if (ValveOperationEx.Show("Pressure Control Mode 변경", (PressureControlMode == PressureControlModePressure ? PressureControlModePosition : PressureControlModePressure) + "로 변경하시겠습니까?") == Enums.DialogResult.Ok)
                 {
-                    if (PressureControlMode == PressureControlModePressure)
-                    {
-                        PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.PressureControlMode, true);
-                        SynchronizeExpected<ushort>(2, PLCService.ReadPressureControlMode, onPressureControlModeUpdated, null, 3000,
-                            "장비의 Pressure Control Mode가 " + PressureControlModePosition + "값으로 설정되지 않았습니다. 프로그램과 장비 간에 Pressure Control Mode 상태 동기화가 되지 않았습니다.");
+                    //if (PressureControlMode == PressureControlModePressure)
+                    //{
+                    //    PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.PressureControlMode, true);
+                    //    SynchronizeExpected<ushort>(2, PLCService.ReadPressureControlMode, onPressureControlModeUpdated, null, 3000,
+                    //        "장비의 Pressure Control Mode가 " + PressureControlModePosition + "값으로 설정되지 않았습니다. 프로그램과 장비 간에 Pressure Control Mode 상태 동기화가 되지 않았습니다.");
 
-                    }
-                    else
-                        if (PressureControlMode == PressureControlModePosition)
-                    {
-                        PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.PressureControlMode, false);
-                        SynchronizeExpected<ushort>(1, PLCService.ReadPressureControlMode, onPressureControlModeUpdated, null, 3000,
-                            "장비의 Pressure Control Mode가 " + PressureControlModePressure + "값으로 설정되지 않았습니다. 프로그램과 장비 간에 Pressure Control Mode 상태 동기화가 되지 않았습니다.");
-                    }
+                    //}
+                    //else
+                    //    if (PressureControlMode == PressureControlModePosition)
+                    //{
+                    //    PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.PressureControlMode, false);
+                    //    SynchronizeExpected<ushort>(1, PLCService.ReadPressureControlMode, onPressureControlModeUpdated, null, 3000,
+                    //        "장비의 Pressure Control Mode가 " + PressureControlModePressure + "값으로 설정되지 않았습니다. 프로그램과 장비 간에 Pressure Control Mode 상태 동기화가 되지 않았습니다.");
+                    //}
                 }
             }
             catch(Exception exception)
@@ -329,11 +329,11 @@ namespace SapphireXR_App.ViewModels
                     {
                         try
                         {
-                            ushort cmdOutputMode = ThrottleValveModeStringToCmdOutputMode[selectedMode];
-                            PLCService.WriteThrottleValveMode((short)cmdOutputMode);
-                            SynchronizeExpected(cmdOutputMode, PLCService.ReadThrottleValveMode, (ushort throttleValveMode) => prevThrottleValveControlMode = CurrentThrottleValveControlMode,
-                                    (ushort throttleValveMode) => CurrentThrottleValveControlMode = prevThrottleValveControlMode, 3000,
-                                    "장비의 Throttle Valve Mode가 " + CurrentThrottleValveControlMode + "값으로 설정되지 않았습니다. 프로그램과 장비 간에 Pressure Control Mode 상태 동기화가 되지 않았습니다.");
+                            //ushort cmdOutputMode = ThrottleValveModeStringToCmdOutputMode[selectedMode];
+                            //PLCService.WriteThrottleValveMode((short)cmdOutputMode);
+                            //SynchronizeExpected(cmdOutputMode, PLCService.ReadThrottleValveMode, (ushort throttleValveMode) => prevThrottleValveControlMode = CurrentThrottleValveControlMode,
+                            //        (ushort throttleValveMode) => CurrentThrottleValveControlMode = prevThrottleValveControlMode, 3000,
+                            //        "장비의 Throttle Valve Mode가 " + CurrentThrottleValveControlMode + "값으로 설정되지 않았습니다. 프로그램과 장비 간에 Pressure Control Mode 상태 동기화가 되지 않았습니다.");
                         }
                         catch(Exception exception)
                         {
@@ -466,7 +466,7 @@ namespace SapphireXR_App.ViewModels
         [ObservableProperty]
         private bool _pLCConnected = PLCService.Connected == PLCConnection.Connected ? true: false;
 
-        private string? prevThrottleValveControlMode = null;
+        //private string? prevThrottleValveControlMode = null;
 
         private ManualBatchViewModel manualBatchViewModel = new ManualBatchViewModel();
 

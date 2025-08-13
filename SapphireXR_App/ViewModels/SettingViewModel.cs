@@ -1,15 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SapphireXR_App.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.IO;
 using SapphireXR_App.Common;
-using System.ComponentModel;
-using System.Collections;
 using SapphireXR_App.Enums;
-using System.Windows;
+using SapphireXR_App.Models;
+using System.Collections;
+using System.ComponentModel;
+using System.IO;
 using System.Net;
+using System.Windows;
+using System.Xml.Linq;
 
 namespace SapphireXR_App.ViewModels
 {
@@ -274,28 +275,28 @@ namespace SapphireXR_App.ViewModels
                         case nameof(InductionHeaterPowerOnOff):
                             if (InductionHeaterPowerOnOff != null)
                             {
-                                PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.InductionHeaterPower, InductionHeaterPowerOnOff.Value);
+                                //PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.InductionHeaterPower, InductionHeaterPowerOnOff.Value);
                             }
                             break;
 
                         case nameof(ThermalBathPowerOnOff):
                             if(ThermalBathPowerOnOff != null)
                             {
-                                PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.ThermalBathPower, ThermalBathPowerOnOff.Value);
+                                //PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.ThermalBathPower, ThermalBathPowerOnOff.Value);
                             }
                             break;
 
                         case nameof(VaccumPumpPowerOnOff):
                             if(VaccumPumpPowerOnOff != null)
                             {
-                                PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.VaccumPumpPower, VaccumPumpPowerOnOff.Value);
+                                //PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.VaccumPumpPower, VaccumPumpPowerOnOff.Value);
                             }
                             break;
 
                         case nameof(LineHeaterPowerOnOff):
                             if(LineHeaterPowerOnOff != null)
                             {
-                                PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.LineHeaterPower, LineHeaterPowerOnOff.Value);
+                                //PLCService.WriteOutputCmd1(PLCService.OutputCmd1Index.LineHeaterPower, LineHeaterPowerOnOff.Value);
                             }
                             break;
                     }
@@ -353,6 +354,10 @@ namespace SapphireXR_App.ViewModels
             lAnalogDeviceIO = dAnalogDeviceIO?.Values.ToList();
             if (lAnalogDeviceIO != null)
             {
+                lAnalogDeviceIO = [new () { Name = "R01", ID = "R01" }, new() { Name = "R01", ID = "R02" }, new() { Name = "R01", ID = "R03" }, new() { Name = "R01", ID = "R04" },
+                    new() { Name = "R01", ID = "R05" }, new() { Name = "R01", ID = "R06" }, new() { Name = "R01", ID = "M01" }, new() { Name = "R01", ID = "M02" }, new() { Name = "R01", ID = "M03" },
+                    new() { Name = "R01", ID = "M04" }, new() { Name = "R01", ID = "M05" }, new() { Name = "R01", ID = "M06" }, new() { Name = "R01", ID = "M07" }, new() { Name = "R01", ID = "M08" }, 
+                    new() { Name = "R01", ID = "M09" }, new() { Name = "R01", ID = "M10" }, new() { Name = "R01", ID = "M11" }, new() { Name = "R01", ID = "M12" }];
                 foreach (var io in lAnalogDeviceIO)
                 {
                     io.PropertyChanged += (object? sender, PropertyChangedEventArgs args) =>
@@ -575,11 +580,11 @@ namespace SapphireXR_App.ViewModels
                 PLCService.WriteDigitalDeviceDelayTime(DigitalDeviceDelayTime);
                 PLCService.CommitDigitalDeviceInterlockSettingToPLC();
 
-                BitArray outputCmd1 = PLCService.ReadOutputCmd1();
-                InductionHeaterPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.InductionHeaterPower];
-                ThermalBathPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.ThermalBathPower];
-                VaccumPumpPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.VaccumPumpPower];
-                LineHeaterPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.LineHeaterPower];
+                //BitArray outputCmd1 = PLCService.ReadOutputCmd1();
+                //InductionHeaterPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.InductionHeaterPower];
+                //ThermalBathPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.ThermalBathPower];
+                //VaccumPumpPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.VaccumPumpPower];
+                //LineHeaterPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.LineHeaterPower];
 
                 if (dInterLockA != null)
                 {
