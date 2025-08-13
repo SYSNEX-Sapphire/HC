@@ -382,3 +382,8 @@ FodyWeavers.xsd
 /_Boot/TwinCAT RT (x64)/Plc/Port_851_boot.tizip
 /PLC_HC/PLC_HC.tmc
 /PLC_HC/_CompileInfo/4D494197-F961-2BDE-B3BB-7C45D9FFFD6A.compileinfo
+/PLC_HC/_CompileInfo/23870359-3C0A-CD99-41F8-E5471F169892.compileinfo
+/PLC_HC/_CompileInfo/26A2AB29-1B90-E4ED-424D-DD850E0B585E.compileinfo
+/PLC_HC/_CompileInfo/72FFDED0-8E91-DD46-8AE0-98DF53684976.compileinfo
+/PLC_HC/_Libraries/Beckhoff Automation GmbH/Tc2_System/3.9.1.0/Tc2_System.compiled-library-ge33
+/_Boot/TargetDescription.xml
