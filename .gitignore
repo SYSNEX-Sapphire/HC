@@ -363,27 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /SapphireXR.tsproj.bak
 /SapphireXR.~u
-/PLC_HC/_CompileInfo/30F61046-201F-3336-1DC6-8450242308E9.compileinfo
-/PLC_HC/_CompileInfo/431C26E4-75B3-13F1-1BB4-C64EDC90017C.compileinfo
+/PLC_HC
 /_Boot
-/_Boot/CurrentConfig/PLC_HC.tpzip
-/_Boot/TwinCAT RT (x64)/CurrentConfig/PLC_HC.tpzip
-/_Boot/TwinCAT RT (x64)/Plc/Port_852.app
-/_Boot/TwinCAT RT (x64)/Plc/Port_852.crc
-/_Boot/TwinCAT RT (x64)/Plc/Port_852_boot.tizip
-/_Boot/TwinCAT RT (x64)/CurrentConfig.tszip
-/_Boot/TwinCAT RT (x64)/CurrentConfig.xml
-/PLC_HC/_CompileInfo/60E68293-DA59-9C4A-E975-5221E0FD6DA9.compileinfo
-/PLC_HC/_CompileInfo_Upload/6BD14C19-6C93-40F8-1E5E-F835F3AD708A.compileinfo
-/_Boot/TwinCAT RT (x64)/Plc/Port_851.app
-/_Boot/TwinCAT RT (x64)/Plc/Port_851.cid
-/_Boot/TwinCAT RT (x64)/Plc/Port_851.crc
-/_Boot/TwinCAT RT (x64)/Plc/Port_851.occ
-/_Boot/TwinCAT RT (x64)/Plc/Port_851_boot.tizip
-/PLC_HC/PLC_HC.tmc
-/PLC_HC/_CompileInfo/4D494197-F961-2BDE-B3BB-7C45D9FFFD6A.compileinfo
-/PLC_HC/_CompileInfo/23870359-3C0A-CD99-41F8-E5471F169892.compileinfo
-/PLC_HC/_CompileInfo/26A2AB29-1B90-E4ED-424D-DD850E0B585E.compileinfo
-/PLC_HC/_CompileInfo/72FFDED0-8E91-DD46-8AE0-98DF53684976.compileinfo
-/PLC_HC/_Libraries/Beckhoff Automation GmbH/Tc2_System/3.9.1.0/Tc2_System.compiled-library-ge33
-/_Boot/TargetDescription.xml
