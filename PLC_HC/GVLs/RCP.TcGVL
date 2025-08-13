@@ -9,6 +9,9 @@ VAR_GLOBAL
 	iRcpStepN				: INT;
 	cmd_RcpOperation		: INT; // 0:Inital State, 10:RUN, 20:PAUSE, 30:RESTART, 40:STOP, 60:SKIP, 90:ManualOperation
 	userState				: INT;	// 0:Inital State, 10:RUN, 20:PAUSE, 30:RESTART, 40:STOP, 50:END, 60:SKIP
+	
+	Pause_ET				: TIME := T#0S;
+	RecipeRunET 			: RecipeRunET; 
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

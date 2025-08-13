@@ -242,12 +242,14 @@ namespace SapphireXR_App.ViewModels
 
         private List<string> refreshAlarmList(PLCService.TriggerType triggerType)
         {
-            return refreshOnList(PLCService.ReadDigitalDeviceAlarms, PLCService.ReadAnalogDeviceAlarms, triggerType, KeysAlarmEventLogged);
+            return new List<string>();
+           //return refreshOnList(PLCService.ReadDigitalDeviceAlarms, PLCService.ReadAnalogDeviceAlarms, triggerType, KeysAlarmEventLogged);
         }
 
-        private  List<string> refreshWarningList(PLCService.TriggerType triggerType)
+        private List<string> refreshWarningList(PLCService.TriggerType triggerType)
         {
-            return refreshOnList(PLCService.ReadDigitalDeviceWarnings, PLCService.ReadAnalogDeviceWarnings, triggerType, KeysWarningEventLogged);
+            return new List<string>();
+            //return refreshOnList(PLCService.ReadDigitalDeviceWarnings, PLCService.ReadAnalogDeviceWarnings, triggerType, KeysWarningEventLogged);
         }
 
         private List<string> refreshOnList(Func<int> plcServiceReadDigitalState, Func<int> plcServiceReadAnalogState, PLCService.TriggerType triggerType, HashSet<string> keysEventLogged)

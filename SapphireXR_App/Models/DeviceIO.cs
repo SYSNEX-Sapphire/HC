@@ -21,14 +21,9 @@ namespace SapphireXR_App.Models
     public partial class AnalogDeviceIO : WarningAlarmDevice
     {
         public int MaxValue { get; set; }
-        public int MinSignal { get; set; }
-        public float CurrentValue { get; set; }
-        public float TargetValue { get; set; }
-    
-        public int UserState1 { get; set; }
-        public int UserState2 { get; set; }
-        public int UserState3 { get; set; }
-        public int UserState4 { get; set; }
+        //public int MinSignal { get; set; }
+        //public float CurrentValue { get; set; }
+        //public float TargetValue { get; set; }
 
     }
     public class ValveDeviceIO: Device

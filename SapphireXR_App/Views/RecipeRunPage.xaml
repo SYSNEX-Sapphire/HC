@@ -130,12 +130,12 @@
                     <Label Canvas.Left="970" Canvas.Top="406" Foreground="{StaticResource PrimaryFontColor}" Content="Zone #6"
                     Width="80" HorizontalContentAlignment="Center"/>
 
-                    <control:RecipeRunFlowController x:Name="furnaceZone1" Canvas.Left="375" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
-                    <control:RecipeRunFlowController x:Name="furnaceZone2" Canvas.Left="495" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
-                    <control:RecipeRunFlowController x:Name="furnaceZone3" Canvas.Left="615" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
-                    <control:RecipeRunFlowController x:Name="furnaceZone4" Canvas.Left="735" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
-                    <control:RecipeRunFlowController x:Name="furnaceZone5" Canvas.Left="855" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
-                    <control:RecipeRunFlowController x:Name="furnaceZone6" Canvas.Left="975" Canvas.Top="426" ControllerID="Temperature" Type="Reactor" />
+                    <control:RecipeRunFlowController x:Name="furnaceZone1" Canvas.Left="375" Canvas.Top="426" ControllerID="Temperature1" Type="Reactor" />
+                    <control:RecipeRunFlowController x:Name="furnaceZone2" Canvas.Left="495" Canvas.Top="426" ControllerID="Temperature2" Type="Reactor" />
+                    <control:RecipeRunFlowController x:Name="furnaceZone3" Canvas.Left="615" Canvas.Top="426" ControllerID="Temperature3" Type="Reactor" />
+                    <control:RecipeRunFlowController x:Name="furnaceZone4" Canvas.Left="735" Canvas.Top="426" ControllerID="Temperature4" Type="Reactor" />
+                    <control:RecipeRunFlowController x:Name="furnaceZone5" Canvas.Left="855" Canvas.Top="426" ControllerID="Temperature5" Type="Reactor" />
+                    <control:RecipeRunFlowController x:Name="furnaceZone6" Canvas.Left="975" Canvas.Top="426" ControllerID="Temperature6" Type="Reactor" />
                     <!--#endregion-->
 
                     <!-- #Region 4. 가스제어용 밸브 -->

@@ -97,29 +97,11 @@
                         <TextBlock Text="{Binding PLCAddressText}" Grid.Row="6" Grid.Column="2" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_950}" Margin="0" Padding="0" FontWeight="Bold"><Run Text="Machine Nam"/><Run Language="ko-kr" Text="e"/></TextBlock>
                         <TextBlock FontFamily="Segoe UI" Grid.Row="8" Grid.Column="0"  FontSize="12" Foreground="{DynamicResource Gray_900}" Margin="0" Padding="0" ><Run Text="PLC "/><Run Language="ko-kr" Text="C"/><Run Text="onnection"/></TextBlock>
                         <TextBlock Text="{Binding PLCConnectionStatus}" Grid.Row="10" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Margin="0" Padding="0" Foreground="{Binding PLCConnectionStatusColor}" FontWeight="Bold" />
-                        <Button Grid.Row="6" Grid.Column="2" Grid.RowSpan="5"  Width="25" Height="25" Command="{Binding ToggleBuzzerOnOffCommand}">
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource ImageButton}">
-                                    <Setter Property="Margin">
-                                        <Setter.Value>
-                                            <Thickness Left="{StaticResource p_1}" Right="{StaticResource p_3}" />
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter Property="BorderThickness" Value="0" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#FF929281" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                            <Image Source="{Binding BuzzerImage}" Width="25" Height="25" IsEnabled="{Binding Online, Source={x:Static model:PLCConnectionState.Instance}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
             <!-- Source Valve Current Status -->
-            <Grid Grid.Row="2" VerticalAlignment="Center">
+            <Grid Grid.Row="2" VerticalAlignment="Center" IsEnabled="False">
                 <Border Style="{StaticResource Tab}">
                     <StackPanel Orientation="Vertical" Height="229" VerticalAlignment="Top">
                         <StackPanel.Margin>
@@ -279,7 +261,7 @@
                 </Border>
             </Grid>
             <!-- Logical Interlock -->
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="3" IsEnabled="False">
                 <Border Style="{StaticResource Tab}">
                     <StackPanel Orientation="Vertical">
                         <StackPanel.Margin>
@@ -404,7 +386,7 @@
                 </Border>
             </Grid>
             <!-- Hardwire Interlock -->
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="4" IsEnabled="False">
                 <Border Style="{StaticResource Tab}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel.Margin>
@@ -554,7 +536,7 @@
                 </Border>
             </Grid>
             <!-- Line Heater Current Value -->
-            <Grid Grid.Row="5" >
+            <Grid Grid.Row="5" IsEnabled="False">
                 <Border Style="{StaticResource Tab}">
                     <StackPanel Orientation="Vertical">
                         <StackPanel.Margin>
@@ -643,7 +625,7 @@
                 </Border>
             </Grid>
             <!-- Colling Water Current Value -->
-            <Grid Grid.Row="6">
+            <Grid Grid.Row="6" IsEnabled="False">
                 <StackPanel Orientation="Vertical" Margin="8,8,8,0">
                     <Grid Height="24">
                         <Grid.ColumnDefinitions>

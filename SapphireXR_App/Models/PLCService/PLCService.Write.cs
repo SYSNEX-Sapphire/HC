@@ -164,21 +164,21 @@ namespace SapphireXR_App.Models
             Ads.WriteAny(hOperationMode, operatonMode);
         }
 
-        public static void WriteOutputCmd1(OutputCmd1Index index, bool powerOn)
-        {
-            if (bOutputCmd1 != null)
-            {
-                bOutputCmd1[(int)index] = powerOn;
-                int[] array = new int[1];
-                bOutputCmd1.CopyTo(array, 0);
-                Ads.WriteAny(hOutputCmd1, (short)array[0]);
-            }
-        }
+        //public static void WriteOutputCmd1(OutputCmd1Index index, bool powerOn)
+        //{
+        //    if (bOutputCmd1 != null)
+        //    {
+        //        bOutputCmd1[(int)index] = powerOn;
+        //        int[] array = new int[1];
+        //        bOutputCmd1.CopyTo(array, 0);
+        //        Ads.WriteAny(hOutputCmd1, (short)array[0]);
+        //    }
+        //}
 
-        public static void WriteThrottleValveMode(short value)
-        {
-            Ads.WriteAny(hOutputCmd2, value);
-        }
+        //public static void WriteThrottleValveMode(short value)
+        //{
+        //    Ads.WriteAny(hOutputCmd2, value);
+        //}
 
         private static int SetBit(bool bitValue, int bitField, int bit)
         {
@@ -267,14 +267,14 @@ namespace SapphireXR_App.Models
                     setBit(analogDeviceIO.ID, 2, analogDeviceIO.WarningSet, dAnalogDeviceAlarmWarningBit);
                 }
             }
-            foreach (SwitchDI switchID in switchDIs)
-            {
-                if (switchID.ID != null)
-                {
-                    setBit(switchID.ID, 3, switchID.AlarmSet, dDigitalDeviceAlarmWarningBit);
-                    setBit(switchID.ID, 4, switchID.WarningSet, dDigitalDeviceAlarmWarningBit);
-                }
-            }
+            //foreach (SwitchDI switchID in switchDIs)
+            //{
+            //    if (switchID.ID != null)
+            //    {
+            //        setBit(switchID.ID, 3, switchID.AlarmSet, dDigitalDeviceAlarmWarningBit);
+            //        setBit(switchID.ID, 4, switchID.WarningSet, dDigitalDeviceAlarmWarningBit);
+            //    }
+            //}
 
             for (uint alarmWarningSettingIndex = 1; alarmWarningSettingIndex < (NumAlarmWarningArraySize- 1); alarmWarningSettingIndex++)
             {

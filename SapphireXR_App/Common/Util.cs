@@ -286,12 +286,9 @@ namespace SapphireXR_App.Common
 
         public static readonly Dictionary<string, string> RecipeFlowControlFieldToControllerID = new Dictionary<string, string>
         {
-            { "M01", "MFC01" }, { "M02", "MFC02" }, { "M03", "MFC03" }, { "M04", "MFC04" }, { "M05", "MFC05" },
-            { "M06", "MFC06" }, { "M07", "MFC07" }, { "M08", "MFC08" }, { "M09", "MFC09" }, { "M10", "MFC10" },
-            { "M11", "MFC11" }, { "M12", "MFC12" }, { "M13", "MFC13" }, { "M14", "MFC14" }, { "M15",  "MFC15" },
-            { "M16", "MFC16" }, { "M17", "MFC17" }, { "M18", "MFC18" }, {"M19", "MFC19"  },
-            { "E01", "EPC01" },  { "E02", "EPC02" }, { "E03", "EPC03" }, { "E04", "EPC04" }, { "E05", "EPC05" },
-            { "E06", "EPC06" }, { "E07", "EPC07" }, { "STemp", "Temperature" }, { "RPress", "Pressure" }, { "SRotation", "Rotation" }
+            { "M01", "MFC01" }, { "M02", "MFC02" }, { "M03", "MFC03" }, { "M04", "MFC04" }, { "M05", "MFC05" }, { "M06", "MFC06" }, { "M07", "MFC07" }, { "M08", "MFC08" },
+            { "M09", "MFC09" }, { "M10", "MFC10" },  { "M11", "MFC11" }, { "M12", "MFC12" }, { "F01", "Temperature1" },  { "F02", "Temperature2" }, { "F03", "Temperature3" }, { "F04", "Temperature4" }, 
+            { "F05", "Temperature5" }, { "F06", "Temperature6" }
         };
     }
 }

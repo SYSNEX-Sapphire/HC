@@ -27,15 +27,6 @@ VAR_GLOBAL
 	//aOutputCmd				: ARRAY[1..3] OF WORD; // Digital Command from UI
 	aInterlockSet			: ARRAY[1..5] OF REAL; // UI Interlokc Setting Value, 5로 수정 
 	aInterlockEnable		: ARRAY[1..3] OF DWORD; // UI Interlock Enable Setting, 3으로 수정
-	
-	nCaseSignalTower		: INT;
-	
-	(* Recipe Control Global Variable*)
-	tRecipeControl_Ramp_ET	: TIME;
-	tRecipeControl_Hold_ET	: TIME;
-	tRecipeControl_Pause_ET	: TIME;
-	
-	
 END_VAR
 
 VAR_GLOBAL CONSTANT
