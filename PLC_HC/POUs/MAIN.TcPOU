@@ -5,13 +5,12 @@
 PROGRAM MAIN
 VAR
 	bOperationMode	: BOOL; // False:Manual, True:RecipeControl
-	bTest : BOOL;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[P11_Furnace();
 
-GVL_IO.OutputSolValve.0 := bTest;
 IF NOT(bOperationMode) THEN
 	//P30_ManualControl(state_Control := 10); //매뉴얼 콘트롤
 ELSE
