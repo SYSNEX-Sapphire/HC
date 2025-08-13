@@ -2,6 +2,7 @@
 <TcPlcObject Version="1.1.0.1">
   <GVL Name="RCP" Id="{ac971452-8a9c-4534-9b84-14e8f84d2615}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'linkalways'}
 VAR_GLOBAL
 	aRecipe		: ARRAY[1..100] OF RecipeStep; //Recipe Structure
 	iRcpTotalStep			: INT; //Recip Total Number

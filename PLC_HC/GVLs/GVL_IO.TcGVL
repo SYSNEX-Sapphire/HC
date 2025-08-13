@@ -2,6 +2,7 @@
 <TcPlcObject Version="1.1.0.1">
   <GVL Name="GVL_IO" Id="{64987411-b046-42d2-9423-04a76a692e64}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'linkalways'}
 VAR_GLOBAL
 	(* Digital IO to Byte *)
 	DigitalInputIO AT %I* 	: BYTE; //EL1088 1EA
