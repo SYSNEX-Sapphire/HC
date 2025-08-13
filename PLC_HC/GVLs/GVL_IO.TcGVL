@@ -23,10 +23,10 @@ VAR_GLOBAL
 	aController_CV 			: ARRAY[1..nControllerNum] OF REAL; //Current Value from RampingController
 	
 	(* Present Value Meter Display*)
-	aInputState				: ARRAY[1..5] OF WORD; // Digital Input from Device (Switch)
-	aOutputCmd				: ARRAY[1..3] OF WORD; // Digital Command from UI
-	aInterlockSet			: ARRAY[1..16] OF REAL; // UI Interlokc Setting Value
-	aInterlockEnable		: ARRAY[1..6] OF DWORD; // UI Interlock Enable Setting
+	// aInputState				: ARRAY[1..5] OF WORD; // Digital Input from Device (Switch)
+	//aOutputCmd				: ARRAY[1..3] OF WORD; // Digital Command from UI
+	aInterlockSet			: ARRAY[1..5] OF REAL; // UI Interlokc Setting Value, 5로 수정 
+	aInterlockEnable		: ARRAY[1..3] OF DWORD; // UI Interlock Enable Setting, 3으로 수정
 	
 	nCaseSignalTower		: INT;
 	
