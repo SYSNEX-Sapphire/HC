@@ -182,12 +182,12 @@
                 <Label Canvas.Left="965" Canvas.Top="596" Foreground="{StaticResource PrimaryFontColor}" Content="Zone #6"
                 Width="80" HorizontalContentAlignment="Center"/>
 
-                <control:HomeFlowController x:Name="furnaceZone1" Canvas.Left="370" Canvas.Top="620" ControllerID="Temperature" Type="Reactor"/>
-                <control:HomeFlowController x:Name="furnaceZone2" Canvas.Left="490" Canvas.Top="620" ControllerID="Temperature" Type="Reactor"/>
-                <control:HomeFlowController x:Name="furnaceZone3" Canvas.Left="610" Canvas.Top="620" ControllerID="Temperature" Type="Reactor"/>
-                <control:HomeFlowController x:Name="furnaceZone4" Canvas.Left="730" Canvas.Top="620" ControllerID="Temperature" Type="Reactor"/>
-                <control:HomeFlowController x:Name="furnaceZone5" Canvas.Left="850" Canvas.Top="620" ControllerID="Temperature" Type="Reactor"/>
-                <control:HomeFlowController x:Name="furnaceZone6" Canvas.Left="970" Canvas.Top="620" ControllerID="Temperature" Type="Reactor"/>
+                <control:HomeFlowController x:Name="furnaceZone1" Canvas.Left="370" Canvas.Top="620" ControllerID="Temperature1" Type="Reactor"/>
+                <control:HomeFlowController x:Name="furnaceZone2" Canvas.Left="490" Canvas.Top="620" ControllerID="Temperature2" Type="Reactor"/>
+                <control:HomeFlowController x:Name="furnaceZone3" Canvas.Left="610" Canvas.Top="620" ControllerID="Temperature3" Type="Reactor"/>
+                <control:HomeFlowController x:Name="furnaceZone4" Canvas.Left="730" Canvas.Top="620" ControllerID="Temperature4" Type="Reactor"/>
+                <control:HomeFlowController x:Name="furnaceZone5" Canvas.Left="850" Canvas.Top="620" ControllerID="Temperature6" Type="Reactor"/>
+                <control:HomeFlowController x:Name="furnaceZone6" Canvas.Left="970" Canvas.Top="620" ControllerID="Temperature7" Type="Reactor"/>
                 <!--#endregion-->
 
                 <!-- #Region 5. 가스제어용 밸브 -->

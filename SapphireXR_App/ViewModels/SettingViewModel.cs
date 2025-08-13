@@ -354,10 +354,12 @@ namespace SapphireXR_App.ViewModels
             lAnalogDeviceIO = dAnalogDeviceIO?.Values.ToList();
             if (lAnalogDeviceIO != null)
             {
-                lAnalogDeviceIO = [new () { Name = "R01", ID = "R01" }, new() { Name = "R01", ID = "R02" }, new() { Name = "R01", ID = "R03" }, new() { Name = "R01", ID = "R04" },
-                    new() { Name = "R01", ID = "R05" }, new() { Name = "R01", ID = "R06" }, new() { Name = "R01", ID = "M01" }, new() { Name = "R01", ID = "M02" }, new() { Name = "R01", ID = "M03" },
-                    new() { Name = "R01", ID = "M04" }, new() { Name = "R01", ID = "M05" }, new() { Name = "R01", ID = "M06" }, new() { Name = "R01", ID = "M07" }, new() { Name = "R01", ID = "M08" }, 
-                    new() { Name = "R01", ID = "M09" }, new() { Name = "R01", ID = "M10" }, new() { Name = "R01", ID = "M11" }, new() { Name = "R01", ID = "M12" }];
+                lAnalogDeviceIO = [new () { Name = "Furnace Zone 1 Temp", ID = "F01" }, new() { Name = "Furnace Zone 2 Temp", ID = "F02" }, new() { Name = "Furnace Zone 3 Temp", ID = "F03" }, 
+                    new() { Name = "Furnace Zone 4 Temp", ID = "F04" }, new() { Name = "Furnace Zone 5 Temp", ID = "F05" }, new() { Name = "Furnace Zone 6 Temp", ID = "F06" }, 
+                    new() { Name = "M01 - B/G N2", ID = "M01" }, new() { Name = "M02 - Ga HCl", ID = "M02" }, new() { Name = "M03 - Ga N2", ID = "M03" },new() { Name = "M04 - NH3 NH3", ID = "M04" }, 
+                    new() { Name = "M05 - NH3 N2", ID = "M05" }, new() { Name = "M06 - Al HCl", ID = "M06" }, new() { Name = "M07 - Al N2", ID = "M07" }, new() { Name = "M08 - Etching HCl", ID = "M08" }, 
+                    new() { Name = "M09 - Etching N2", ID = "M09" }, new() { Name = "M10 - H2/O2 DCS", ID = "M10" }, new() { Name = "M11 - H2/O2 N2", ID = "M11" }, new() { Name = "M12 - B/F N2", ID = "M12" }];
+                AlarmSettingSave();
                 foreach (var io in lAnalogDeviceIO)
                 {
                     io.PropertyChanged += (object? sender, PropertyChangedEventArgs args) =>

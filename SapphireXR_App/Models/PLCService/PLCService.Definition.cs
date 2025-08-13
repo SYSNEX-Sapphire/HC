@@ -141,10 +141,8 @@ namespace SapphireXR_App.Models
         {
             { "MFC01", 0 }, { "MFC02", 1 }, { "MFC03", 2 }, { "MFC04", 3 }, { "MFC05", 4 },
             { "MFC06", 5 }, { "MFC07", 6 }, { "MFC08", 7 }, { "MFC09", 8 }, { "MFC10", 9 },
-            { "MFC11", 10 }, { "MFC12", 11 }, { "MFC13", 12 }, { "MFC14", 13 }, { "MFC15", 14 },
-            { "MFC16", 15 }, { "MFC17", 16 }, { "MFC18", 17 }, { "MFC19", 18 },
-            { "EPC01", 19 },  { "EPC02", 20 }, { "EPC03", 21 }, { "EPC04", 22 }, { "EPC05", 23 },
-            { "EPC06", 24 }, { "EPC07", 25 }, {"Temperature", 26}, {"Pressure", 27}, {"Rotation", 28}
+            { "MFC11", 10 }, { "MFC12", 11 }, { "Temperature1", 12 }, { "Temperature2", 13 }, { "Temperature3", 14 },
+            { "Temperature4", 15 }, { "Temperature5", 16 }, { "Temperature6", 17 }
         };
         public static readonly int NumControllers = dIndexController.Count;
 

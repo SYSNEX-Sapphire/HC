@@ -27,6 +27,15 @@
 			</Properties>
 		</DataType>
 		<DataType>
+			<Name GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}" IecBaseType="true" AutoDeleteType="true">ARRAY [1..3] OF INT</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
+			<ArrayInfo>
+				<LBound>1</LBound>
+				<Elements>3</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6outData22B</Name>
 			<BitSize>192</BitSize>
 			<SubItem>
@@ -125,7 +134,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{54872A79-3C7B-479E-8547-D3B2B5F2ABCB}" Name="PLC_HC" PrjFilePath="PLC_HC\PLC_HC.plcproj" TmcFilePath="PLC_HC\PLC_HC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{A7660ED9-A7D2-5F07-0114-2396A155C728}" TmcPath="PLC_HC\PLC_HC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{7EBA97C8-E5BA-EF38-BD69-4BAC6317DE48}" TmcPath="PLC_HC\PLC_HC.tmc">
 					<Name>PLC_HC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -133,6 +142,21 @@
 						<Var>
 							<Name>P11_Furnace.fbModbus_Master.OutData</Name>
 							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.DigitalOutputIO</Name>
+							<Comment><![CDATA[EL2088 1EA]]></Comment>
+							<Type>BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.aAnalogOutputIO</Name>
+							<Comment><![CDATA[EL4004 3EA]]></Comment>
+							<Type GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}">ARRAY [1..3] OF INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.OutputSolValve</Name>
+							<Comment><![CDATA[16열 32점]]></Comment>
+							<Type>DWORD</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1">
@@ -144,6 +168,16 @@
 						<Var>
 							<Name>P11_Furnace.fbModbus_Master.WcState</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.DigitalInputIO</Name>
+							<Comment><![CDATA[EL1088 1EA]]></Comment>
+							<Type>BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.aAnalogInputIO</Name>
+							<Comment><![CDATA[EL3064 3EA]]></Comment>
+							<Type GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}">ARRAY [1..3] OF INT</Type>
 						</Var>
 					</Vars>
 					<Contexts>
@@ -2436,7 +2470,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 					<Box Id="10" BoxType="9095" BoxFlags="#x00000020">
 						<Name>Term 10 (EL6752)</Name>
 						<ImageId>1005</ImageId>
-						<EtherCAT SlaveType="5" AdsServerAddress="d3e10044020b0000" FixedAdsServerNetId="true" PdiType="#x0008" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x1a603052" RevisionNo="#x00140000" InfoDataAddr="true" InfoDataNetId="true" RepeatSupport="true" TimeoutMailbox2="3000" GenerateOwnNetId="true" InitializeOwnNetId="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6752 DeviceNet Master" Desc="EL6752" PortABoxInfo="#x01000009">
+						<EtherCAT SlaveType="5" AdsServerAddress="d3e1002c020b0000" FixedAdsServerNetId="true" PdiType="#x0008" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x1a603052" RevisionNo="#x00140000" InfoDataAddr="true" InfoDataNetId="true" RepeatSupport="true" TimeoutMailbox2="3000" GenerateOwnNetId="true" InitializeOwnNetId="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6752 DeviceNet Master" Desc="EL6752" PortABoxInfo="#x01000009">
 							<SyncMan>001000042600010001000000400000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000400000040004001422010000</SyncMan>
 							<SyncMan>001800002400000003000000000000000000001824010000</SyncMan>
