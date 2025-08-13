@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.14">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.16">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6inData22B</Name>
@@ -25,6 +25,15 @@
 					<Name>hide</Name>
 				</Property>
 			</Properties>
+		</DataType>
+		<DataType>
+			<Name GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}" IecBaseType="true" AutoDeleteType="true">ARRAY [1..3] OF INT</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
+			<ArrayInfo>
+				<LBound>1</LBound>
+				<Elements>3</Elements>
+			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6outData22B</Name>
@@ -79,21 +88,21 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
-			<BitSize>7</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>7</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000038}" TcBaseType="true" HideType="true">USINTARR4</Name>
 			<BitSize>32</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
 			<ArrayInfo>
 				<LBound>0</LBound>
 				<Elements>4</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00200000000E}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..13] OF BIT</Name>
+			<BitSize>14</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>14</Elements>
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
@@ -114,7 +123,6 @@
 			<Licenses>
 				<Target>
 					<ManualSelect>{6952449D-F68C-49A2-ADE4-8639D85B33A4}</ManualSelect>
-					<ManualSelect>{A1AF8A04-C08D-4853-A5A0-0E6C3A278A8C}</ManualSelect>
 				</Target>
 			</Licenses>
 			<Tasks>
@@ -125,7 +133,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{54872A79-3C7B-479E-8547-D3B2B5F2ABCB}" Name="PLC_HC" PrjFilePath="PLC_HC\PLC_HC.plcproj" TmcFilePath="PLC_HC\PLC_HC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{A7660ED9-A7D2-5F07-0114-2396A155C728}" TmcPath="PLC_HC\PLC_HC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{9461B639-C097-7F59-3425-8820B9D38A1D}" TmcPath="PLC_HC\PLC_HC.tmc">
 					<Name>PLC_HC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -133,6 +141,21 @@
 						<Var>
 							<Name>P11_Furnace.fbModbus_Master.OutData</Name>
 							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.DigitalOutputIO</Name>
+							<Comment><![CDATA[EL2088 1EA]]></Comment>
+							<Type>BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.aAnalogOutputIO</Name>
+							<Comment><![CDATA[EL4004 3EA]]></Comment>
+							<Type GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}">ARRAY [1..3] OF INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.OutputSolValve</Name>
+							<Comment><![CDATA[16열 32점]]></Comment>
+							<Type>DWORD</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1">
@@ -144,6 +167,16 @@
 						<Var>
 							<Name>P11_Furnace.fbModbus_Master.WcState</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.DigitalInputIO</Name>
+							<Comment><![CDATA[EL1088 1EA]]></Comment>
+							<Type>BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.aAnalogInputIO</Name>
+							<Comment><![CDATA[EL3064 3EA]]></Comment>
+							<Type GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}">ARRAY [1..3] OF INT</Type>
 						</Var>
 					</Vars>
 					<Contexts>
@@ -164,7 +197,7 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.0.103.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.0.103.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
 				<Name>Device 1 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -981,10 +1014,49 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<CoeProfile ProfileNo="19665801"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="9" BoxType="9103" BoxFlags="#x00000020">
-						<Name>Term 9 (EL6021)</Name>
+					<Box Id="9" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 9 (EL4004)</Name>
+						<ImageId>1003</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0fa43052" RevisionNo="#x00140000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL4004 4Ch. Ana. Output 0-10V, 12bit" Desc="EL4004" PortABoxInfo="#x01000008">
+							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
+							<SyncMan>001108002400010003000000000000000800001124010000</SyncMan>
+							<SyncMan>801100000000000004000000000000000000801100000000</SyncMan>
+							<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<DcMode>53796e6368726f6e0000000000000000534d2d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e0000000000000000000000000000000000000000000000000000000000a0860100000000070100000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<Pdo Name="AO Outputs Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="Analog output" Index="#x7000" Sub="#x11" Flags="#x00020000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="AO Outputs Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="Analog output" Index="#x7010" Sub="#x11" Flags="#x00020000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="AO Outputs Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="Analog output" Index="#x7020" Sub="#x11" Flags="#x00020000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="AO Outputs Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="Analog output" Index="#x7030" Sub="#x11" Flags="#x00020000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="26219401"/>
+							<CoeProfile ProfileNo="26219401"/>
+							<CoeProfile ProfileNo="26219401"/>
+							<CoeProfile ProfileNo="26219401"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="10" BoxType="9103" BoxFlags="#x00000020">
+						<Name>Term 10 (EL6021)</Name>
 						<ImageId>1004</ImageId>
-						<EtherCAT SlaveType="7" PdiType="#x0005" MboxDataLinkLayer="true" CycleMBoxPolling="true" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x17853052" RevisionNo="#x00160000" InfoDataAddr="true" RepeatSupport="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" SdoUploadWithMaxLength="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6021 Interface (RS422/485)" Desc="EL6021" PortABoxInfo="#x01000008">
+						<EtherCAT SlaveType="7" PdiType="#x0005" MboxDataLinkLayer="true" CycleMBoxPolling="true" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x17853052" RevisionNo="#x00160000" InfoDataAddr="true" RepeatSupport="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" SdoUploadWithMaxLength="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6021 Interface (RS422/485)" Desc="EL6021" PortABoxInfo="#x01000009">
 							<SyncMan>0018f6002600010001000000f600f600f600001826010000</SyncMan>
 							<SyncMan>f618f6002200010002000000f600f600f600f61822010000</SyncMan>
 							<SyncMan>001018002400010003000000000000001800001024010000</SyncMan>
@@ -2433,27 +2505,232 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<CoeProfile ProfileNo="5001"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="10" BoxType="9095" BoxFlags="#x00000020">
-						<Name>Term 10 (EL6752)</Name>
+					<Box Id="11" BoxType="9095" BoxFlags="#x00000020">
+						<Name>Term 11 (EL6752)</Name>
 						<ImageId>1005</ImageId>
-						<EtherCAT SlaveType="5" AdsServerAddress="d3e10044020b0000" FixedAdsServerNetId="true" PdiType="#x0008" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x1a603052" RevisionNo="#x00140000" InfoDataAddr="true" InfoDataNetId="true" RepeatSupport="true" TimeoutMailbox2="3000" GenerateOwnNetId="true" InitializeOwnNetId="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6752 DeviceNet Master" Desc="EL6752" PortABoxInfo="#x01000009">
+						<EtherCAT SlaveType="5" AdsServerAddress="c0a8006703010000" FixedAdsServerNetId="true" PdiType="#x0008" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x1a603052" RevisionNo="#x00140000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" RepeatSupport="true" TimeoutMailbox2="3000" GenerateOwnNetId="true" InitializeOwnNetId="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6752 DeviceNet Master" Desc="EL6752" PortABoxInfo="#x0100000a">
 							<SyncMan>001000042600010001000000400000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000400000040004001422010000</SyncMan>
-							<SyncMan>001800002400000003000000000000000000001824010000</SyncMan>
-							<SyncMan>002402002000010004000000000000000000002420010000</SyncMan>
-							<Fmmu>0000000000000000000000020000000001000000000000000000000000000000</Fmmu>
+							<SyncMan>00180c002400010003000000000000000000001824010000</SyncMan>
+							<SyncMan>002404002000010004000000000000000000002420010000</SyncMan>
+							<Fmmu>0000000000000000001800020100000001000000000000000000000000000000</Fmmu>
 							<Fmmu>0000000000000000002400010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010140200181402</BootStrapData>
-							<Pdo Name="Device" Index="#x1a80" Flags="#x0011" SyncMan="3">
-								<Entry Name="Error" Index="#xf100" Sub="#x01" Flags="#x00000100">
+							<Pdo Name="CKD_OUT" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="Outputs.Output Data" Index="#x7000" Sub="#x01" Flags="#x00000100">
+									<Type GUID="{18071995-0000-0000-0000-000000000038}">USINTARR4</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Device 2 (EL6752)_IN" Index="#x1a80" Flags="#x0011" SyncMan="3">
+								<Entry Name="CKD_MacState" Index="#xa000" Sub="#x01" Flags="#x00000100">
 									<Type>USINT</Type>
 								</Entry>
-								<Entry Name="DiagFlag" Index="#xf100" Sub="#x02" Flags="#x00000100">
+								<Entry Name="Device 2 (EL6752)_Error" Index="#xf100" Sub="#x01" Flags="#x00000100">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="Device 2 (EL6752)_DiagFlag" Index="#xf100" Sub="#x02" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="CKD_DiagFlag" Index="#xa000" Sub="#x02" Flags="#x00000100">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry>
-									<Type GUID="{18071995-0000-0000-0000-002000000007}">ARRAY [0..6] OF BIT</Type>
+									<Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Device 2 (EL6752)_OUT" Index="#x1680" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="BitStrobe_MacId_0" Index="#xf200" Sub="#x01" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_1" Index="#xf200" Sub="#x02" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_2" Index="#xf200" Sub="#x03" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_3" Index="#xf200" Sub="#x04" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_4" Index="#xf200" Sub="#x05" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_5" Index="#xf200" Sub="#x06" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_6" Index="#xf200" Sub="#x07" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_7" Index="#xf200" Sub="#x08" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_8" Index="#xf200" Sub="#x09" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_9" Index="#xf200" Sub="#x0a" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_10" Index="#xf200" Sub="#x0b" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_11" Index="#xf200" Sub="#x0c" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_12" Index="#xf200" Sub="#x0d" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_13" Index="#xf200" Sub="#x0e" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_14" Index="#xf200" Sub="#x0f" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_15" Index="#xf200" Sub="#x10" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_16" Index="#xf200" Sub="#x11" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_17" Index="#xf200" Sub="#x12" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_18" Index="#xf200" Sub="#x13" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_19" Index="#xf200" Sub="#x14" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_20" Index="#xf200" Sub="#x15" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_21" Index="#xf200" Sub="#x16" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_22" Index="#xf200" Sub="#x17" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_23" Index="#xf200" Sub="#x18" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_24" Index="#xf200" Sub="#x19" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_25" Index="#xf200" Sub="#x1a" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_26" Index="#xf200" Sub="#x1b" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_27" Index="#xf200" Sub="#x1c" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_28" Index="#xf200" Sub="#x1d" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_29" Index="#xf200" Sub="#x1e" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_30" Index="#xf200" Sub="#x1f" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_31" Index="#xf200" Sub="#x20" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_32" Index="#xf200" Sub="#x21" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_33" Index="#xf200" Sub="#x22" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_34" Index="#xf200" Sub="#x23" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_35" Index="#xf200" Sub="#x24" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_36" Index="#xf200" Sub="#x25" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_37" Index="#xf200" Sub="#x26" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_38" Index="#xf200" Sub="#x27" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_39" Index="#xf200" Sub="#x28" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_40" Index="#xf200" Sub="#x29" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_41" Index="#xf200" Sub="#x2a" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_42" Index="#xf200" Sub="#x2b" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_43" Index="#xf200" Sub="#x2c" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_44" Index="#xf200" Sub="#x2d" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_45" Index="#xf200" Sub="#x2e" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_46" Index="#xf200" Sub="#x2f" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_47" Index="#xf200" Sub="#x30" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_48" Index="#xf200" Sub="#x31" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_49" Index="#xf200" Sub="#x32" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_50" Index="#xf200" Sub="#x33" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_51" Index="#xf200" Sub="#x34" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_52" Index="#xf200" Sub="#x35" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_53" Index="#xf200" Sub="#x36" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_54" Index="#xf200" Sub="#x37" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_55" Index="#xf200" Sub="#x38" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_56" Index="#xf200" Sub="#x39" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_57" Index="#xf200" Sub="#x3a" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_58" Index="#xf200" Sub="#x3b" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_59" Index="#xf200" Sub="#x3c" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_60" Index="#xf200" Sub="#x3d" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_61" Index="#xf200" Sub="#x3e" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_62" Index="#xf200" Sub="#x3f" Flags="#x00000100">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="BitStrobe_MacId_63" Index="#xf200" Sub="#x40" Flags="#x00000100">
+									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<CoeProfile ProfileNo="340792201"/>
@@ -2521,27 +2798,27 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<CoeProfile ProfileNo="340792201"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="11" BoxType="9099">
-						<Name>Term 11 (EL9011)</Name>
+					<Box Id="12" BoxType="9099">
+						<Name>Term 12 (EL9011)</Name>
 						<ImageId>1006</ImageId>
-						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x0100000a"/>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x0100000b"/>
 					</Box>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="2" Disabled="true" DevType="88" AmsPort="28674" AmsNetId="192.168.0.103.3.1" RemoteName="Device 2 (EL6752)">
+			<Device Id="2" DevType="88" AmsPort="28674" AmsNetId="192.168.0.103.3.1" RemoteName="Device 2 (EL6752)">
 				<Name>Device 2 (EL6752)</Name>
 				<AddressInfo>
 					<Ecat>
-						<EtherCATDeviceId>10</EtherCATDeviceId>
-						<EtherCATDeviceName>TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 10 (EL6752)</EtherCATDeviceName>
+						<EtherCATDeviceId>11</EtherCATDeviceId>
+						<EtherCATDeviceName>TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 11 (EL6752)</EtherCATDeviceName>
 					</Ecat>
 				</AddressInfo>
 				<Image Id="3" AddrType="4" ImageType="3">
 					<Name>Image</Name>
 				</Image>
-				<Box Id="12" BoxType="5203">
-					<Name>CKD-1</Name>
+				<Box Id="13" BoxType="5203">
+					<Name>CKD</Name>
 					<Comment><![CDATA[EDS-File: 'OPP6-2D.EDS'
 DescText: OPP6-2D
 Vendor:  CKD Corporation
@@ -2611,6 +2888,7 @@ Catalog Number:  ]]></Comment>
 				<DeviceNet>
 					<Fcxxxx>
 						<DevSettings NetId="c0a800670301" EquiCycleTime="100000"/>
+						<DevParameter CycleTime="100000"/>
 						<EquiParameter RelationShiftCycle="0"/>
 					</Fcxxxx>
 					<BusParameter MacId="63" Baudrate="3" VendorID="108" DeviceType="12" ProductCode="6752" MajorRevision="1" MinorRevision="1" SerialNumber="305419896" IOCycleTime="100"/>
@@ -2619,54 +2897,10 @@ Catalog Number:  ]]></Comment>
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500830000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^PLC_HC^PLC_HC Instance">
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 9 (EL6021)">
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^Status" VarB="COM TxPDO-Map Inputs^Status"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+			<OwnerB Name="TIID^Device 2 (EL6752)^CKD">
+				<Link VarA="PlcTask Outputs^GVL_IO.OutputSolValve" VarB="Connection (Poll)^Outputs^Output Data"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>
