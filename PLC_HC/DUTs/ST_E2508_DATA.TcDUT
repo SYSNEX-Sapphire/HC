@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_E2508_DATA" Id="{0ddc36b3-8ecc-45f1-b008-ffb4cc513566}">
+    <Declaration><![CDATA[TYPE ST_E2508_DATA :
+STRUCT
+	TEMP_PV_VALUE :WORD;(*1*)
+	TEMP_TARGET_VALUE :WORD;(*2*)
+	TEMP_OUTPUT_LEVEL :WORD;(*3*)
+	TEMP_ADD_4:WORD;
+	TEMP_WORKING_SP:WORD;(*5*)
+	TEMP_PID_P_VALUE:WORD;
+	TEMP_ADD_7:WORD;
+	TEMP_PID_I_VALUE:WORD;(*8*)
+	TEMP_PID_D_VALUE:WORD;(*9*)
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
