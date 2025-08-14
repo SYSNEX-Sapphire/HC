@@ -18,6 +18,12 @@
     <LibraryReferences>{e21aaa1e-a955-4e25-8b48-e18c773377c9}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DEVICE\FB_E2408_Manager.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DEVICE\FB_Modbus_Send_FIFO.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\E_RampGeneratorState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -48,6 +54,12 @@
     <Compile Include="DUTs\ScaleFactor.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Temp_Controller\ST_E2408_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Temp_Controller\ST_Modbus_Send_Frame.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FUNCTION\BOOL_TO_STRING_LHeaterON.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -72,11 +84,24 @@
     <Compile Include="FUNCTION\Real_To_String_ThermalBath.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FUNCTION\Temp_Controller\F_Temp_Write_Ramp_Value.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FUNCTION\Temp_Controller\F_Temp_Write_Set_Point.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FUNCTION\Temp_Controller\F_Temp_Write_Value.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FUNCTION\USINT_TO_WORD_Bit.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FUNCTION\WORD_TO_USINT_Bit.TcPOU">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GVLs\GVL_Furnace.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\GVL_IO.TcGVL">
       <SubType>Code</SubType>
@@ -119,9 +144,6 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\P11_Furnace.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\P30_ManualControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -140,8 +162,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\Temp_Controller" />
+    <Folder Include="FUNCTION\Temp_Controller" />
     <Folder Include="GVLs" />
     <Folder Include="FUNCTION" />
+    <Folder Include="DEVICE" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +185,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

@@ -2,6 +2,15 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.14">
 	<DataTypes>
 		<DataType>
+			<Name GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}" IecBaseType="true" AutoDeleteType="true">ARRAY [1..3] OF INT</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
+			<ArrayInfo>
+				<LBound>1</LBound>
+				<Elements>3</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6inData22B</Name>
 			<BitSize>192</BitSize>
 			<SubItem>
@@ -25,15 +34,6 @@
 					<Name>hide</Name>
 				</Property>
 			</Properties>
-		</DataType>
-		<DataType>
-			<Name GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}" IecBaseType="true" AutoDeleteType="true">ARRAY [1..3] OF INT</Name>
-			<BitSize>48</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
-			<ArrayInfo>
-				<LBound>1</LBound>
-				<Elements>3</Elements>
-			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6outData22B</Name>
@@ -134,15 +134,11 @@
 		</System>
 		<Plc>
 			<Project GUID="{54872A79-3C7B-479E-8547-D3B2B5F2ABCB}" Name="PLC_HC" PrjFilePath="PLC_HC\PLC_HC.plcproj" TmcFilePath="PLC_HC\PLC_HC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{7EBA97C8-E5BA-EF38-BD69-4BAC6317DE48}" TmcPath="PLC_HC\PLC_HC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{259E059B-1A20-D902-DF06-EB49AE19726D}" TmcPath="PLC_HC\PLC_HC.tmc">
 					<Name>PLC_HC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>P11_Furnace.fbModbus_Master.OutData</Name>
-							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
-						</Var>
 						<Var>
 							<Name>GVL_IO.DigitalOutputIO</Name>
 							<Comment><![CDATA[EL2088 1EA]]></Comment>
@@ -158,17 +154,13 @@
 							<Comment><![CDATA[16열 32점]]></Comment>
 							<Type>DWORD</Type>
 						</Var>
+						<Var>
+							<Name>RCP.fbModbusManager.fbModbus_Master.OutData</Name>
+							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>P11_Furnace.fbModbus_Master.InData</Name>
-							<Type GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU">MB_KL6inData22B</Type>
-						</Var>
-						<Var>
-							<Name>P11_Furnace.fbModbus_Master.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
 						<Var>
 							<Name>GVL_IO.DigitalInputIO</Name>
 							<Comment><![CDATA[EL1088 1EA]]></Comment>
@@ -179,7 +171,71 @@
 							<Comment><![CDATA[EL3064 3EA]]></Comment>
 							<Type GUID="{BA256C6A-CD79-7464-5392-B9A2F61BB830}">ARRAY [1..3] OF INT</Type>
 						</Var>
+						<Var>
+							<Name>RCP.fbModbusManager.fbModbus_Master.InData</Name>
+							<Type GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU">MB_KL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>RCP.fbModbusManager.fbModbus_Master.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
 					</Vars>
+					<UnrestoredVarLinks ImportTime="2025-08-14T09:24:15">
+						<OwnerA Name="InputDst" Prefix="TIPC^PLC_HC^PLC_HC Instance" Type="1">
+							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 9 (EL6021)">
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 0" Size="8" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.InData^Status" TypeA="WORD" InOutA="0" ParentTypeA="MB_KL6inData22B" GuidA="{18071995-0000-0000-0000-000000000004}" VarB="COM TxPDO-Map Inputs^Status" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="OutputSrc" Prefix="TIPC^PLC_HC^PLC_HC Instance" Type="2">
+							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 9 (EL6021)">
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^Ctrl" TypeA="WORD" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000000000004}" VarB="COM RxPDO-Map Outputs^Ctrl" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 0" Size="8" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64" RestoreInfo="ANotFound"/>
+								<Link VarA="P11_Furnace.fbModbus_Master.OutData^D" TypeA="ARRAY [0..21] OF BYTE" InOutA="1" ParentTypeA="MB_KL6outData22B" GuidA="{18071995-0000-0000-0000-000300000016}" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
 							<Id>0</Id>
@@ -2652,56 +2708,4 @@ Catalog Number:  ]]></Comment>
 			</Device>
 		</Io>
 	</Project>
-	<Mappings>
-		<OwnerA Name="TIPC^PLC_HC^PLC_HC Instance">
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 9 (EL6021)">
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Inputs^P11_Furnace.fbModbus_Master.InData^Status" VarB="COM TxPDO-Map Inputs^Status"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^P11_Furnace.fbModbus_Master.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
-			</OwnerB>
-		</OwnerA>
-	</Mappings>
 </TcSmProject>

@@ -11,7 +11,9 @@ VAR_GLOBAL
 	userState				: INT;	// 0:Inital State, 10:RUN, 20:PAUSE, 30:RESTART, 40:STOP, 50:END, 60:SKIP
 	
 	Pause_ET				: TIME := T#0S;
-	RecipeRunET 			: RecipeRunET; 
+	RecipeRunET 			: RecipeRunET;
+	
+	fbModbusManager			:FB_E2408_Manager;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

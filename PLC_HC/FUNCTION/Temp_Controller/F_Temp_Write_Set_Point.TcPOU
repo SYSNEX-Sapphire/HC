@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_Temp_Write_Set_Point" Id="{13e9245b-ce18-4824-91fc-976f21622026}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Temp_Write_Set_Point : ST_Modbus_Send_Frame
+VAR_INPUT
+	Module_Number	:WORD;
+	Write_Value		:WORD;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_Temp_Write_Set_Point := F_Temp_Write_Value(Module_Number:=Module_Number,
+											Command_Index:=2,
+											Write_Value:=Write_Value);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
