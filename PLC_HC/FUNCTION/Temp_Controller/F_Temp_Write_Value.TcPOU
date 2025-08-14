@@ -3,7 +3,7 @@
   <POU Name="F_Temp_Write_Value" Id="{f8555c32-2600-4397-926c-cc4e887709e3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION F_Temp_Write_Value : ST_Modbus_Send_Frame
 VAR_INPUT
-	Module_Number	:WORD;
+	Module_Number	:BYTE;
 	Command_Index	:WORD;
 	Write_Value		:WORD;
 END_VAR
