@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="F_Temp_Write_Ramp_Value" Id="{255aca7b-5b9d-4bca-a5f5-a4d0271a5474}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION F_Temp_Write_Ramp_Value : BOOL
+    <Declaration><![CDATA[FUNCTION F_Temp_Write_Ramp_Value : ST_Modbus_Send_Frame
 VAR_INPUT
 	Module_Number	:WORD;
 	Write_Value		:WORD;
@@ -10,9 +10,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[F_Temp_Write_Ramp_Value:=F_Temp_Write_Value(Module_Number:=Module_Number,
-											Command_Index:=161,
-											Write_Value:=Write_Value);]]></ST>
+      <ST><![CDATA[F_Temp_Write_Ramp_Value := F_Temp_Write_Value(Module_Number := Module_Number,
+											Command_Index := 161,
+											Write_Value := Write_Value);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
