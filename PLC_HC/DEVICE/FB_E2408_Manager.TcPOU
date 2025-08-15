@@ -24,10 +24,10 @@ VAR
 	DataReadTon			:TON;
 	bWriteExecute		:BOOL;
 	bReadExecute		:BOOL;
-	arrReceivedBuffer 	:ARRAY [0..200] OF WORD;
+	arrReceivedBuffer 	:ARRAY [0..20] OF WORD;
 	arrSendBuffer 		:ARRAY [0..99] OF WORD;
 	
-	nModbusRead_Start_ADDR	:WORD;
+	nModbusRead_Start_ADDR	:BYTE;
 	nModbusWrite_Start_ADDR	:WORD;
 	nReadExecuteCount		:UDINT;
 		
@@ -53,6 +53,7 @@ VAR
 	ReadInputRegsError		: BOOL;
 	WriteSingleRegisterBusy	: BOOL;
 	WriteSingleRegisterError: BOOL;
+	nModbusWrite_UniD: BYTE;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -89,7 +90,7 @@ END_IF
 
 (*Copy Data*)
 IF (ReadInputRegsBusy = FALSE AND ReadInputRegsError = FALSE)  THEN
-	IF (fbModbus_Master.cbRead >0)  (*AND (arrReceivedBuffer[4] <> 0)*) THEN
+	IF (fbModbus_Master.cbRead = 40 )  (*AND (arrReceivedBuffer[4] <> 0)*) THEN
 		
 	IF arrReceivedBuffer[4] = 0 THEN
 		BufferCount_Zefo:=BufferCount_Zefo +1 ; 
@@ -112,12 +113,14 @@ nCycle:=nCycle+1;
 
 (*Change Address*)
 IF ReadInputRegsBusy = FALSE  AND ReadInputRegsError = FALSE  AND fbStructModbusSend.nBufferCount = 0 AND bWriteExecute = FALSE AND WriteSingleRegisterBusy = FALSE THEN
-DataReadTon(IN:=TRUE,pT:=T#100MS);
+DataReadTon(IN:=TRUE,pT:=T#500MS);
 	IF DataReadTon.Q THEN
 		
 		nReadExecuteCount:=nReadExecuteCount+1;
 		DataReadTon(IN:=FALSE);
 		bReadExecute:=TRUE;
+		
+		MEMSET(ADR(arrReceivedBuffer),0,SIZEOF(arrReceivedBuffer));
 		
 		CASE nReadExecuteCount OF
 			1:
@@ -132,7 +135,7 @@ DataReadTon(IN:=TRUE,pT:=T#100MS);
 				nModbusRead_Start_ADDR:=5;
 			6:
 				nModbusRead_Start_ADDR:=6;
-			
+			7:	
 				nReadExecuteCount:=0;
 		ELSE
 			nReadExecuteCount:=0;
@@ -156,6 +159,7 @@ IF fbStructModbusSend.nBufferCount > 0 AND bWriteExecute = FALSE AND WriteSingle
 		fbStructModbusSend.A_Remove(stOutput=>stOutput);
 		
 		nWriteQuantity:=stOutput.sendQuantity;
+		nModbusWrite_UniD:=stOutput.UnitID;
 		nModbusWrite_Start_ADDR:=stOutput.StartAddress;
 		MEMCPY(ADR(arrSendBuffer),ADR(stoutput.SendData),SIZEOF(stoutput.SendData));
 		
@@ -172,7 +176,7 @@ END_IF]]></ST>
         <ST><![CDATA[//Write the Regs to Modbus Server Function16
 IF ReadInputRegsBusy = FALSE THEN
 	fbModbus_Master.WriteSingleRegister(
-		UnitID:= 1, 
+		UnitID:= nModbusWrite_UniD, 
 		Quantity:= nWriteQuantity, 
 		MBAddr:= nModbusWrite_Start_ADDR, 
 		cbLength:= SIZEOF(arrSendBuffer),
@@ -193,13 +197,13 @@ IF WriteSingleRegisterError THEN
 	WriteCount:=WriteCount+1;
 END_IF
 
-IF WriteSingleRegisterBusy = FALSE THEN
+IF WriteSingleRegisterBusy = FALSE  THEN
 	//Read the Regs FROM Modbus Server Function3
 	fbModbus_Master.ReadInputRegs(
-		UnitID:= 1, // 온도 콘트롤러 ID 
+		UnitID:= nModbusRead_Start_ADDR, // 온도 콘트롤러 ID 
 		Quantity:= 20, // 통신 데이터 사이즈
-		MBAddr:= nModbusRead_Start_ADDR, //레지스터 주소
-		cbLength:= SIZEOF(arrReceivedBuffer), 
+		MBAddr:= 1, //레지스터 주소
+		cbLength:= SIZEOF(arrReceivedBuffer) , 
 		pMemoryAddr:= ADR(arrReceivedBuffer),
 		AuxQuantity:= , 
 		AuxMBAddr:= , 

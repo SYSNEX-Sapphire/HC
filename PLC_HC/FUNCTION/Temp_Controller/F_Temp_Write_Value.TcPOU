@@ -11,7 +11,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[F_Temp_Write_Value.StartAddress	:= Command_Index;
+      <ST><![CDATA[F_Temp_Write_Value.UnitID	:= Module_Number;
+F_Temp_Write_Value.StartAddress	:= Command_Index;
 F_Temp_Write_Value.sendQuantity	:= 1;
 F_Temp_Write_Value.SendData[0]	:= Write_Value;]]></ST>
     </Implementation>

@@ -7,7 +7,24 @@ VAR
 	bOperationMode	: BOOL; // False:Manual, True:RecipeControl
 	
 	bTempSetPointSend: BOOL;
-	bTest : Bool;
+	bTest : BOOL;
+	nRamping:WORD;
+	nSetpoint : WORD;
+	nTest1 : WORD;
+	nTest2 : WORD;
+	nTest3 : WORD;
+	nTest4 : WORD;
+	nTest5 : WORD;
+	nTest6 : WORD;
+	bTemp_Ramping_Start: ARRAY[1..6]OF  BOOL;
+	TargetTEMP: ARRAY[1..6] OF INT;
+	rampingTime: ARRAY[1..6] OF INT;
+	bRampingControlIndex: INT;
+	bRampingRTrig: ARRAY[1..6]OF R_TRIG;
+	bRampingFTrig: ARRAY[1..6]OF F_TRIG;
+	nTempRampingCount: INT;
+	RampingStartTemp: REAL;
+	TempRampingIndex: BYTE;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -19,23 +36,13 @@ END_VAR
 	RData_Module_5=>GVL_Furnace.Received_e2408_data_5,
 	RData_Module_6=>GVL_Furnace.Received_e2408_data_6); (*통신이 정상 동작 하면 GVL_HEATER.Received_e2508_data_1 ~6 들어 온다*)
 
+
+_Temp_Ramping_Temp();
+
 (*Test 용 Flag*)
 IF bTempSetPointSend THEN
 	bTempSetPointSend := FALSE;
-	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(1,10));(*1번 모듈 온도 10도 셋팅*)
- 	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(2,20));(*2번 모듈 온도 10도 셋팅*)
- 	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(3,10));(*3번 모듈 온도 10도 셋팅*)
- 	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(4,10));(*4번 모듈 온도 10도 셋팅*)
- 	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(5,10));(*5번 모듈 온도 10도 셋팅*)
-// 	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_TEMP_WRITE_SET_POINT(6,10));(*6번 모듈 온도 10도 셋팅*)
-	
- 	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Ramp_Value(1,100));(*1번 Ramp 10 셋팅*)
- 	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Ramp_Value(2,100));(*1번 Ramp 10 셋팅*)
-	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Ramp_Value(3,100));(*1번 Ramp 10 셋팅*)
-	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Ramp_Value(4,100));(*1번 Ramp 10 셋팅*)
-	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Ramp_Value(5,100));(*1번 Ramp 10 셋팅*)
-//  	RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Ramp_Value(6,100));(*1번 Ramp 10 셋팅*)
-
+		RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(1, nTest1));(*1번 모듈 온도 10도 셋팅*)
 END_IF
 	
 IF NOT(bOperationMode) THEN
@@ -44,7 +51,56 @@ ELSE
 	//P50_RecipeControl(); //레시피 콘트론
 END_IF
 
-GVL_IO.OutputSolValve.0 := bTest;]]></ST>
+GVL_IO.OutputSolValve.0 := bTest;
+]]></ST>
     </Implementation>
+    <Action Name="_Temp_Ramping_Temp" Id="{9be35b16-c922-4677-a578-87d618f9ab69}">
+      <Implementation>
+        <ST><![CDATA[FOR nTempRampingCount:=1 TO 6 BY 1 DO 
+	CASE nTempRampingCount OF
+		1:
+			RampingStartTemp:= GVL_Furnace.Received_e2408_data_1.TEMP_TARGET_VALUE;
+		2:
+			RampingStartTemp:= GVL_Furnace.Received_e2408_data_2.TEMP_TARGET_VALUE;
+		3:
+			RampingStartTemp:= GVL_Furnace.Received_e2408_data_3.TEMP_TARGET_VALUE;
+		4:
+			RampingStartTemp:= GVL_Furnace.Received_e2408_data_4.TEMP_TARGET_VALUE;
+		5:
+			RampingStartTemp:= GVL_Furnace.Received_e2408_data_5.TEMP_TARGET_VALUE;
+		6:
+			RampingStartTemp:= GVL_Furnace.Received_e2408_data_6.TEMP_TARGET_VALUE;
+	END_CASE
+
+	RCP.fbTempRamping[nTempRampingCount]();
+	
+	bRampingRTrig[nTempRampingCount](CLK:=bTemp_Ramping_Start[nTempRampingCount]);
+	bRampingFTrig[nTempRampingCount](CLK:=RCP.fbTempRamping[nTempRampingCount].bBusy );
+	
+	IF bRampingRTrig[nTempRampingCount].Q THEN
+		RCP.fbTempRamping[nTempRampingCount](bExecute:=TRUE,
+							StartTemp:=RampingStartTemp,
+							RampingTargetTemp:=TargetTEMP[nTempRampingCount],
+							RampingTime:=rampingTime[nTempRampingCount]);
+	END_IF
+	IF bRampingFTrig[nTempRampingCount].Q THEN
+		RCP.fbTempRamping[nTempRampingCount](bExecute:=FALSE);
+		bTemp_Ramping_Start[nTempRampingCount]:=FALSE;
+	END_IF
+
+	IF RCP.fbTempRamping[nTempRampingCount].bExecute = TRUE AND bTemp_Ramping_Start[nTempRampingCount]=FALSE THEN
+		RCP.fbTempRamping[nTempRampingCount](bExecute:=FALSE);
+	END_IF
+	
+	RCP.RampingRingEdge[nTempRampingCount](CLK:=RCP.fbTempRamping[nTempRampingCount].bTempChangeFlag);
+	
+	IF RCP.fbTempRamping[nTempRampingCount].bBusy = TRUE AND rcp.RampingRingEdge[nTempRampingCount].Q THEN
+		RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(INT_TO_BYTE(nTempRampingCount),INT_TO_WORD(RCP.fbTempRamping[nTempRampingCount].OutputSetTemp)));(*1번 모듈 온도 10도 셋팅*)
+	END_IF
+
+END_FOR
+]]></ST>
+      </Implementation>
+    </Action>
   </POU>
 </TcPlcObject>
