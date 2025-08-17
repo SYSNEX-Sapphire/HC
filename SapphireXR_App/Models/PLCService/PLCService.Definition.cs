@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Windows.Threading;
 using TwinCAT.Ads;
-using System.Windows;
 using SapphireXR_App.Enums;
 using System.Runtime.InteropServices;
 
@@ -26,43 +25,6 @@ namespace SapphireXR_App.Models
             public ReadBufferException(string message) : base(message) { }
         }
 
-        internal class LeakTestModeSubscriber : IObserver<bool>
-        {
-            void IObserver<bool>.OnCompleted()
-            {
-                throw new NotImplementedException();
-            }
-
-            void IObserver<bool>.OnError(Exception error)
-            {
-                throw new NotImplementedException();
-            }
-
-            void IObserver<bool>.OnNext(bool value)
-            {
-                LeakTestMode = value;
-                if (value == false)
-                {
-                    foreach ((string valveID, string coupled) in LeftCoupled)
-                    {
-                        try
-                        {
-                            DoWriteValveState(valveID, false);
-                            DoWriteValveState(coupled, false);
-                        }
-                        catch (Exception exception)
-                        {
-                            if (ShowMessageOnLeakTestModeSubscriberWriteValveState == true)
-                            {
-                                ShowMessageOnLeakTestModeSubscriberWriteValveState = MessageBox.Show("PLC로부터 Valve 상태를 읽어오는데 실패했습니다. 이 메시지를 다시 표시하지 않으려면 Yes를 클릭하세요. 원인은 다음과 같습니다: " + exception.Message, "",
-                                    MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.Yes ? false : true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         private struct RecipeRunET
@@ -74,6 +36,13 @@ namespace SapphireXR_App.Models
         internal enum RecipeRunETMode : short
         {
             None = 0, Ramp = 1, Hold = 2
+        };
+
+        public struct RampGeneratorInput
+        {
+            public bool restart;
+            public float targetValue; // REAL in PLC is a 32-bit floating point, which is 'float' in C#
+            public ushort rampTime;     // UINT in PLC is a 16-bit unsigned integer, which is 'ushort' in C#
         };
 
         internal enum HardWiringInterlockStateIndex
@@ -145,6 +114,8 @@ namespace SapphireXR_App.Models
             { "Temperature4", 15 }, { "Temperature5", 16 }, { "Temperature6", 17 }
         };
         public static readonly int NumControllers = dIndexController.Count;
+        public static readonly int NumMFCControllers = 12;
+        public static readonly int NumTemperatureControllers = 6;
 
         public static readonly Dictionary<string, int> dMonitoringMeterIndex = new Dictionary<string, int>
         {
@@ -154,16 +125,15 @@ namespace SapphireXR_App.Models
 
         private static readonly Dictionary<string, int> dAnalogDeviceAlarmWarningBit = new Dictionary<string, int>
         {
-            { "R01", 0 }, { "R02", 1 }, { "R03", 2 },  { "M01", 3 }, { "M02", 4 }, { "M03", 5 },  { "M04", 6 }, { "M05", 7 }, { "M06", 8 }, { "M07", 9 }, { "M08", 10 }, { "M09", 11 },  
-            { "M10", 12 }, { "M11", 13 }, { "M12", 14 },  { "M13", 15 }, { "M14", 16 }, { "M15",17 }, { "M16", 18 }, { "M17", 19 }, { "M18", 20 },  { "M19", 21 }, { "E01", 22 }, { "E02", 23 }, 
-            { "E03", 24 }, { "E04", 25 }, { "E05", 26 }, { "E06", 27 }, { "E07", 28 }
+            { "M01", 0 }, { "M02", 1 }, { "M03", 2 },  { "M04", 3 }, { "M05", 4 }, { "M06", 5 }, { "M07", 6 }, { "M08", 7 }, { "M09", 8 }, { "M10", 9 }, { "M11", 10 }, { "M12", 11 },
+            { "F01", 12 }, { "F02", 13 }, { "F03", 14 }, { "F04", 15 }, { "F05", 16 }, { "F06", 17 }
         };
 
-        private static readonly Dictionary<string, int> dDigitalDeviceAlarmWarningBit = new Dictionary<string, int>
-        {
-            { "A01", 0 }, { "A02", 1 }, { "A03", 2 },  { "A04", 3 }, { "A05", 4 }, { "A06", 5 },  { "A07", 6 }, { "A08", 7 }, { "A09", 8 }, { "A10", 9 }, { "A11", 10 }, { "A12", 11 },
-            { "A13", 12 }, { "A14", 13 }, { "A15", 14 }
-        };
+        //private static readonly Dictionary<string, int> dDigitalDeviceAlarmWarningBit = new Dictionary<string, int>
+        //{
+        //    { "A01", 0 }, { "A02", 1 }, { "A03", 2 },  { "A04", 3 }, { "A05", 4 }, { "A06", 5 },  { "A07", 6 }, { "A08", 7 }, { "A09", 8 }, { "A10", 9 }, { "A11", 10 }, { "A12", 11 },
+        //    { "A13", 12 }, { "A14", 13 }, { "A15", 14 }
+        //};
 
         public const uint LineHeaterTemperature = 8;
         private const uint NumAlarmWarningArraySize = 3;
@@ -180,13 +150,12 @@ namespace SapphireXR_App.Models
         //private static short[]? aInputState = null;
         //private static BitArray? bOutputCmd1 = null;
         private static short[]? aDeviceRampTimes = new short[dIndexController.Count];
-        private static float[]? aDeviceTargetValues = new float[dIndexController.Count];
+        private static float?[] aTargetValueMappingFactor = new float?[dIndexController.Count];
         private static int[] InterlockEnables = Enumerable.Repeat<int>(0, (int)NumAlarmWarningArraySize).ToArray();
         private static Memory<byte> userStateBuffer = new Memory<byte>([ 0x00, 0x00 ]);
 
         private static Dictionary<string, ObservableManager<float>.Publisher>? dCurrentValueIssuers;
         private static Dictionary<string, ObservableManager<float>.Publisher>? dControlValueIssuers;
-        private static Dictionary<string, ObservableManager<float>.Publisher>? dTargetValueIssuers;
         private static Dictionary<string, ObservableManager<(float, float)>.Publisher>? dControlCurrentValueIssuers;
         private static Dictionary<string, ObservableManager<float>.Publisher>? aMonitoringCurrentValueIssuers;
         private static ObservableManager<BitArray>.Publisher? baHardWiringInterlockStateIssuers;
@@ -207,8 +176,6 @@ namespace SapphireXR_App.Models
         private static ObservableManager<BitArray>.Publisher? dLogicalInterlockStateIssuer;
         private static ObservableManager<PLCConnection>.Publisher? dPLCConnectionPublisher;
         private static ObservableManager<bool>.Publisher? dOperationModeChangingPublisher;
-
-        private static LeakTestModeSubscriber? leakTestModeSubscriber = null;
 
         static Task<bool>? TryConnectAsync = null;
 
@@ -244,8 +211,6 @@ namespace SapphireXR_App.Models
         private static uint hDeviceMaxValuePLC;
         private static uint hDeviceControlValuePLC;
         private static uint hDeviceCurrentValuePLC;
-        private static uint hWriteDeviceTargetValuePLC;
-        private static uint hWriteDeviceRampTimePLC;
         private static uint hRcp;
         private static uint hRcpTotalStep;
         private static uint hCmd_RcpOperation;
@@ -268,21 +233,19 @@ namespace SapphireXR_App.Models
         private static uint hRecipeControlPauseTime;
         private static uint[] hInterlockEnable = new uint[NumAlarmWarningArraySize];
         private static uint[] hInterlockset = new uint[NumInterlockSet];
+        private static uint[] hAControllerInput = new uint[NumMFCControllers];
         //private static uint[] hInterlock = new uint[NumInterlock];
 
         private static bool RecipeRunEndNotified = false;
-        private static bool LeakTestMode = true;
-
-        private static bool ShowMessageOnLeakTestModeSubscriberWriteValveState = true;
         private static bool ShowMessageOnOnTick = true;
 
         private static Dictionary<string, string> LeftCoupled = new Dictionary<string, string>();
         private static Dictionary<string, string> RightCoupled = new Dictionary<string, string>();
-
+       
         private static HashSet<int> InterlockEnableUpperIndiceToCommit = new HashSet<int>();
         private static HashSet<int> InterlockEnableLowerIndiceToCommit = new HashSet<int>();
         private static Dictionary<int, float> AnalogDeviceInterlockSetIndiceToCommit = new Dictionary<int, float>();
-        private static (bool, float) DigitalDevicelnterlockSetToCommit = (false, 0.0f);
+        //private static (bool, float) DigitalDevicelnterlockSetToCommit = (false, 0.0f);
         private static Dictionary<int, float> InterlockSetIndiceToCommit = new Dictionary<int, float>();
     }
 }

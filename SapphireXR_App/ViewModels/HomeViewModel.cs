@@ -20,26 +20,6 @@ namespace SapphireXR_App.ViewModels
         public HomeViewModel()
         {
             DashBoardViewModel = new HomeBottomDashBoardViewModel();
-            leakTestModePublisher = ObservableManager<bool>.Get("Leak Test Mode");
-            EnableLeakTestCommand = new RelayCommand<object>((object? menuName) =>
-            {
-                switch ((string)menuName!)
-                {
-                    case "Show Leak Test Valve":
-                        OnLeakTestVisibility = Visibility.Visible;
-                        OffLeakTestVisibility = Visibility.Hidden;
-                        leakTestModePublisher.Publish(true);
-                        LeakTestModeStr = disableLeakTestModeStr;
-                        break;
-
-                    case "Hide Leak Test Valve":
-                        OnLeakTestVisibility = Visibility.Hidden;
-                        OffLeakTestVisibility = Visibility.Visible;
-                        leakTestModePublisher.Publish(false);
-                        LeakTestModeStr = enableLeakTestModeStr;
-                        break;
-                }
-            });
 
             ShowValveLabelCommand = new RelayCommand<object>((object? menuName) =>
             {
@@ -56,30 +36,14 @@ namespace SapphireXR_App.ViewModels
                 }
             });
 
-            flowControllerValueSubscribers = [new FlowControllerValueSubscriber<float>((float value) => { TargetTemp = Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Temperature.TargetValue"),
-                new FlowControllerValueSubscriber<float>((float value) => { ControlTemp = Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Temperature.ControlValue"),
-                new FlowControllerValueSubscriber<float>((float value) => { CurrentTemp = Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Temperature.CurrentValue"),
+            flowControllerValueSubscribers = [
                 new FlowControllerValueSubscriber<float>((float value) => { PowerRateTemp = Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
                 "MonitoringPresentValue.HeaterPowerRate.CurrentValue"),
-                new FlowControllerValueSubscriber<float>((float value) => { TargetPress =  Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Pressure.TargetValue"),
-                new FlowControllerValueSubscriber<float>((float value) => { ControlPress =  Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Pressure.ControlValue"),
-                new FlowControllerValueSubscriber<float>((float value) => { CurrentPress =  Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Pressure.CurrentValue"),
                 new FlowControllerValueSubscriber<float>((float value) => { ValvePosition = Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
                 "MonitoringPresentValue.ValvePosition.CurrentValue"),
                 new FlowControllerValueSubscriber<float>((float value) => { UltimatePressure =Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "MonitoringPresentValue.UltimatePressure.CurrentValue"),
-                new FlowControllerValueSubscriber<float>((float value) => { TargetRotation = Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Rotation.TargetValue"),
-                new FlowControllerValueSubscriber<float>((float value) => { ControlRotation = Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Rotation.ControlValue"),
-                new FlowControllerValueSubscriber<float>((float value) => { CurrentRotation = Util.FloatingPointStrWithMaxDigit(value, AppSetting.FloatingPointMaxNumberDigit); }, 
-                "FlowControl.Rotation.CurrentValue")];
+                "MonitoringPresentValue.UltimatePressure.CurrentValue")
+               ];
             foreach(FlowControllerValueSubscriber subscriber in flowControllerValueSubscribers)
             {
                 if(subscriber is FlowControllerValueSubscriber<int>)
@@ -92,8 +56,8 @@ namespace SapphireXR_App.ViewModels
                 }
             }
        
-            ObservableManager<BitArray>.Subscribe("DigitalOutput3", digitalOutput3Subscriber = new DigitalOutput3Subscriber(this));
-            ObservableManager<short>.Subscribe("ThrottleValveStatus", throttleValveStatusSubscriber = new ThrottleValveStatusSubscriber(this));
+            //ObservableManager<BitArray>.Subscribe("DigitalOutput3", digitalOutput3Subscriber = new DigitalOutput3Subscriber(this));
+            //ObservableManager<short>.Subscribe("ThrottleValveStatus", throttleValveStatusSubscriber = new ThrottleValveStatusSubscriber(this));
             ObservableManager<PLCConnection>.Subscribe("PLCService.Connected", plcConnectionStateSubscriber = new PLCConnectionStateSubscriber(this));
             ObservableManager<bool>.Subscribe("RecipeRunViewModel.RecipeEnded", recipeEndedSubscriber = new RecipeEndedSubscriber(this));
 
@@ -391,8 +355,7 @@ namespace SapphireXR_App.ViewModels
                 }
             }
         }
-
-        public ICommand EnableLeakTestCommand { get; set; }
+    
         public ICommand ShowValveLabelCommand { get; set; }
         public ICommand ManualBatchCommand => new RelayCommand(() => {
             ManualBatchEx.Show(manualBatchViewModel);
@@ -402,20 +365,12 @@ namespace SapphireXR_App.ViewModels
             EventLogWindow.Show();
         });
 
-        [ObservableProperty]
-        private string _leakTestModeStr = disableLeakTestModeStr;
-        static private readonly string enableLeakTestModeStr = "Show Leak Test Valve";
-        static private readonly string disableLeakTestModeStr = "Hide Leak Test Valve";
 
         [ObservableProperty]
         private string _showValveLabelStr = hideValveLabelStr;
         static private readonly string showValveLabelStr = "Show Label";
         static private readonly string hideValveLabelStr = "Hide Label";
 
-        [ObservableProperty]
-        private Visibility _onLeakTestVisibility;
-        [ObservableProperty]
-        private Visibility _offLeakTestVisibility;
         [ObservableProperty]
         private Visibility _valveLabelVisibility;
 
@@ -480,9 +435,8 @@ namespace SapphireXR_App.ViewModels
         public BottomDashBoardViewModel DashBoardViewModel { get; set; }
 
         private FlowControllerValueSubscriber[] flowControllerValueSubscribers;
-        private DigitalOutput3Subscriber digitalOutput3Subscriber;
-        private ThrottleValveStatusSubscriber throttleValveStatusSubscriber;
-        private ObservableManager<bool>.Publisher leakTestModePublisher;
+        //private DigitalOutput3Subscriber digitalOutput3Subscriber;
+       // private ThrottleValveStatusSubscriber throttleValveStatusSubscriber;
         private PLCConnectionStateSubscriber plcConnectionStateSubscriber;
         private RecipeEndedSubscriber recipeEndedSubscriber;
 

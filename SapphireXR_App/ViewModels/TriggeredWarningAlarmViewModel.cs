@@ -35,119 +35,75 @@ namespace SapphireXR_App.ViewModels
             switch (index)
             {
                 case 0:
-                    key = "R01";
-                    break;
-
-                case 1:
-                    key = "R02";
-                    break;
-
-                case 2:
-                    key = "R03";
-                    break;
-
-                case 3:
                     key = "M01";
                     break;
 
-                case 4:
+                case 1:
                     key = "M02";
                     break;
 
-                case 5:
+                case 2:
                     key = "M03";
                     break;
 
-                case 6:
+                case 3:
                     key = "M04";
                     break;
 
-                case 7:
+                case 4:
                     key = "M05";
                     break;
 
-                case 8:
+                case 5:
                     key = "M06";
                     break;
 
-                case 9:
+                case 6:
                     key = "M07";
                     break;
 
-                case 10:
+                case 7:
                     key = "M08";
                     break;
 
-                case 11:
+                case 8:
                     key = "M09";
                     break;
 
-                case 12:
+                case 9:
                     key = "M10";
                     break;
 
-                case 13:
+                case 10:
                     key = "M11";
                     break;
 
-                case 14:
+                case 11:
                     key = "M12";
                     break;
 
+                case 12:
+                    key = "F01";
+                    break;
+
+                case 13:
+                    key = "F02";
+                    break;
+
+                case 14:
+                    key = "F03";
+                    break;
+
                 case 15:
-                    key = "M13";
+                    key = "F04";
                     break;
 
                 case 16:
-                    key = "M14";
+                    key = "F05";
                     break;
 
                 case 17:
-                    key = "M15";
-                    break;
-
-                case 18:
-                    key = "M16";
-                    break;
-
-                case 19:
-                    key = "M17";
-                    break;
-
-                case 20:
-                    key = "M18";
-                    break;
-
-                case 21:
-                    key = "M19";
-                    break;
-
-                case 22:
-                    key = "E01";
-                    break;
-
-                case 23:
-                    key = "E02";
-                    break;
-
-                case 24:
-                    key = "E03";
-                    break;
-
-                case 25:
-                    key = "E04";
-                    break;
-
-                case 26:
-                    key = "E05";
-                    break;
-
-                case 27:
-                    key = "E06";
-                    break;
-
-                case 28:
-                    key = "E07";
+                    key = "F06";
                     break;
 
                 default:
@@ -165,80 +121,6 @@ namespace SapphireXR_App.ViewModels
             }
         }
 
-        private static string? GetDigitalDeviceNotificationName(uint index)
-        {
-            string key;
-            switch (index)
-            {
-                case 0:
-                    key = "A01";
-                    break;
-
-                case 1:
-                    key = "A02";
-                    break;
-
-                case 2:
-                    key = "A03";
-                    break;
-
-                case 3:
-                    key = "A04";
-                    break;
-
-                case 4:
-                    key = "A05";
-                    break;
-
-                case 5:
-                    key = "A06";
-                    break;
-
-                case 6:
-                    key = "A07";
-                    break;
-
-                case 7:
-                    key = "A08";
-                    break;
-
-                case 8:
-                    key = "A09";
-                    break;
-
-                case 9:
-                    key = "A10";
-                    break;
-
-                case 10:
-                    key = "A11";
-                    break;
-
-                case 11:
-                    key = "A12";
-                    break;
-
-                case 12:
-                    key = "A13";
-                    break;
-
-                case 13:
-                    key = "A14";
-                    break;
-
-                default:
-                    return null;
-            }
-            SwitchDI? switchDI = null;
-            if(SettingViewModel.dSwitchDI?.TryGetValue(key, out switchDI) == true)
-            {
-                return switchDI.Name;
-            }
-            else
-            {
-                return null;
-            }
-        }
 
         private List<string> refreshAlarmList(PLCService.TriggerType triggerType)
         {
@@ -252,37 +134,9 @@ namespace SapphireXR_App.ViewModels
             //return refreshOnList(PLCService.ReadDigitalDeviceWarnings, PLCService.ReadAnalogDeviceWarnings, triggerType, KeysWarningEventLogged);
         }
 
-        private List<string> refreshOnList(Func<int> plcServiceReadDigitalState, Func<int> plcServiceReadAnalogState, PLCService.TriggerType triggerType, HashSet<string> keysEventLogged)
+        private List<string> refreshOnList(Func<int> plcServiceReadAnalogState, PLCService.TriggerType triggerType, HashSet<string> keysEventLogged)
         {
             List<string> onList = new List<string>();
-
-            int digitalDeviceAlarms = plcServiceReadDigitalState();
-            for(uint digitalDevice = 0; digitalDevice < PLCService.NumDigitalDevice; ++digitalDevice)
-            {
-                string? notificationName = GetDigitalDeviceNotificationName(digitalDevice);
-                if (notificationName != null)
-                {
-                    if (PLCService.ReadBit(digitalDeviceAlarms, (int)digitalDevice) == true)
-                    {
-                        onList.Add(notificationName);
-                        if (keysEventLogged.Contains(notificationName) == false)
-                        {
-                            EventLogs.Instance.EventLogList.Add(new EventLog()
-                            {
-                                Date = DateTime.Now,
-                                Message = notificationName,
-                                Name = (triggerType == PLCService.TriggerType.Alarm) ? "Digital Alarm" : "Digital Warning",
-                                Type = (triggerType == PLCService.TriggerType.Alarm) ? EventLog.LogType.Alarm : EventLog.LogType.Warning
-                            });
-                            keysEventLogged.Add(notificationName);
-                        }
-                    }
-                    else
-                    {
-                        keysEventLogged.Remove(notificationName);
-                    }
-                }
-            }
 
             int analogDeviceAlarms = plcServiceReadAnalogState();
             for(uint analogDevice = 0; analogDevice < PLCService.NumAnalogDevice; ++analogDevice)

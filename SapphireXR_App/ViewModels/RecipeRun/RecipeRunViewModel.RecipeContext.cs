@@ -6,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
-using static SapphireXR_App.Models.PLCService;
 
 namespace SapphireXR_App.ViewModels
 {
@@ -184,23 +183,23 @@ namespace SapphireXR_App.ViewModels
                                 ++(CurrentLoopContext.CurrentLoopCount);
                             }
 
-                            if (0 < currentRecipe.cTemp)
-                            {
-                                TotalWaitTemp = currentRecipe.cTemp;
-                                temperatureControlValueSubscriber ??= new TemperatureCurrentValueSubscriber(this);
-                                temperatureControlValueUnsubscriber ??= ObservableManager<float>.Subscribe("FlowControl.Temperature.CurrentValue", temperatureControlValueSubscriber!);
-                            }
-                            else
-                            {
-                                if (temperatureControlValueUnsubscriber != null)
-                                {
-                                    temperatureControlValueUnsubscriber.Dispose();
-                                    temperatureControlValueUnsubscriber = null;
-                                }
-                                temperatureControlValueSubscriber = null;
-                                TotalWaitTemp = null;
-                                CurrentWaitTemp = null;
-                            }
+                            //if (0 < currentRecipe.cTemp)
+                            //{
+                            //    TotalWaitTemp = currentRecipe.cTemp;
+                            //    temperatureControlValueSubscriber ??= new TemperatureCurrentValueSubscriber(this);
+                            //    temperatureControlValueUnsubscriber ??= ObservableManager<float>.Subscribe("FlowControl.Temperature.CurrentValue", temperatureControlValueSubscriber!);
+                            //}
+                            //else
+                            //{
+                            //    if (temperatureControlValueUnsubscriber != null)
+                            //    {
+                            //        temperatureControlValueUnsubscriber.Dispose();
+                            //        temperatureControlValueUnsubscriber = null;
+                            //    }
+                            //    temperatureControlValueSubscriber = null;
+                            //    TotalWaitTemp = null;
+                            //    CurrentWaitTemp = null;
+                            //}
 
                             return currentRecipe;
                         }
@@ -360,8 +359,8 @@ namespace SapphireXR_App.ViewModels
                 modifiedRecipeIndice.Clear();
                 disposeSubscribe();
                 disposeResource();
-                temperatureControlValueUnsubscriber = null;
-                temperatureControlValueSubscriber = null;
+                //temperatureControlValueUnsubscriber = null;
+                //temperatureControlValueSubscriber = null;
                 recipeRunElapsedTimeUnsubscriber = null;
                 recipeControlPauseTimeUnsubscriber = null;
                 recipeRunElapsedTimeSubscriber = null;
@@ -490,7 +489,7 @@ namespace SapphireXR_App.ViewModels
             public int currentRecipeIndex = -1;
             private bool disposedValue = false;
 
-            private TemperatureCurrentValueSubscriber? temperatureControlValueSubscriber;
+            //private TemperatureCurrentValueSubscriber? temperatureControlValueSubscriber;
             private IDisposable? temperatureControlValueUnsubscriber = null;
             private RecipeTimeSubscriber? recipeControlPauseTimeSubscriber = null;
             private IDisposable? recipeControlPauseTimeUnsubscriber = null;

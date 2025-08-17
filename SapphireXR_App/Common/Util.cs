@@ -213,21 +213,20 @@ namespace SapphireXR_App.Common
         {
             if (batch.RampingTime != null)
             {
-                PLCService.WriteTargetValue(batch.AnalogIOUserStates.Select((AnalogIOUserState analogIOUserState) => (float)analogIOUserState.Value).ToArray());
-                PLCService.WriteRampTime(Enumerable.Repeat((short)batch.RampingTime, batch.AnalogIOUserStates.Count).ToArray());
+                PLCService.WriteFlowControllerTargetValue(batch.AnalogIOUserStates.Select((AnalogIOUserState analogIOUserState) => (float)analogIOUserState.Value).ToArray(),
+                    Enumerable.Repeat((short)batch.RampingTime, batch.AnalogIOUserStates.Count).ToArray());
 
                 int partSize = sizeof(int) * 8;
-                BitArray firstValveStates = new BitArray(partSize);
-                BitArray secondValveStates = new BitArray(partSize);
+                BitArray valveStates = new BitArray(partSize);
                 foreach (DigitalIOUserState digitalIOUserState in batch.DigitalIOUserStates)
                 {
                     int index;
                     if (PLCService.ValveIDtoOutputSolValveIdx.TryGetValue(digitalIOUserState.ID, out index) == true)
                     {
-                        firstValveStates[index] = digitalIOUserState.On;
+                        valveStates[index] = digitalIOUserState.On;
                     }
                 }
-                PLCService.WriteValveState(firstValveStates, secondValveStates);
+                PLCService.WriteValveState(valveStates);
             }
         }
 

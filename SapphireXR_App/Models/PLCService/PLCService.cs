@@ -152,8 +152,6 @@ namespace SapphireXR_App.Models
             hDeviceMaxValuePLC = Ads.CreateVariableHandle("GVL_IO.aMaxValueController");
 
             hReadValveStatePLC = Ads.CreateVariableHandle("GVL_IO.OutputSolValve");
-            hWriteDeviceTargetValuePLC = Ads.CreateVariableHandle("GVL_IO.aController_TV");
-            hWriteDeviceRampTimePLC = Ads.CreateVariableHandle("GVL_IO.aController_RampTime");
 
             //hMonitoring_PV = Ads.CreateVariableHandle("GVL_IO.aMonitoring_PV");
             //hInputState = Ads.CreateVariableHandle("GVL_IO.aInputState");
@@ -187,6 +185,10 @@ namespace SapphireXR_App.Models
             //hE3508InputManAuto = Ads.CreateVariableHandle("GVL_IO.nE3508_nInputManAutoBytes");
             //hOutputSetType = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_SetType");
             //hOutputMode = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_Mode");
+            for (uint analogDevice = 0; analogDevice < NumMFCControllers; ++analogDevice)
+            {
+                hAControllerInput[analogDevice] = Ads.CreateVariableHandle("GVL_IO.aController[" + (analogDevice + 1) + "].input");
+            }
         }
 
         private static void IntializePubSub()
@@ -200,11 +202,6 @@ namespace SapphireXR_App.Models
             foreach (KeyValuePair<string, int> kv in dIndexController)
             {
                 dControlValueIssuers.Add(kv.Key, ObservableManager<float>.Get("FlowControl." + kv.Key + ".ControlValue"));
-            }
-            dTargetValueIssuers = new Dictionary<string, ObservableManager<float>.Publisher>();
-            foreach (KeyValuePair<string, int> kv in dIndexController)
-            {
-                dTargetValueIssuers.Add(kv.Key, ObservableManager<float>.Get("FlowControl." + kv.Key + ".TargetValue"));
             }
             dControlCurrentValueIssuers = new Dictionary<string, ObservableManager<(float, float)>.Publisher>();
             foreach (KeyValuePair<string, int> kv in dIndexController)
@@ -238,8 +235,6 @@ namespace SapphireXR_App.Models
             dLogicalInterlockStateIssuer = ObservableManager<BitArray>.Get("LogicalInterlockState");
             dPLCConnectionPublisher = ObservableManager<PLCConnection>.Get("PLCService.Connected");
             dOperationModeChangingPublisher = ObservableManager<bool>.Get("OperationModeChanging");
-
-            ObservableManager<bool>.Subscribe("Leak Test Mode", leakTestModeSubscriber = new LeakTestModeSubscriber());
         }
 
         private static void ReadStateFromPLC(object? sender, EventArgs e)
@@ -259,13 +254,6 @@ namespace SapphireXR_App.Models
                     foreach (KeyValuePair<string, int> kv in dIndexController)
                     {
                         dCurrentValueIssuers?[kv.Key].Publish(aDeviceCurrentValues[dIndexController[kv.Key]]);
-                    }
-                }
-                if (aDeviceTargetValues != null)
-                {
-                    foreach (KeyValuePair<string, int> kv in dIndexController)
-                    {
-                        dTargetValueIssuers?[kv.Key].Publish(aDeviceTargetValues[dIndexController[kv.Key]]);
                     }
                 }
                 if (aDeviceControlValues != null && aDeviceCurrentValues != null)
@@ -333,14 +321,6 @@ namespace SapphireXR_App.Models
                         exceptionStr += "\r\n";
                     }
                     exceptionStr += "aDeviceCurrentValues is null in OnTick PLCService";
-                }
-                if (aDeviceTargetValues == null)
-                {
-                    if (exceptionStr != string.Empty)
-                    {
-                        exceptionStr += "\r\n";
-                    }
-                    exceptionStr += "aDeviceTargetValues is null in OnTick PLCService";
                 }
                 //if (aMonitoring_PVs == null)
                 //{

@@ -8,9 +8,7 @@ using SapphireXR_App.Models;
 using System.Collections;
 using System.ComponentModel;
 using System.IO;
-using System.Net;
 using System.Windows;
-using System.Xml.Linq;
 
 namespace SapphireXR_App.ViewModels
 {
@@ -46,11 +44,11 @@ namespace SapphireXR_App.ViewModels
                     dAnalogDeviceIO = deserialized;
                 }
             }
-            JToken? jSwitchDI = jDeviceInit["SwitchDI"];
-            if (jSwitchDI != null)
-            {
-                dSwitchDI = JsonConvert.DeserializeObject<Dictionary<string, SwitchDI>>(jSwitchDI.ToString());
-            }
+            //JToken? jSwitchDI = jDeviceInit["SwitchDI"];
+            //if (jSwitchDI != null)
+            //{
+            //    dSwitchDI = JsonConvert.DeserializeObject<Dictionary<string, SwitchDI>>(jSwitchDI.ToString());
+            //}
             JToken? jGasDO = jDeviceInit["GasDO"];
             if (jGasDO != null)
             {
@@ -71,11 +69,11 @@ namespace SapphireXR_App.ViewModels
             {
                 AnalogDeviceDelayTimeValue = JsonConvert.DeserializeObject<float>(jAnalogDelayTime.ToString());
             }
-            JToken? jDigitalDelayTime = jDeviceInit["AlarmDelayTimeD"];
-            if (jDigitalDelayTime != null)
-            {
-                DigitalDeviceDelayTimeValue = JsonConvert.DeserializeObject<float>(jDigitalDelayTime.ToString());
-            }
+            //JToken? jDigitalDelayTime = jDeviceInit["AlarmDelayTimeD"];
+            //if (jDigitalDelayTime != null)
+            //{
+            //    DigitalDeviceDelayTimeValue = JsonConvert.DeserializeObject<float>(jDigitalDelayTime.ToString());
+            //}
             JToken? jInterLockD = jDeviceInit["InterLockD"];
             if (jInterLockD != null)
             {
@@ -267,10 +265,6 @@ namespace SapphireXR_App.ViewModels
                             PLCService.WriteAnalogDeviceDelayTime(AnalogDeviceDelayTime);
                             break;
 
-                        case nameof(DigitalDeviceDelayTime):
-                            PLCService.WriteDigitalDeviceDelayTime(DigitalDeviceDelayTime);
-                            break;
-
                         case nameof(InductionHeaterPowerOnOff):
                             if (InductionHeaterPowerOnOff != null)
                             {
@@ -363,12 +357,6 @@ namespace SapphireXR_App.ViewModels
             lAnalogDeviceIO = dAnalogDeviceIO?.Values.ToList();
             if (lAnalogDeviceIO != null)
             {
-                lAnalogDeviceIO = [new () { Name = "Furnace Zone 1 Temp", ID = "F01" }, new() { Name = "Furnace Zone 2 Temp", ID = "F02" }, new() { Name = "Furnace Zone 3 Temp", ID = "F03" }, 
-                    new() { Name = "Furnace Zone 4 Temp", ID = "F04" }, new() { Name = "Furnace Zone 5 Temp", ID = "F05" }, new() { Name = "Furnace Zone 6 Temp", ID = "F06" }, 
-                    new() { Name = "M01 - B/G N2", ID = "M01" }, new() { Name = "M02 - Ga HCl", ID = "M02" }, new() { Name = "M03 - Ga N2", ID = "M03" },new() { Name = "M04 - NH3 NH3", ID = "M04" }, 
-                    new() { Name = "M05 - NH3 N2", ID = "M05" }, new() { Name = "M06 - Al HCl", ID = "M06" }, new() { Name = "M07 - Al N2", ID = "M07" }, new() { Name = "M08 - Etching HCl", ID = "M08" }, 
-                    new() { Name = "M09 - Etching N2", ID = "M09" }, new() { Name = "M10 - H2/O2 DCS", ID = "M10" }, new() { Name = "M11 - H2/O2 N2", ID = "M11" }, new() { Name = "M12 - B/F N2", ID = "M12" }];
-                AlarmSettingSave();
                 foreach (var io in lAnalogDeviceIO)
                 {
                     io.PropertyChanged += (object? sender, PropertyChangedEventArgs args) =>
@@ -391,30 +379,30 @@ namespace SapphireXR_App.ViewModels
                     };
                 }
             }
-            lSwitchDI = dSwitchDI?.Values.ToList();
-            if(lSwitchDI != null)
-            {
-                foreach(var io in lSwitchDI)
-                {
-                    io.PropertyChanged += (object? sender, PropertyChangedEventArgs args) =>
-                    {
-                        SwitchDI? switchID = sender as SwitchDI;
-                        if (switchID != null && switchID.ID != null)
-                        {
-                            switch (args.PropertyName)
-                            {
-                                case nameof(SwitchDI.AlarmSet):
-                                    PLCService.WriteDigitalDeviceAlarmState(switchID.ID, switchID.AlarmSet);
-                                    break;
+            //lSwitchDI = dSwitchDI?.Values.ToList();
+            //if(lSwitchDI != null)
+            //{
+            //    foreach(var io in lSwitchDI)
+            //    {
+            //        io.PropertyChanged += (object? sender, PropertyChangedEventArgs args) =>
+            //        {
+            //            SwitchDI? switchID = sender as SwitchDI;
+            //            if (switchID != null && switchID.ID != null)
+            //            {
+            //                switch (args.PropertyName)
+            //                {
+            //                    case nameof(SwitchDI.AlarmSet):
+            //                        PLCService.WriteDigitalDeviceAlarmState(switchID.ID, switchID.AlarmSet);
+            //                        break;
 
-                                case nameof(SwitchDI.WarningSet):
-                                    PLCService.WriteDigitalDeviceWarningState(switchID.ID, switchID.WarningSet);
-                                    break;
-                            }
-                        }
-                    };
-                }
-            }
+            //                    case nameof(SwitchDI.WarningSet):
+            //                        PLCService.WriteDigitalDeviceWarningState(switchID.ID, switchID.WarningSet);
+            //                        break;
+            //                }
+            //            }
+            //        };
+            //    }
+            //}
             lGasDO = dGasDO?.Values.ToList();
 
             if (PLCService.Connected == PLCConnection.Connected)
@@ -508,25 +496,25 @@ namespace SapphireXR_App.ViewModels
             JToken jsonAnalogDeviceIO = JsonConvert.SerializeObject(dAnalogDeviceIO);
             JToken jValveDeviceIO = JsonConvert.SerializeObject(ValveDeviceIO);
             JToken jGasIO = JsonConvert.SerializeObject(GasIO);
-            JToken jsonSwitchDI = JsonConvert.SerializeObject(dSwitchDI);
+            //JToken jsonSwitchDI = JsonConvert.SerializeObject(dSwitchDI);
             JToken jsonGasDO = JsonConvert.SerializeObject(dGasDO);
             JToken jInterLockD = JsonConvert.SerializeObject(dInterLockD);
             JToken jInterLockA = JsonConvert.SerializeObject(dInterLockA);
             JToken jAlarmDeviation = JsonConvert.SerializeObject(AlarmDeviationValue);
             JToken jWarningDeviation = JsonConvert.SerializeObject(WarningDeviationValue);
             JToken jAnalogDelayTime = JsonConvert.SerializeObject(AnalogDeviceDelayTimeValue);
-            JToken jDigitalDelayTime = JsonConvert.SerializeObject(DigitalDeviceDelayTimeValue);
+            //JToken jDigitalDelayTime = JsonConvert.SerializeObject(DigitalDeviceDelayTimeValue);
 
 
             JObject jDeviceIO = new(
                 new JProperty("AlarmDeviation", jAlarmDeviation),
                 new JProperty("WarningDeviation", jWarningDeviation),
                 new JProperty("AlarmDelayTimeA", jAnalogDelayTime),
-                new JProperty("AlarmDelayTimeD", jDigitalDelayTime),
+                //new JProperty("AlarmDelayTimeD", jDigitalDelayTime),
                 new JProperty("AnalogDeviceIO", jsonAnalogDeviceIO),
                 new JProperty("ValveDeviceIO", jValveDeviceIO),
                 new JProperty("GasIO", jGasIO),
-                new JProperty("SwitchDI", jsonSwitchDI),
+               // new JProperty("SwitchDI", jsonSwitchDI),
                 new JProperty("GasDO", jsonGasDO),
                 new JProperty("InterLockD", jInterLockD),
                 new JProperty("InterLockA", jInterLockA)
@@ -581,14 +569,14 @@ namespace SapphireXR_App.ViewModels
         {
           
             PLCService.WriteDeviceMaxValue(lAnalogDeviceIO);
-            PLCService.WriteAlarmWarningSetting(lAnalogDeviceIO ?? [], lSwitchDI ?? []);
+            PLCService.WriteAlarmWarningSetting(lAnalogDeviceIO ?? []);
                 
             PLCService.WriteAlarmDeviationState(AlarmDeviation);
             PLCService.WriteWarningDeviationState(WarningDeviation);
             PLCService.WriteAnalogDeviceDelayTime(AnalogDeviceDelayTime);
             PLCService.CommitAnalogDeviceInterlockSettingToPLC();
-            PLCService.WriteDigitalDeviceDelayTime(DigitalDeviceDelayTime);
-            PLCService.CommitDigitalDeviceInterlockSettingToPLC();
+            //PLCService.WriteDigitalDeviceDelayTime(DigitalDeviceDelayTime);
+            //PLCService.CommitDigitalDeviceInterlockSettingToPLC();
 
             //BitArray outputCmd1 = PLCService.ReadOutputCmd1();
             //InductionHeaterPowerOnOff = outputCmd1[(int)PLCService.OutputCmd1Index.InductionHeaterPower];
@@ -658,9 +646,7 @@ namespace SapphireXR_App.ViewModels
 
         private static List<Device> CreateDefaultGasIO()
         {
-            return [new() { ID = "Gas1", Name = "H2"}, new() { ID = "Gas2", Name = "N2" }, new() { ID = "Gas3", Name = "NH3" }, new() { ID = "Gas4", Name = "SiH4" },
-                new() { ID = "Source1", Name = "TEB" }, new() { ID = "Source2", Name = "TMAI"}, new() { ID = "Source3", Name = "TMIn"}, new() { ID = "Source4", Name = "TMGa"},
-                new() { ID = "Source5", Name = "DTMGa"}, new() { ID = "Source6", Name = "Cp2Mg"}];
+            return [new() { ID = "Gas1", Name = "H2"}, new() { ID = "Gas2", Name = "N2" }, new() { ID = "Gas3", Name = "NH3" }, new() { ID = "Gas4", Name = "SiH4" }];
         }
 
         [RelayCommand]

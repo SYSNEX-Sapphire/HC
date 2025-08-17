@@ -71,56 +71,23 @@ namespace SapphireXR_App.ViewModels.BottomDashBoard
                     case "MFC12":
                         return recipe.M12;
 
-                    case "MFC13":
-                        return recipe.M13;
+                    case "Temperature1":
+                        return recipe.F01;
 
-                    case "MFC14":
-                        return recipe.M14;
+                    case "Temperature2":
+                        return recipe.F02;
 
-                    case "MFC15":
-                        return recipe.M15;
+                    case "Temperature3":
+                        return recipe.F03;
 
-                    case "MFC16":
-                        return recipe.M04;
+                    case "Temperature4":
+                        return recipe.F04;
 
-                    case "MFC17":
-                        return recipe.M17;
+                    case "Temperature5":
+                        return recipe.F05;
 
-                    case "MFC18":
-                        return recipe.M18;
-
-                    case "MFC19":
-                        return recipe.M19;
-
-                    case "EPC01":
-                        return recipe.E01;
-
-                    case "EPC02":
-                        return recipe.E02;
-
-                    case "EPC03":
-                        return recipe.E03;
-
-                    case "EPC04":
-                        return recipe.E04;
-
-                    case "EPC05":
-                        return recipe.E05;
-
-                    case "EPC06":
-                        return recipe.E06;
-
-                    case "EPC07":
-                        return recipe.E07;
-
-                    case "Temperature":
-                        return recipe.STemp;
-
-                    case "Pressure":
-                        return recipe.RPress;
-
-                    case "Rotation":
-                        return recipe.SRotation;
+                    case "Temperature6":
+                        return recipe.F06;
 
                     default:
                         return 0.0f;

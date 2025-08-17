@@ -143,13 +143,13 @@
                         <control:SingleValve x:Name="V11" Canvas.Left="1108" Canvas.Top="113" ValveID="V11" Target="CurrentRecipeStep" />
                         <control:SingleValve x:Name="V12" Canvas.Left="1208" Canvas.Top="113" ValveID="V12" Target="CurrentRecipeStep" />
 
-                        <control:SingleValve x:Name="V14" Canvas.Left="308" Canvas.Top="278" ValveID="V14" Target="CurrentRecipeStep" />
-                        <control:SingleValve x:Name="V15" Canvas.Left="508" Canvas.Top="278" ValveID="V15" Target="CurrentRecipeStep" />
-                        <control:SingleValve x:Name="V16" Canvas.Left="708" Canvas.Top="278" ValveID="V16" Target="CurrentRecipeStep" />
-                        <control:SingleValve x:Name="V17" Canvas.Left="908" Canvas.Top="278" ValveID="V17" Target="CurrentRecipeStep" />
-                        <control:SingleValve x:Name="V18" Canvas.Left="1108" Canvas.Top="278" ValveID="V18" Target="CurrentRecipeStep" />
-                        <control:SingleValve x:Name="V19" Canvas.Left="1208" Canvas.Top="278" ValveID="V19" Target="CurrentRecipeStep" />
-                        <control:SingleValve x:Name="V20" Canvas.Left="108" Canvas.Top="278" ValveID="V20" Target="CurrentRecipeStep" />
+                        <control:SingleValve x:Name="V14" Canvas.Left="108" Canvas.Top="278" ValveID="V14" Target="CurrentRecipeStep" />
+                        <control:SingleValve x:Name="V15" Canvas.Left="308" Canvas.Top="278" ValveID="V15" Target="CurrentRecipeStep" />
+                        <control:SingleValve x:Name="V16" Canvas.Left="508" Canvas.Top="278" ValveID="V16" Target="CurrentRecipeStep" />
+                        <control:SingleValve x:Name="V17" Canvas.Left="708" Canvas.Top="278" ValveID="V17" Target="CurrentRecipeStep" />
+                        <control:SingleValve x:Name="V18" Canvas.Left="908" Canvas.Top="278" ValveID="V18" Target="CurrentRecipeStep" />
+                        <control:SingleValve x:Name="V19" Canvas.Left="1108" Canvas.Top="278" ValveID="V19" Target="CurrentRecipeStep" />
+                        <control:SingleValve x:Name="V20" Canvas.Left="1208" Canvas.Top="278" ValveID="V20" Target="CurrentRecipeStep" />
                         <!--#endregion-->
 
                         <!-- #Region 5. 가스제어(MFC, EPC) -->

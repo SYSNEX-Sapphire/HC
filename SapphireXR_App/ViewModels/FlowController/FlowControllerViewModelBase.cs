@@ -104,7 +104,7 @@ namespace SapphireXR_App.ViewModels.FlowController
                 string? name = renameMapping.Where((KeyValuePair<string, string> keyValue) => keyValue.Value == ControllerID).Select((KeyValuePair<string, string> keyValue) => keyValue.Key).FirstOrDefault();
                 if (name != null)
                 {
-                    Name = Util.GetFlowControllerName(name!);
+                    Name = Util.GetFlowControllerName(name);
                 }
             };
             switch (Type)
@@ -114,14 +114,9 @@ namespace SapphireXR_App.ViewModels.FlowController
                     getName(Util.RecipeFlowControlFieldToControllerID);
                     break;
 
-                case "EPC":
-                    ControllerBorderBackground = Application.Current.Resources.MergedDictionaries[0]["EPCDisplayColor1"] as SolidColorBrush ?? ControllerBorderBackground;
-                    getName(Util.RecipeFlowControlFieldToControllerID);
-                    break;
-
                 case "Reactor":
                     ControllerBorderBackground = Application.Current.Resources.MergedDictionaries[0]["ReactorDisplayColor1"] as SolidColorBrush ?? ControllerBorderBackground;
-                    getName(ReactorID);
+                    getName(Util.RecipeFlowControlFieldToControllerID);
                     break;
             }
             BorderBackground = ControllerBorderBackground;

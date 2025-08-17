@@ -27,7 +27,7 @@ END_VAR
  		f_ResetTimersAndRCPTimes(fbPause_TON := Pause_TON, fbRamp_TON := Ramp_TON, fbHold_TON := Hold_TON);
 		
 		FOR i:=1 TO Rcp.iRcpTotalStep DO
-			loopCount[i] := Rcp.aRecipe[i].iRecipe[9];
+			loopCount[i] := Rcp.aRecipe[i].iRecipe[5];
 		END_FOR
 		
 		nRcpIndex := 0;
@@ -60,23 +60,20 @@ END_VAR
 				END_IF				
 				
 			E_RecipeRun.CheckHoldTemp: //Hold Temp 확인
-				IF RCP.aRecipe[nRcpIndex].iRecipe[7] = 0 THEN
+				IF RCP.aRecipe[nRcpIndex].iRecipe[3] <> 0 THEN
 					Hold_TON(IN:=TRUE, PT:=INT_TO_TIME(RCP.aRecipe[nRcpIndex].iRecipe[3]*1000), ET=>RCP.RecipeRunET.ET);
 					RCP.RecipeRunET.Mode := E_RecipeRunETMode.Hold;
 					IF Hold_TON.Q THEN
 						Hold_TON(IN:=FALSE);
-						eRecipeRun := E_RecipeRun.End; // 레시피 첫 Column 실행
+						eRecipeRun := E_RecipeRun.End;
 					END_IF
-				ELSIF GVL_IO.aController_PV[27] < RCP.aRecipe[nRcpIndex].iRecipe[7] THEN //서셉터 온도가 Wait 온도보다 낮을 때
-					Hold_TON(IN:=FALSE);
+				ELSE 
 					eRecipeRun := E_RecipeRun.End; // 레시피 첫 Column 실행
-				ELSE // 서셉터 온도가 Wait 온도보다 높을 때
-					;// 떨어질 때까지 기다림
 				END_IF
 				
 			E_RecipeRun.End: // 다음 Step 이동 (루프 마지막 단계일 경우, 다음 Step 이동 또는 루프 처음단계로 점프)
 				loopCount[nRcpIndex] := loopCount[nRcpIndex] - 1;
-				nRcpIndex := nRcpIndex + 1 - (RCP.aRecipe[nRcpIndex].iRecipe[8]) * MIN(loopCount[nRcpIndex], 1);
+				nRcpIndex := nRcpIndex + 1 - (RCP.aRecipe[nRcpIndex].iRecipe[4]) * MIN(loopCount[nRcpIndex], 1);
 				IF nRcpIndex > Rcp.iRcpTotalStep THEN
 					RCP.cmd_RcpOperation := 50;
 				END_IF

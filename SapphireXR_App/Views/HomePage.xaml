@@ -33,7 +33,6 @@
             <Canvas Grid.Row="0" Background="{DynamicResource Gray_300}">
                 <Canvas.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="{Binding LeakTestModeStr}" Command="{Binding EnableLeakTestCommand}" CommandParameter="{Binding Header,  RelativeSource={RelativeSource Mode=Self}}" />
                         <MenuItem Header="{Binding ShowValveLabelStr}" Command="{Binding ShowValveLabelCommand}" CommandParameter="{Binding Header,  RelativeSource={RelativeSource Mode=Self}}"/>
                     </ContextMenu>
                 </Canvas.ContextMenu>

@@ -223,23 +223,23 @@ namespace SapphireXR_App.ViewModels
                 valveStatePublishers["V08"].Publish(value.V08);
                 valveStatePublishers["V10"].Publish(value.V10);
                 valveStatePublishers["V11"].Publish(value.V11);
-                valveStatePublishers["V13"].Publish(value.V13);
+                valveStatePublishers["V12"].Publish(value.V12);
                 valveStatePublishers["V14"].Publish(value.V14);
                 valveStatePublishers["V16"].Publish(value.V16);
                 valveStatePublishers["V17"].Publish(value.V17);
                 valveStatePublishers["V19"].Publish(value.V19);
                 valveStatePublishers["V20"].Publish(value.V20);
-                valveStatePublishers["V22"].Publish(value.V22);
-                valveStatePublishers["V23"].Publish(value.V23);
-                valveStatePublishers["V24"].Publish(value.V24);
-                valveStatePublishers["V25"].Publish(value.V25);
-                valveStatePublishers["V26"].Publish(value.V26);
-                valveStatePublishers["V27"].Publish(value.V27);
-                valveStatePublishers["V28"].Publish(value.V28);
-                valveStatePublishers["V29"].Publish(value.V29);
-                valveStatePublishers["V30"].Publish(value.V30);
-                valveStatePublishers["V31"].Publish(value.V31);
-                valveStatePublishers["V32"].Publish(value.V32);
+                //valveStatePublishers["V22"].Publish(value.V22);
+                //valveStatePublishers["V23"].Publish(value.V23);
+                //valveStatePublishers["V24"].Publish(value.V24);
+                //valveStatePublishers["V25"].Publish(value.V25);
+                //valveStatePublishers["V26"].Publish(value.V26);
+                //valveStatePublishers["V27"].Publish(value.V27);
+                //valveStatePublishers["V28"].Publish(value.V28);
+                //valveStatePublishers["V29"].Publish(value.V29);
+                //valveStatePublishers["V30"].Publish(value.V30);
+                //valveStatePublishers["V31"].Publish(value.V31);
+                //valveStatePublishers["V32"].Publish(value.V32);
 
                 flowValuePublishers["MFC01"].Publish(value.M01);
                 flowValuePublishers["MFC02"].Publish(value.M02);
@@ -253,23 +253,23 @@ namespace SapphireXR_App.ViewModels
                 flowValuePublishers["MFC10"].Publish(value.M10);
                 flowValuePublishers["MFC11"].Publish(value.M11);
                 flowValuePublishers["MFC12"].Publish(value.M12);
-                flowValuePublishers["MFC13"].Publish(value.M13);
-                flowValuePublishers["MFC14"].Publish(value.M14);
-                flowValuePublishers["MFC15"].Publish(value.M15);
-                flowValuePublishers["MFC16"].Publish(value.M16);
-                flowValuePublishers["MFC17"].Publish(value.M17);
-                flowValuePublishers["MFC18"].Publish(value.M18);
-                flowValuePublishers["MFC19"].Publish(value.M19);
-                flowValuePublishers["EPC01"].Publish(value.E01);
-                flowValuePublishers["EPC02"].Publish(value.E02);
-                flowValuePublishers["EPC03"].Publish(value.E03);
-                flowValuePublishers["EPC04"].Publish(value.E04);
-                flowValuePublishers["EPC05"].Publish(value.E05);
-                flowValuePublishers["EPC06"].Publish(value.E06);
-                flowValuePublishers["EPC07"].Publish(value.E07);
-                flowValuePublishers["Temperature"].Publish(value.STemp);
-                flowValuePublishers["Pressure"].Publish(value.RPress);
-                flowValuePublishers["Rotation"].Publish(value.SRotation);
+                //flowValuePublishers["MFC13"].Publish(value.M13);
+                //flowValuePublishers["MFC14"].Publish(value.M14);
+                //flowValuePublishers["MFC15"].Publish(value.M15);
+                //flowValuePublishers["MFC16"].Publish(value.M16);
+                //flowValuePublishers["MFC17"].Publish(value.M17);
+                //flowValuePublishers["MFC18"].Publish(value.M18);
+                //flowValuePublishers["MFC19"].Publish(value.M19);
+                //flowValuePublishers["EPC01"].Publish(value.E01);
+                //flowValuePublishers["EPC02"].Publish(value.E02);
+                //flowValuePublishers["EPC03"].Publish(value.E03);
+                //flowValuePublishers["EPC04"].Publish(value.E04);
+                //flowValuePublishers["EPC05"].Publish(value.E05);
+                //flowValuePublishers["EPC06"].Publish(value.E06);
+                //flowValuePublishers["EPC07"].Publish(value.E07);
+                //flowValuePublishers["Temperature"].Publish(value.STemp);
+                //flowValuePublishers["Pressure"].Publish(value.RPress);
+                //flowValuePublishers["Rotation"].Publish(value.SRotation);
             }
 
             public void clean()
@@ -335,12 +335,20 @@ namespace SapphireXR_App.ViewModels
                         currentSelected!.V05 = isOpen;
                         break;
 
+                    case "V06":
+                        currentSelected!.V06 = isOpen;
+                        break;
+
                     case "V07":
                         currentSelected!.V07 = isOpen;
                         break;
 
                     case "V08":
                         currentSelected!.V08 = isOpen;
+                        break;
+
+                    case "V09":
+                        currentSelected!.V09 = isOpen;
                         break;
 
                     case "V10":
@@ -351,12 +359,16 @@ namespace SapphireXR_App.ViewModels
                         currentSelected!.V11 = isOpen;
                         break;
 
-                    case "V13":
-                        currentSelected!.V13 = isOpen;
+                    case "V12":
+                        currentSelected!.V12 = isOpen;
                         break;
 
                     case "V14":
                         currentSelected!.V14 = isOpen;
+                        break;
+
+                    case "V15":
+                        currentSelected!.V15 = isOpen;
                         break;
 
                     case "V16":
@@ -367,56 +379,16 @@ namespace SapphireXR_App.ViewModels
                         currentSelected!.V17 = isOpen;
                         break;
 
+                    case "V18":
+                        currentSelected!.V18 = isOpen;
+                        break;
+
                     case "V19":
                         currentSelected!.V19 = isOpen;
                         break;
 
                     case "V20":
                         currentSelected!.V20 = isOpen;
-                        break;
-
-                    case "V22":
-                        currentSelected!.V22 = isOpen;
-                        break;
-
-                    case "V23":
-                        currentSelected!.V23 = isOpen;
-                        break;
-
-                    case "V24":
-                        currentSelected!.V24 = isOpen;
-                        break;
-
-                    case "V25":
-                        currentSelected!.V25 = isOpen;
-                        break;
-
-                    case "V26":
-                        currentSelected!.V26 = isOpen;
-                        break;
-
-                    case "V27":
-                        currentSelected!.V27 = isOpen;
-                        break;
-
-                    case "V28":
-                        currentSelected!.V28 = isOpen;
-                        break;
-
-                    case "V29":
-                        currentSelected!.V29 = isOpen;
-                        break;
-
-                    case "V30":
-                        currentSelected!.V30 = isOpen;
-                        break;
-
-                    case "V31":
-                        currentSelected!.V31 = isOpen;
-                        break;
-
-                    case "V32":
-                        currentSelected!.V32 = isOpen;
                         break;
                 }
             }
@@ -444,11 +416,17 @@ namespace SapphireXR_App.ViewModels
                     case "V05":
                         return currentSelected!.V05;
 
+                    case "V06":
+                        return currentSelected!.V06;
+
                     case "V07":
                         return currentSelected!.V07;
 
                     case "V08":
                         return currentSelected!.V08;
+
+                    case "V09":
+                        return currentSelected!.V09;
 
                     case "V10":
                         return currentSelected!.V10;
@@ -456,11 +434,14 @@ namespace SapphireXR_App.ViewModels
                     case "V11":
                         return currentSelected!.V11;
 
-                    case "V13":
-                        return currentSelected!.V13;
+                    case "V12":
+                        return currentSelected!.V12;
 
                     case "V14":
                         return currentSelected!.V14;
+
+                    case "V15":
+                        return currentSelected!.V15;
 
                     case "V16":
                         return currentSelected!.V16;
@@ -468,44 +449,14 @@ namespace SapphireXR_App.ViewModels
                     case "V17":
                         return currentSelected!.V17;
 
+                    case "V18":
+                        return currentSelected!.V18;
+
                     case "V19":
                         return currentSelected!.V19;
 
                     case "V20":
                         return currentSelected!.V20;
-
-                    case "V22":
-                        return currentSelected!.V22;
-
-                    case "V23":
-                        return currentSelected!.V23;
-
-                    case "V24":
-                        return currentSelected!.V24;
-
-                    case "V25":
-                        return currentSelected!.V25;
-
-                    case "V26":
-                        return currentSelected!.V26;
-
-                    case "V27":
-                        return currentSelected!.V27;
-
-                    case "V28":
-                        return currentSelected!.V28;
-
-                    case "V29":
-                        return currentSelected!.V29;
-
-                    case "V30":
-                        return currentSelected!.V30;
-
-                    case "V31":
-                        return currentSelected!.V31;
-
-                    case "V32":
-                        return currentSelected!.V32;
 
                     default:
                         throw new Exception("RecipeStateUpdater: " + valveID + " is invalid valve name in getValveState()");
@@ -569,72 +520,28 @@ namespace SapphireXR_App.ViewModels
                         currentSelected.M12 = value;
                         break;
 
-                    case "MFC13":
-                        currentSelected.M13 = value;
+                    case "Temperature1":
+                        currentSelected.F01 = value;
                         break;
 
-                    case "MFC14":
-                        currentSelected.M14 = value;
+                    case "Temperature2":
+                        currentSelected.F02 = value;
                         break;
 
-                    case "MFC15":
-                        currentSelected.M15 = value;
+                    case "Temperature3":
+                        currentSelected.F03 = value;
                         break;
 
-                    case "MFC16":
-                        currentSelected.M16 = value;
+                    case "Temperature4":
+                        currentSelected.F04 = value;
                         break;
 
-                    case "MFC17":
-                        currentSelected.M17 = value;
+                    case "Temperature5":
+                        currentSelected.F05 = value;
                         break;
 
-                    case "MFC18":
-                        currentSelected.M18 = value;
-                        break;
-
-                    case "MFC19":
-                        currentSelected.M19 = value;
-                        break;
-
-                    case "EPC01":
-                        currentSelected.E01 = value;
-                        break;
-
-                    case "EPC02":
-                        currentSelected.E02 = value;
-                        break;
-
-                    case "EPC03":
-                        currentSelected.E03 = value;
-                        break;
-
-                    case "EPC04":
-                        currentSelected.E04 = value;
-                        break;
-
-                    case "EPC05":
-                        currentSelected.E05 = value;
-                        break;
-
-                    case "EPC06":
-                        currentSelected.E06 = value;
-                        break;
-
-                    case "EPC07":
-                        currentSelected.E07 = value;
-                        break;
-
-                    case "Temperature":
-                        currentSelected.STemp = (short)value;
-                        break;
-
-                    case "Pressure":
-                        currentSelected.RPress = (short)value;
-                        break;
-
-                    case "Rotation":
-                        currentSelected.SRotation = (short)value;
+                    case "Temperature6":
+                        currentSelected.F06 = value;
                         break;
 
                     default:
@@ -687,59 +594,23 @@ namespace SapphireXR_App.ViewModels
                     case "MFC12":
                         return currentSelected.M12;
 
-                    case "MFC13":
-                        return currentSelected.M13;
+                    case "Temperature1":
+                        return currentSelected.F01;
 
-                    case "MFC14":
-                        return currentSelected.M14;
+                    case "Temperature2":
+                        return currentSelected.F02;
 
-                    case "MFC15":
-                        return currentSelected.M15;
+                    case "Temperature3":
+                        return currentSelected.F03;
 
-                    case "MFC16":
-                        return currentSelected.M16;
+                    case "Temperature4":
+                        return currentSelected.F04;
 
-                    case "MFC17":
-                        return currentSelected.M17;
+                    case "Temperature5":
+                        return currentSelected.F05;
 
-                    case "MFC18":
-                        return currentSelected.M18;
-
-                    case "MFC19":
-                        return currentSelected.M19;
-
-                    case "EPC01":
-                        return currentSelected.E01;
-
-                    case "EPC02":
-                        return currentSelected.E02;
-
-                    case "EPC03":
-                        return currentSelected.E03;
-
-                    case "EPC04":
-                        return currentSelected.E04;
-
-                    case "EPC05":
-                        return currentSelected.E05;
-
-                    case "EPC06":
-                        return currentSelected.E06;
-
-                    case "EPC07":
-                        return currentSelected.E07;
-
-                    case "Temperature":
-                        return currentSelected.STemp;
-                        
-
-                    case "Pressure":
-                        return currentSelected.RPress;
-                        
-
-                    case "Rotation":
-                        return currentSelected.SRotation;
-                        
+                    case "Temperature6":
+                        return currentSelected.F06;
 
                     default:
                         throw new Exception("RecipeStateUpdater: return currentSelected is null in getControlValue()");

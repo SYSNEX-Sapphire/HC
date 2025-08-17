@@ -6,9 +6,9 @@ namespace SapphireXR_App.Models
     {
         private static void ReadValveStateFromPLC()
         {
-            uint aReadValveStatePLC1 = (uint)Ads.ReadAny(hReadValveStatePLC, typeof(uint)); // Convert to Array
+            uint aReadValveStatePLC = (uint)Ads.ReadAny(hReadValveStatePLC, typeof(uint)); // Convert to Array
 
-            baReadValveStatePLC = new BitArray([(int)aReadValveStatePLC1]);
+            baReadValveStatePLC = new BitArray([(int)aReadValveStatePLC]);
         }
 
         private static void ReadInitialStateValueFromPLC()
@@ -21,7 +21,6 @@ namespace SapphireXR_App.Models
         {
             aDeviceCurrentValues = Ads.ReadAny<float[]>(hDeviceCurrentValuePLC, [NumControllers]);
             aDeviceControlValues = Ads.ReadAny<float[]>(hDeviceControlValuePLC, [NumControllers]);
-            aDeviceTargetValues = Ads.ReadAny<float[]>(hWriteDeviceTargetValuePLC, [NumControllers]);
             //aMonitoring_PVs = Ads.ReadAny<float[]>(hMonitoring_PV, [18]);
             //aInputState = Ads.ReadAny<short[]>(hInputState, [5]);
             ReadValveStateFromPLC();
