@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SetValves" Id="{7548a082-4ddf-4666-a6a4-0b0dbf9dc60a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SetValves
+VAR_INPUT
+	valveSetting: DWORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Solenoid Valve Mapping *)
+GVL_IO.OutputSolValve.0 := valveSetting.0; //V01 B/G N2 In
+GVL_IO.OutputSolValve.1 := valveSetting.1; //V02 Ga HCl In 
+GVL_IO.OutputSolValve.2 := valveSetting.2; //V3 Ga N2 In 
+GVL_IO.OutputSolValve.3 := valveSetting.3; //V4 NH3 NH3 In
+GVL_IO.OutputSolValve.4 := valveSetting.4; //V5 NH3 N2 In
+GVL_IO.OutputSolValve.5 := valveSetting.5; //V6 Al HCl In
+GVL_IO.OutputSolValve.6 := valveSetting.6; //V7 Al N2 In
+GVL_IO.OutputSolValve.7 := valveSetting.7; //V8 Etching HCl In
+GVL_IO.OutputSolValve.8 := valveSetting.8; //V9 Etching N2 In
+GVL_IO.OutputSolValve.9 := valveSetting.9; //V10 H2O2 HCl In
+GVL_IO.OutputSolValve.10 := valveSetting.10; //V11 H2/O2 N2 In
+GVL_IO.OutputSolValve.11 := valveSetting.11; //V12 B/F N2 In 
+GVL_IO.OutputSolValve.12 := valveSetting.12; //V13
+GVL_IO.OutputSolValve.13 := valveSetting.13; //V14 B/G Out
+GVL_IO.OutputSolValve.14 := valveSetting.14; //V15 Ga Out
+GVL_IO.OutputSolValve.15 := valveSetting.15; //V16 Nh3 Out
+GVL_IO.OutputSolValve.16 := valveSetting.16; //V17 Al Out
+GVL_IO.OutputSolValve.17 := valveSetting.17; //V18 Etching Out
+GVL_IO.OutputSolValve.18 := valveSetting.18; //V19 H2/O2 Out
+GVL_IO.OutputSolValve.19 := valveSetting.19; //V20 F/F Out]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

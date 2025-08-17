@@ -363,6 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /SapphireXR.tsproj.bak
 /SapphireXR.~u
-/PLC_HC
 /_Boot
+/CompileInfo
 /_Boot/TwinCAT RT (x64)/Plc/Port_851.ocm
