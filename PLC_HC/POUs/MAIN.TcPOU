@@ -16,35 +16,11 @@ VAR
 	nTest4 : WORD;
 	nTest5 : WORD;
 	nTest6 : WORD;
-	bTemp_Ramping_Start: ARRAY[1..6]OF  BOOL;
-	TargetTEMP: ARRAY[1..6] OF INT;
-	rampingTime: ARRAY[1..6] OF INT;
-	bRampingControlIndex: INT;
-	bRampingRTrig: ARRAY[1..6]OF R_TRIG;
-	bRampingFTrig: ARRAY[1..6]OF F_TRIG;
-	nTempRampingCount: INT;
-	RampingStartTemp: REAL;
-	TempRampingIndex: BYTE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[RCP.fbModbusManager(
-	RData_Module_1=>GVL_Furnace.Received_e2408_data_1,
-	RData_Module_2=>GVL_Furnace.Received_e2408_data_2,
-	RData_Module_3=>GVL_Furnace.Received_e2408_data_3,
-	RData_Module_4=>GVL_Furnace.Received_e2408_data_4,
-	RData_Module_5=>GVL_Furnace.Received_e2408_data_5,
-	RData_Module_6=>GVL_Furnace.Received_e2408_data_6); (*통신이 정상 동작 하면 GVL_HEATER.Received_e2508_data_1 ~6 들어 온다*)
+      <ST><![CDATA[_TempManager();
 
-
-_Temp_Ramping_Temp();
-
-(*Test 용 Flag*)
-IF bTempSetPointSend THEN
-	bTempSetPointSend := FALSE;
-		RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(1, nTest1));(*1번 모듈 온도 10도 셋팅*)
-END_IF
-	
 IF NOT(bOperationMode) THEN
 	//P30_ManualControl(state_Control := 10); //매뉴얼 콘트롤
 ELSE
@@ -54,52 +30,17 @@ END_IF
 GVL_IO.OutputSolValve.0 := bTest;
 ]]></ST>
     </Implementation>
-    <Action Name="_Temp_Ramping_Temp" Id="{9be35b16-c922-4677-a578-87d618f9ab69}">
+    <Action Name="_TempManager" Id="{55c4ebf8-341e-483a-935c-fc1b3d670af7}">
       <Implementation>
-        <ST><![CDATA[FOR nTempRampingCount:=1 TO 6 BY 1 DO 
-	CASE nTempRampingCount OF
-		1:
-			RampingStartTemp:= GVL_Furnace.Received_e2408_data_1.TEMP_TARGET_VALUE;
-		2:
-			RampingStartTemp:= GVL_Furnace.Received_e2408_data_2.TEMP_TARGET_VALUE;
-		3:
-			RampingStartTemp:= GVL_Furnace.Received_e2408_data_3.TEMP_TARGET_VALUE;
-		4:
-			RampingStartTemp:= GVL_Furnace.Received_e2408_data_4.TEMP_TARGET_VALUE;
-		5:
-			RampingStartTemp:= GVL_Furnace.Received_e2408_data_5.TEMP_TARGET_VALUE;
-		6:
-			RampingStartTemp:= GVL_Furnace.Received_e2408_data_6.TEMP_TARGET_VALUE;
-	END_CASE
+        <ST><![CDATA[GVL_IO.aController_ramping_euroTherm();
 
-	RCP.fbTempRamping[nTempRampingCount]();
-	
-	bRampingRTrig[nTempRampingCount](CLK:=bTemp_Ramping_Start[nTempRampingCount]);
-	bRampingFTrig[nTempRampingCount](CLK:=RCP.fbTempRamping[nTempRampingCount].bBusy );
-	
-	IF bRampingRTrig[nTempRampingCount].Q THEN
-		RCP.fbTempRamping[nTempRampingCount](bExecute:=TRUE,
-							StartTemp:=RampingStartTemp,
-							RampingTargetTemp:=TargetTEMP[nTempRampingCount],
-							RampingTime:=rampingTime[nTempRampingCount]);
-	END_IF
-	IF bRampingFTrig[nTempRampingCount].Q THEN
-		RCP.fbTempRamping[nTempRampingCount](bExecute:=FALSE);
-		bTemp_Ramping_Start[nTempRampingCount]:=FALSE;
-	END_IF
-
-	IF RCP.fbTempRamping[nTempRampingCount].bExecute = TRUE AND bTemp_Ramping_Start[nTempRampingCount]=FALSE THEN
-		RCP.fbTempRamping[nTempRampingCount](bExecute:=FALSE);
-	END_IF
-	
-	RCP.RampingRingEdge[nTempRampingCount](CLK:=RCP.fbTempRamping[nTempRampingCount].bTempChangeFlag);
-	
-	IF RCP.fbTempRamping[nTempRampingCount].bBusy = TRUE AND rcp.RampingRingEdge[nTempRampingCount].Q THEN
-		RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(INT_TO_BYTE(nTempRampingCount),INT_TO_WORD(RCP.fbTempRamping[nTempRampingCount].OutputSetTemp)));(*1번 모듈 온도 10도 셋팅*)
-	END_IF
-
-END_FOR
-]]></ST>
+RCP.fbModbusManager(
+	RData_Module_1=>GVL_Furnace.Received_e2408_data_1,
+	RData_Module_2=>GVL_Furnace.Received_e2408_data_2,
+	RData_Module_3=>GVL_Furnace.Received_e2408_data_3,
+	RData_Module_4=>GVL_Furnace.Received_e2408_data_4,
+	RData_Module_5=>GVL_Furnace.Received_e2408_data_5,
+	RData_Module_6=>GVL_Furnace.Received_e2408_data_6); (*통신이 정상 동작 하면 GVL_HEATER.Received_e2508_data_1 ~6 들어 온다*)]]></ST>
       </Implementation>
     </Action>
   </POU>

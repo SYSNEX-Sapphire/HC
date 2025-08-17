@@ -15,6 +15,9 @@ VAR_GLOBAL
 	OutputSolValve AT %Q* : DWORD; //16열 32점
 	
 	(* Read and Write of Device Control Value*)
+	(*Ramping Generator_Eurotherm*)
+	aController_ramping_euroTherm:FB_RampGenerator_Eurotherm;
+	
 	aMaxValueController		: ARRAY[1..nControllerNum]OF REAL ; //Device Max Value from UI
 	aController 			: ARRAY[1..nControllerNum] OF FB_RampGenerator; //MFC 0 ~ 5V
 	aController_TV 			: ARRAY[1..nControllerNum] OF REAL; //Target Value from UI

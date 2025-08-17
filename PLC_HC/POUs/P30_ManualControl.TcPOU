@@ -7,6 +7,16 @@ VAR_INPUT
 END_VAR
 VAR
 	i 	: INT;
+	
+	Temp_1_Ramping:ARRAY[1..6]OF  INT;
+	Temp_1_target: ARRAY[1..6]OF  INT;
+	Temp_1_BufferTarget: ARRAY[1..6]OF  INT;
+
+
+	
+	
+	
+
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[FOR i:=1 TO 12 DO
@@ -23,7 +33,9 @@ END_VAR]]></Declaration>
 END_FOR
 
 (* Furnace Temperature Controller *)
-// Modbus 6EA 통신 으로 값 설정 및  읽기]]></ST>
+// Modbus 6EA 통신 으로 값 설정 및  읽기
+
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

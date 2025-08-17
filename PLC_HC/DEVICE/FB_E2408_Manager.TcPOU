@@ -54,6 +54,7 @@ VAR
 	WriteSingleRegisterBusy	: BOOL;
 	WriteSingleRegisterError: BOOL;
 	nModbusWrite_UniD: BYTE;
+	WriteErrorID: Tc2_ModbusRTU.MODBUS_ERRORS;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -97,6 +98,7 @@ IF (ReadInputRegsBusy = FALSE AND ReadInputRegsError = FALSE)  THEN
 	END_IF
 
 		CASE nReadExecuteCount OF
+			
 			1:MEMCPY(ADR(RData_Module_1),ADR(arrReceivedBuffer),SIZEOF(RData_Module_1));
 				ReceivedTime :=nCycle;
 				nCycle:=0;
@@ -105,6 +107,7 @@ IF (ReadInputRegsBusy = FALSE AND ReadInputRegsError = FALSE)  THEN
 			4:MEMCPY(ADR(RData_Module_4),ADR(arrReceivedBuffer),SIZEOF(RData_Module_4));
 			5:MEMCPY(ADR(RData_Module_5),ADR(arrReceivedBuffer),SIZEOF(RData_Module_5));
 			6:MEMCPY(ADR(RData_Module_6),ADR(arrReceivedBuffer),SIZEOF(RData_Module_6));
+			
 		END_CASE
 	END_IF
 	
@@ -113,7 +116,7 @@ nCycle:=nCycle+1;
 
 (*Change Address*)
 IF ReadInputRegsBusy = FALSE  AND ReadInputRegsError = FALSE  AND fbStructModbusSend.nBufferCount = 0 AND bWriteExecute = FALSE AND WriteSingleRegisterBusy = FALSE THEN
-DataReadTon(IN:=TRUE,pT:=T#500MS);
+	DataReadTon(IN:=TRUE,pT:=T#200MS);
 	IF DataReadTon.Q THEN
 		
 		nReadExecuteCount:=nReadExecuteCount+1;
@@ -152,7 +155,7 @@ END_IF]]></ST>
 END_IF
 
 IF fbStructModbusSend.nBufferCount > 0 AND bWriteExecute = FALSE AND WriteSingleRegisterBusy = FALSE THEN
-	ResendTon(IN:=TRUE,pt:=T#150MS);
+	ResendTon(IN:=TRUE,pt:=T#200MS);
 	rinedge(CLK:=ResendTon.Q);
 	IF rinedge.q THEN
 		ResendTon(IN:=FALSE);
@@ -189,7 +192,7 @@ IF ReadInputRegsBusy = FALSE THEN
 		Timeout:= T#1S , 
 		BUSY=>WriteSingleRegisterBusy ,
 		Error=>WriteSingleRegisterError , 
-		ErrorId=> , 
+		ErrorId=>WriteErrorID,
 		cbRead=> );
 END_IF
 

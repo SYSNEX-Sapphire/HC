@@ -129,6 +129,9 @@
     <Compile Include="POUs\FB_RampGenerator_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FB_RampGenerator_Eurotherm.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FB_RecipeSequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
