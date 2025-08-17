@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_AnalogDeviceRampControl" Id="{4d71c662-5820-4a02-9202-6db8dc7db64b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AnalogDeviceRampControl
+VAR
+	i: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i:= 1 TO GVL_IO.nNumMFC DO
+	IF GVL_IO.aMaxValueController[i] <> 0 THEN
+		GVL_IO.aAnalogOutputIO[i] := LREAL_TO_INT(GVL_IO.aController[i].rControlValue);
+		
+		GVL_IO.aController_PV[i] := GVL_IO.aAnalogInputIO[i] / (GVL_IO.EL3064MaxValueH * GVL_IO.aMaxValueController[i]);
+		GVL_IO.aController_CV[i] := LREAL_TO_REAL((GVL_IO.aController[i].rControlValue / GVL_IO.EL3064MaxValueH)*GVL_IO.aMaxValueController[i]);
+		GVL_IO.aController[i]();	
+	END_IF
+END_FOR
+
+(* Furnace Temperature Controller *)
+// Modbus 6EA 통신 으로 값 설정 및  읽기]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
