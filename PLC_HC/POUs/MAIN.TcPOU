@@ -16,6 +16,7 @@ VAR
 	nTest4 : WORD;
 	nTest5 : WORD;
 	nTest6 : WORD;
+	nloop: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -32,9 +33,7 @@ GVL_IO.OutputSolValve.0 := bTest;
     </Implementation>
     <Action Name="_TempManager" Id="{55c4ebf8-341e-483a-935c-fc1b3d670af7}">
       <Implementation>
-        <ST><![CDATA[GVL_IO.aController_ramping_euroTherm();
-
-RCP.fbModbusManager(
+        <ST><![CDATA[RCP.fbModbusManager(
 	RData_Module_1=>GVL_Furnace.Received_e2408_data_1,
 	RData_Module_2=>GVL_Furnace.Received_e2408_data_2,
 	RData_Module_3=>GVL_Furnace.Received_e2408_data_3,

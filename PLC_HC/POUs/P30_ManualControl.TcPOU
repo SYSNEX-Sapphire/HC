@@ -11,12 +11,12 @@ VAR
 
 
 	
-	
+	fbAnalogDeviceRampControl:FB_AnalogDeviceRampControl;
 	
 
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[analogDeviceRampControl();]]></ST>
+      <ST><![CDATA[fbAnalogDeviceRampControl();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

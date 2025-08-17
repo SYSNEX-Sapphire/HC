@@ -133,7 +133,8 @@ END_VAR
 		Rcp.cmd_RcpOperation := 10;
 		RCP.Pause_ET := T#0S;
 END_CASE
-RCP.iRcpStepN := nRcpIndex;]]></ST>
+RCP.iRcpStepN := nRcpIndex;
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
