@@ -46,7 +46,7 @@ IF bTempSetPointSend THEN
 END_IF
 	
 IF NOT(bOperationMode) THEN
-	//P30_ManualControl(state_Control := 10); //매뉴얼 콘트롤
+	P30_ManualControl(); //매뉴얼 콘트롤
 ELSE
 	//P50_RecipeControl(); //레시피 콘트론
 END_IF

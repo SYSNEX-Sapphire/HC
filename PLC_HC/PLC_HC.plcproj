@@ -78,6 +78,9 @@
     <Compile Include="FUNCTION\FB_TON_Pausable_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FUNCTION\F_ResetTimersAndRCPTimes.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FUNCTION\HEXSTR_TO_REAL_LHeaterPV.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -114,6 +117,12 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FB_AnalogDeviceRampControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_ControlRampGenerator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FB_DeviationCheck.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -129,16 +138,22 @@
     <Compile Include="POUs\FB_RampGenerator_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FB_RampGenerator_2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_RecipeAnalogInputControlSequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FB_RecipeSequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_SensorLimitCheck.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_TON_Pausable_2.TcPOU">
+    <Compile Include="POUs\FB_SetValves.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_ResetTimersAndRCPTimes.TcPOU">
+    <Compile Include="POUs\FB_TON_Pausable_2.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
