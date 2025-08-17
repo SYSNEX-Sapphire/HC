@@ -115,7 +115,7 @@ namespace SapphireXR_App.Models
         };
         public static readonly int NumControllers = dIndexController.Count;
         public static readonly int NumMFCControllers = 12;
-        public static readonly int NumTemperatureControllers = 6;
+        public static readonly int NumFurnaceTempControllers = 6;
 
         public static readonly Dictionary<string, int> dMonitoringMeterIndex = new Dictionary<string, int>
         {
@@ -149,8 +149,7 @@ namespace SapphireXR_App.Models
         //private static float[]? aMonitoring_PVs = null;
         //private static short[]? aInputState = null;
         //private static BitArray? bOutputCmd1 = null;
-        private static short[]? aDeviceRampTimes = new short[dIndexController.Count];
-        private static float?[] aTargetValueMappingFactor = new float?[dIndexController.Count];
+        private static float?[] aTargetValueMappingFactor = new float?[NumMFCControllers];
         private static int[] InterlockEnables = Enumerable.Repeat<int>(0, (int)NumAlarmWarningArraySize).ToArray();
         private static Memory<byte> userStateBuffer = new Memory<byte>([ 0x00, 0x00 ]);
 
@@ -233,7 +232,8 @@ namespace SapphireXR_App.Models
         private static uint hRecipeControlPauseTime;
         private static uint[] hInterlockEnable = new uint[NumAlarmWarningArraySize];
         private static uint[] hInterlockset = new uint[NumInterlockSet];
-        private static uint[] hAControllerInput = new uint[NumMFCControllers];
+        private static uint[] hMFCControllerInput = new uint[NumMFCControllers];
+        private static uint[] hFurnaceTempControllerInput = new uint[NumFurnaceTempControllers];
         //private static uint[] hInterlock = new uint[NumInterlock];
 
         private static bool RecipeRunEndNotified = false;

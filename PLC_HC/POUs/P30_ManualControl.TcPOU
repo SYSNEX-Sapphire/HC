@@ -8,8 +8,6 @@ VAR
 	Temp_1_Ramping:ARRAY[1..6]OF  INT;
 	Temp_1_target: ARRAY[1..6]OF  INT;
 	Temp_1_BufferTarget: ARRAY[1..6]OF  INT;
-
-
 	
 	fbAnalogDeviceRampControl:FB_AnalogDeviceRampControl;
 	

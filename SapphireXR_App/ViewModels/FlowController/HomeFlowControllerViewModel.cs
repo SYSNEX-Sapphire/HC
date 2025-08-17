@@ -1,10 +1,11 @@
-﻿using SapphireXR_App.Enums;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SapphireXR_App.Common;
-using SapphireXR_App.WindowServices;
-using static SapphireXR_App.ViewModels.FlowControlViewModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Windows;
+using SapphireXR_App.Enums;
 using SapphireXR_App.Models;
+using SapphireXR_App.WindowServices;
+using System.Windows;
+using System.Windows.Media;
+using static SapphireXR_App.ViewModels.FlowControlViewModel;
 
 namespace SapphireXR_App.ViewModels.FlowController
 {
@@ -93,7 +94,17 @@ namespace SapphireXR_App.ViewModels.FlowController
                     {
                         if (controlValues.targetValue != null && controlValues.rampTime != null)
                         {
-                            PLCService.WriteFlowControllerTargetValue(ControllerID, controlValues.targetValue.Value, controlValues.rampTime.Value);
+                            switch(Type)
+                            {
+                                case "MFC":
+                                    PLCService.WriteMFCTargetValue(ControllerID, controlValues.targetValue.Value, controlValues.rampTime.Value);
+                                    break;
+
+                                case "Reactor":
+                                    PLCService.WriteFurnaceTempTargetValue(ControllerID, controlValues.targetValue.Value, controlValues.rampTime.Value);
+                                    break;
+                            }
+                            
                             ToastMessage.Show(ControllerID + " Target Value, Ramp Time 설정 완료", ToastMessage.MessageType.Sucess);
                         }
                     }

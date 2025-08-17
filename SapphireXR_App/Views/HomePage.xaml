@@ -185,8 +185,8 @@
                 <control:HomeFlowController x:Name="furnaceZone2" Canvas.Left="490" Canvas.Top="620" ControllerID="Temperature2" Type="Reactor"/>
                 <control:HomeFlowController x:Name="furnaceZone3" Canvas.Left="610" Canvas.Top="620" ControllerID="Temperature3" Type="Reactor"/>
                 <control:HomeFlowController x:Name="furnaceZone4" Canvas.Left="730" Canvas.Top="620" ControllerID="Temperature4" Type="Reactor"/>
-                <control:HomeFlowController x:Name="furnaceZone5" Canvas.Left="850" Canvas.Top="620" ControllerID="Temperature6" Type="Reactor"/>
-                <control:HomeFlowController x:Name="furnaceZone6" Canvas.Left="970" Canvas.Top="620" ControllerID="Temperature7" Type="Reactor"/>
+                <control:HomeFlowController x:Name="furnaceZone5" Canvas.Left="850" Canvas.Top="620" ControllerID="Temperature5" Type="Reactor"/>
+                <control:HomeFlowController x:Name="furnaceZone6" Canvas.Left="970" Canvas.Top="620" ControllerID="Temperature6" Type="Reactor"/>
                 <!--#endregion-->
 
                 <!-- #Region 5. 가스제어용 밸브 -->
@@ -204,14 +204,13 @@
                 <control:SingleValve x:Name="V11" Canvas.Left="1108" Canvas.Top="138" ValveID="V11" />
                 <control:SingleValve x:Name="V12" Canvas.Left="1208" Canvas.Top="138" ValveID="V12" />
 
-
-                <control:SingleValve x:Name="V14" Canvas.Left="308" Canvas.Top="338" ValveID="V14" />
-                <control:SingleValve x:Name="V15" Canvas.Left="508" Canvas.Top="338" ValveID="V15" />
-                <control:SingleValve x:Name="V16" Canvas.Left="708" Canvas.Top="338" ValveID="V16" />
-                <control:SingleValve x:Name="V17" Canvas.Left="908" Canvas.Top="338" ValveID="V17" />
-                <control:SingleValve x:Name="V18" Canvas.Left="1108" Canvas.Top="338" ValveID="V18" />
-                <control:SingleValve x:Name="V19" Canvas.Left="1208" Canvas.Top="338" ValveID="V19" />
-                <control:SingleValve x:Name="V20" Canvas.Left="108" Canvas.Top="338" ValveID="V20" />
+                <control:SingleValve x:Name="V14" Canvas.Left="108" Canvas.Top="338" ValveID="V14" />
+                <control:SingleValve x:Name="V15" Canvas.Left="308" Canvas.Top="338" ValveID="V15" />
+                <control:SingleValve x:Name="V16" Canvas.Left="508" Canvas.Top="338" ValveID="V16" />
+                <control:SingleValve x:Name="V17" Canvas.Left="708" Canvas.Top="338" ValveID="V17" />
+                <control:SingleValve x:Name="V18" Canvas.Left="908" Canvas.Top="338" ValveID="V18" />
+                <control:SingleValve x:Name="V19" Canvas.Left="1108" Canvas.Top="338" ValveID="V19" />
+                <control:SingleValve x:Name="V20" Canvas.Left="1208" Canvas.Top="338" ValveID="V20" />
                 <!--#endregion-->
 
                 <!-- #Region 6. 가스 제어(MFC, EPC) -->

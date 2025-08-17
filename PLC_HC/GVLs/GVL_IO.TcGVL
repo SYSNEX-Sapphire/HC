@@ -19,9 +19,6 @@ VAR_GLOBAL
 	aController 			: ARRAY[1..nNumMFC] OF FB_ControlRampGenerator; //MFC 0 ~ 5V
 	aController_TempContoller		: ARRAY[1..nNumFurnaceTemp] OF FB_ControlRampGenerator; //Temp Generator
 	
-	aController_TempInput 	: ARRAY[1..nNumFurnaceTemp] OF RampGeneratorInput;
-	aController_TV 			: ARRAY[1..nNumController] OF REAL; //Target Value from UI
-	aController_RampTime 	: ARRAY[1..nNumController] OF INT;
 	aController_PV 			: ARRAY[1..nNumController] OF REAL; //Present Value from Device
 	aController_CV 			: ARRAY[1..nNumController] OF REAL; //Current Value from RampingController
 	

@@ -187,7 +187,11 @@ namespace SapphireXR_App.Models
             //hOutputMode = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_Mode");
             for (uint analogDevice = 0; analogDevice < NumMFCControllers; ++analogDevice)
             {
-                hAControllerInput[analogDevice] = Ads.CreateVariableHandle("GVL_IO.aController[" + (analogDevice + 1) + "].input");
+                hMFCControllerInput[analogDevice] = Ads.CreateVariableHandle("GVL_IO.aController[" + (analogDevice + 1) + "].input");
+            }
+            for(uint analogDevice = 0; analogDevice < NumFurnaceTempControllers; ++analogDevice)
+            {
+                hFurnaceTempControllerInput[analogDevice] = Ads.CreateVariableHandle("GVL_IO.aController_TempContoller[" + (analogDevice + 1) + "].input");
             }
         }
 

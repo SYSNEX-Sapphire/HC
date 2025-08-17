@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Collections;
 using SapphireXR_App.Common;
+using System.Globalization;
 
 namespace SapphireXR_App.Models
 {
@@ -303,7 +304,7 @@ namespace SapphireXR_App.Models
             WriteFirstInterlockSetting(true, 1);
         }
 
-        public static void WriteFlowControllerTargetValue(string controllerID, int targetValue, short rampTime)
+        public static void WriteMFCTargetValue(string controllerID, int targetValue, short rampTime)
         {
             int controllerIDIndex = dIndexController[controllerID];
             float? targetValueMappingFactor = aTargetValueMappingFactor[controllerIDIndex];
@@ -312,7 +313,13 @@ namespace SapphireXR_App.Models
                 throw new Exception("KL3464MaxValueH is null in WriteFlowControllerTargetValue");
             }
 
-            Ads.WriteAny(hAControllerInput[controllerIDIndex], new RampGeneratorInput { restart = true, rampTime = (ushort)rampTime, targetValue = targetValue * targetValueMappingFactor.Value });
+            Ads.WriteAny(hMFCControllerInput[controllerIDIndex], new RampGeneratorInput { restart = true, rampTime = (ushort)rampTime, targetValue = targetValue * targetValueMappingFactor.Value });
+        }
+
+        public static void WriteFurnaceTempTargetValue(string controllerID, int targetValue, short rampTime)
+        {
+            int controllerIDIndex = dIndexController[controllerID] - NumMFCControllers;
+            Ads.WriteAny(hFurnaceTempControllerInput[controllerIDIndex], new RampGeneratorInput { restart = true, rampTime = (ushort)rampTime, targetValue = targetValue });
         }
     }
 }

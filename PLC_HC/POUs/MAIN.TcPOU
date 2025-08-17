@@ -27,8 +27,6 @@ IF NOT(bOperationMode) THEN
 ELSE
 	//P50_RecipeControl(); //레시피 콘트론
 END_IF
-
-GVL_IO.OutputSolValve.0 := bTest;
 ]]></ST>
     </Implementation>
     <Action Name="_TempManager" Id="{55c4ebf8-341e-483a-935c-fc1b3d670af7}">

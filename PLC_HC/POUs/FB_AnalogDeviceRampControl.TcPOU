@@ -43,6 +43,19 @@ IF Rtrig.Q THEN
 		END_IF
 	END_FOR
 END_IF
+i:=  GVL_Furnace.Received_e2408_data_1.TEMP_PV_VALUE;
+GVL_IO.aController_PV[13] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_1.TEMP_PV_VALUE);
+GVL_IO.aController_CV[13] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_1.TEMP_TARGET_VALUE);
+GVL_IO.aController_PV[14] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_2.TEMP_PV_VALUE);
+GVL_IO.aController_CV[14] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_2.TEMP_TARGET_VALUE);
+GVL_IO.aController_PV[15] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_3.TEMP_PV_VALUE);
+GVL_IO.aController_CV[15] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_3.TEMP_TARGET_VALUE);
+GVL_IO.aController_PV[16] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_4.TEMP_PV_VALUE);
+GVL_IO.aController_CV[16] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_4.TEMP_TARGET_VALUE);
+GVL_IO.aController_PV[17] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_5.TEMP_PV_VALUE);
+GVL_IO.aController_CV[17] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_5.TEMP_TARGET_VALUE);
+GVL_IO.aController_PV[18] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_6.TEMP_PV_VALUE);
+GVL_IO.aController_CV[18] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_6.TEMP_TARGET_VALUE);
 
 _UpdateData_Temp();]]></ST>
     </Implementation>
