@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Init" Id="{826e22a7-a99b-4c58-85ce-df0630ecf0d0}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Init
+VAR
+	tempController_initialized : ARRAY [1..GVL_IO.nNumFurnaceTemp] OF BOOL := [FALSE, FALSE, FALSE, FALSE, FALSE, FALSE];
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF 0 < GVL_FURNACE.Received_e2408_data_1.TEMP_TARGET_VALUE AND tempController_initialized[1] = FALSE THEN
+	GVL_IO.aController_TempContoller[1].initialRControlValue := WORD_TO_INT(GVL_FURNACE.Received_e2408_data_1.TEMP_TARGET_VALUE);
+	tempController_initialized[1] := TRUE;
+END_IF
+IF 0 < GVL_FURNACE.Received_e2408_data_2.TEMP_TARGET_VALUE AND tempController_initialized[2] = FALSE  THEN
+	GVL_IO.aController_TempContoller[2].initialRControlValue := WORD_TO_INT(GVL_FURNACE.Received_e2408_data_2.TEMP_TARGET_VALUE);
+	tempController_initialized[2] := TRUE;
+END_IF
+IF 0 < GVL_FURNACE.Received_e2408_data_3.TEMP_TARGET_VALUE AND tempController_initialized[3] = FALSE  THEN
+	GVL_IO.aController_TempContoller[3].initialRControlValue := WORD_TO_INT(GVL_FURNACE.Received_e2408_data_3.TEMP_TARGET_VALUE);
+	tempController_initialized[3] := TRUE;
+END_IF
+IF 0 < GVL_FURNACE.Received_e2408_data_4.TEMP_TARGET_VALUE AND tempController_initialized[4] = FALSE  THEN
+	GVL_IO.aController_TempContoller[4].initialRControlValue := WORD_TO_INT(GVL_FURNACE.Received_e2408_data_4.TEMP_TARGET_VALUE);
+	tempController_initialized[4] := TRUE;
+END_IF
+IF 0 < GVL_FURNACE.Received_e2408_data_5.TEMP_TARGET_VALUE AND tempController_initialized[5] = FALSE  THEN
+	GVL_IO.aController_TempContoller[5].initialRControlValue := WORD_TO_INT(GVL_FURNACE.Received_e2408_data_5.TEMP_TARGET_VALUE);
+	tempController_initialized[5] := TRUE;
+END_IF
+IF 0 < GVL_FURNACE.Received_e2408_data_6.TEMP_TARGET_VALUE AND tempController_initialized[6] = FALSE  THEN
+	GVL_IO.aController_TempContoller[6].initialRControlValue := WORD_TO_INT(GVL_FURNACE.Received_e2408_data_6.TEMP_TARGET_VALUE);
+	tempController_initialized[6] := TRUE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

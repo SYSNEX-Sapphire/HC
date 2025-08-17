@@ -20,7 +20,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_TempManager();
+      <ST><![CDATA[Init();
+_TempManager();
 
 IF NOT(bOperationMode) THEN
 	P30_ManualControl(); //매뉴얼 콘트롤

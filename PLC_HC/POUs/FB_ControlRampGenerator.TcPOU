@@ -4,8 +4,10 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ControlRampGenerator
 VAR_INPUT
 	input : RampGeneratorInput;
+	initialRControlValue: LREAL := 0;
 END_VAR
 VAR
+	initialStart : BOOL := TRUE;
 	state : E_RampGeneratorState := E_RampGeneratorState.End;
 	rampGenerator : FB_CTRL_RAMP_GENERATOR;
 	rampGeneratorParams	: ST_CTRL_RAMP_GENERATOR_PARAMS := (tTaskCycleTime := T#100MS, tCtrlCycleTime := T#100MS, fVeloPos := 0, fVeloNeg := 0);
@@ -15,8 +17,7 @@ VAR_OUTPUT
 	targetValueReached : BOOL := FALSE;
 	isError : BOOL;
 	eErrorID : E_CTRL_ERRORCODES;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF input.restart = TRUE AND 0 < input.rampTime AND rControlValue <> input.targetValue THEN
 	state := E_RampGeneratorState.Init;
@@ -25,6 +26,10 @@ END_IF
 	
 CASE state OF
 	E_RampGeneratorState.Init:
+		IF initialStart = TRUE THEN
+			rControlValue := initialRControlValue;
+			initialStart := FALSE;
+		END_IF
 		rampGeneratorParams.fVeloPos			:= ABS(input.targetValue - rControlValue) / input.rampTime * 0.1; (* in units per second *)
 		rampGeneratorParams.fVeloNeg			:= rampGeneratorParams.fVeloPos; (* in units per second *)
 		rampGeneratorParams.tCtrlCycleTime		:= input.tCtrlCycleTime;
