@@ -8,28 +8,28 @@ VAR_GLOBAL
 	DigitalOutputIO AT %Q* 	: BYTE; //EL2088 1EA
 	
 	(* Analog IN / OUT to INT *)
-	aAnalogInputIO AT %I* : ARRAY[1..3] OF INT; //EL3064 3EA
-	aAnalogOutputIO AT %Q*	: ARRAY[1..3] OF INT; //EL4004 3EA
+	aAnalogInputIO AT %I* : ARRAY[1..nNumController] OF INT; //EL3064 3EA
+	aAnalogOutputIO AT %Q*	: ARRAY[1..nNumController] OF INT; //EL4004 3EA
 	
 	(*Solenoid Valve*)
 	OutputSolValve AT %Q* : DWORD; //16열 32점
 	
 	(* Read and Write of Device Control Value*)
-	(*Ramping Generator_Eurotherm*)
-	aController_ramping_euroTherm:FB_RampGenerator_Eurotherm;
-	
-	aMaxValueController		: ARRAY[1..nControllerNum]OF REAL ; //Device Max Value from UI
-	aController 			: ARRAY[1..nControllerNum] OF FB_RampGenerator; //MFC 0 ~ 5V
-	aController_TV 			: ARRAY[1..nControllerNum] OF REAL; //Target Value from UI
-	aController_RampTime 	: ARRAY[1..nControllerNum] OF INT;
-	aController_PV 			: ARRAY[1..nControllerNum] OF REAL; //Present Value from Device
-	aController_CV 			: ARRAY[1..nControllerNum] OF REAL; //Current Value from RampingController
+	aMaxValueController		: ARRAY[1..nNumController]OF REAL ; //Device Max Value from UI
+	aController 			: ARRAY[1..nNumMFC] OF FB_ControlRampGenerator; //MFC 0 ~ 5V
+	aController_TempInput 	: ARRAY[1..nNumFurnaceTemp] OF RampGeneratorInput;
+	aController_TV 			: ARRAY[1..nNumController] OF REAL; //Target Value from UI
+	aController_RampTime 	: ARRAY[1..nNumController] OF INT;
+	aController_PV 			: ARRAY[1..nNumController] OF REAL; //Present Value from Device
+	aController_CV 			: ARRAY[1..nNumController] OF REAL; //Current Value from RampingController
 	
 	(* Present Value Meter Display*)
 	// aInputState				: ARRAY[1..5] OF WORD; // Digital Input from Device (Switch)
 	//aOutputCmd				: ARRAY[1..3] OF WORD; // Digital Command from UI
 	aInterlockSet			: ARRAY[1..5] OF REAL; // UI Interlokc Setting Value, 5로 수정 
 	aInterlockEnable		: ARRAY[1..3] OF DWORD; // UI Interlock Enable Setting, 3으로 수정
+	KL3464MaxValueH: INT;
+	num: INT;
 END_VAR
 
 VAR_GLOBAL CONSTANT
@@ -39,7 +39,9 @@ VAR_GLOBAL CONSTANT
 	EL4004MaxValue 	: REAL := 32767; //4~20mA
 // 	KL3152MaxValue	: REAL := 65535; //4~20mA
 // 	KL3204MaxValue 	: REAL := 32767; //4~20mA
-	nControllerNum	: INT :=18 ; //MFC 12EA, Eurotherm 6EA
+	nNumController	: INT := 18 ; //MFC 12EA, Eurotherm 6EA
+	nNumMFC			: INT := 12;
+	nNumFurnaceTemp	: INT := 6;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

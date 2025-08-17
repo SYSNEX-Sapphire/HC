@@ -13,9 +13,8 @@ VAR_GLOBAL
 	Pause_ET				: TIME := T#0S;
 	RecipeRunET 			: RecipeRunET;
 	
-	
-	fbModbusManager:FB_E2408_Manager;
-	fbTempRamping : ARRAY[1..6]OF FB_TEMP_RAMPING;
+	fbModbusManager: FB_E2408_Manager;
+	fbTempRamping : ARRAY[1..6] OF FB_TEMP_RAMPING;
 	RampingRingEdge : ARRAY[1..6]OF R_TRIG;
 	
 END_VAR]]></Declaration>

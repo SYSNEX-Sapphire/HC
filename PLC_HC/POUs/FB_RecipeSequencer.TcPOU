@@ -12,7 +12,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[(* Write a Controller MFC / EPC *)
-FOR i:= 1 TO 12 DO
+FOR i:= 1 TO GVL_IO.nNumMFC DO
 	IF GVL_IO.aMaxValueController[i] <> 0 THEN
 		GVL_IO.aController[i].nState := 10;
 		GVL_IO.aController[i].nRampTime := RCP.aRecipe[nRcpIndex].iRecipe[2]; //Current Recipe Step Ramp Time
