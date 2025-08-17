@@ -3,6 +3,9 @@
   <GVL Name="GVL_Furnace" Id="{0a68cee5-3bf6-4bc6-ac07-6733f18f0137}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
+	
+// 	fbRampingGenerator_Eurotherm: FB_RampGenerator_Eurotherm;
+
 	Received_e2408_data_1 	:ST_E2408_Data;
 	Received_e2408_data_2 	:ST_E2408_Data;
 	Received_e2408_data_3 	:ST_E2408_Data;

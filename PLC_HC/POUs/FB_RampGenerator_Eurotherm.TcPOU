@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_RampGenerator_Eurotherm" Id="{6df291c0-ae65-46bc-a20b-2eabcf59ff29}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RampGenerator_Eurotherm
+VAR_INPUT
+	bTemp_Ramping_Start: ARRAY[1..6]OF BOOL;
+	TargetTEMP: ARRAY[1..6] OF INT;   
+	rampirnngTime: ARRAY[1..6] OF INT; 
+END_VAR
+
+VAR_OUTPUT
+END_VAR
+
+VAR
+	TargetTEMP_Bak:ARRAY[1..6]OF INT;
+	rampingTime_Bak:ARRAY[1..6]OF INT;
+	
+	RampingTON 		: TON;
+	bRampingControlIndex: INT;
+	
+	bRampingRTrig: ARRAY[1..6]OF R_TRIG;
+	bRampingFTrig: ARRAY[1..6]OF F_TRIG;
+	nTempRampingCount: INT;
+	RampingStartTemp: REAL;
+	TempRampingIndex: BYTE;
+	bCheckRamping_Temp_OR_Time: array[1..6]of bool;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// 
+// (*
+// 	각 템프 콘트롤러의 bTemp_Ramping_Start가 된것만 Ramping 시작
+// 	bTemp_Ramping_Start 가 False 되면  ramping 는 마지막 단계 에서 정지된다
+// 	(*2 초 마다 ramping 제어 *)
+// *)
+// 
+// _Temp_Ramping_Temp();
+]]></ST>
+    </Implementation>
+    <Action Name="_Temp_Ramping_Temp" Id="{9be35b16-c922-4677-a578-87d618f9ab69}">
+      <Implementation>
+        <ST><![CDATA[// FOR nTempRampingCount:=1 TO 6 BY 1 DO
+// 	
+// 	(*Ramping 처음 시작시에 현재 Setvalue 시작 한다.*)
+// 	CASE nTempRampingCount OF
+// 		1:
+// 			RampingStartTemp:= GVL_Furnace.Received_e2408_data_1.TEMP_PV_VALUE;
+// 		2:
+// 			RampingStartTemp:= GVL_Furnace.Received_e2408_data_2.TEMP_PV_VALUE;
+// 		3:
+// 			RampingStartTemp:= GVL_Furnace.Received_e2408_data_3.TEMP_PV_VALUE;
+// 		4:
+// 			RampingStartTemp:= GVL_Furnace.Received_e2408_data_4.TEMP_PV_VALUE;
+// 		5:
+// 			RampingStartTemp:= GVL_Furnace.Received_e2408_data_5.TEMP_PV_VALUE;
+// 		6:
+// 			RampingStartTemp:= GVL_Furnace.Received_e2408_data_6.TEMP_PV_VALUE;
+// 	END_CASE
+// 	
+// 	(*ramping Function Block*)
+// 	RCP.fbTempRamping[nTempRampingCount](StartTemp:=RampingStartTemp,
+// 							RampingTargetTemp:=TargetTEMP[nTempRampingCount],
+// 							RampingTime:=rampingTime[nTempRampingCount]);
+// 	
+// 	bRampingRTrig[nTempRampingCount](CLK:=bTemp_Ramping_Start[nTempRampingCount]);
+// 	bRampingFTrig[nTempRampingCount](CLK:=RCP.fbTempRamping[nTempRampingCount].bBusy );
+// 	
+// 	IF bRampingRTrig[nTempRampingCount].Q THEN
+// 		bCheckRamping_Temp_OR_Time[nTempRampingCount]:=FALSE;
+// 		RCP.fbTempRamping[nTempRampingCount](bExecute:=TRUE);
+// 	END_IF
+// 	
+// 	IF bRampingFTrig[nTempRampingCount].Q THEN
+// 		RCP.fbTempRamping[nTempRampingCount](bExecute:=FALSE);
+// 		bTemp_Ramping_Start[nTempRampingCount]:=FALSE;
+// 	END_IF
+// 
+// 	IF RCP.fbTempRamping[nTempRampingCount].bExecute = TRUE AND bTemp_Ramping_Start[nTempRampingCount]=FALSE THEN
+// 		RCP.fbTempRamping[nTempRampingCount](bExecute:=FALSE);
+// 	END_IF
+// 	
+// 	RCP.RampingRingEdge[nTempRampingCount](CLK:=RCP.fbTempRamping[nTempRampingCount].bTempChangeFlag);
+// 	
+// 	IF RCP.fbTempRamping[nTempRampingCount].bBusy = TRUE AND rcp.RampingRingEdge[nTempRampingCount].Q THEN
+// 		RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(INT_TO_BYTE(nTempRampingCount),INT_TO_WORD(RCP.fbTempRamping[nTempRampingCount].OutputSetTemp)));
+// 	END_IF
+// 
+// END_FOR
+]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

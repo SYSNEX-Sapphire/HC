@@ -4,6 +4,11 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_AnalogDeviceRampControl
 VAR
 	i: INT;
+	nLoop: INT;
+	EurothermTon: TON;
+	Rtrig: R_TRIG;
+	
+	aController_CV_Temp_Bak :ARRAY[1..GVL_IO.nNumFurnaceTemp] OF LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -13,12 +18,53 @@ END_VAR
 		
 		GVL_IO.aController_PV[i] := GVL_IO.aAnalogInputIO[i] / (GVL_IO.EL3064MaxValueH * GVL_IO.aMaxValueController[i]);
 		GVL_IO.aController_CV[i] := LREAL_TO_REAL((GVL_IO.aController[i].rControlValue / GVL_IO.EL3064MaxValueH)*GVL_IO.aMaxValueController[i]);
-		GVL_IO.aController[i]();	
+		GVL_IO.aController[i]();
 	END_IF
 END_FOR
 
+
+
 (* Furnace Temperature Controller *)
-// Modbus 6EA 통신 으로 값 설정 및  읽기]]></ST>
+FOR i:= 1 TO GVL_IO.nNumFurnaceTemp DO
+	GVL_io.aController_TempContoller[i]();
+END_FOR
+
+EurothermTon(in:=TRUE,PT:=T#3S);
+Rtrig(CLK:=EurothermTon.Q);
+
+IF Rtrig.Q THEN
+	EurothermTon(in:=FALSE);
+	FOR nLoop:=1 TO GVL_IO.nNumFurnaceTemp BY 1 DO
+		IF aController_CV_Temp_Bak[nLoop] <> GVL_IO.aController_TempContoller[nLoop].rControlValue THEN
+			aController_CV_Temp_Bak[nLoop]:=GVL_IO.aController_TempContoller[nLoop].rControlValue;
+			
+			RCP.fbModbusManager._SendModbusCommand(sendMessage:=F_Temp_Write_Set_Point(INT_TO_BYTE(nLoop),LREAL_TO_WORD(GVL_IO.aController_TempContoller[nLoop].rControlValue)));
+			
+		END_IF
+	END_FOR
+END_IF
+
+_UpdateData_Temp();]]></ST>
     </Implementation>
+    <Action Name="_UpdateData_Temp" Id="{29590148-48a6-475c-9328-f1b927d4822a}">
+      <Implementation>
+        <ST><![CDATA[(*Update Data*)
+ 
+ GVL_IO.aController_PV[13]:=GVL_Furnace.Received_e2408_data_1.TEMP_PV_VALUE;
+ GVL_IO.aController_PV[14]:=GVL_Furnace.Received_e2408_data_2.TEMP_PV_VALUE;
+ GVL_IO.aController_PV[15]:=GVL_Furnace.Received_e2408_data_3.TEMP_PV_VALUE;
+ GVL_IO.aController_PV[16]:=GVL_Furnace.Received_e2408_data_4.TEMP_PV_VALUE;
+ GVL_IO.aController_PV[17]:=GVL_Furnace.Received_e2408_data_5.TEMP_PV_VALUE;
+ GVL_IO.aController_PV[18]:=GVL_Furnace.Received_e2408_data_6.TEMP_PV_VALUE;
+ 
+ GVL_IO.aController_CV[13]:=GVL_Furnace.Received_e2408_data_1.TEMP_TARGET_VALUE;
+ GVL_IO.aController_CV[14]:=GVL_Furnace.Received_e2408_data_2.TEMP_TARGET_VALUE;
+ GVL_IO.aController_CV[15]:=GVL_Furnace.Received_e2408_data_3.TEMP_TARGET_VALUE;
+ GVL_IO.aController_CV[16]:=GVL_Furnace.Received_e2408_data_4.TEMP_TARGET_VALUE;
+ GVL_IO.aController_CV[17]:=GVL_Furnace.Received_e2408_data_5.TEMP_TARGET_VALUE;
+ GVL_IO.aController_CV[18]:=GVL_Furnace.Received_e2408_data_6.TEMP_TARGET_VALUE;
+ ]]></ST>
+      </Implementation>
+    </Action>
   </POU>
 </TcPlcObject>

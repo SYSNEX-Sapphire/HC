@@ -25,6 +25,9 @@ FOR i:= 1 TO GVL_IO.nNumMFC DO
 	END_IF
 END_FOR
 
+
+
+
 (* Solenoid Valve Mapping *)
 GVL_IO.OutputSolValve.0 := RCP.aRecipe[nRcpIndex].dRecipe.0; //V01 B/G N2 In
 GVL_IO.OutputSolValve.1 := RCP.aRecipe[nRcpIndex].dRecipe.1; //V02 Ga HCl In 

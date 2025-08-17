@@ -17,6 +17,8 @@ VAR_GLOBAL
 	(* Read and Write of Device Control Value*)
 	aMaxValueController		: ARRAY[1..nNumController]OF REAL ; //Device Max Value from UI
 	aController 			: ARRAY[1..nNumMFC] OF FB_ControlRampGenerator; //MFC 0 ~ 5V
+	aController_TempContoller		: ARRAY[1..nNumFurnaceTemp] OF FB_ControlRampGenerator; //Temp Generator
+	
 	aController_TempInput 	: ARRAY[1..nNumFurnaceTemp] OF RampGeneratorInput;
 	aController_TV 			: ARRAY[1..nNumController] OF REAL; //Target Value from UI
 	aController_RampTime 	: ARRAY[1..nNumController] OF INT;
