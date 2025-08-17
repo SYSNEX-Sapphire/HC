@@ -280,8 +280,8 @@ namespace SapphireXR_App.Common
 
         public static void ConstraintEmptyToZeroOnDataGridCellCommitForRecipeRunEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
-            ConstraintEmptyToZeroOnDataGridCellCommit(sender, e, ["Ramp", "Hold", "M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08", "M09", "M10", "M11", "M12", "M13", "M14", "M15", "M16",
-               "M17", "M18", "M19", "Loop", "Jump", "Susceptor Temp.", "Reactor Press.", "Sus. Rotation", "Compare Temp."]);
+            ConstraintEmptyToZeroOnDataGridCellCommit(sender, e, ["Ramp", "Hold", "M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08", "M09", "M10", "M11", "M12", 
+                "LoopRepeat", "LoopEndStep", "Zone1", "Zone2", "Zone3", "Zone4", "Zone5", "Zone6" ]);
         }
 
         public static readonly Dictionary<string, string> RecipeFlowControlFieldToControllerID = new Dictionary<string, string>

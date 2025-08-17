@@ -364,5 +364,4 @@ FodyWeavers.xsd
 /SapphireXR.tsproj.bak
 /SapphireXR.~u
 /_Boot
-/CompileInfo
-/_Boot/TwinCAT RT (x64)/Plc/Port_851.ocm
+/_CompileInfo
