@@ -94,6 +94,15 @@
                     <Grid>
                         <Rectangle RadiusX="{StaticResource r_5}" RadiusY="{StaticResource r_5}" Fill="{StaticResource Gray_50}"/>
                         <Grid>
+                            <Grid.Resources>
+                                <Style TargetType="Rectangle" x:Key="subSection">
+                                    <Setter Property="RadiusX" Value="{StaticResource p_3}" />
+                                    <Setter Property="RadiusY" Value="{StaticResource p_3}" />
+                                    <Setter Property="Fill" Value="{StaticResource Gray_50}" />
+                                    <Setter Property="Stroke" Value="{StaticResource Gray_300}" />
+                                    <Setter Property="StrokeThickness" Value="1" />
+                                </Style>
+                            </Grid.Resources>
                             <Grid Margin="{StaticResource p_5_sqrt}">
                                 <Grid.Resources>
                                     <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBox}">
@@ -198,120 +207,88 @@
                                     <Grid.Margin>
                                         <Thickness Right="{StaticResource p_6}" />
                                     </Grid.Margin>
-                                    <Rectangle RadiusX="{StaticResource r_5}" RadiusY="{StaticResource r_5}" Stroke="{StaticResource Gray_300}" />
-                                    <StackPanel Orientation="Vertical" Margin="{StaticResource p_5_sqrt}">
-                                        <Label Style="{StaticResource SectionTitle}" Content="Alarm Setting (Digital)" />
-                                        <StackPanel Orientation="Horizontal">
-                                            <StackPanel.Margin>
+                                    <Rectangle Style="{StaticResource subSection}"/>
+                                    <StackPanel Margin="{StaticResource p_5_sqrt}">
+                                        <StackPanel.Resources>
+                                            <Style x:Key="DeviceNamingSettingDataGrid" TargetType="DataGrid" BasedOn="{StaticResource SettingDataGrid}">
+                                                <Setter Property="Margin">
+                                                    <Setter.Value>
+                                                        <Thickness Bottom="{StaticResource p_3}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Source={x:Static model:PLCConnectionState.Instance}, Path=Online, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Value="True">
+                                                        <Setter Property="IsReadOnly" Value="True" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Resources>
+                                        <Grid>
+                                            <Grid.Margin>
                                                 <Thickness Bottom="{StaticResource p_3}" />
-                                            </StackPanel.Margin>
-                                            <TextBlock Text="Delay Time(s)" Style="{StaticResource infoTextBlockLeft}">
-                                                <TextBlock.Margin>
-                                                    <Thickness Right="{StaticResource p_2}" />
-                                                </TextBlock.Margin>
-                                            </TextBlock>
-                                            <TextBox x:Name="tbAlarmDelayTimeD" Text="{Binding DigitalDeviceDelayTime, UpdateSourceTrigger=PropertyChanged}" Width="135.5">
-                                                <TextBox.Margin>
-                                                    <Thickness Right="{StaticResource p_4}" />
-                                                </TextBox.Margin>
-                                            </TextBox>
-                                            <Button x:Name="btnEventSettingSave" Content="Save" Width="200" Height="28" Command="{Binding DigitalDeviceSettingSaveCommand}" Style="{StaticResource PrimaryButton}" />
-                                        </StackPanel>
-                                        <DataGrid x:Name="dgAlarmSettingD" ItemsSource="{Binding lSwitchDI}" Style="{StaticResource SettingDataGrid}">
+                                            </Grid.Margin>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="40" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Style="{StaticResource SectionTitle}" Content="Device Naming" VerticalAlignment="Top"/>
+                                            <Button Grid.Column="1" x:Name="DeviceNameSave" Content="Save" Width="66" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource PrimaryButton}"/>
+                                        </Grid>
+                                        <DataGrid x:Name="dgMaxValueSetting" ItemsSource="{Binding lAnalogDeviceIO}" Style="{StaticResource DeviceNamingSettingDataGrid}" Height="300">
                                             <DataGrid.Resources>
                                                 <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
                                             </DataGrid.Resources>
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="ID" IsReadOnly="True"  CanUserSort="False" CanUserResize="False" Width="50" Binding="{Binding Path=ID}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Device Name" IsReadOnly="True"  CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Path=Name}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTemplateColumn Header="Alarm" CanUserSort="False" CanUserResize="False" Width="50">
-                                                    <DataGridTemplateColumn.HeaderStyle>
-                                                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource checkAllColumnHeader}">
-                                                            <Setter Property="behavior:DataGridColumnHeaderBehavior.ClickCommand" Value="{Binding Path=DataContext.DigitalAlarmCheckAllColumnViewModel.ToggleCheckCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                            <Setter Property="behavior:DataGridColumnHeaderBehavior.MouseEnterCommand" Value="{Binding Path=DataContext.DigitalAlarmCheckAllColumnViewModel.ShowGuidePlaceHolderCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                            <Setter Property="behavior:DataGridColumnHeaderBehavior.MouseLeaveCommand" Value="{Binding Path=DataContext.DigitalAlarmCheckAllColumnViewModel.HideGuidePlaceHolderCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                        </Style>
-                                                    </DataGridTemplateColumn.HeaderStyle>
-                                                    <DataGridTemplateColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <Grid>
-                                                                <CheckBox IsChecked="{Binding Path=DataContext.DigitalAlarmCheckAllColumnViewModel.IsPlaceHolderCheck, RelativeSource={RelativeSource AncestorType=DataGrid}}" Style="{StaticResource DataGridCheckBox}" Opacity="0.2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                                    Visibility="{Binding Path=DataContext.DigitalAlarmCheckAllColumnViewModel.ShowGuidePlaceHolderCheckBox, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                                <CheckBox IsChecked="{Binding AlarmSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DataGridCheckBox}" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                                    Visibility="{Binding Path=DataContext.DigitalAlarmCheckAllColumnViewModel.ShowCheckBox, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </DataGridTemplateColumn.CellTemplate>
-                                                </DataGridTemplateColumn>
-                                                <DataGridTemplateColumn Header="Warning" Width="60" CanUserSort="False" CanUserResize="False">
-                                                    <DataGridTemplateColumn.HeaderStyle>
-                                                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource checkAllColumnHeader}">
-                                                            <Setter Property="behavior:DataGridColumnHeaderBehavior.ClickCommand" Value="{Binding Path=DataContext.DigitalWarningCheckAllColumnViewModel.ToggleCheckCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                            <Setter Property="behavior:DataGridColumnHeaderBehavior.MouseEnterCommand" Value="{Binding Path=DataContext.DigitalWarningCheckAllColumnViewModel.ShowGuidePlaceHolderCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                            <Setter Property="behavior:DataGridColumnHeaderBehavior.MouseLeaveCommand" Value="{Binding Path=DataContext.DigitalWarningCheckAllColumnViewModel.HideGuidePlaceHolderCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                        </Style>
-                                                    </DataGridTemplateColumn.HeaderStyle>
-                                                    <DataGridTemplateColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <Grid>
-                                                                <CheckBox IsChecked="{Binding Path=DataContext.DigitalWarningCheckAllColumnViewModel.IsPlaceHolderCheck, RelativeSource={RelativeSource AncestorType=DataGrid}}" Style="{StaticResource DataGridCheckBox}" Opacity="0.2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                                          Visibility="{Binding Path=DataContext.DigitalWarningCheckAllColumnViewModel.ShowGuidePlaceHolderCheckBox, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                                <CheckBox IsChecked="{Binding WarningSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DataGridCheckBox}" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                                          Visibility="{Binding Path=DataContext.DigitalWarningCheckAllColumnViewModel.ShowCheckBox, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </DataGridTemplateColumn.CellTemplate>
-                                                </DataGridTemplateColumn>
+                                                <DataGridTextColumn Header="ID" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="60" Binding="{Binding Path=ID, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource EventLogElement}" />
+                                                <DataGridTextColumn Header="Device Name" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  ElementStyle="{StaticResource EventLogElement}" />
+                                                <DataGridTextColumn Header="Max Value" CanUserSort="False" CanUserResize="False" Width="120" Binding="{Binding Path=MaxValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ElementStyle="{StaticResource EventLogElement}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                        <DataGrid x:Name="DigitalMappingSetting" ItemsSource="{Binding ValveDeviceIO}" Style="{StaticResource DeviceNamingSettingDataGrid}" Height="300">
+                                            <DataGrid.Resources>
+                                                <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
+                                            </DataGrid.Resources>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Device ID" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="60" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" ElementStyle="{StaticResource EventLogElement}" />
+                                                <DataGridTextColumn Header="Device Name" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ElementStyle="{StaticResource EventLogElement}" />
+                                                <DataGridTextColumn Header="Sol. ID" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="120" Binding="{Binding SolValveID, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" ElementStyle="{StaticResource EventLogElement}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                        <DataGrid ItemsSource="{Binding GasIO}" Height="220">
+                                            <DataGrid.Style>
+                                                <Style TargetType="DataGrid" BasedOn="{StaticResource SettingDataGrid}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Source={x:Static model:PLCConnectionState.Instance}, Path=Online, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Value="True">
+                                                            <Setter Property="IsReadOnly" Value="True" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </DataGrid.Style>
+                                            <DataGrid.Resources>
+                                                <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
+                                            </DataGrid.Resources>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Device ID" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="60" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" ElementStyle="{StaticResource EventLogElement}" />
+                                                <DataGridTextColumn Header="Device Name" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ElementStyle="{StaticResource EventLogElement}" />
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </StackPanel>
                                 </Grid>
                                 <!-- LogBook 테이블 -->
                                 <Grid Grid.Column="2">
-                                    <Rectangle RadiusX="{StaticResource r_5}" RadiusY="{StaticResource r_5}" Stroke="{StaticResource Gray_300}" />
-                                    <StackPanel Orientation="Vertical" Margin="{StaticResource p_5_sqrt}">
-                                        <Label Style="{StaticResource SectionTitle}" Content="Log Book" />
-                                        <Button x:Name="LogFileRead" Content="Load" Style="{StaticResource DefaultButton}" Height="29">
-                                            <Button.Margin>
-                                                <Thickness Bottom="{StaticResource p_3}" />
-                                            </Button.Margin>
-                                        </Button>
-                                        <StackPanel Orientation="Horizontal">
-                                            <StackPanel.Margin>
-                                                <Thickness Bottom="{StaticResource p_3}" />
-                                            </StackPanel.Margin>
-                                            <StackPanel.Resources>
-                                                <Style TargetType="Button" BasedOn="{StaticResource DefaultButton}">
-                                                    <Setter Property="Height" Value="30" />
-                                                    <Setter Property="Width" Value="102" />
-                                                    <Setter Property="FontSize" Value="14" />
-                                                    <Setter Property="FontWeight" Value="Bold" />
-                                                </Style>
-                                            </StackPanel.Resources>
-                                            <Button x:Name="LogFilterAlarm" Content="Alarm" Foreground="#FF6063" />
-                                            <Button x:Name="LogFilterWarning" Foreground="#FF8D60" >
-                                                <Button.Margin>
-                                                    <Thickness Left="{StaticResource p_2}" Right="{StaticResource p_2}" />
-                                                </Button.Margin>
-                                                Warning
-                                            </Button>
-                                            <Button x:Name="LogFilterInformation" Foreground="#6BFF83">
-                                                <Button.Margin>
-                                                    <Thickness Right="{StaticResource p_2}" />
-                                                </Button.Margin>
-                                                Information
-                                            </Button>
-                                            <Button x:Name="LogFilterClear" Foreground="{StaticResource Gray_700}" Content="Clear" />
-                                        </StackPanel>
-                                        <DataGrid x:Name="LogbookTable" Height="788" Style="{StaticResource SettingDataGrid}">
+                                    <Rectangle Style="{StaticResource subSection}"/>
+                                    <StackPanel Margin="{StaticResource p_5_sqrt}">
+                                        <Label Content="I/O List" Style="{StaticResource SectionTitle}" />
+                                        <DataGrid x:Name="IOList" Style="{StaticResource SettingDataGrid}" ItemsSource="{Binding IOList}" Height="872">
                                             <DataGrid.Resources>
                                                 <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
                                             </DataGrid.Resources>
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="60" Binding="{Binding}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Massage" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Date" IsReadOnly="True"  CanUserSort="False" CanUserResize="False" Width="100" Binding="{Binding Date, StringFormat=d}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Time" IsReadOnly="True"  CanUserSort="False" CanUserResize="False" Width="100" Binding="{Binding Time}" ElementStyle="{StaticResource EventLogElement}" />
+                                                <DataGridTextColumn Header="Name" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Name}" ElementStyle="{StaticResource EventLogElement}"/>
+                                                <DataGridCheckBoxColumn Header="On/Off" CanUserSort="False" CanUserResize="False" Width="60" IsReadOnly="True" Binding="{Binding OnOff, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource ValveOnOffCheckBox}" EditingElementStyle="{StaticResource DataGridCheckBox}" />
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </StackPanel>
@@ -323,7 +300,7 @@
 
             </TabItem>
             <!-- Tab for Device Setting -->
-            <TabItem Name="DeviceSetting" Header="Device">
+            <!--<TabItem Name="DeviceSetting" Header="Device">
                 <TabItem.Margin>
                     <Thickness Top="{StaticResource p_5}" Bottom="-20" />
                 </TabItem.Margin>
@@ -333,13 +310,7 @@
                         <Grid>
                             <Grid Margin="{StaticResource p_5_sqrt}">
                                 <Grid.Resources>
-                                    <Style TargetType="Rectangle" x:Key="subSection">
-                                        <Setter Property="RadiusX" Value="{StaticResource p_3}" />
-                                        <Setter Property="RadiusY" Value="{StaticResource p_3}" />
-                                        <Setter Property="Fill" Value="{StaticResource Gray_50}" />
-                                        <Setter Property="Stroke" Value="{StaticResource Gray_300}" />
-                                        <Setter Property="StrokeThickness" Value="1" />
-                                    </Style>
+                                  
                                 </Grid.Resources>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="552"/>
@@ -599,7 +570,7 @@
                                                     <Thickness Bottom="{StaticResource p_2}" />
                                                 </CheckBox.Margin>
                                             </CheckBox>
-                                            <!--<Border Style="{StaticResource subSubSectionSeperator}" />
+                                            --><!--<Border Style="{StaticResource subSubSectionSeperator}" />
                                             <Label Style="{StaticResource SectionTitle}" Content="Misc."/>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -610,7 +581,7 @@
                                                 <TextBlock Grid.Column="0" Text="Log Interval in Recipe Run (Millisecond)" Style="{StaticResource infoTextBlockLeft}"/>
                                                 <Line Grid.Column="1" Style="{StaticResource seperatorLine}" />
                                                 <local:NumberBox Grid.Column="2" Text="{Binding LogIntervalInRecipeRun}" Style="{StaticResource sectionTextBox}"/>
-                                            </Grid>-->
+                                            </Grid>--><!--
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="1">
@@ -654,101 +625,11 @@
                                         </StackPanel>
                                     </Grid>
                                 </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.Margin>
-                                        <Thickness Right="{StaticResource p_6}" />
-                                    </Grid.Margin>
-                                    <Rectangle Style="{StaticResource subSection}"/>
-                                    <StackPanel Margin="{StaticResource p_5_sqrt}">
-                                        <StackPanel.Resources>
-                                            <Style x:Key="DeviceNamingSettingDataGrid" TargetType="DataGrid" BasedOn="{StaticResource SettingDataGrid}">
-                                                <Setter Property="Margin">
-                                                    <Setter.Value>
-                                                        <Thickness Bottom="{StaticResource p_3}" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Source={x:Static model:PLCConnectionState.Instance}, Path=Online, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Value="True">
-                                                        <Setter Property="IsReadOnly" Value="True" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </StackPanel.Resources>
-                                        <Grid>
-                                            <Grid.Margin>
-                                                <Thickness Bottom="{StaticResource p_3}" />
-                                            </Grid.Margin>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="40" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition />
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" Style="{StaticResource SectionTitle}" Content="Device Naming" VerticalAlignment="Top"/>
-                                            <Button Grid.Column="1" x:Name="DeviceNameSave" Content="Save" Width="66" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource PrimaryButton}"/>
-                                        </Grid>
-                                        <DataGrid x:Name="dgMaxValueSetting" ItemsSource="{Binding lAnalogDeviceIO}" Style="{StaticResource DeviceNamingSettingDataGrid}" Height="300">
-                                            <DataGrid.Resources>
-                                                <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
-                                            </DataGrid.Resources>
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Header="ID" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="60" Binding="{Binding Path=ID, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Device Name" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Max Value" CanUserSort="False" CanUserResize="False" Width="120" Binding="{Binding Path=MaxValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ElementStyle="{StaticResource EventLogElement}" />
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                        <DataGrid x:Name="DigitalMappingSetting" ItemsSource="{Binding ValveDeviceIO}" Style="{StaticResource DeviceNamingSettingDataGrid}" Height="300">
-                                            <DataGrid.Resources>
-                                                <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
-                                            </DataGrid.Resources>
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Device ID" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="60" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Device Name" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Sol. ID" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="120" Binding="{Binding SolValveID, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" ElementStyle="{StaticResource EventLogElement}" />
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                        <DataGrid ItemsSource="{Binding GasIO}" Height="220">
-                                            <DataGrid.Style>
-                                                <Style TargetType="DataGrid" BasedOn="{StaticResource SettingDataGrid}">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Source={x:Static model:PLCConnectionState.Instance}, Path=Online, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Value="True">
-                                                            <Setter Property="IsReadOnly" Value="True" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>  
-                                                </Style>
-                                            </DataGrid.Style>
-                                            <DataGrid.Resources>
-                                                <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
-                                            </DataGrid.Resources>
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Device ID" IsReadOnly="True" CanUserSort="False" CanUserResize="False" Width="60" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" ElementStyle="{StaticResource EventLogElement}" />
-                                                <DataGridTextColumn Header="Device Name" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ElementStyle="{StaticResource EventLogElement}" />
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                    </StackPanel>
-
-                                </Grid>
-                                <Grid Grid.Column="2">
-                                    <Rectangle Style="{StaticResource subSection}"/>
-                                    <StackPanel Margin="{StaticResource p_5_sqrt}">
-                                        <Label Content="I/O List" Style="{StaticResource SectionTitle}" />
-                                        <DataGrid x:Name="IOList" Style="{StaticResource SettingDataGrid}" ItemsSource="{Binding IOList}" Height="872">
-                                            <DataGrid.Resources>
-                                                <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
-                                            </DataGrid.Resources>
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Name" CanUserSort="False" CanUserResize="False" Width="*" Binding="{Binding Name}" ElementStyle="{StaticResource EventLogElement}"/>
-                                                <DataGridCheckBoxColumn Header="On/Off" CanUserSort="False" CanUserResize="False" Width="60" IsReadOnly="True" Binding="{Binding OnOff, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource ValveOnOffCheckBox}" EditingElementStyle="{StaticResource DataGridCheckBox}" />
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                    </StackPanel>
-                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
                 </TabItem.Content>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
     </Grid>
 </Page>

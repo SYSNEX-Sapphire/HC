@@ -88,9 +88,9 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource Gray_900}" Margin="0" Padding="0"><Run Text="Machine Name"/></TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource Gray_950}"  Margin="0"  Padding="0" FontWeight="Bold"><Run Text="Marvel 120MS"/></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource Gray_950}"  Margin="0"  Padding="0" FontWeight="Bold"><Run Text="Lumi HVPE"/></TextBlock>
                         <TextBlock FontFamily="Segoe UI" Grid.Row="0" Grid.Column="2" FontSize="12" Foreground="{DynamicResource Gray_900}" Margin="0" Padding="0"><Run Language="ko-kr" Text="System ID"/></TextBlock>
-                        <TextBlock FontFamily="Segoe UI" Grid.Row="2" Grid.Column="2"  FontSize="12" Foreground="{DynamicResource Gray_950}" Margin="0" Padding="0" FontWeight="Bold"><Run Language="ko-kr" Text="2024 SKKU2"/></TextBlock>
+                        <TextBlock FontFamily="Segoe UI" Grid.Row="2" Grid.Column="2"  FontSize="12" Foreground="{DynamicResource Gray_950}" Margin="0" Padding="0" FontWeight="Bold"><Run Language="ko-kr" Text="2025 Lumi"/></TextBlock>
                         <TextBlock FontFamily="Segoe UI" Grid.Row="4" Grid.Column="0" FontSize="12" Foreground="{DynamicResource Gray_900}" Margin="0" Padding="0" ><Run Language="ko-kr" Text="Application"/></TextBlock>
                         <TextBlock FontFamily="Segoe UI" Grid.Row="6" Grid.Column="0" FontSize="12" Foreground="{DynamicResource Gray_950}" Margin="0" Padding="0" FontWeight="Bold" RenderTransformOrigin="0.563,1.979"><Run Language="ko-kr" Text="GaN"/></TextBlock>
                         <TextBlock FontFamily="Segoe UI" FontSize="12" Grid.Row="4" Grid.Column="2" Foreground="{DynamicResource Gray_900}" Margin="0" Padding="0" ><Run Language="ko-kr" Text="PLC Address"/></TextBlock>
@@ -165,9 +165,9 @@
                             <TextBlock Grid.Row="0" Grid.Column="1" Text="Carrier" HorizontalAlignment="Center" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
                             <TextBlock Grid.Row="0" Grid.Column="2" Text="Source" HorizontalAlignment="Center" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
                             <TextBlock Grid.Row="0" Grid.Column="3" Text="Manifold" HorizontalAlignment="Center" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12" />
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Gas3_1, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Style="{StaticResource SourceStatusLabelText}" />
+                            <!--<TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Gas3_1, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Style="{StaticResource SourceStatusLabelText}" />
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Gas3_2, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Style="{StaticResource SourceStatusLabelText}" />
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Gas4, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Gas4, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />-->
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding Source1, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
                             <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Source2, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
                             <TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding Source3, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
