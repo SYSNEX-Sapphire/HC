@@ -95,31 +95,14 @@ namespace SapphireXR_App.ViewModels
             private static string GetFlowControllerID(string flowControlState)
             {
                 string flowControllerID = "";
-                switch (flowControlState)
+                switch (flowControlState[0])
                 {
-                    case "STemp":
-                        flowControllerID = "Temperature";
+                    case 'M':
+                        flowControllerID = "MFC" + flowControlState.Substring(1, flowControlState.Length - 1);
                         break;
 
-                    case "RPress":
-                        flowControllerID = "Pressure";
-                        break;
-
-                    case "SRotation":
-                        flowControllerID = "Rotation";
-                        break;
-
-                    default:
-                        switch (flowControlState[0])
-                        {
-                            case 'M':
-                                flowControllerID = "MFC" + flowControlState.Substring(1, flowControlState.Length - 1);
-                                break;
-
-                            case 'E':
-                                flowControllerID = "EPC" + flowControlState.Substring(1, flowControlState.Length - 1);
-                                break;
-                        }
+                    case 'F':
+                        flowControllerID = "Temperature" + flowControlState.Substring(1, flowControlState.Length - 1);
                         break;
                 }
 
@@ -130,44 +113,29 @@ namespace SapphireXR_App.ViewModels
             {
                 if (args.PropertyName != null)
                 {
-                    switch (args.PropertyName)
+                    if (2 <= args.PropertyName.Length)
                     {
-                        case "STemp":
-                        case "RPress":
-                        case "SRotation":
-                            {
-                                string flowControllerID = GetFlowControllerID(args.PropertyName);
-                                propagateControlValue(flowControllerID, getControlValue(flowControllerID));
-                            }
-                            break;
-
-                        default:
-                            if (2 <= args.PropertyName.Length)
-                            {
-                                switch (args.PropertyName[0])
+                        switch (args.PropertyName[0])
+                        {
+                            case 'V':
+                                if (CheckDigit(args.PropertyName, 1) == true)
                                 {
-                                    case 'V':
-                                        if (CheckDigit(args.PropertyName, 1) == true)
-                                        {
-                                            propagateValveState(args.PropertyName, getValveState(args.PropertyName));
-                                        }
-                                        break;
-
-                                    case 'E':
-                                    case 'M':
-                                        {
-                                            if (CheckDigit(args.PropertyName, 1) == true)
-                                            {
-                                                string flowControllerID = GetFlowControllerID(args.PropertyName);
-                                                propagateControlValue(flowControllerID, getControlValue(flowControllerID));
-                                            }
-                                        }
-                                        break;
+                                    propagateValveState(args.PropertyName, getValveState(args.PropertyName));
                                 }
-                            }
-                            break;
-                    }
+                                break;
 
+                            case 'F':
+                            case 'M':
+                                {
+                                    if (CheckDigit(args.PropertyName, 1) == true)
+                                    {
+                                        string flowControllerID = Util.RecipeFlowControlFieldToControllerID[args.PropertyName];
+                                        propagateControlValue(flowControllerID, getControlValue(flowControllerID));
+                                    }
+                                }
+                                break;
+                        }
+                    }
                 }
             }
 
@@ -219,27 +187,21 @@ namespace SapphireXR_App.ViewModels
                 valveStatePublishers["V03"].Publish(value.V03);
                 valveStatePublishers["V04"].Publish(value.V04);
                 valveStatePublishers["V05"].Publish(value.V05);
+                valveStatePublishers["V06"].Publish(value.V06);
                 valveStatePublishers["V07"].Publish(value.V07);
                 valveStatePublishers["V08"].Publish(value.V08);
+                valveStatePublishers["V09"].Publish(value.V09);
                 valveStatePublishers["V10"].Publish(value.V10);
                 valveStatePublishers["V11"].Publish(value.V11);
                 valveStatePublishers["V12"].Publish(value.V12);
                 valveStatePublishers["V14"].Publish(value.V14);
+                valveStatePublishers["V15"].Publish(value.V15);
                 valveStatePublishers["V16"].Publish(value.V16);
                 valveStatePublishers["V17"].Publish(value.V17);
+                valveStatePublishers["V18"].Publish(value.V18);
                 valveStatePublishers["V19"].Publish(value.V19);
                 valveStatePublishers["V20"].Publish(value.V20);
-                //valveStatePublishers["V22"].Publish(value.V22);
-                //valveStatePublishers["V23"].Publish(value.V23);
-                //valveStatePublishers["V24"].Publish(value.V24);
-                //valveStatePublishers["V25"].Publish(value.V25);
-                //valveStatePublishers["V26"].Publish(value.V26);
-                //valveStatePublishers["V27"].Publish(value.V27);
-                //valveStatePublishers["V28"].Publish(value.V28);
-                //valveStatePublishers["V29"].Publish(value.V29);
-                //valveStatePublishers["V30"].Publish(value.V30);
-                //valveStatePublishers["V31"].Publish(value.V31);
-                //valveStatePublishers["V32"].Publish(value.V32);
+              
 
                 flowValuePublishers["MFC01"].Publish(value.M01);
                 flowValuePublishers["MFC02"].Publish(value.M02);
@@ -253,23 +215,12 @@ namespace SapphireXR_App.ViewModels
                 flowValuePublishers["MFC10"].Publish(value.M10);
                 flowValuePublishers["MFC11"].Publish(value.M11);
                 flowValuePublishers["MFC12"].Publish(value.M12);
-                //flowValuePublishers["MFC13"].Publish(value.M13);
-                //flowValuePublishers["MFC14"].Publish(value.M14);
-                //flowValuePublishers["MFC15"].Publish(value.M15);
-                //flowValuePublishers["MFC16"].Publish(value.M16);
-                //flowValuePublishers["MFC17"].Publish(value.M17);
-                //flowValuePublishers["MFC18"].Publish(value.M18);
-                //flowValuePublishers["MFC19"].Publish(value.M19);
-                //flowValuePublishers["EPC01"].Publish(value.E01);
-                //flowValuePublishers["EPC02"].Publish(value.E02);
-                //flowValuePublishers["EPC03"].Publish(value.E03);
-                //flowValuePublishers["EPC04"].Publish(value.E04);
-                //flowValuePublishers["EPC05"].Publish(value.E05);
-                //flowValuePublishers["EPC06"].Publish(value.E06);
-                //flowValuePublishers["EPC07"].Publish(value.E07);
-                //flowValuePublishers["Temperature"].Publish(value.STemp);
-                //flowValuePublishers["Pressure"].Publish(value.RPress);
-                //flowValuePublishers["Rotation"].Publish(value.SRotation);
+                flowValuePublishers["Temperature1"].Publish(value.F01);
+                flowValuePublishers["Temperature2"].Publish(value.F02);
+                flowValuePublishers["Temperature3"].Publish(value.F03);
+                flowValuePublishers["Temperature4"].Publish(value.F04);
+                flowValuePublishers["Temperature5"].Publish(value.F05);
+                flowValuePublishers["Temperature6"].Publish(value.F06);
             }
 
             public void clean()

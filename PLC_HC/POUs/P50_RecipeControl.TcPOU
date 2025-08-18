@@ -51,7 +51,7 @@ END_VAR
 				eRecipeRun := E_RecipeRun.Ramp;
 				
 			E_RecipeRun.Ramp: // Ramp 수행
-				Ramp_TON(IN:=TRUE, PT:=INT_TO_TIME(RCP.aRecipe[nRcpIndex].iRecipe[2]*1000), ET=>RCP.RecipeRunET.ET);
+				Ramp_TON(IN:=TRUE, PT:=RCP.aRecipe[nRcpIndex].iRecipe[2] * T#1S, ET=>RCP.RecipeRunET.ET);
 				RCP.RecipeRunET.Mode := E_RecipeRunETMode.Ramp;
 				IF Ramp_TON.Q THEN
 					Ramp_TON(IN:=FALSE);
@@ -60,7 +60,7 @@ END_VAR
 				
 			E_RecipeRun.CheckHoldTemp: //Hold Temp 확인
 				IF RCP.aRecipe[nRcpIndex].iRecipe[3] <> 0 THEN
-					Hold_TON(IN:=TRUE, PT:=INT_TO_TIME(RCP.aRecipe[nRcpIndex].iRecipe[3]*1000), ET=>RCP.RecipeRunET.ET);
+					Hold_TON(IN:=TRUE, PT:=RCP.aRecipe[nRcpIndex].iRecipe[3]* T#1S, ET=>RCP.RecipeRunET.ET);
 					RCP.RecipeRunET.Mode := E_RecipeRunETMode.Hold;
 					IF Hold_TON.Q THEN
 						Hold_TON(IN:=FALSE);
