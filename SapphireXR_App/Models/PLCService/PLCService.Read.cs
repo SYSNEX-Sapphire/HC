@@ -34,9 +34,22 @@ namespace SapphireXR_App.Models
             }
             else
             {
-                return float.NaN;
+                throw new InvalidOperationException("DeviceCurrenValues array in PLCServce have not been initialized.");
             }
         }
+
+        public static float ReadControlValue(string controllerID)
+        {
+            if (aDeviceControlValues != null)
+            {
+                return aDeviceControlValues[dIndexController[controllerID]];
+            }
+            else
+            {
+                throw new InvalidOperationException("DeviceControlValues array in PLCServce have not been initialized.");
+            }
+        }
+
 
         public static short ReadUserState()
         {

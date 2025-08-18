@@ -5,27 +5,27 @@
 #pragma warning disable CS8618 // null을 허용하지 않는 필드는 생성자를 종료할 때 null이 아닌 값을 포함해야 합니다. 'required' 한정자를 추가하거나 nullable로 선언하는 것이 좋습니다.
         public RecipeLog() { }
 #pragma warning restore CS8618 // null을 허용하지 않는 필드는 생성자를 종료할 때 null이 아닌 값을 포함해야 합니다. 'required' 한정자를 추가하거나 nullable로 선언하는 것이 좋습니다.
-        public RecipeLog(Recipe recipe)
+        public RecipeLog(string name)
         {
-            Step = recipe.Name;
-            SV_M01 = recipe.M01;
-            SV_M02 = recipe.M02;
-            SV_M03 = recipe.M03;
-            SV_M04 = recipe.M04;
-            SV_M05 = recipe.M05;
-            SV_M06 = recipe.M06;
-            SV_M07 = recipe.M07;
-            SV_M08 = recipe.M08;
-            SV_M09 = recipe.M09;
-            SV_M10 = recipe.M10;
-            SV_M11 = recipe.M11;
-            SV_M12 = recipe.M12;
-            SV_F01 = recipe.F01;
-            SV_F02 = recipe.F02;
-            SV_F03 = recipe.F03;
-            SV_F04 = recipe.F04;
-            SV_F05 = recipe.F05;
-            SV_F06 = recipe.F06;
+            Step = name;
+            SV_M01 = PLCService.ReadControlValue("MFC01");
+            SV_M02 = PLCService.ReadControlValue("MFC02");
+            SV_M03 = PLCService.ReadControlValue("MFC03");
+            SV_M04 = PLCService.ReadControlValue("MFC04");
+            SV_M05 = PLCService.ReadControlValue("MFC05");
+            SV_M06 = PLCService.ReadControlValue("MFC06");
+            SV_M07 = PLCService.ReadControlValue("MFC07");
+            SV_M08 = PLCService.ReadControlValue("MFC08");
+            SV_M09 = PLCService.ReadControlValue("MFC09");
+            SV_M10 = PLCService.ReadControlValue("MFC10");
+            SV_M11 = PLCService.ReadControlValue("MFC11");
+            SV_M12 = PLCService.ReadControlValue("MFC12");
+            SV_F01 = PLCService.ReadControlValue("Temperature1");
+            SV_F02 = PLCService.ReadControlValue("Temperature2");
+            SV_F03 = PLCService.ReadControlValue("Temperature3");
+            SV_F04 = PLCService.ReadControlValue("Temperature4");
+            SV_F05 = PLCService.ReadControlValue("Temperature5");
+            SV_F06 = PLCService.ReadControlValue("Temperature6");
 
             PV_M01 = PLCService.ReadCurrentValue("MFC01");
             PV_M02 = PLCService.ReadCurrentValue("MFC02");
