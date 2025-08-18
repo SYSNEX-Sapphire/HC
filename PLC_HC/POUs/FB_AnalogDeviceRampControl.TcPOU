@@ -43,7 +43,7 @@ IF Rtrig.Q THEN
 		END_IF
 	END_FOR
 END_IF
-i:=  GVL_Furnace.Received_e2408_data_1.TEMP_PV_VALUE;
+
 GVL_IO.aController_PV[13] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_1.TEMP_PV_VALUE);
 GVL_IO.aController_CV[13] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_1.TEMP_TARGET_VALUE);
 GVL_IO.aController_PV[14] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_2.TEMP_PV_VALUE);

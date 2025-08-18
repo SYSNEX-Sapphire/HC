@@ -221,25 +221,25 @@ namespace SapphireXR_App.Models
 
             //BitArray from Valve Data
             BitArray aRecipeBit = new BitArray(32);
-            aRecipeBit[0] = rhs.V01 ? true : false;
-            aRecipeBit[1] = rhs.V02 ? true : false;
-            aRecipeBit[2] = rhs.V03 ? true : false;
-            aRecipeBit[3] = rhs.V04 ? true : false;
-            aRecipeBit[4] = rhs.V05 ? true : false;
-            aRecipeBit[4] = rhs.V06 ? true : false;
-            aRecipeBit[5] = rhs.V07 ? true : false;
-            aRecipeBit[6] = rhs.V08 ? true : false;
-            aRecipeBit[6] = rhs.V09 ? true : false;
-            aRecipeBit[7] = rhs.V10 ? true : false;
-            aRecipeBit[8] = rhs.V11 ? true : false;
-            aRecipeBit[9] = rhs.V12 ? true : false;
-            aRecipeBit[10] = rhs.V14 ? true : false;
-            aRecipeBit[10] = rhs.V15 ? true : false;
-            aRecipeBit[11] = rhs.V16 ? true : false;
-            aRecipeBit[12] = rhs.V17 ? true : false;
-            aRecipeBit[12] = rhs.V18 ? true : false;
-            aRecipeBit[13] = rhs.V19 ? true : false;
-            aRecipeBit[14] = rhs.V20 ? true : false;
+            aRecipeBit[0] = rhs.V01;
+            aRecipeBit[1] = rhs.V02;
+            aRecipeBit[2] = rhs.V03;
+            aRecipeBit[3] = rhs.V04;
+            aRecipeBit[4] = rhs.V05;
+            aRecipeBit[5] = rhs.V06;
+            aRecipeBit[6] = rhs.V07;
+            aRecipeBit[7] = rhs.V08;
+            aRecipeBit[8] = rhs.V09;
+            aRecipeBit[9] = rhs.V10;
+            aRecipeBit[10] = rhs.V11;
+            aRecipeBit[11] = rhs.V12;
+            aRecipeBit[13] = rhs.V14;
+            aRecipeBit[14] = rhs.V15;
+            aRecipeBit[15] = rhs.V16;
+            aRecipeBit[16] = rhs.V17;
+            aRecipeBit[17] = rhs.V18;
+            aRecipeBit[18] = rhs.V19;
+            aRecipeBit[19] = rhs.V20;
 
             sName = rhs.Name;
 

@@ -4,7 +4,7 @@
     <Declaration><![CDATA[TYPE RecipeStep :
 STRUCT
 	sRecipe : STRING(81);
-	iRecipe : ARRAY[1..9] OF INT; //Reactor Condition
+	iRecipe : ARRAY[1..5] OF INT; //Reactor Condition
 	rRecipe : ARRAY[1..GVL_IO.nNumController] OF REAL; //MFC, Furnace Temp
 	dRecipe : DWORD; //Valve Data
 END_STRUCT
