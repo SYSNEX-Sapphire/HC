@@ -42,9 +42,6 @@
     <Compile Include="DUTs\OperationMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\outWord.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DUTs\RampGeneratorInput.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -52,9 +49,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\RecipeStep.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\ScaleFactor.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Temp_Controller\ST_E2408_Data.TcDUT">
@@ -132,31 +126,13 @@
     <Compile Include="POUs\FB_OverLimitCheck.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_RampGenerator.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FB_RampGenerator_1.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FB_RampGenerator_2.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\FB_RecipeAnalogInputControlSequencer.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FB_RampGenerator_Eurotherm.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FB_RecipeSequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_SensorLimitCheck.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_SetValves.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FB_TON_Pausable_2.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Init.TcPOU">
