@@ -19,7 +19,11 @@ END_VAR
 	GVL_IO.aController[i].input.targetValue := rRecipe[i] / GVL_IO.aMaxValueController[i] * GVL_IO.EL3064MaxValueH;;
 END_FOR
 
-//TO DO: 온도계 1~6번 제어]]></ST>
+FOR i:= 1 TO GVL_IO.nNumFurnaceTemp DO
+	GVL_IO.aController_TempContoller[i].input.restart := TRUE;
+	GVL_IO.aController_TempContoller[i].input.rampTime := rampTime; 
+	GVL_IO.aController_TempContoller[i].input.targetValue := rRecipe[i];
+END_FOR]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

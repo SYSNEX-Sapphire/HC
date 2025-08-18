@@ -123,11 +123,11 @@ namespace SapphireXR_App.ViewModels
                 {
                     case 0:
                     case 1:
-                        leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentPLCStateViewModel(leftViewModel);
+                        //leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentPLCStateViewModel(leftViewModel);
                         break;
 
                     case 2:
-                        leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentRecipeStepViewModel(leftViewModel);
+                        //leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentRecipeStepViewModel(leftViewModel);
                         break;
                 }
             }
@@ -252,10 +252,10 @@ namespace SapphireXR_App.ViewModels
 
             void IObserver<bool>.OnNext(bool value)
             {
-                if (leftViewModel.CurrentSourceStatusViewModel is SourceStatusFromCurrentRecipeStepViewModel)
-                {
-                    leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentRecipeStepViewModel(leftViewModel);
-                }
+                //if (leftViewModel.CurrentSourceStatusViewModel is SourceStatusFromCurrentRecipeStepViewModel)
+                //{
+                //    leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentRecipeStepViewModel(leftViewModel);
+                //}
             }
 
             private LeftViewModel leftViewModel;
@@ -352,42 +352,42 @@ namespace SapphireXR_App.ViewModels
             {
                 var updateCarrierStatus = (string prevGasName, string gasName) =>
                 {
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.NH3_1Carrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.NH3_1Carrier = gasName;
-                    }
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.NH3_2Carrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.NH3_2Carrier = gasName;
-                    }
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.SiH4Carrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.SiH4Carrier = gasName;
-                    }
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TEBCarrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.TEBCarrier = gasName;
-                    }
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMAlCarrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.TMAlCarrier = gasName;
-                    }
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMGaCarrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.TMGaCarrier = gasName;
-                    }
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.DTMGaCarrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.DTMGaCarrier = gasName;
-                    }
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.Cp2MgCarrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.Cp2MgCarrier = gasName;
-                    }
-                    if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMInCarrier)
-                    {
-                        leftViewModel.CurrentSourceStatusViewModel.TMInCarrier = gasName;
-                    }
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.NH3_1Carrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.NH3_1Carrier = gasName;
+                    //}
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.NH3_2Carrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.NH3_2Carrier = gasName;
+                    //}
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.SiH4Carrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.SiH4Carrier = gasName;
+                    //}
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TEBCarrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.TEBCarrier = gasName;
+                    //}
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMAlCarrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.TMAlCarrier = gasName;
+                    //}
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMGaCarrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.TMGaCarrier = gasName;
+                    //}
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.DTMGaCarrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.DTMGaCarrier = gasName;
+                    //}
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.Cp2MgCarrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.Cp2MgCarrier = gasName;
+                    //}
+                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMInCarrier)
+                    //{
+                    //    leftViewModel.CurrentSourceStatusViewModel.TMInCarrier = gasName;
+                    //}
                 };
                 switch (value.Item1)
                 {

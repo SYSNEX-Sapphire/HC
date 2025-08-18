@@ -5,7 +5,6 @@
 VAR
 	nRcpIndex		: INT;
 	eRecipeRun		: E_RecipeRun ; //레시피 상태
-	fbRecipeSequencer : FB_RecipeSequencer;
 	fbRecipeAnalogControlInputSequencer: FB_RecipeAnalogInputControlSequencer;
 	fbSetValves: FB_SetValves;
 	fbAnalogDeviceRampControl: FB_AnalogDeviceRampControl;

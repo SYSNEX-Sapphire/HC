@@ -458,21 +458,21 @@ namespace SapphireXR_App.ViewModels
         [ObservableProperty]
         private Brush _pLCConnectionStatusColor = PLCDisconnectedFontColor;
 
-        [ObservableProperty]
-        private SourceStatusViewModel _currentSourceStatusViewModel;
+        //[ObservableProperty]
+        //private SourceStatusViewModel _currentSourceStatusViewModel;
 
         [ObservableProperty]
         private string signalTowerImage = SignalTowerDefaultPath;
 
-        private readonly CoolingWaterValueSubscriber showerHeaderTempSubscriber;
-        private readonly CoolingWaterValueSubscriber inductionCoilTempSubscriber;
-        private readonly HardWiringInterlockStateSubscriber hardWiringInterlockStateSubscriber;
+        //private readonly CoolingWaterValueSubscriber showerHeaderTempSubscriber;
+        //private readonly CoolingWaterValueSubscriber inductionCoilTempSubscriber;
+        //private readonly HardWiringInterlockStateSubscriber hardWiringInterlockStateSubscriber;
         private readonly MainViewTabIndexChagedSubscriber mainViewTabIndexChagedSubscriber;
-        private readonly SignalTowerStateSubscriber signalTowerStateSubscriber;
-        private readonly LineHeaterTemperatureSubscriber lineHeaterTemperatureSubscriber;
-        private readonly ResetCurrentRecipeSubscriber resetCurrentRecipeSubscriber;
-        private readonly LogicalInterlockSubscriber logicalInterlockSubscriber;
-        private readonly GasIOLabelSubscriber gasIOLabelSubscriber;
+        //private readonly SignalTowerStateSubscriber signalTowerStateSubscriber;
+        //private readonly LineHeaterTemperatureSubscriber lineHeaterTemperatureSubscriber;
+        //private readonly ResetCurrentRecipeSubscriber resetCurrentRecipeSubscriber;
+       // private readonly LogicalInterlockSubscriber logicalInterlockSubscriber;
+        //private readonly GasIOLabelSubscriber gasIOLabelSubscriber;
         private readonly PLCConnectionStateSubscriber plcConnectionStateSubscriber;
     }
 }
