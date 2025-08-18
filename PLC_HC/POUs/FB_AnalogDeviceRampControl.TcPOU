@@ -16,7 +16,7 @@ END_VAR
 	IF GVL_IO.aMaxValueController[i] <> 0 THEN
 		GVL_IO.aAnalogOutputIO[i] := LREAL_TO_INT(GVL_IO.aController[i].rControlValue);
 		
-		GVL_IO.aController_PV[i] := GVL_IO.aAnalogInputIO[i] / (GVL_IO.EL3064MaxValueH * GVL_IO.aMaxValueController[i]);
+		GVL_IO.aController_PV[i] := (GVL_IO.aAnalogInputIO[i] / GVL_IO.EL3064MaxValueH) * GVL_IO.aMaxValueController[i];
 		GVL_IO.aController_CV[i] := LREAL_TO_REAL((GVL_IO.aController[i].rControlValue / GVL_IO.EL3064MaxValueH)*GVL_IO.aMaxValueController[i]);
 		GVL_IO.aController[i]();
 	END_IF
