@@ -22,7 +22,7 @@ END_FOR
 FOR i:= 1 TO GVL_IO.nNumFurnaceTemp DO
 	GVL_IO.aController_TempContoller[i].input.restart := TRUE;
 	GVL_IO.aController_TempContoller[i].input.rampTime := rampTime; 
-	GVL_IO.aController_TempContoller[i].input.targetValue := rRecipe[i];
+	GVL_IO.aController_TempContoller[i].input.targetValue := rRecipe[i + GVL_IO.nNumMFC];
 END_FOR]]></ST>
     </Implementation>
   </POU>
