@@ -33,11 +33,6 @@ namespace SapphireXR_App.ViewModels
                 switch (args.PropertyName)
                 {
                     case nameof(Recipe.RTime):
-                        if (sender == currentStep || sender == prevStep)
-                        {
-                            refreshRampingRateTemp();
-                            refreshRampingRatePress();
-                        }
                         refreshTotal();
                         break;
 
@@ -50,24 +45,33 @@ namespace SapphireXR_App.ViewModels
                     case nameof(Recipe.M02):
                     case nameof(Recipe.M03):
                     case nameof(Recipe.M04):
+                    case nameof(Recipe.M05):
+                    case nameof(Recipe.M06):
                     case nameof(Recipe.M07):
                     case nameof(Recipe.M08):
                     case nameof(Recipe.M09):
                     case nameof(Recipe.M10):
                     case nameof(Recipe.M11):
-                    //case nameof(Recipe.M14):
-                    //case nameof(Recipe.M15):
-                    //case nameof(Recipe.M16):
-                    //case nameof(Recipe.M17):
-                    //case nameof(Recipe.V30):
-                    //case nameof(Recipe.V29):
-                    //case nameof(Recipe.V31):
-                    //case nameof(Recipe.V23):
-                    //case nameof(Recipe.V24):
-                    //case nameof(Recipe.V25):
-                    //case nameof(Recipe.V26):
-                    //case nameof(Recipe.V27):
-                    //case nameof(Recipe.V28):
+                    case nameof(Recipe.M12):
+                    case nameof(Recipe.V01):
+                    case nameof(Recipe.V02):
+                    case nameof(Recipe.V03):
+                    case nameof(Recipe.V04):
+                    case nameof(Recipe.V05):
+                    case nameof(Recipe.V06):
+                    case nameof(Recipe.V07):
+                    case nameof(Recipe.V08):
+                    case nameof(Recipe.V09):
+                    case nameof(Recipe.V10):
+                    case nameof(Recipe.V11):
+                    case nameof(Recipe.V12):
+                    case nameof(Recipe.V14):
+                    case nameof(Recipe.V15):
+                    case nameof(Recipe.V16):
+                    case nameof(Recipe.V17):
+                    case nameof(Recipe.V18):
+                    case nameof(Recipe.V19):
+                    case nameof(Recipe.V20):
                         refreshTotalFlowRate();
                         break;
                 }
@@ -92,50 +96,6 @@ namespace SapphireXR_App.ViewModels
                 }
             }
 
-            private void refreshRampingRateTemp()
-            {
-                if (currentStep == null)
-                {
-                    return;
-                }
-
-                try
-                {
-                    //int sTempDiff = currentStep.STemp;
-                    //if (prevStep != null)
-                    //{
-                    //    sTempDiff = Math.Abs(sTempDiff - prevStep.STemp);
-                    //}
-                    //RampingRateTemp = sTempDiff / currentStep.RTime;
-                }
-                catch
-                {
-                    RampingRateTemp = null;
-                }
-            }
-
-            private void refreshRampingRatePress()
-            {
-                if (currentStep == null)
-                {
-                    return;
-                }
-
-                try
-                {
-                    //int rPressDiff = currentStep.RPress;
-                    //if (prevStep != null)
-                    //{
-                    //    rPressDiff = Math.Abs(rPressDiff - prevStep.RPress);
-                    //}
-                    //RampingRatePress = rPressDiff / currentStep.RTime;
-                }
-                catch
-                {
-                    RampingRatePress = null;
-                }
-            }
-
             private void refreshTotalFlowRate()
             {
                 if(currentStep == null)
@@ -144,46 +104,54 @@ namespace SapphireXR_App.ViewModels
                 }
 
                 float totalFlowRate = 0;
-                totalFlowRate += currentStep.M01;
-                totalFlowRate += currentStep.M02;
-                //if(currentStep.V30 == true)
-                //{
-                //    totalFlowRate += currentStep.M03;
-                //}
-                //if (currentStep.V29 == true)
-                //{
-                //    totalFlowRate += currentStep.M04;
-                //}
-                //if (currentStep.V31 == true)
-                //{
-                //    totalFlowRate += currentStep.M07;
-                //}
-                //if (currentStep.V23 == true)
-                //{
-                //    totalFlowRate += currentStep.M08;
-                //}
-                //if (currentStep.V24 == true)
-                //{
-                //    totalFlowRate += currentStep.M09;
-                //}
-                //if (currentStep.V25 == true)
-                //{
-                //    totalFlowRate += currentStep.M10;
-                //}
-                //if (currentStep.V26 == true)
-                //{
-                //    totalFlowRate += currentStep.M11;
-                //}
-                //if (currentStep.V27 == true)
-                //{
-                //    totalFlowRate += currentStep.M14;
-                //}
-                //if (currentStep.V28 == true)
-                //{
-                //    totalFlowRate += currentStep.M15;
-                //}
-                //totalFlowRate += currentStep.M16;
-                //totalFlowRate += currentStep.M17;
+                if (currentStep.V01 == true && currentStep.V14 == true)
+                {
+                    totalFlowRate += currentStep.M01;
+                }
+                if(currentStep.V02 == true && currentStep.V15 == true)
+                {
+                    totalFlowRate += currentStep.M02;
+                }
+                if (currentStep.V03 == true && currentStep.V15 == true)
+                {
+                    totalFlowRate += currentStep.M03;
+                }
+                if (currentStep.V04 == true && currentStep.V16 == true)
+                {
+                    totalFlowRate += currentStep.M04;
+                }
+                if (currentStep.V05 == true && currentStep.V16 == true)
+                {
+                    totalFlowRate += currentStep.M05;
+                }
+                if (currentStep.V06 == true && currentStep.V17 == true)
+                {
+                    totalFlowRate += currentStep.M06;
+                }
+                if (currentStep.V07 == true && currentStep.V17 == true)
+                {
+                    totalFlowRate += currentStep.M07;
+                }
+                if (currentStep.V08 == true && currentStep.V18 == true)
+                {
+                    totalFlowRate += currentStep.M08;
+                }
+                if (currentStep.V09 == true && currentStep.V18 == true)
+                {
+                    totalFlowRate += currentStep.M09;
+                }
+                if (currentStep.V10 == true && currentStep.V19 == true)
+                {
+                    totalFlowRate += currentStep.M10;
+                }
+                if (currentStep.V11 == true && currentStep.V19 == true)
+                {
+                    totalFlowRate += currentStep.M11;
+                }
+                if (currentStep.V12 == true && currentStep.V20 == true)
+                {
+                    totalFlowRate += currentStep.M12;
+                }
 
                 TotalFlowRate = (int)totalFlowRate;
             }
@@ -202,18 +170,13 @@ namespace SapphireXR_App.ViewModels
                     {
                         prevStep = null;
                     }
-
-                    refreshRampingRatePress();
-                    refreshRampingRateTemp();
                     refreshTotalFlowRate();
                 }
                 else
                 {
                     currentStep = null;
                     prevStep = null;
-
-                    RampingRatePress = null;
-                    RampingRateTemp = null;
+              
                     TotalFlowRate = null;
                 }
             }
@@ -267,10 +230,6 @@ namespace SapphireXR_App.ViewModels
             private int? _totalRecipeTime = null;
             [ObservableProperty]
             private int? _totalStepNumber = null;
-            [ObservableProperty]
-            private int? _rampingRateTemp = null;
-            [ObservableProperty]
-            private int? _rampingRatePress = null;
             [ObservableProperty]
             private int? _totalFlowRate = null;
 

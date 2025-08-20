@@ -183,24 +183,6 @@ namespace SapphireXR_App.ViewModels
                                 ++(CurrentLoopContext.CurrentLoopCount);
                             }
 
-                            //if (0 < currentRecipe.cTemp)
-                            //{
-                            //    TotalWaitTemp = currentRecipe.cTemp;
-                            //    temperatureControlValueSubscriber ??= new TemperatureCurrentValueSubscriber(this);
-                            //    temperatureControlValueUnsubscriber ??= ObservableManager<float>.Subscribe("FlowControl.Temperature.CurrentValue", temperatureControlValueSubscriber!);
-                            //}
-                            //else
-                            //{
-                            //    if (temperatureControlValueUnsubscriber != null)
-                            //    {
-                            //        temperatureControlValueUnsubscriber.Dispose();
-                            //        temperatureControlValueUnsubscriber = null;
-                            //    }
-                            //    temperatureControlValueSubscriber = null;
-                            //    TotalWaitTemp = null;
-                            //    CurrentWaitTemp = null;
-                            //}
-
                             return currentRecipe;
                         }
                     }
@@ -340,7 +322,6 @@ namespace SapphireXR_App.ViewModels
 
             private void disposeSubscribe()
             {
-                temperatureControlValueUnsubscriber?.Dispose();
                 recipeRunElapsedTimeUnsubscriber?.Dispose();
                 recipeControlPauseTimeUnsubscriber?.Dispose();
             }
@@ -359,8 +340,6 @@ namespace SapphireXR_App.ViewModels
                 modifiedRecipeIndice.Clear();
                 disposeSubscribe();
                 disposeResource();
-                //temperatureControlValueUnsubscriber = null;
-                //temperatureControlValueSubscriber = null;
                 recipeRunElapsedTimeUnsubscriber = null;
                 recipeControlPauseTimeUnsubscriber = null;
                 recipeRunElapsedTimeSubscriber = null;
@@ -378,8 +357,6 @@ namespace SapphireXR_App.ViewModels
                 CurrentLoopNumber = null;
                 TotalLoopNumber = null;
                 TotalLoopStep = null;
-                CurrentWaitTemp = null;
-                TotalWaitTemp = null;
 
                 foreach (LoopContext loopContext in loopContexts)
                 {
@@ -480,17 +457,11 @@ namespace SapphireXR_App.ViewModels
             private int? _currentLoopNumber = null;
             [ObservableProperty]
             private int? _totalLoopNumber = null;
-            [ObservableProperty]
-            private int? _currentWaitTemp = null;
-            [ObservableProperty]
-            private int? _totalWaitTemp = null;
 
             public Recipe? currentRecipe = null;
             public int currentRecipeIndex = -1;
             private bool disposedValue = false;
-
-            //private TemperatureCurrentValueSubscriber? temperatureControlValueSubscriber;
-            private IDisposable? temperatureControlValueUnsubscriber = null;
+         
             private RecipeTimeSubscriber? recipeControlPauseTimeSubscriber = null;
             private IDisposable? recipeControlPauseTimeUnsubscriber = null;
             private RecipeRunElapsedTimeSubscriber? recipeRunElapsedTimeSubscriber = null;

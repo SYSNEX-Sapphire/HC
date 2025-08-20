@@ -318,8 +318,6 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="4" />
                                             <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="4" />
-                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
                                         <Grid.Resources>
                                             <Style x:Key="InfoLabelRight" TargetType="Label" BasedOn="{StaticResource infoLabelLeft}">
@@ -349,7 +347,6 @@
                                         <Label Grid.Row="11" Grid.Column="0" Content="Pause Time" Style="{StaticResource InfoLabelRight}" />
                                         <Label Grid.Row="13" Grid.Column="0" Content="Loop Step" Style="{StaticResource InfoLabelRight}" />
                                         <Label Grid.Row="15" Grid.Column="0" Content="Loop Number" Style="{StaticResource InfoLabelRight}" />
-                                        <Label Grid.Row="17" Grid.Column="0" Content="Wait Temp" Style="{StaticResource InfoLabelRight}" />
 
                                         <TextBox x:Name="tbRecipeCurrentTime" Grid.Row="1" Grid.Column="1" Text="{Binding CurrentRecipe.CurrentRecipeTime}" Style="{StaticResource RecipeRunInfoTextBox}" IsReadOnly="True" />
                                         <TextBox x:Name="tbRecipeTotalTime" Grid.Row="1" Grid.Column="3" Text="{Binding CurrentRecipe.TotalRecipeTime}" Style="{StaticResource RecipeRunInfoTextBox}" IsReadOnly="True" />
@@ -365,8 +362,6 @@
                                         <TextBox x:Name="tbRecipeLoopEnd" Grid.Row="13" Grid.Column="3" Text="{Binding CurrentRecipe.CurrentLoopContext.LoopEndStep}" Style="{StaticResource RecipeRunInfoTextBox}" IsReadOnly="True" />
                                         <TextBox x:Name="tbRecipeCurrentLoop" Grid.Row="15" Grid.Column="1" Text="{Binding CurrentRecipe.CurrentLoopContext.CurrentLoopCount}" Style="{StaticResource RecipeRunInfoTextBox}" IsReadOnly="True" />
                                         <TextBox x:Name="tbRecipeTotalLoop" Grid.Row="15" Grid.Column="3" Text="{Binding CurrentRecipe.CurrentLoopContext.TotalLoop}" Style="{StaticResource RecipeRunInfoTextBox}" IsReadOnly="True" />
-                                        <TextBox x:Name="tbSusceptorCurrentTemp" Grid.Row="17" Grid.Column="1" Text="{Binding CurrentRecipe.CurrentWaitTemp}" Style="{StaticResource RecipeRunInfoTextBox}" IsReadOnly="True" />
-                                        <TextBox x:Name="tbRecipeWaitTemp" Grid.Row="17" Grid.Column="3" Text="{Binding CurrentRecipe.TotalWaitTemp}" Style="{StaticResource RecipeRunInfoTextBox}" IsReadOnly="True" />
                                     </Grid>
                                 </StackPanel>
                             </Border>
@@ -387,7 +382,7 @@
                                     </Label>
                                     <Button Width="134" HorizontalAlignment="Right" Style="{StaticResource DefaultButton}" Content="Clear" Command="{Binding ClearEventLogCommand}"/>
                                 </DockPanel>
-                                <DataGrid x:Name="dgEventLog" ItemsSource="{Binding Source={x:Static model:EventLogs.Instance}, Path=EventLogList}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" Style="{StaticResource EventLog}" Height="100">
+                                <DataGrid x:Name="dgEventLog" ItemsSource="{Binding Source={x:Static model:EventLogs.Instance}, Path=EventLogList}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" Style="{StaticResource EventLog}" Height="130">
                                     <DataGrid.Resources>
                                         <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
                                     </DataGrid.Resources>

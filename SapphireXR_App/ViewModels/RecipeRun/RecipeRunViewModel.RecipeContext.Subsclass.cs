@@ -11,36 +11,6 @@ namespace SapphireXR_App.ViewModels
     {
         public partial class RecipeContext : ObservableObject, IDisposable
         {
-            private class TemperatureCurrentValueSubscriber : IObserver<float>
-            {
-                internal TemperatureCurrentValueSubscriber(RecipeContext rc)
-                {
-                    recipeContext = rc;
-                }
-
-                void IObserver<float>.OnCompleted()
-                {
-                    throw new NotImplementedException();
-                }
-
-                void IObserver<float>.OnError(Exception error)
-                {
-                    throw new NotImplementedException();
-                }
-
-                void IObserver<float>.OnNext(float value)
-                {
-                    if (prevValue == null || prevValue != value)
-                    {
-                        recipeContext.CurrentWaitTemp = (int)value;
-                        prevValue = recipeContext.CurrentWaitTemp;
-                    }
-                }
-
-                private RecipeContext recipeContext;
-                private int? prevValue;
-            }
-
             private class RecipeTimeSubscriber : IObserver<int>
             {
                 internal RecipeTimeSubscriber(Action<int> onNextAc)
