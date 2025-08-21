@@ -207,6 +207,7 @@ namespace SapphireXR_App.ViewModels
                     EventLogs.Instance.EventLogList.Add(new EventLog() { Message = "레시피가 종료되었습니다", Name = "Recipe End", Type = EventLog.LogType.Information });
                     toRecipeLoadedState();
                     recipeEndedPOnClientSidePublisher.Publish(true);
+                    System.Media.SystemSounds.Beep.Play();
                     Console.Beep(500, 3000);
                     Task.Delay(TimeSpan.FromSeconds(3)).ContinueWith(task =>
                     {
