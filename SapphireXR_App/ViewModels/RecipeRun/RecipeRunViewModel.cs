@@ -204,10 +204,14 @@ namespace SapphireXR_App.ViewModels
 
                 case RecipeUserState.Ended:
                     CurrentRecipe.stopLog();
-                    EventLogs.Instance.EventLogList.Add(new EventLog() { Message = "레시피가 종료되었습니다", Name = "Recipe End", Type = EventLog.LogType.Information });                 
-                    ToastMessage.Show("Recipe가 종료되었습니다. 종료시간: " + DateTime.Now.ToString("HH:mm"), ToastMessage.MessageType.Information);
+                    EventLogs.Instance.EventLogList.Add(new EventLog() { Message = "레시피가 종료되었습니다", Name = "Recipe End", Type = EventLog.LogType.Information });
                     toRecipeLoadedState();
                     recipeEndedPOnClientSidePublisher.Publish(true);
+                    Console.Beep(500, 3000);
+                    Task.Delay(TimeSpan.FromSeconds(3)).ContinueWith(task =>
+                    {
+                        ToastMessage.Show("Recipe가 종료되었습니다. 종료시간: " + DateTime.Now.ToString("HH:mm"), ToastMessage.MessageType.Information);
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
                     break;
             }
             RecipeOpenCommand.NotifyCanExecuteChanged();
