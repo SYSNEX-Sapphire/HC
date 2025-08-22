@@ -27,14 +27,6 @@ namespace SapphireXR_App.ViewModels
                 deselect();
             }
 
-            private void rearangeNumber(int insert)
-            {
-                for(int index = insert; index < RecipeViewModel.Recipes!.Count; ++index)
-                {
-                    RecipeViewModel.Recipes[index].No = (short)(index + 1);
-                }
-            }
-
             private void deselect()
             {
                 CurrentState = State.NoneSelected;
@@ -94,7 +86,6 @@ namespace SapphireXR_App.ViewModels
                 recipeAddedPublishser.Publish(new List<Recipe>() { added });
                 added.Foreground = Brushes.LightPink;
                 RecipeViewModel.newlyAddedForMarking.Add(added);
-                rearangeNumber(index);
 
                 return added;
             }
@@ -164,7 +155,6 @@ namespace SapphireXR_App.ViewModels
                             recipe.Foreground = Brushes.LightPink;
                         }
                         recipeAddedPublishser.Publish(added);
-                        rearangeNumber(insert);
 
                         RecipeViewModel.newlyAddedForMarking.AddRange(added);
                     }
@@ -175,7 +165,6 @@ namespace SapphireXR_App.ViewModels
                 if(State.Selected <= CurrentState)
                 {
                     RecipeViewModel.Recipes!.RemoveAt((IList)this.Selected!);
-                    rearangeNumber(0);
                 }
             });
             public IRelayCommand InsertStepCommand => new RelayCommand(() =>
