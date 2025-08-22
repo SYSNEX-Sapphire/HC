@@ -14,7 +14,6 @@ namespace SapphireXR_App.Models
         public Recipe(Recipe rhs)
         {
             Name = rhs.Name;
-            No = rhs.No;
             HTime = rhs.HTime;
             RTime = rhs.RTime;
             M01 = rhs.M01;
