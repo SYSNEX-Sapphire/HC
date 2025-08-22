@@ -58,7 +58,8 @@ namespace SapphireXR_App.Models
 
         public string Name { get; set; } = "";
         // RecipeInt Array
-        public short No { get; set; }
+        [ObservableProperty]
+        private short no;
         [ObservableProperty]
         private short _rTime;
         [ObservableProperty]
