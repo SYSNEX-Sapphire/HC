@@ -14,15 +14,19 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[FOR i:= 1 TO GVL_IO.nNumMFC DO
-	GVL_IO.aController[i].input.restart := TRUE;
-	GVL_IO.aController[i].input.rampTime := rampTime; 
-	GVL_IO.aController[i].input.targetValue := rRecipe[i] / GVL_IO.aMaxValueController[i] * GVL_IO.EL3064MaxValueH;;
+	IF 0 <= rRecipe[i] AND GVL_IO.aMaxValueController[i] <> 0 THEN
+		GVL_IO.aController[i].input.restart := TRUE;
+		GVL_IO.aController[i].input.rampTime := rampTime; 
+		GVL_IO.aController[i].input.targetValue := rRecipe[i] / GVL_IO.aMaxValueController[i] * GVL_IO.EL3064MaxValueH;
+	END_IF
 END_FOR
 
 FOR i:= 1 TO GVL_IO.nNumFurnaceTemp DO
-	GVL_IO.aController_TempContoller[i].input.restart := TRUE;
-	GVL_IO.aController_TempContoller[i].input.rampTime := rampTime; 
-	GVL_IO.aController_TempContoller[i].input.targetValue := rRecipe[i + GVL_IO.nNumMFC];
+	IF 0 <= rRecipe[i + GVL_IO.nNumMFC] THEN
+		GVL_IO.aController_TempContoller[i].input.restart := TRUE;
+		GVL_IO.aController_TempContoller[i].input.rampTime := rampTime; 
+		GVL_IO.aController_TempContoller[i].input.targetValue := rRecipe[i + GVL_IO.nNumMFC];
+	END_IF
 END_FOR]]></ST>
     </Implementation>
   </POU>

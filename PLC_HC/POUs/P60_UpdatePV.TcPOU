@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="P60_UpdatePV" Id="{99fb6a7c-0acf-4211-9d5c-0f7621390c17}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P60_UpdatePV
+VAR
+	i: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i:= 1 TO GVL_IO.nNumMFC DO
+	IF 0 < GVL_IO.aMaxValueController[i] THEN
+		GVL_IO.aController_PV[i] := (GVL_IO.aAnalogInputIO[i] / GVL_IO.EL3064MaxValueH) * GVL_IO.aMaxValueController[i];
+	END_IF
+END_FOR
+
+GVL_IO.aController_PV[13] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_1.TEMP_PV_VALUE);
+GVL_IO.aController_PV[14] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_2.TEMP_PV_VALUE);
+GVL_IO.aController_PV[15] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_3.TEMP_PV_VALUE);
+GVL_IO.aController_PV[16] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_4.TEMP_PV_VALUE);
+GVL_IO.aController_PV[17] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_5.TEMP_PV_VALUE);
+GVL_IO.aController_PV[18] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_6.TEMP_PV_VALUE);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

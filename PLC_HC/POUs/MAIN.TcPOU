@@ -28,7 +28,8 @@ IF NOT(bOperationMode) THEN
 ELSE
 	P50_RecipeControl(); //레시피 콘트론
 END_IF
-]]></ST>
+
+P60_UpdatePV();]]></ST>
     </Implementation>
     <Action Name="_TempManager" Id="{55c4ebf8-341e-483a-935c-fc1b3d670af7}">
       <Implementation>
