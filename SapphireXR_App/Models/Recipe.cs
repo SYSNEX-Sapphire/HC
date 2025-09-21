@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CsvHelper.Configuration.Attributes;
+using SapphireXR_App.Common;
+using SapphireXR_App.ViewModels;
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -9,10 +11,15 @@ namespace SapphireXR_App.Models
 {
     public partial class Recipe : ObservableObject
     {
-        public Recipe() { }
+        public Recipe() 
+        {
+            initialize();
+        }
 
         public Recipe(Recipe rhs)
         {
+            initialize();
+
             Name = rhs.Name;
             HTime = rhs.HTime;
             RTime = rhs.RTime;
@@ -55,6 +62,119 @@ namespace SapphireXR_App.Models
             F06 = rhs.F06;
         }
 
+        private void initialize()
+        {
+            PropertyChanged += (sender, args) =>
+            {
+                var constraintValue = (string fullName, float? curValue) =>
+                {
+                    if (curValue == null)
+                    {
+                        return curValue;
+                    }
+
+                    int? maxValue = SettingViewModel.ReadMaxValue(fullName) ?? 0;
+                    if (maxValue < curValue)
+                    {
+                        maxValueExceedPublihser.Publish(fullName);
+                        return (float)maxValue;
+                    }
+                    else
+                    {
+                        return curValue;
+                    }
+                };
+                switch (args.PropertyName)
+                {
+                    case nameof(M01):
+                        M01 = constraintValue("MFC01", M01);
+                        break;
+
+                    case nameof(M02):
+                        M02 = constraintValue("MFC02", M02);
+                        break;
+
+                    case nameof(M03):
+                        M03 = constraintValue("MFC03", M03);
+                        break;
+
+                    case nameof(M04):
+                        M04 = constraintValue("MFC04", M04);
+                        break;
+
+                    case nameof(M05):
+                        M05 = constraintValue("MFC05", M05);
+                        break;
+
+                    case nameof(M06):
+                        M06 = constraintValue("MFC06", M06);
+                        break;
+
+                    case nameof(M07):
+                        M07 = constraintValue("MFC07", M07);
+                        break;
+
+                    case nameof(M08):
+                        M08 = constraintValue("MFC08", M08);
+                        break;
+
+                    case nameof(M09):
+                        M09 = constraintValue("MFC09", M09);
+                        break;
+
+                    case nameof(M10):
+                        M10 = constraintValue("MFC10", M10);
+                        break;
+
+                    case nameof(M11):
+                        M11 = constraintValue("MFC11", M11);
+                        break;
+
+                    case nameof(M12):
+                        M12 = constraintValue("MFC12", M12);
+                        break;
+
+                    case nameof(F01):
+                        F01 = constraintValue("Temperature1", F01);
+                        break;
+
+                    case nameof(F02):
+                        F02 = constraintValue("Temperature2", F02);
+                        break;
+
+                    case nameof(F03):
+                        F03 = constraintValue("Temperature3", F03);
+                        break;
+
+                    case nameof(F04):
+                        F04 = constraintValue("Temperature4", F04);
+                        break;
+
+                    case nameof(F05):
+                        F05 = constraintValue("Temperature5", F05);
+                        break;
+
+                    case nameof(F06):
+                        F06 = constraintValue("Temperature6", F06);
+                        break;
+
+                    case nameof(LoopRepeat):
+                        if (LoopRepeat == null)
+                        {
+                            LoopEndStep = null;
+                        }
+                        break;
+
+                    case nameof(LoopEndStep):
+                        if (LoopEndStep == null)
+                        {
+                            LoopRepeat = null;
+                        }
+                        break;
+                }
+            };
+        }
+
         public string Name { get; set; } = "";
         // RecipeInt Array
         [ObservableProperty]
@@ -64,47 +184,49 @@ namespace SapphireXR_App.Models
         [ObservableProperty]
         public short _hTime;
 
-        public short LoopRepeat { get; set; }
-        public short LoopEndStep { get; set; }
+        [ObservableProperty]
+        public short? loopRepeat;
+        [ObservableProperty]
+        public short? loopEndStep;
 
         //RecipeFloat Array
         [ObservableProperty]
-        private float _m01;
+        private float? _m01;
         [ObservableProperty]
-        private float _m02;
+        private float? _m02;
         [ObservableProperty]
-        private float _m03;
+        private float? _m03;
         [ObservableProperty]
-        private float _m04;
+        private float? _m04;
         [ObservableProperty]
-        private float _m05;
+        private float? _m05;
         [ObservableProperty]
-        private float _m06;
+        private float? _m06;
         [ObservableProperty]
-        private float _m07;
+        private float? _m07;
         [ObservableProperty]
-        private float _m08;
+        private float? _m08;
         [ObservableProperty]
-        private float _m09;
+        private float? _m09;
         [ObservableProperty]
-        private float _m10;
+        private float? _m10;
         [ObservableProperty]
-        private float _m11;
+        private float? _m11;
         [ObservableProperty]
-        private float _m12;
+        private float? _m12;
 
         [ObservableProperty]
-        private float _f01;
+        private float? _f01;
         [ObservableProperty]
-        private float _f02;
+        private float? _f02;
         [ObservableProperty]
-        private float _f03;
+        private float? _f03;
         [ObservableProperty]
-        private float _f04;
+        private float? _f04;
         [ObservableProperty]
-        private float _f05;
+        private float? _f05;
         [ObservableProperty]
-        private float _f06;
+        private float? _f06;
 
         //RecipeDouble Array
         [ObservableProperty]
@@ -186,12 +308,15 @@ namespace SapphireXR_App.Models
             set;
             get;
         } = 0;
+
+        [Ignore]
+        private static readonly ObservableManager<string>.Publisher maxValueExceedPublihser = ObservableManager<string>.Get("Recipe.MaxValueExceed");
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 0)]
     public class PlcRecipe
     {
-        public PlcRecipe(Recipe rhs)
+        public PlcRecipe(Recipe rhs, AnalogRecipe alternative)
         {
             //Short Type Array
             aRecipeShort[0] = rhs.No;
@@ -200,24 +325,24 @@ namespace SapphireXR_App.Models
             aRecipeShort[3] = rhs.JumpStride;
             aRecipeShort[4] = rhs.LoopCount;
             //Float Type Array
-            aRecipeFloat[0] = rhs.M01;
-            aRecipeFloat[1] = rhs.M02;
-            aRecipeFloat[2] = rhs.M03;
-            aRecipeFloat[3] = rhs.M04;
-            aRecipeFloat[4] = rhs.M05;
-            aRecipeFloat[5] = rhs.M06;
-            aRecipeFloat[6] = rhs.M07;
-            aRecipeFloat[7] = rhs.M08;
-            aRecipeFloat[8] = rhs.M09;
-            aRecipeFloat[9] = rhs.M10;
-            aRecipeFloat[10] = rhs.M11;
-            aRecipeFloat[11] = rhs.M12;
-            aRecipeFloat[12] = rhs.F01;
-            aRecipeFloat[13] = rhs.F02;
-            aRecipeFloat[14] = rhs.F03;
-            aRecipeFloat[15] = rhs.F04;
-            aRecipeFloat[16] = rhs.F05;
-            aRecipeFloat[17] = rhs.F06;
+            aRecipeFloat[0] = rhs.M01 ?? alternative.M01;
+            aRecipeFloat[1] = rhs.M02 ?? alternative.M02;
+            aRecipeFloat[2] = rhs.M03 ?? alternative.M03;
+            aRecipeFloat[3] = rhs.M04 ?? alternative.M04;
+            aRecipeFloat[4] = rhs.M05 ?? alternative.M05;
+            aRecipeFloat[5] = rhs.M06 ?? alternative.M06;
+            aRecipeFloat[6] = rhs.M07 ?? alternative.M07;
+            aRecipeFloat[7] = rhs.M08 ?? alternative.M08;
+            aRecipeFloat[8] = rhs.M09 ?? alternative.M09;
+            aRecipeFloat[9] = rhs.M10 ?? alternative.M10;
+            aRecipeFloat[10] = rhs.M11 ?? alternative.M11;
+            aRecipeFloat[11] = rhs.M12 ?? alternative.M12;
+            aRecipeFloat[12] = rhs.F01 ?? alternative.F01;
+            aRecipeFloat[13] = rhs.F02 ?? alternative.F02;
+            aRecipeFloat[14] = rhs.F03 ?? alternative.F03;
+            aRecipeFloat[15] = rhs.F04 ?? alternative.F04;
+            aRecipeFloat[16] = rhs.F05 ?? alternative.F05;
+            aRecipeFloat[17] = rhs.F06 ?? alternative.F06;
 
             //BitArray from Valve Data
             BitArray aRecipeBit = new BitArray(32);
@@ -260,5 +385,49 @@ namespace SapphireXR_App.Models
         public float[] aRecipeFloat = new float[18];
 
         public int iValve;
+    }
+
+    public class AnalogRecipe
+    {
+        public void update(PlcRecipe recipe)
+        {
+            M01 = recipe.aRecipeFloat[0];
+            M02 = recipe.aRecipeFloat[1];
+            M03 = recipe.aRecipeFloat[2];
+            M04 = recipe.aRecipeFloat[3];
+            M05 = recipe.aRecipeFloat[4];
+            M06 = recipe.aRecipeFloat[5];
+            M07 = recipe.aRecipeFloat[6];
+            M08 = recipe.aRecipeFloat[7];
+            M09 = recipe.aRecipeFloat[8];
+            M10 = recipe.aRecipeFloat[9];
+            M11 = recipe.aRecipeFloat[10];
+            M12 = recipe.aRecipeFloat[11];
+            F01 = recipe.aRecipeFloat[12];
+            F02 = recipe.aRecipeFloat[13];
+            F03 = recipe.aRecipeFloat[14];
+            F04 = recipe.aRecipeFloat[15];
+            F05 = recipe.aRecipeFloat[16];
+            F06 = recipe.aRecipeFloat[17];
+        }
+
+        public float M01 { get; set; }
+        public float M02 { get; set; }
+        public float M03 { get; set; }
+        public float M04 { get; set; }
+        public float M05 { get; set; }
+        public float M06 { get; set; }
+        public float M07 { get; set; }
+        public float M08 { get; set; }
+        public float M09 { get; set; }
+        public float M10 { get; set; }
+        public float M11 { get; set; }
+        public float M12 { get; set; }
+        public float F01 { get; set; }
+        public float F02 { get; set; }
+        public float F03 { get; set; }
+        public float F04 { get; set; }
+        public float F05 { get; set; }
+        public float F06 { get; set; }
     }
 }

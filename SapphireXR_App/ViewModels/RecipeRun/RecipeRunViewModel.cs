@@ -76,21 +76,20 @@ namespace SapphireXR_App.ViewModels
                         if (CurrentRecipe != EmptyRecipeContext)
                         {
                             SyncPLCState(RecipeCommand.Initiate);
-                            RecipeService.PLCLoad(CurrentRecipe.Recipes);
+                            try
+                            {
+                                RecipeService.PLCLoad(CurrentRecipe.Recipes);
+                            }
+                            catch(Exception ex)
+                            {
+                                MessageBox.Show("Recipe를 PLC로 로드하는데 문제가 발생하였습니다. 원인은 다음과 같습니다: " + ex.Message);
+                            }
                         }
                         else
                         {
                             switchState(RecipeUserState.Uninitialized);
                         }
                         break;
-
-                    //case nameof(RecipeStartAvailableInterlock):
-                    //    if (RecipeStartAvailableInterlock == false && recipeRunning() == true)
-                    //    {
-                    //        RecipeStop();
-                    //    }
-                    //    RecipeStartCommand.NotifyCanExecuteChanged();
-                    //    break;
 
                     case nameof(AlarmTriggered):
                         if(AlarmTriggered == true && recipeRunning() == true)
@@ -124,7 +123,12 @@ namespace SapphireXR_App.ViewModels
                 (bool result, string? recipeFilePath, List<Recipe>? recipes) = RecipeService.OpenRecipe(Config, AppSetting.RecipeRunRecipeInitialPath);
                 if (result == true)
                 {
-                    if(recipes!.Count <= 0)
+                    (bool validateResult, string message) = RecipeValidator.Validate(recipes!);
+                    if(validateResult == false)
+                    {
+                        throw new InvalidOperationException(message);
+                    }
+                    if (recipes!.Count <= 0)
                     {
                         MessageBox.Show(recipeFilePath + "은 빈 파일입니다.");
                         return;
@@ -207,8 +211,11 @@ namespace SapphireXR_App.ViewModels
                     EventLogs.Instance.EventLogList.Add(new EventLog() { Message = "레시피가 종료되었습니다", Name = "Recipe End", Type = EventLog.LogType.Information });
                     toRecipeLoadedState();
                     recipeEndedPOnClientSidePublisher.Publish(true);
-                    System.Media.SystemSounds.Beep.Play();
-                    Console.Beep(500, 3000);
+                    Task.Run(() =>
+                    {
+                        System.Media.SystemSounds.Beep.Play();
+                        Console.Beep(500, 3000);
+                    });
                     Task.Delay(TimeSpan.FromSeconds(3)).ContinueWith(task =>
                     {
                         ToastMessage.Show("Recipe가 종료되었습니다. 종료시간: " + DateTime.Now.ToString("HH:mm"), ToastMessage.MessageType.Information);
@@ -247,7 +254,6 @@ namespace SapphireXR_App.ViewModels
         private bool canStartStopCommadExecute()
         {
             return PLCService.Connected == PLCConnection.Connected && CurrentRecipeUserState != RecipeUserState.Uninitialized && AlarmTriggered == false;
-            //return PLCService.Connected == PLCConnection.Connected && CurrentRecipeUserState != RecipeUserState.Uninitialized && RecipeStartAvailableInterlock == true && AlarmTriggered == false;
         }
 
         [RelayCommand(CanExecute = nameof(canStartStopCommadExecute))]

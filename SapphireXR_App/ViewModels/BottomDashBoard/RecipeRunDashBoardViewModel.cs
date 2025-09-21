@@ -31,7 +31,7 @@ namespace SapphireXR_App.ViewModels.BottomDashBoard
                 };
             }
 
-            private float GetFlowControllerValue(string flowControllerID, Recipe recipe)
+            private float? GetFlowControllerValue(string flowControllerID, Recipe recipe)
             {
                 switch (plotModel.Title)
                 {
@@ -105,11 +105,21 @@ namespace SapphireXR_App.ViewModels.BottomDashBoard
                     series1.Points.Add(new DataPoint(accumTime, 0));
                     foreach (Recipe recipe in recipes)
                     {
-                        float flowControllerValue = GetFlowControllerValue(plotModel.Title, recipe);
-                        accumTime += (uint)recipe.RTime;
-                        series1.Points.Add(new DataPoint(TimeSpanAxis.ToDouble(TimeSpan.FromSeconds(accumTime)), flowControllerValue));
-                        accumTime += (uint)recipe.HTime;
-                        series1.Points.Add(new DataPoint(TimeSpanAxis.ToDouble(TimeSpan.FromSeconds(accumTime)), flowControllerValue));
+                        float? flowControllerValue = GetFlowControllerValue(plotModel.Title, recipe);
+                        if(flowControllerValue == null)
+                        {
+                            if(0 < series1.Points.Count)
+                            {
+                                flowControllerValue = (float)series1.Points.Last().Y;
+                            }
+                        }
+                        if (flowControllerValue != null)
+                        {
+                            accumTime += (uint)recipe.RTime;
+                            series1.Points.Add(new DataPoint(TimeSpanAxis.ToDouble(TimeSpan.FromSeconds(accumTime)), flowControllerValue.Value));
+                            accumTime += (uint)recipe.HTime;
+                            series1.Points.Add(new DataPoint(TimeSpanAxis.ToDouble(TimeSpan.FromSeconds(accumTime)), flowControllerValue.Value));
+                        }
                     }
                     plotModel.Axes[0].Maximum = TimeSpanAxis.ToDouble(TimeSpan.FromSeconds(accumTime));
                 }

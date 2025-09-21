@@ -20,12 +20,6 @@ namespace SapphireXR_App.Models
             }
         }
 
-        //public static void AddCoupledValves(string leftValveID, string rightValveID)
-        //{
-        //    LeftCoupled[rightValveID] = leftValveID;
-        //    RightCoupled[leftValveID] = rightValveID;
-        //}
-
         public static void WriteValveState(string valveID, bool onOff)
         {
             DoWriteValveState(valveID, onOff);
@@ -307,13 +301,7 @@ namespace SapphireXR_App.Models
         public static void WriteMFCTargetValue(string controllerID, int targetValue, short rampTime)
         {
             int controllerIDIndex = dIndexController[controllerID];
-            float? targetValueMappingFactor = aTargetValueMappingFactor[controllerIDIndex];
-            if (targetValueMappingFactor == null)
-            {
-                throw new Exception("KL3464MaxValueH is null in WriteFlowControllerTargetValue");
-            }
-
-            Ads.WriteAny(hMFCControllerInput[controllerIDIndex], new RampGeneratorInput { restart = true, rampTime = (ushort)rampTime, targetValue = targetValue * targetValueMappingFactor.Value });
+            Ads.WriteAny(hMFCControllerInput[controllerIDIndex], new RampGeneratorInput { restart = true, rampTime = (ushort)rampTime, targetValue = targetValue * GetTargetValueMappingFactor(controllerID) });
         }
 
         public static void WriteFurnaceTempTargetValue(string controllerID, int targetValue, short rampTime)

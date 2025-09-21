@@ -103,54 +103,197 @@ namespace SapphireXR_App.ViewModels
                     return;
                 }
 
+                var getTargetValue = (Func<Recipe, float?> selector) =>
+                {
+                    float? currentValue = selector(currentStep);
+                    if (currentValue != null)
+                    {
+                        return currentValue;
+                    }
+                    else
+                    {
+                        var findDefaultValue = (Recipe current, Func<Recipe, float?> selector) =>
+                        {
+                            Recipe? recipe = recipes.Where(recipe => recipe.No < current.No).Reverse().FirstOrDefault(recipe => selector(recipe) != null);
+                            if (recipe != null)
+                            {
+                                return selector(recipe);
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        };
+
+                        float? defaultValue = findDefaultValue(currentStep, selector);
+                        if (defaultValue != null)
+                        {
+                            return defaultValue;
+
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                };
+
                 float totalFlowRate = 0;
                 if (currentStep.V01 == true && currentStep.V14 == true)
                 {
-                    totalFlowRate += currentStep.M01;
+                    float? targetValue = getTargetValue(recipe => recipe.M01);
+                    if(targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if(currentStep.V02 == true && currentStep.V15 == true)
                 {
-                    totalFlowRate += currentStep.M02;
+                    float? targetValue = getTargetValue(recipe => recipe.M02);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V03 == true && currentStep.V15 == true)
                 {
-                    totalFlowRate += currentStep.M03;
+                    float? targetValue = getTargetValue(recipe => recipe.M03);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V04 == true && currentStep.V16 == true)
                 {
-                    totalFlowRate += currentStep.M04;
+                    float? targetValue = getTargetValue(recipe => recipe.M04);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V05 == true && currentStep.V16 == true)
                 {
-                    totalFlowRate += currentStep.M05;
+                    float? targetValue = getTargetValue(recipe => recipe.M05);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V06 == true && currentStep.V17 == true)
                 {
-                    totalFlowRate += currentStep.M06;
+                    float? targetValue = getTargetValue(recipe => recipe.M06);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V07 == true && currentStep.V17 == true)
                 {
-                    totalFlowRate += currentStep.M07;
+                    float? targetValue = getTargetValue(recipe => recipe.M07);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V08 == true && currentStep.V18 == true)
                 {
-                    totalFlowRate += currentStep.M08;
+                    float? targetValue = getTargetValue(recipe => recipe.M08);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V09 == true && currentStep.V18 == true)
                 {
-                    totalFlowRate += currentStep.M09;
+                    float? targetValue = getTargetValue(recipe => recipe.M09);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V10 == true && currentStep.V19 == true)
                 {
-                    totalFlowRate += currentStep.M10;
+                    float? targetValue = getTargetValue(recipe => recipe.M10);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V11 == true && currentStep.V19 == true)
                 {
-                    totalFlowRate += currentStep.M11;
+                    float? targetValue = getTargetValue(recipe => recipe.M11);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
                 if (currentStep.V12 == true && currentStep.V20 == true)
                 {
-                    totalFlowRate += currentStep.M12;
+                    float? targetValue = getTargetValue(recipe => recipe.M12);
+                    if (targetValue != null)
+                    {
+                        totalFlowRate += targetValue.Value;
+                    }
+                    else
+                    {
+                        TotalFlowRate = null;
+                        return;
+                    }
                 }
 
                 TotalFlowRate = (int)totalFlowRate;

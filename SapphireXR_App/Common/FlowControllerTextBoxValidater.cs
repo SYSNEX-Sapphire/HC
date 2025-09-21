@@ -15,7 +15,7 @@ namespace SapphireXR_App.Common
     {
         public string valdiate(TextBox textBox)
         {
-            if (textBox.Text == "" || Util.IsTextNumeric(textBox.Text) == true)
+            if (textBox.Text == "" || uint.TryParse(textBox.Text, out uint value) == true)
             {
                 prevText = textBox.Text;
             }
@@ -29,24 +29,28 @@ namespace SapphireXR_App.Common
 
         public (string, Result) valdiate(TextBox textBox, uint maxValue)
         {
-            if(textBox.Text == "")
+            if (textBox.Text == "")
             {
                 prevText = textBox.Text;
                 return (prevText, Result.Valid);
             }
 
-            if(Util.IsTextNumeric(textBox.Text) == false)
+            if (uint.TryParse(textBox.Text, out uint value) == true)
+            {
+                if (value <= maxValue)
+                {
+                    prevText = textBox.Text;
+                    return (prevText, Result.Valid);
+                }
+                else
+                {
+                    return (prevText, Result.ExceedMax);
+                }
+            }
+            else
             {
                 return (prevText, Result.NotNumber);
             }
-
-            if(maxValue < uint.Parse(textBox.Text))
-            {
-                return (prevText, Result.ExceedMax);
-            }
-
-            prevText = textBox.Text;
-            return (prevText, Result.Valid);
         }
 
         public (string, Result) valdiate(TextBox textBox, string flowControllerID)
@@ -134,7 +138,7 @@ namespace SapphireXR_App.Common
                 if (flowControlField != null)
                 {
                     string? flowControllerID = null;
-                    if (Util.RecipeFlowControlFieldToControllerID.TryGetValue(flowControlField, out flowControllerID) == true)
+                    if (Util.RecipeColumnHeaderToControllerID.TryGetValue(flowControlField, out flowControllerID) == true)
                     {
                         return validate(textBox, flowControllerID);
                     }

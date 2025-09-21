@@ -147,6 +147,11 @@ namespace SapphireXR_App.Common
 
         public static void ConstraintEmptyToZeroOnDataGridCellCommit(object sender, DataGridCellEditEndingEventArgs e, IList<string> headers)
         {
+            ConstraintEmptyToDefaultValueOnDataGridCellCommit(sender, e, headers, "0");
+        }
+
+        public static void ConstraintEmptyToDefaultValueOnDataGridCellCommit(object sender, DataGridCellEditEndingEventArgs e, IList<string> headers, string defaultValue)
+        {
             if (e.EditAction == DataGridEditAction.Commit)
             {
                 string? columnHeader = e.Column.Header as string;
@@ -155,7 +160,23 @@ namespace SapphireXR_App.Common
                     TextBox? editingElement = e.EditingElement as TextBox;
                     if (editingElement != null && editingElement.Text == "")
                     {
-                        editingElement.Text = "0";
+                        editingElement.Text = defaultValue;
+                    }
+                }
+            }
+        }
+
+        public static void ConstraintEmptyToDefaultValueOnDataGridCellCommit(object sender, DataGridCellEditEndingEventArgs e, Dictionary<string, string> headerDefaultValuePair)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                string? columnHeader = e.Column.Header as string;
+                if (columnHeader != null && headerDefaultValuePair.TryGetValue(columnHeader, out string? defaultValue) == true)
+                {
+                    TextBox? editingElement = e.EditingElement as TextBox;
+                    if (editingElement != null && editingElement.Text == "")
+                    {
+                        editingElement.Text = defaultValue;
                     }
                 }
             }
@@ -286,8 +307,15 @@ namespace SapphireXR_App.Common
         public static readonly Dictionary<string, string> RecipeFlowControlFieldToControllerID = new Dictionary<string, string>
         {
             { "M01", "MFC01" }, { "M02", "MFC02" }, { "M03", "MFC03" }, { "M04", "MFC04" }, { "M05", "MFC05" }, { "M06", "MFC06" }, { "M07", "MFC07" }, { "M08", "MFC08" },
-            { "M09", "MFC09" }, { "M10", "MFC10" },  { "M11", "MFC11" }, { "M12", "MFC12" }, { "F01", "Temperature1" },  { "F02", "Temperature2" }, { "F03", "Temperature3" }, { "F04", "Temperature4" }, 
-            { "F05", "Temperature5" }, { "F06", "Temperature6" }
+            { "M09", "MFC09" }, { "M10", "MFC10" },  { "M11", "MFC11" }, { "M12", "MFC12" }, { "F01", "Temperature1" },  { "F02", "Temperature2" }, { "F03", "Temperature3" }, 
+            { "F04", "Temperature4" }, { "F05", "Temperature5" }, { "F06", "Temperature6" }
+        };
+
+        public static readonly Dictionary<string, string> RecipeColumnHeaderToControllerID = new Dictionary<string, string>
+        {
+            { "M01", "MFC01" }, { "M02", "MFC02" }, { "M03", "MFC03" }, { "M04", "MFC04" }, { "M05", "MFC05" }, { "M06", "MFC06" }, { "M07", "MFC07" }, { "M08", "MFC08" },
+            { "M09", "MFC09" }, { "M10", "MFC10" },  { "M11", "MFC11" }, { "M12", "MFC12" }, { "Zone 1", "Temperature1" },  { "Zone 2", "Temperature2" }, { "Zone 3", "Temperature3" }, 
+            { "Zone 4", "Temperature4" }, { "Zone 5", "Temperature5" }, { "Zone 6", "Temperature6" }
         };
     }
 }
