@@ -29,6 +29,7 @@ namespace SapphireXR_App.ViewModels
 
             loadToRecipeRunPublisher = ObservableManager<(string, IList<Recipe>)>.Get("RecipeEdit.LoadToRecipeRun");
             switchTabToDataRunPublisher = ObservableManager<int>.Get("SwitchTab");
+            ObservableManager<RecipeRunViewModel.RecipeUserState>.Subscribe("RecipeRun.State", this);
 
             RecipePLCLoadCommand = new RelayCommand(() =>
             {
@@ -120,6 +121,10 @@ namespace SapphireXR_App.ViewModels
                 case nameof(RecipeFilePath):
                     RecipeSaveCommand.NotifyCanExecuteChanged();
                     break;
+
+                case nameof(RecipeRunning):
+                    RecipePLCLoadCommand.NotifyCanExecuteChanged();
+                    break;
             }
         }
 
@@ -193,7 +198,7 @@ namespace SapphireXR_App.ViewModels
 
         void IObserver<RecipeRunViewModel.RecipeUserState>.OnNext(RecipeRunViewModel.RecipeUserState value)
         {
-            RecipeRunning = (value == RecipeRunViewModel.RecipeUserState.Run);
+            RecipeRunning = (value == RecipeRunViewModel.RecipeUserState.Run) || (value == RecipeRunViewModel.RecipeUserState.Pause);
         }
 
         private static readonly CsvHelper.Configuration.CsvConfiguration Config = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
