@@ -3,13 +3,14 @@ using CsvHelper.Configuration.Attributes;
 using SapphireXR_App.Common;
 using SapphireXR_App.ViewModels;
 using System.Collections;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
 
 namespace SapphireXR_App.Models
 {
-    public partial class Recipe : ObservableObject
+    public partial class Recipe : ObservableObject, IDataErrorInfo
     {
         public Recipe() 
         {
@@ -308,6 +309,26 @@ namespace SapphireXR_App.Models
             set;
             get;
         } = 0;
+
+        [Ignore]
+        string IDataErrorInfo.Error => string.Empty;
+
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                if (stepValidator != null)
+                {
+                    return stepValidator.validate(this, columnName);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Recipe의 Step Validator가 설정되지 않았습니다.");
+                }
+            }
+        }
+
+        internal RecipeValidator.RecipeStepValidator? stepValidator = null;
 
         [Ignore]
         private static readonly ObservableManager<string>.Publisher maxValueExceedPublihser = ObservableManager<string>.Get("Recipe.MaxValueExceed");

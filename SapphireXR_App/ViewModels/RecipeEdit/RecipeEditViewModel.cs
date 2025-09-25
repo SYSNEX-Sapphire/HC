@@ -36,7 +36,17 @@ namespace SapphireXR_App.ViewModels
                 loadToRecipeRunPublisher.Publish((RecipeFilePath ?? "", new RecipeObservableCollection(Recipes.Select(recipe => new Recipe(recipe)))));
                 switchTabToDataRunPublisher.Publish(1);
             },
-            () => Recipes != null && 0 < Recipes.Count && !RecipeRunning);
+            () =>
+            {
+                if (0 < Recipes.Count)
+                {
+                    return RecipeValidator.Valid(Recipes);
+                }
+                else
+                {
+                    return false;
+                }
+            });
             var recipeSave = (string filePath) =>
             {
                 if (Recipes != null)
@@ -93,6 +103,8 @@ namespace SapphireXR_App.ViewModels
                         break;
                 }
             };
+
+            Recipes = new RecipeObservableCollection();
         }
 
         private void RecipeViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -100,8 +112,15 @@ namespace SapphireXR_App.ViewModels
             switch (e.PropertyName)
             {
                 case nameof(Recipes):
+                    var refreshOnRecipeChangedAndRecpiceCollectionChanaged = () =>
+                    {
+                        Recipes.RefreshNo();
+                        RecipeService.SetRecipeStepValidator(Recipes, () => RecipePLCLoadCommand.NotifyCanExecuteChanged());
+                        RecipePLCLoadCommand.NotifyCanExecuteChanged();
+                    };
+
+                    refreshOnRecipeChangedAndRecpiceCollectionChanaged();
                     RecipeOpenCommand.NotifyCanExecuteChanged();
-                    RecipePLCLoadCommand.NotifyCanExecuteChanged();
                     RecipeSaveAsCommand.NotifyCanExecuteChanged();
                     cleanupNewlyAdded();
                     ReactorDataGridContext.reset();
@@ -109,8 +128,7 @@ namespace SapphireXR_App.ViewModels
                     ValveDataGridContext.reset();
                     Recipes.CollectionChanged += (object? sender, NotifyCollectionChangedEventArgs args) =>
                     {
-                        RecipePLCLoadCommand.NotifyCanExecuteChanged();
-                        Recipes.RefreshNo();
+                        refreshOnRecipeChangedAndRecpiceCollectionChanaged();
                     };
                     recipeStateUpdater?.clean();
                     recipeStateUpdater = null;
@@ -208,7 +226,7 @@ namespace SapphireXR_App.ViewModels
         };
 
         [ObservableProperty]
-        private RecipeObservableCollection _recipes = new RecipeObservableCollection();
+        private RecipeObservableCollection _recipes;
 
         public IRelayCommand RecipeNewCommand => new RelayCommand(() =>
         {
