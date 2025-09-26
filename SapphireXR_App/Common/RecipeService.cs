@@ -7,49 +7,41 @@ namespace SapphireXR_App.Common
 {
     public static class RecipeService
     {
-        internal class OpenRecipeFileException : Exception
-        {
-            internal OpenRecipeFileException(string message) : base(message) { }
-        }
 
         public static (bool, string?, List<Recipe>?) OpenRecipe(CsvHelper.Configuration.CsvConfiguration config, string? initialDirectory)
         {
-            try
+            OpenFileDialog openFile = new();
+            openFile.Multiselect = false;
+            openFile.Filter = "csv 파일(*.csv)|*.csv";
+
+            if (Path.Exists(initialDirectory) == false)
             {
-                OpenFileDialog openFile = new();
-                openFile.Multiselect = false;
-                openFile.Filter = "csv 파일(*.csv)|*.csv";
-
-                if(Path.Exists(initialDirectory) == false)
+                initialDirectory = AppDomain.CurrentDomain.BaseDirectory + "Recipe";
+                if (Path.Exists(initialDirectory) == false)
                 {
-                    initialDirectory = AppDomain.CurrentDomain.BaseDirectory + "Recipe";
-                    if (Path.Exists(initialDirectory) == false)
-                    {
-                        Directory.CreateDirectory(initialDirectory);
-                    }
-                }
-                openFile.InitialDirectory = initialDirectory;
-
-                if (openFile.ShowDialog() != true) return (false, null, null);
-                string recipeFilePath = openFile.FileName;
-
-                using (StreamReader streamReader = new StreamReader(recipeFilePath))
-                {
-                    using (var csvReader = new CsvReader(streamReader, config))
-                    {
-                        return (true, recipeFilePath, csvReader.GetRecords<Recipe>().ToList());
-                    }
+                    Directory.CreateDirectory(initialDirectory);
                 }
             }
-            catch (Exception exception)
+            openFile.InitialDirectory = initialDirectory;
+
+            if (openFile.ShowDialog() != true)
             {
-                throw new OpenRecipeFileException(exception.Message);
+                return (false, null, null);
+            }
+
+            string recipeFilePath = openFile.FileName;
+            using (StreamReader streamReader = new StreamReader(recipeFilePath))
+            {
+                using (var csvReader = new CsvReader(streamReader, config))
+                {
+                    return (true, recipeFilePath, csvReader.GetRecords<Recipe>().ToList());
+                }
             }
         }
 
         public static PlcRecipe[] ToPLCRecipe(IList<Recipe> recipes)
         {
-            (bool success, string message) = RecipeValidator.Validate(recipes);
+            (bool success, string message) = RecipeValidator.ValidOnLoadedFromDisk(recipes);
             if (success == false)
             {
                 throw new InvalidOperationException(message);
@@ -101,5 +93,28 @@ namespace SapphireXR_App.Common
             PLCService.WriteRecipe(aRecipePLC);
             PLCService.WriteTotalStep((short)aRecipePLC.Length);
         }
+
+        public static void SetRecipeStepValidator(IList<Recipe> recipes, Action onValidChanged)
+        {
+            if (0 < recipes.Count)
+            {
+                recipes[0].stepValidator = new RecipeValidator.FirstRecipeStepValidator(false);
+                recipes[0].stepValidator!.PropertyChanged += (sender, args) =>
+                {
+                    switch (args.PropertyName)
+                    {
+                        case nameof(RecipeValidator.RecipeStepValidator.Valid):
+                            onValidChanged();
+                            break;
+                    }
+                };
+                for (int recipe = 1; recipe < recipes.Count; ++recipe)
+                {
+                    recipes[recipe].stepValidator = DefaultRecipeStepValidator;
+                }
+            }
+        }
+
+        private static readonly RecipeValidator.NormalRecipeStepValidator DefaultRecipeStepValidator = new RecipeValidator.NormalRecipeStepValidator();
     }
 }
