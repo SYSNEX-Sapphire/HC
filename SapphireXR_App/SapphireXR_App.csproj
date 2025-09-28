@@ -9,61 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Configurations\AppSetting.json" />
-    <None Remove="Resources\Configurations\DeviceIO.json" />
-    <None Remove="Resources\icons\icon=alert_red.png" />
-    <None Remove="Resources\icons\icon=alert_yellow.png" />
-    <None Remove="Resources\icons\icon=analog.png" />
-    <None Remove="Resources\icons\icon=ani_signal_blue.gif" />
-    <None Remove="Resources\icons\icon=app.png" />
-    <None Remove="Resources\icons\icon=buzzeroff.png" />
-    <None Remove="Resources\icons\icon=buzzeron.png" />
-    <None Remove="Resources\icons\icon=chevron.png" />
-    <None Remove="Resources\icons\icon=close.png" />
-    <None Remove="Resources\icons\icon=controller.png" />
-    <None Remove="Resources\icons\icon=cool.png" />
-    <None Remove="Resources\icons\icon=digital.png" />
-    <None Remove="Resources\icons\icon=etc.png" />
-    <None Remove="Resources\icons\icon=event.png" />
-    <None Remove="Resources\icons\icon=flow_controller.png" />
-    <None Remove="Resources\icons\icon=gear.png" />
-    <None Remove="Resources\icons\icon=gem stone.png" />
-    <None Remove="Resources\icons\icon=graph.png" />
-    <None Remove="Resources\icons\icon=heater.png" />
-    <None Remove="Resources\icons\icon=icon28.png" />
-    <None Remove="Resources\icons\icon=line_pressure.png" />
-    <None Remove="Resources\icons\icon=live_plot.png" />
-    <None Remove="Resources\icons\icon=lock_01.png" />
-    <None Remove="Resources\icons\icon=lock_02.png" />
-    <None Remove="Resources\icons\icon=minimize.png" />
-    <None Remove="Resources\icons\icon=minus.png" />
-    <None Remove="Resources\icons\icon=new.png" />
-    <None Remove="Resources\icons\icon=nut and bolt.png" />
-    <None Remove="Resources\icons\icon=open.png" />
-    <None Remove="Resources\icons\icon=pause.png" />
-    <None Remove="Resources\icons\icon=play.png" />
-    <None Remove="Resources\icons\icon=PLC.png" />
-    <None Remove="Resources\icons\icon=plus.png" />
-    <None Remove="Resources\icons\icon=pressure.png" />
-    <None Remove="Resources\icons\icon=recipe_information.png" />
-    <None Remove="Resources\icons\icon=refresh.png" />
-    <None Remove="Resources\icons\icon=rotation.png" />
-    <None Remove="Resources\icons\icon=sapphire.png" />
-    <None Remove="Resources\icons\icon=save.png" />
-    <None Remove="Resources\icons\icon=save_as.png" />
-    <None Remove="Resources\icons\icon=skip.png" />
-    <None Remove="Resources\icons\icon=stop.png" />
-    <None Remove="Resources\icons\icon=temp.png" />
-    <None Remove="Resources\icons\icon=trash.png" />
-    <None Remove="Resources\icons\icon=valve.png" />
-    <None Remove="Resources\icons\icon=valveoperation.png" />
-    <None Remove="Resources\icons\icon=_user.png" />
-    <None Remove="Resources\icons\icon_line_reset.png" />
-    <None Remove="Resources\plus-icon-13071.png" />
-    <None Remove="Resources\subtract-icon-png-28153.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AnimatedImage.Wpf" Version="2.0.0" />
     <PackageReference Include="Beckhoff.TwinCAT.Ads" Version="6.1.294" />
     <PackageReference Include="Caliburn.Micro.Core" Version="4.0.230" />
