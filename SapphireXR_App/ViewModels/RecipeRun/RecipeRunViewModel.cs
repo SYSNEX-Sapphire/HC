@@ -237,6 +237,7 @@ namespace SapphireXR_App.ViewModels
             RecipeCleanCommand.NotifyCanExecuteChanged();
             ChangeLogDirectoryCommand.NotifyCanExecuteChanged();
             recipeRunStatePublisher?.Publish(CurrentRecipeUserState);
+            RecipeLoopReadOnly = recipeRunning();
         }
 
         private bool recipeRunning()
@@ -565,5 +566,8 @@ namespace SapphireXR_App.ViewModels
 
         [ObservableProperty]
         private RecipeUserState _currentRecipeUserState = RecipeUserState.Uninitialized;
+
+        [ObservableProperty]
+        private bool recipeLoopReadOnly = true;
     }
 }
