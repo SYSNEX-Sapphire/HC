@@ -21,6 +21,7 @@ namespace SapphireXR_App.Models
         {
             initialize();
 
+            No = rhs.No;
             Name = rhs.Name;
             HTime = rhs.HTime;
             RTime = rhs.RTime;
