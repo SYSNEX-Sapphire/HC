@@ -16,7 +16,6 @@ using OxyPlot.Annotations;
 using SapphireXR_App.WindowServices;
 using System.Windows.Media;
 using OxyPlot.Wpf;
-using System.Runtime.CompilerServices;
 
 namespace SapphireXR_App.ViewModels
 {
@@ -247,19 +246,9 @@ namespace SapphireXR_App.ViewModels
                         }    
                     }
                     seriesForDevice!.Points.Clear();
-                    IList<Annotation> toRemove = new List<Annotation>();
-                    foreach(Annotation annotation in plotModelByType.plotModel.Annotations)
-                    {
-                        if((string)annotation.Tag == prefix)
-                        {
-                            toRemove.Add(annotation);
-                        }
-                    }
-                    foreach(Annotation annotation in toRemove)
-                    {
-                        plotModelByType.plotModel.Annotations.Remove(annotation);
-                    }
-                    plotModelByType.annotations.RemoveAll(annotation => (string)annotation.Tag == prefix);
+                    Predicate<Annotation> predicate = annotation => (string)annotation.Tag == prefix;
+                    plotModelByType.plotModel.Annotations.RemoveAll(predicate);
+                    plotModelByType.annotations.RemoveAll(predicate);
                    
                     for (int recipeLog = 0; recipeLog < recipeLogs.Count; ++recipeLog)
                     {
