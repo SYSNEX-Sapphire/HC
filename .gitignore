@@ -371,3 +371,8 @@ FodyWeavers.xsd
 /PLC_HC/_CompileInfo_Upload
 /SapphireXR.project.~u
 /TrialLicense.tclrs
+/PLC_HC/_Libraries/Beckhoff Automation GmbH/Tc2_ControllerToolbox/3.6.1.0/Tc2_ControllerToolbox.compiled-library-ge33
+/PLC_HC/_Libraries/Beckhoff Automation GmbH/Tc2_ModbusRTU/3.6.1.0/Tc2_ModbusRTU.compiled-library-ge33
+/PLC_HC/_Libraries/Beckhoff Automation GmbH/Tc2_Standard/3.4.5.0/Tc2_Standard.compiled-library-ge33
+/PLC_HC/_Libraries/Beckhoff Automation GmbH/Tc2_System/3.6.4.0/Tc2_System.compiled-library-ge33
+/PLC_HC/_Libraries/Beckhoff Automation GmbH/Tc3_Module/3.4.5.0/Tc3_Module.compiled-library-ge33
