@@ -259,7 +259,8 @@ namespace SapphireXR_App.ViewModels
             //ObservableManager<BitArray>.Subscribe("LogicalInterlockState", logicalInterlockSubscriber = new LogicalInterlockSubscriber(this));
             //ObservableManager<(string, string)>.Subscribe("GasIOLabelChanged", gasIOLabelSubscriber = new GasIOLabelSubscriber(this));
             ObservableManager<PLCConnection>.Subscribe("PLCService.Connected", plcConnectionStateSubscriber = new PLCConnectionStateSubscriber(this)); 
-          
+            ObservableManager<short>.Subscribe("SignalTowerLight", signalTowerLightSubscriber = new SignalTowerLightSubscriber(this));
+
             //CurrentSourceStatusViewModel = new SourceStatusFromCurrentPLCStateViewModel(this);
             //PropertyChanging += (object? sender, PropertyChangingEventArgs args) =>
             //{
@@ -283,6 +284,7 @@ namespace SapphireXR_App.ViewModels
 
                             case "Disconnected":
                                 PLCConnectionStatusColor = PLCDisconnectedFontColor;
+                                SignalTowerImage = SignalTowerDefaultPath;
                                 break;
                         }
                         break;
@@ -474,5 +476,6 @@ namespace SapphireXR_App.ViewModels
        // private readonly LogicalInterlockSubscriber logicalInterlockSubscriber;
         //private readonly GasIOLabelSubscriber gasIOLabelSubscriber;
         private readonly PLCConnectionStateSubscriber plcConnectionStateSubscriber;
+        private readonly SignalTowerLightSubscriber signalTowerLightSubscriber;
     }
 }

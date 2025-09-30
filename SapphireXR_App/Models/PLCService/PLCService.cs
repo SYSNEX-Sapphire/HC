@@ -182,6 +182,7 @@ namespace SapphireXR_App.Models
             hUserState = Ads.CreateVariableHandle("RCP.userState");
             hRecipeControlPauseTime = Ads.CreateVariableHandle("RCP.Pause_ET");
             hRecipeRunET = Ads.CreateVariableHandle("RCP.RecipeRunET");
+            hCaseSignalTower = Ads.CreateVariableHandle("GVL_IO.nCaseSignalTower");
             //hE3508InputManAuto = Ads.CreateVariableHandle("GVL_IO.nE3508_nInputManAutoBytes");
             //hOutputSetType = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_SetType");
             //hOutputMode = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_Mode");
@@ -239,6 +240,7 @@ namespace SapphireXR_App.Models
             dLogicalInterlockStateIssuer = ObservableManager<BitArray>.Get("LogicalInterlockState");
             dPLCConnectionPublisher = ObservableManager<PLCConnection>.Get("PLCService.Connected");
             dOperationModeChangingPublisher = ObservableManager<bool>.Get("OperationModeChanging");
+            dSingalTowerStatePublisher = ObservableManager<short>.Get("SignalTowerLight");
         }
 
         private static void ReadStateFromPLC(object? sender, EventArgs e)
@@ -297,7 +299,9 @@ namespace SapphireXR_App.Models
                         dValveStateIssuers?[valveID].Publish(baReadValveStatePLC[index]);
                     }
                 }
-             
+
+                dSingalTowerStatePublisher?.Publish(Ads.ReadAny<short>(hCaseSignalTower));
+
                 //dLineHeaterTemperatureIssuers?.Publish(Ads.ReadAny<float[]>(hTemperaturePV, [(int)LineHeaterTemperature]));
 
                 //byte[] digitalOutput = Ads.ReadAny<byte[]>(hDigitalOutput, [4]);
@@ -312,7 +316,7 @@ namespace SapphireXR_App.Models
 
                 //int iterlock1 = Ads.ReadAny<int>(hInterlock[0]);
                 //dLogicalInterlockStateIssuer?.Publish(new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(iterlock1) : BitConverter.GetBytes(iterlock1).Reverse().ToArray()));
-            
+
                 string exceptionStr = string.Empty;
                 if (aDeviceControlValues == null)
                 {

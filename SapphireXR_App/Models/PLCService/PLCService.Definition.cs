@@ -175,6 +175,7 @@ namespace SapphireXR_App.Models
         private static ObservableManager<BitArray>.Publisher? dLogicalInterlockStateIssuer;
         private static ObservableManager<PLCConnection>.Publisher? dPLCConnectionPublisher;
         private static ObservableManager<bool>.Publisher? dOperationModeChangingPublisher;
+        private static ObservableManager<short>.Publisher? dSingalTowerStatePublisher;
 
         static Task<bool>? TryConnectAsync = null;
 
@@ -214,6 +215,7 @@ namespace SapphireXR_App.Models
         private static uint hRcpTotalStep;
         private static uint hCmd_RcpOperation;
         private static uint hRcpStepN;
+        private static uint hCaseSignalTower;
         //private static uint hMonitoring_PV;
         //private static uint hInputState;
         //private static uint hInputState4;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Numerics;
+using System.Printing;
 using System.Windows.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SapphireXR_App.Common;
@@ -463,6 +464,55 @@ namespace SapphireXR_App.ViewModels
             void IObserver<PLCConnection>.OnNext(PLCConnection value)
             {
                 leftViewModel.setConnectionStatusText(value);
+            }
+
+            private LeftViewModel leftViewModel;
+        }
+
+        private class SignalTowerLightSubscriber : IObserver<short>
+        {
+            internal SignalTowerLightSubscriber(LeftViewModel vm)
+            {
+                leftViewModel = vm;
+            }
+            void IObserver<short>.OnCompleted()
+            {
+                throw new NotImplementedException();
+            }
+
+            void IObserver<short>.OnError(Exception error)
+            {
+                throw new NotImplementedException();
+            }
+
+            void IObserver<short>.OnNext(short value)
+            {
+                switch(value)
+                {
+                    case 1:
+                        leftViewModel.SignalTowerImage = SignalTowerRedPath;
+                        break;
+
+                    case 2:
+                        leftViewModel.SignalTowerImage = SignalTowerYellowPath;
+                        break;
+
+                    case 3:
+                        leftViewModel.SignalTowerImage = SignalTowerGreenath;
+                        break;
+
+                    case 4:
+                        leftViewModel.SignalTowerImage = SignalTowerBluePath;
+                        break;
+
+                    case 5:
+                        leftViewModel.SignalTowerImage = SignalTowerWhitePath;
+                        break;
+
+                    default:
+                        leftViewModel.SignalTowerImage = SignalTowerDefaultPath;
+                        break;
+                }    
             }
 
             private LeftViewModel leftViewModel;
