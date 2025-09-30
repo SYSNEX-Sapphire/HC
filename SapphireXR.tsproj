@@ -11,10 +11,10 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6outData22B</Name>
+			<Name GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6inData22B</Name>
 			<BitSize>192</BitSize>
 			<SubItem>
-				<Name>Ctrl</Name>
+				<Name>Status</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
 				<BitSize>16</BitSize>
 				<BitOffs>0</BitOffs>
@@ -36,10 +36,10 @@
 			</Properties>
 		</DataType>
 		<DataType>
-			<Name GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6inData22B</Name>
+			<Name GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6outData22B</Name>
 			<BitSize>192</BitSize>
 			<SubItem>
-				<Name>Status</Name>
+				<Name>Ctrl</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
 				<BitSize>16</BitSize>
 				<BitOffs>0</BitOffs>
@@ -117,13 +117,12 @@
 	</ImageDatas>
 	<Project ProjectGUID="{3D06573F-FA21-4D81-AB6B-ED6B30724E66}" Target64Bit="true" ShowHideConfigurations="#x3c7">
 		<System>
-			<Settings MaxCpus="8" NonWinCpus="1">
-				<Cpu CpuId="7"/>
+			<Settings MaxCpus="16" NonWinCpus="1">
+				<Cpu CpuId="15"/>
 			</Settings>
 			<Licenses>
 				<Target>
 					<ManualSelect>{6952449D-F68C-49A2-ADE4-8639D85B33A4}</ManualSelect>
-					<ManualSelect>{A1AF8A04-C08D-4853-A5A0-0E6C3A278A8C}</ManualSelect>
 				</Target>
 			</Licenses>
 			<Tasks>
@@ -134,31 +133,9 @@
 		</System>
 		<Plc>
 			<Project GUID="{54872A79-3C7B-479E-8547-D3B2B5F2ABCB}" Name="PLC_HC" PrjFilePath="PLC_HC\PLC_HC.plcproj" TmcFilePath="PLC_HC\PLC_HC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC_HC\PLC_HC.tmc" TmcHash="{5D3C651E-6C89-69EB-0820-A8452A8809B8}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC_HC\PLC_HC.tmc" TmcHash="{94741EAF-B1BA-BC9A-9A1D-52773AB5967C}">
 					<Name>PLC_HC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="2" AreaNo="1">
-						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>GVL_IO.DigitalOutputIO</Name>
-							<Comment><![CDATA[EL2088 1EA]]></Comment>
-							<Type>BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.OutputSolValve</Name>
-							<Comment><![CDATA[16열 32점]]></Comment>
-							<Type>DWORD</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.aAnalogOutputIO</Name>
-							<Comment><![CDATA[EL4004 3EA]]></Comment>
-							<Type GUID="{DF6FA6D7-8415-01D4-2A6F-83A1C77003C7}">ARRAY [1..18] OF INT</Type>
-						</Var>
-						<Var>
-							<Name>RCP.fbModbusManager.fbModbus_Master.OutData</Name>
-							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
-						</Var>
-					</Vars>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
@@ -178,6 +155,28 @@
 						<Var>
 							<Name>RCP.fbModbusManager.fbModbus_Master.WcState</Name>
 							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL_IO.DigitalOutputIO</Name>
+							<Comment><![CDATA[EL2088 1EA]]></Comment>
+							<Type>BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.aAnalogOutputIO</Name>
+							<Comment><![CDATA[EL4004 3EA]]></Comment>
+							<Type GUID="{DF6FA6D7-8415-01D4-2A6F-83A1C77003C7}">ARRAY [1..18] OF INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.OutputSolValve</Name>
+							<Comment><![CDATA[16열 32점]]></Comment>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>RCP.fbModbusManager.fbModbus_Master.OutData</Name>
+							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2025-08-14T09:24:15">
