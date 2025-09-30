@@ -340,60 +340,26 @@
                 </Border>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1" Background="{StaticResource Gray_100}" Width="300" IsEnabled="False">
+        <Grid Grid.Column="1" Background="{StaticResource Gray_100}" Width="300">
             <Border BorderBrush="{StaticResource Gray_300}" Padding="{StaticResource p_3_sqrt}">
                 <Border.BorderThickness>
                     <Thickness Left="1" Top="1" />
                 </Border.BorderThickness>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="150"/>
-                        <RowDefinition Height="600"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!-- User Status-->
-                    <Grid Grid.Row="0">
-                        <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource Gray_300}">
-                            <Border>
-                                <Border.BorderThickness>
-                                    <Thickness Left="{StaticResource p_2}" Right="{StaticResource p_2}" Bottom="14"/>
-                                </Border.BorderThickness>
-                                <StackPanel Orientation="Vertical" Margin="0, 0, 0, 0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Resources/icons/icon=user_status.png" Width="24" Height="24"/>
-                                        <Label Foreground="{StaticResource Gray_950}" FontSize="14" HorizontalContentAlignment="Center" FontFamily="Segoe UI">
-                                            <Bold>User Status</Bold>
-                                        </Label>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical">
-                                        <StackPanel.Margin>
-                                            <Thickness Left="{StaticResource p_5}" Bottom="0"/>
-                                        </StackPanel.Margin>
-                                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="{StaticResource Gray_950}" HorizontalAlignment="Stretch" FontFamily="Segoe UI" FontSize="12">
-                                            <TextBlock.Margin>
-                                                <Thickness Bottom="{StaticResource p_1}" />
-                                            </TextBlock.Margin>
-                                            Check the current equipment settings and adjust the values of each device.
-                                        </TextBlock>
-                                        <Button Content="User State" Height="26" Command="{Binding ManualBatchCommand}" Style="{StaticResource DefaultButton}">
-                                            <Button.Margin>
-                                                <Thickness Left="0" Right="0" Top="{StaticResource p_1}" Bottom="0"/>
-                                            </Button.Margin>
-                                        </Button>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
-                        </Border>
-                    </Grid>
                     <!-- Furnace Temperature Controller Status -->
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="0">
                         <Grid.Margin>
                             <Thickness Top="{StaticResource p_1}" />
                         </Grid.Margin>
                         <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource Gray_300}">
                             <StackPanel>
                                 <StackPanel.Margin>
-                                    <Thickness Left="{StaticResource p_2}" Right="{StaticResource p_2}"/>
+                                    <Thickness Left="{StaticResource p_2}" Right="{StaticResource p_2}" Bottom="{StaticResource p_5}"/>
                                 </StackPanel.Margin>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel.Margin>
@@ -412,7 +378,8 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
                                                 <Label HorizontalAlignment="Left" Content="Furnace Zone #1" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
-                                                <TextBox x:Name="tbPowerRateTemp" Text="{Binding PowerRateTemp}" IsReadOnly="True" HorizontalAlignment="Stretch" Height="18" Style="{StaticResource InfoTextBox}"/>
+                                                <ProgressBar Minimum="0" Maximum="100" Value="50" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
+                                                <ProgressBar Minimum="0" Maximum="100" Value="20" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -422,7 +389,9 @@
                                                 <RowDefinition />
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                                                <Label HorizontalAlignment="Left" Content="Furnace Zone #2" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />                           
+                                                <Label HorizontalAlignment="Left" Content="Furnace Zone #2" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
+                                                <ProgressBar Minimum="0" Maximum="100" Value="10" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
+                                                <ProgressBar Minimum="0" Maximum="100" Value="20" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -433,6 +402,8 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
                                                 <Label HorizontalAlignment="Left" Content="Furnace Zone #3" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
+                                                <ProgressBar Minimum="0" Maximum="100" Value="90" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
+                                                <ProgressBar Minimum="0" Maximum="100" Value="20" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -443,6 +414,8 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
                                                 <Label HorizontalAlignment="Left" Content="Furnace Zone #4" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
+                                                <ProgressBar Minimum="0" Maximum="100" Value="40" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
+                                                <ProgressBar Minimum="0" Maximum="100" Value="70" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -453,6 +426,8 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
                                                 <Label HorizontalAlignment="Left" Content="Furnace Zone #5" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
+                                                <ProgressBar Minimum="0" Maximum="100" Value="30" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
+                                                <ProgressBar Minimum="0" Maximum="100" Value="10" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -463,6 +438,8 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
                                                 <Label HorizontalAlignment="Left" Content="Furnace Zone #6" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
+                                                <ProgressBar Minimum="0" Maximum="100" Value="80" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
+                                                <ProgressBar Minimum="0" Maximum="100" Value="20" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -472,7 +449,7 @@
                         </Border>
                     </Grid>
                     <!-- Event Log -->
-                    <Grid Grid.Row="2" >
+                    <Grid Grid.Row="1" >
                         <Grid.Margin>
                             <Thickness Top="{StaticResource p_1}" />
                         </Grid.Margin>
@@ -490,7 +467,7 @@
                                 </Label>
                                 <Button Width="134" HorizontalAlignment="Right" Style="{StaticResource DefaultButton}" Content="Clear" Command="{Binding ClearEventLogsCommand}"/>
                             </DockPanel>
-                            <DataGrid x:Name="dgEventLog" ToolTip="상세 윈도우를 뛰우려면 더블클릭 하세요." VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" ItemsSource="{Binding Source={x:Static model:EventLogs.Instance}, Path=EventLogList}" Style="{StaticResource EventLog}" Height="114">
+                            <DataGrid x:Name="dgEventLog" ToolTip="상세 윈도우를 뛰우려면 더블클릭 하세요." VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" ItemsSource="{Binding Source={x:Static model:EventLogs.Instance}, Path=EventLogList}" Style="{StaticResource EventLog}" Height="455">
                                 <DataGrid.Resources>
                                     <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
                                 </DataGrid.Resources>
