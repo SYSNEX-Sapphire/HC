@@ -1,2 +1,15 @@
 {
+  "LogFileDirectory": "\"C:\\\\SapphireXR\\\\HC\\\\SapphireXR_App\\\\bin\\\\Release\\\\net8.0-windows\\\\Log\"",
+  "UnderFlowControlFallbackRatePercentage": "1",
+  "FloatingPointMaxNumberDigit": "4",
+  "PLCAddress": "\"5.166.23.119.1.1\"",
+  "PLCPort": "851",
+  "ConfigMode": "false",
+  "PrecursorSourceMonitorLabel": "{\"GasMonitor1\":\"H2\",\"GasMonitor2\":\"N2\",\"GasMonitor3\":\"SiH4\",\"GasMonitor4\":\"NH3\"}",
+  "ConnectionRetryMilleseconds": "1000",
+  "RecipeRunRecipeInitialPath": "null",
+  "RecipeEditRecipeInitialPath": "null",
+  "RecipeLog1InitialPath": "null",
+  "RecipeLog2InitialPath": "null",
+  "MaxNumberOfRecipeSteps": "100"
 }
