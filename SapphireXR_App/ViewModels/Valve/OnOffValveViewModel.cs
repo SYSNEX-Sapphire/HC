@@ -1,9 +1,10 @@
-﻿using SapphireXR_App.Common;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SapphireXR_App.Common;
 using System.Windows;
 
 namespace SapphireXR_App.ViewModels.Valve
 {
-    public class OnOffValveViewModel: ValveViewModel
+    public partial class OnOffValveViewModel: ValveViewModel
     {
         private class ValveLabelUpdater : IObserver<(string, string)>
         {
@@ -58,17 +59,9 @@ namespace SapphireXR_App.ViewModels.Valve
         }
 
         private ValveStateUpdater? valveStateUpdater;
-        public string? Name
-        {
-            get { return (string)GetValue(NameProperty); }
-            set
-            {
-                SetValue(NameProperty, value);
-            }
-        }
 
-        public static readonly DependencyProperty NameProperty =
-            DependencyProperty.Register("Name", typeof(string), typeof(OnOffValveViewModel), new PropertyMetadata(default));
+        [ObservableProperty]
+        private string? name;
         private ValveLabelUpdater valveLabelUpdater;
     }
 }

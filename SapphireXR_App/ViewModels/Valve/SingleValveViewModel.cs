@@ -2,10 +2,12 @@
 using System.Windows;
 using System.Windows.Media;
 using CommunityToolkit.Mvvm.Input;
+using SapphireXR_App.Common;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SapphireXR_App.ViewModels
 {
-    public class SingleValveViewModel: OnOffValveViewModel
+    public partial class SingleValveViewModel: OnOffValveViewModel
     {
         protected override PopupMessage getPopupMessage()
         {
@@ -31,6 +33,18 @@ namespace SapphireXR_App.ViewModels
                     }
                 }
             });
+            PropertyChanged += (sender, args) =>
+            {
+                switch(args.PropertyName)
+                {
+                    case nameof(IsOpen):
+                        if (Name != null)
+                        {
+                            valveStatePublisher.Publish((Name, IsOpen));
+                        }
+                        break;
+                }
+            };
         }
 
         private static PopupMessage CreateDefaultPopupMessage(string valveID)
@@ -46,31 +60,17 @@ namespace SapphireXR_App.ViewModels
             };
         }
 
-        private PopupMessage popUpMessage = new PopupMessage() { cancelWithOpen = "", cancelWithoutOpen = "", confirmWithOpen = "", confirmWithoutOpen = "", messageWithOpen = "", messageWithoutOpen = ""}; 
+        private PopupMessage popUpMessage = new PopupMessage() { cancelWithOpen = "", cancelWithoutOpen = "", confirmWithOpen = "", confirmWithoutOpen = "", messageWithOpen = "", messageWithoutOpen = ""};
 
-        public Brush OnColor
-        {
-            get { return (Brush)GetValue(OnColorProperty); }
-            set { SetValue(OnColorProperty, value); }
-        }
-        public static readonly DependencyProperty OnColorProperty =
-            DependencyProperty.Register("OnColor", typeof(Brush), typeof(SingleValveViewModel), new PropertyMetadata(Brushes.Transparent));
+        [ObservableProperty]
+        private Brush onColor = Brushes.Lime;
 
-        public Brush OffColor
-        {
-            get { return (Brush)GetValue(OffColorProperty); }
-            set { SetValue(OffColorProperty, value); }
-        }
-        public static readonly DependencyProperty OffColorProperty =
-            DependencyProperty.Register("OffColor", typeof(Brush), typeof(SingleValveViewModel), new PropertyMetadata(Brushes.Transparent));
+        [ObservableProperty]
+        private Brush offColor = Brushes.Lime;
 
-        public bool IsNormallyOpen
-        {
-            get { return (bool)GetValue(IsNormallyOpenProperty); }
-            set { SetValue(IsNormallyOpenProperty, value); }
-        }
-        // Using a DependencyProperty as the backing store for IsNormallyOpen.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsNormallyOpenProperty =
-            DependencyProperty.Register("IsNormallyOpen", typeof(bool), typeof(SingleValveViewModel), new PropertyMetadata(default));
+        [ObservableProperty]
+        private bool isNormallyOpen = false;
+        
+        private ObservableManager<(string, bool)>.Publisher valveStatePublisher = ObservableManager<(string, bool)>.Get("ValveState");
     }
 }

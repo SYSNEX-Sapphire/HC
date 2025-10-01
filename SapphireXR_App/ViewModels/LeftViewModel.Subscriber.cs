@@ -157,7 +157,7 @@ namespace SapphireXR_App.ViewModels
             {
                 var checkAllSignalOff = (BitArray ioList) =>
                 {
-                    if( ioList[(int)PLCService.IOListIndex.SingalTower_RED] == false &&
+                    if (ioList[(int)PLCService.IOListIndex.SingalTower_RED] == false &&
                            ioList[(int)PLCService.IOListIndex.SingalTower_YELLOW] == false &&
                            ioList[(int)PLCService.IOListIndex.SingalTower_GREEN] == false &&
                            ioList[(int)PLCService.IOListIndex.SingalTower_BLUE] == false &&
@@ -287,7 +287,7 @@ namespace SapphireXR_App.ViewModels
                     prevValue = newValue;
                 }
             }
-           
+
             void IObserver<BitArray>.OnNext(BitArray value)
             {
                 var getGasState = (BitArray bitArray, int upperBitIndex, int lowerBitIndex) => (byte)(Convert.ToUInt32(bitArray[upperBitIndex]) << 1 | Convert.ToUInt32(bitArray[lowerBitIndex]));
@@ -390,55 +390,6 @@ namespace SapphireXR_App.ViewModels
                     //    leftViewModel.CurrentSourceStatusViewModel.TMInCarrier = gasName;
                     //}
                 };
-                switch (value.Item1)
-                {
-                    case "Gas1":
-                        updateCarrierStatus(leftViewModel.Gas1, value.Item2);
-                        leftViewModel.Gas1 = value.Item2;
-                        leftViewModel.LogicalInterlockGas1 = LeftViewModel.GetIogicalInterlockLabel(value.Item2);
-                        break;
-
-                    case "Gas2":
-                        updateCarrierStatus(leftViewModel.Gas2, value.Item2);
-                        leftViewModel.Gas2 = value.Item2;
-                        leftViewModel.LogicalInterlockGas2 = LeftViewModel.GetIogicalInterlockLabel(value.Item2);
-                        break;
-
-                    case "Gas3":
-                        leftViewModel.Gas3_1 = LeftViewModel.GetGas3Label(value.Item2, 1);
-                        leftViewModel.Gas3_2 = LeftViewModel.GetGas3Label(value.Item2, 2);
-                        leftViewModel.LogicalInterlockGas3 = LeftViewModel.GetIogicalInterlockLabel(value.Item2);
-                        break;
-
-                    case "Gas4":
-                        leftViewModel.Gas4 = value.Item2;
-                        leftViewModel.LogicalInterlockGas4 = LeftViewModel.GetIogicalInterlockLabel(value.Item2);
-                        break;
-
-                    case "Source1":
-                        leftViewModel.Source1 = value.Item2;
-                        break;
-
-                    case "Source2":
-                        leftViewModel.Source2 = value.Item2;
-                        break;
-
-                    case "Source3":
-                        leftViewModel.Source3 = value.Item2;
-                        break;
-
-                    case "Source4":
-                        leftViewModel.Source4 = value.Item2;
-                        break;
-
-                    case "Source5":
-                        leftViewModel.Source5 = value.Item2;
-                        break;
-
-                    case "Source6":
-                        leftViewModel.Source6 = value.Item2;
-                        break;
-                }
             }
 
             private LeftViewModel leftViewModel;
@@ -487,7 +438,7 @@ namespace SapphireXR_App.ViewModels
 
             void IObserver<short>.OnNext(short value)
             {
-                switch(value)
+                switch (value)
                 {
                     case 1:
                         leftViewModel.SignalTowerImage = SignalTowerRedPath;
@@ -512,10 +463,189 @@ namespace SapphireXR_App.ViewModels
                     default:
                         leftViewModel.SignalTowerImage = SignalTowerDefaultPath;
                         break;
-                }    
+                }
             }
 
             private LeftViewModel leftViewModel;
+        }
+
+        private class ValveStateSubscriber : IObserver<(string, bool)>
+        {
+            internal ValveStateSubscriber(LeftViewModel vm)
+            {
+                leftViewModel = vm;
+            }
+            void IObserver<(string, bool)>.OnCompleted()
+            {
+                throw new NotImplementedException();
+            }
+            void IObserver<(string, bool)>.OnError(Exception error)
+            {
+                throw new NotImplementedException();
+            }
+            void IObserver<(string, bool)>.OnNext((string, bool) value)
+            {
+                switch(value.Item1)
+                {
+                    case "V01":
+                        valveStates[0] = value.Item2;
+                        break;
+                    case "V02":
+                        valveStates[1] = value.Item2;
+                        break;
+                    case "V03":
+                        valveStates[2] = value.Item2;
+                        break;
+                    case "V04":
+                        valveStates[3] = value.Item2;
+                        break;
+                    case "V05":
+                        valveStates[4] = value.Item2;
+                        break;
+                    case "V06":
+                        valveStates[5] = value.Item2;
+                        break;
+                    case "V07":
+                        valveStates[6] = value.Item2;
+                        break;
+                    case "V08":
+                        valveStates[7] = value.Item2;
+                        break;
+                    case "V09":
+                        valveStates[8] = value.Item2;
+                        break;
+                    case "V10":
+                        valveStates[9] = value.Item2;
+                        break;
+                    case "V11":
+                        valveStates[10] = value.Item2;
+                        break;
+                    case "V12":
+                        valveStates[11] = value.Item2;
+                        break;
+                    // V13은 제외
+                    case "V14":
+                        valveStates[13] = value.Item2;
+                        break;
+                    case "V15":
+                        valveStates[14] = value.Item2;
+                        break;
+                    case "V16":
+                        valveStates[15] = value.Item2;
+                        break;
+                    case "V17":
+                        valveStates[16] = value.Item2;
+                        break;
+                    case "V18":
+                        valveStates[17] = value.Item2;
+                        break;
+                    case "V19":
+                        valveStates[18] = value.Item2;
+                        break;
+                    case "V20":
+                        valveStates[19] = value.Item2;
+                        break;
+                }
+
+                if (valveStates[13] == true && valveStates[0] == true)
+                {
+                    leftViewModel.BackgroundInletGas = LeftViewModel.Gas1;
+                    leftViewModel.BackgroundInletGasColor = LeftViewModel.Gas1Color;
+                }
+                else
+                {
+                    leftViewModel.BackgroundInletGas = "";
+                }
+
+                if (valveStates[14] == true && valveStates[1] == true)
+                {
+                    leftViewModel.GaliumBoatInletGas = LeftViewModel.Gas2;
+                    leftViewModel.GaliumBoatInletGasColor = LeftViewModel.Gas2Color;
+                }
+                else if(valveStates[14] == true && valveStates[2] == true)
+                {
+                    leftViewModel.GaliumBoatInletGas = LeftViewModel.Gas1;
+                    leftViewModel.GaliumBoatInletGasColor = LeftViewModel.Gas1Color;
+                }
+                else
+                {
+                    leftViewModel.GaliumBoatInletGas = "";
+                }
+
+                if (valveStates[15] == true && valveStates[3] == true)
+                {
+                    leftViewModel.AmmoniaInletTubeGas = LeftViewModel.Gas3;
+                    leftViewModel.AmmoniaInletTubeGasColor = LeftViewModel.Gas3Color;
+                }
+                else if (valveStates[15] == true && valveStates[4] == true)
+                {
+                    leftViewModel.AmmoniaInletTubeGas = LeftViewModel.Gas1;
+                    leftViewModel.AmmoniaInletTubeGasColor = LeftViewModel.Gas1Color;
+                }
+                else
+                {
+                    leftViewModel.AmmoniaInletTubeGas = "";
+                }
+
+                if (valveStates[16] == true && valveStates[5] == true)
+                {
+                    leftViewModel.AluminuimBoatInletGas = LeftViewModel.Gas2;
+                    leftViewModel.AluminuimBoatInletGasColor = LeftViewModel.Gas2Color;
+                }
+                else if(valveStates[16] == true && valveStates[6] == true)
+                {
+                    leftViewModel.AluminuimBoatInletGas = LeftViewModel.Gas1;
+                    leftViewModel.AluminuimBoatInletGasColor = LeftViewModel.Gas1Color;
+                }
+                else
+                {
+                    leftViewModel.AluminuimBoatInletGas = "";
+                }
+
+                if (valveStates[17] == true && valveStates[7] == true)
+                {
+                    leftViewModel.EtchingTubeInletGas = LeftViewModel.Gas2;
+                    leftViewModel.EtchingTubeInletGasColor = LeftViewModel.Gas2Color;
+                }
+                else if (valveStates[17] == true && valveStates[8] == true)
+                {
+                    leftViewModel.EtchingTubeInletGas = LeftViewModel.Gas1;
+                    leftViewModel.EtchingTubeInletGasColor = LeftViewModel.Gas1Color;
+                }
+                else
+                {
+                    leftViewModel.EtchingTubeInletGas = "";
+                }
+
+                if (valveStates[18] == true && valveStates[9] == true)
+                {
+                    leftViewModel.H2O2InletGas = LeftViewModel.Gas4;
+                    leftViewModel.H2O2InletGasColor = LeftViewModel.Gas4Color;
+                }
+                else if (valveStates[18] == true && valveStates[10] == true)
+                {
+                   leftViewModel.H2O2InletGas = LeftViewModel.Gas1;
+                   leftViewModel.H2O2InletGasColor = LeftViewModel.Gas1Color;
+                }
+                else
+                {
+                    leftViewModel.H2O2InletGas = "";
+                }
+
+                if (valveStates[19] == true && valveStates[11] == true)
+                {
+                    leftViewModel.BackFlangeInletGas = LeftViewModel.Gas1;
+                    leftViewModel.BackFlangeInletGasColor = LeftViewModel.Gas1Color;
+                }
+                else
+                {
+                    leftViewModel.BackFlangeInletGas = "";
+                }
+
+            }
+
+            private LeftViewModel leftViewModel;
+            private bool[] valveStates = new bool[20];
         }
     }
 }

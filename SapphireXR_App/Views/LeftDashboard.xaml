@@ -180,47 +180,40 @@
                                 <RowDefinition Height="10"/>
                             </Grid.RowDefinitions>
                             
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Back Ground Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>                        
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Source1, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Back Ground Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="Galium Boat Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Source2, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
 
                             <TextBlock Grid.Row="6" Grid.Column="0" Text="Ammonia Inlet Tube" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-                            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Source3, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
 
                             <TextBlock Grid.Row="9" Grid.Column="0" Text="Aluminum Boat Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-                            <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Source4, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
 
                             <TextBlock Grid.Row="12" Grid.Column="0" Text="Etching Tube Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-                            <TextBlock Grid.Row="13" Grid.Column="1" Text="{Binding Source5, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
 
                             <TextBlock Grid.Row="15" Grid.Column="0" Text="H2 / O2 Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-                            <TextBlock Grid.Row="16" Grid.Column="1" Text="{Binding Source6, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
 
                             <TextBlock Grid.Row="18" Grid.Column="0" Text="Back Flange" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-                            <TextBlock Grid.Row="19" Grid.Column="1" Text="{Binding Source6, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  Style="{StaticResource SourceStatusLabelText}" />
-                            
+
                             <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}" >
-                                <!--<TextBlock Text="{Binding CurrentSourceStatusViewModel.NH3_1Carrier, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="{Binding CurrentSourceStatusViewModel.NH3_1CarrierColor}" Style="{StaticResource SourceStatusIndicatorText}" />-->
+                                <TextBlock Text="{Binding BackgroundInletGas}" Foreground="{Binding BackgroundInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <!--<TextBlock Text="{Binding CurrentSourceStatusViewModel.NH3_1Source}" Foreground="{Binding CurrentSourceStatusViewModel.NH3_1SourceColor}" Style="{StaticResource SourceStatusIndicatorText}" />-->
+                                <TextBlock Text="{Binding GaliumBoatInletGas}" Foreground="{Binding GaliumBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <!--<TextBlock Text="{Binding CurrentSourceStatusViewModel.NH3_1Vent}" Foreground="{Binding CurrentSourceStatusViewModel.NH3_1VentColor}" Style="{StaticResource SourceStatusIndicatorText}" />-->
+                                <TextBlock Text="{Binding AmmoniaInletTubeGas}" Foreground="{Binding AmmoniaInletTubeGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <!--<TextBlock Text="{Binding CurrentSourceStatusViewModel.NH3_2Carrier, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="{Binding CurrentSourceStatusViewModel.NH3_2CarrierColor}" Style="{StaticResource SourceStatusIndicatorText}" />-->
+                                <TextBlock Text="{Binding AluminuimBoatInletGas}" Foreground="{Binding AluminuimBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <!--<TextBlock Text="{Binding CurrentSourceStatusViewModel.NH3_2Source}" Foreground="{Binding CurrentSourceStatusViewModel.NH3_2SourceColor}" Style="{StaticResource SourceStatusIndicatorText}" />-->
+                                <TextBlock Text="{Binding EtchingTubeInletGas}" Foreground="{Binding EtchingTubeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <!--<TextBlock Text="{Binding CurrentSourceStatusViewModel.NH3_2Vent}" Foreground="{Binding CurrentSourceStatusViewModel.NH3_2VentColor}" Style="{StaticResource SourceStatusIndicatorText}" />-->
+                                <TextBlock Text="{Binding H2O2InletGas}" Foreground="{Binding H2O2InletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="19" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <!--<TextBlock Text="{Binding CurrentSourceStatusViewModel.SiH4Carrier, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="{Binding CurrentSourceStatusViewModel.SiH4CarrierColor}" Style="{StaticResource SourceStatusIndicatorText}" />-->
+                                <TextBlock Text="{Binding BackFlangeInletGas}" Foreground="{Binding BackFlangeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                         </Grid>
                     </StackPanel>
