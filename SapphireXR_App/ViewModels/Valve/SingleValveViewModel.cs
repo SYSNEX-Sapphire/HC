@@ -33,18 +33,6 @@ namespace SapphireXR_App.ViewModels
                     }
                 }
             });
-            PropertyChanged += (sender, args) =>
-            {
-                switch(args.PropertyName)
-                {
-                    case nameof(IsOpen):
-                        if (Name != null)
-                        {
-                            valveStatePublisher.Publish((Name, IsOpen));
-                        }
-                        break;
-                }
-            };
         }
 
         private static PopupMessage CreateDefaultPopupMessage(string valveID)
@@ -70,7 +58,5 @@ namespace SapphireXR_App.ViewModels
 
         [ObservableProperty]
         private bool isNormallyOpen = false;
-        
-        private ObservableManager<(string, bool)>.Publisher valveStatePublisher = ObservableManager<(string, bool)>.Get("ValveState");
     }
 }

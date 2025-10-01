@@ -195,25 +195,25 @@
                             <TextBlock Grid.Row="18" Grid.Column="0" Text="Back Flange" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
 
                             <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}" >
-                                <TextBlock Text="{Binding BackgroundInletGas}" Foreground="{Binding BackgroundInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.BackgroundInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.BackgroundInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <TextBlock Text="{Binding GaliumBoatInletGas}" Foreground="{Binding GaliumBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <TextBlock Text="{Binding AmmoniaInletTubeGas}" Foreground="{Binding AmmoniaInletTubeGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGas}" Foreground="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <TextBlock Text="{Binding AluminuimBoatInletGas}" Foreground="{Binding AluminuimBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <TextBlock Text="{Binding EtchingTubeInletGas}" Foreground="{Binding EtchingTubeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <TextBlock Text="{Binding H2O2InletGas}" Foreground="{Binding H2O2InletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.H2O2InletGas}" Foreground="{Binding CurrentSourceStatusViewModel.H2O2InletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                             <Border Grid.Row="19" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
-                                <TextBlock Text="{Binding BackFlangeInletGas}" Foreground="{Binding BackFlangeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.BackFlangeInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.BackFlangeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
                         </Grid>
                     </StackPanel>
