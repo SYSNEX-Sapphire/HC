@@ -150,5 +150,64 @@ namespace SapphireXR_App.ViewModels
             }
             private HomeViewModel homeViewModel;
         }
+
+        private class TemperatureBarUpdater : IObserver<float>
+        {
+            internal TemperatureBarUpdater(Action<float> onNextAc)
+            {
+                onNext = onNextAc;
+            }
+
+            void IObserver<float>.OnCompleted()
+            {
+                throw new NotImplementedException();
+            }
+
+            void IObserver<float>.OnError(Exception error)
+            {
+                throw new NotImplementedException();
+            }
+
+            void IObserver<float>.OnNext(float value)
+            {
+               if (prevTemperature != value)
+                {
+                    onNext(value);
+                    prevTemperature = value;
+                }
+            }
+
+            Action<float> onNext;
+            private float? prevTemperature = null;
+        }
+
+        private class TempPowerRateUpdater : IObserver<short>
+        {
+            internal TempPowerRateUpdater(Action<short> onNextAc)
+            {
+                onNext = onNextAc;
+            }
+            void IObserver<short>.OnCompleted()
+            {
+                throw new NotImplementedException();
+            }
+
+            void IObserver<short>.OnError(Exception error)
+            {
+                throw new NotImplementedException();
+            }
+
+            void IObserver<short>.OnNext(short value)
+            {
+                if(prevPowerRate != value)
+                {
+                    onNext(value);
+                    prevPowerRate = value;
+                }
+            }
+
+            Action<short> onNext;
+            short? prevPowerRate = null;
+        }
     }
 }

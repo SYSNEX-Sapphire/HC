@@ -19,7 +19,13 @@ GVL_IO.aController_PV[15] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_3.TEMP
 GVL_IO.aController_PV[16] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_4.TEMP_PV_VALUE);
 GVL_IO.aController_PV[17] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_5.TEMP_PV_VALUE);
 GVL_IO.aController_PV[18] := WORD_TO_REAL(GVL_Furnace.Received_e2408_data_6.TEMP_PV_VALUE);
-]]></ST>
+
+GVL_IO.aController_TempPowerRate[1] := GVL_Furnace.Received_e2408_data_1.TEMP_OUTPUT_LEVEL;
+GVL_IO.aController_TempPowerRate[2] := GVL_Furnace.Received_e2408_data_2.TEMP_OUTPUT_LEVEL;
+GVL_IO.aController_TempPowerRate[3] := GVL_Furnace.Received_e2408_data_3.TEMP_OUTPUT_LEVEL;
+GVL_IO.aController_TempPowerRate[4] := GVL_Furnace.Received_e2408_data_4.TEMP_OUTPUT_LEVEL;
+GVL_IO.aController_TempPowerRate[5] := GVL_Furnace.Received_e2408_data_5.TEMP_OUTPUT_LEVEL;
+GVL_IO.aController_TempPowerRate[6] := GVL_Furnace.Received_e2408_data_6.TEMP_OUTPUT_LEVEL;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

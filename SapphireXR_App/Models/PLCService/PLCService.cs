@@ -148,6 +148,7 @@ namespace SapphireXR_App.Models
             hDeviceControlValuePLC = Ads.CreateVariableHandle("GVL_IO.aController_CV");
             //Read Present Value from Device of PLC
             hDeviceCurrentValuePLC = Ads.CreateVariableHandle("GVL_IO.aController_PV");
+            hTempPowerRate = Ads.CreateVariableHandle("GVL_IO.aController_TempPowerRate");
             //Read and Write Max Value of PLC 
             hDeviceMaxValuePLC = Ads.CreateVariableHandle("GVL_IO.aMaxValueController");
 
@@ -213,6 +214,10 @@ namespace SapphireXR_App.Models
             {
                 dControlCurrentValueIssuers.Add(kv.Key, ObservableManager<(float, float)>.Get("FlowControl." + kv.Key + ".ControlTargetValue.CurrentPLCState"));
             }
+            dTempPowerRatePublishers = [ObservableManager<short>.Get("Temperature1.PowerRate"), ObservableManager<short>.Get("Temperature2.PowerRate"),
+                ObservableManager<short>.Get("Temperature3.PowerRate"), ObservableManager<short>.Get("Temperature4.PowerRate"), ObservableManager<short>.Get("Temperature5.PowerRate"),
+                ObservableManager<short>.Get("Temperature6.PowerRate")];
+          
             aMonitoringCurrentValueIssuers = new Dictionary<string, ObservableManager<float>.Publisher>();
             foreach (KeyValuePair<string, int> kv in dMonitoringMeterIndex)
             {
@@ -267,6 +272,13 @@ namespace SapphireXR_App.Models
                     foreach (KeyValuePair<string, int> kv in dIndexController)
                     {
                         dControlCurrentValueIssuers?[kv.Key].Publish((aDeviceCurrentValues[dIndexController[kv.Key]], aDeviceControlValues[dIndexController[kv.Key]]));
+                    }
+                }
+                if(aDeviceTempPowerRates != null)
+                {
+                    for(uint tempControllerIdx = 0; tempControllerIdx < NumFurnaceTempControllers; ++tempControllerIdx)
+                    {
+                        dTempPowerRatePublishers?[tempControllerIdx].Publish(aDeviceTempPowerRates[tempControllerIdx]);
                     }
                 }
 

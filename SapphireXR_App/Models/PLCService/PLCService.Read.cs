@@ -21,6 +21,7 @@ namespace SapphireXR_App.Models
         {
             aDeviceCurrentValues = Ads.ReadAny<float[]>(hDeviceCurrentValuePLC, [NumControllers]);
             aDeviceControlValues = Ads.ReadAny<float[]>(hDeviceControlValuePLC, [NumControllers]);
+            aDeviceTempPowerRates = Ads.ReadAny<short[]>(hTempPowerRate, [NumFurnaceTempControllers]);
             ReadValveStateFromPLC();
         }
 
