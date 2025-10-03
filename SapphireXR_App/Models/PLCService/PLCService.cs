@@ -148,6 +148,7 @@ namespace SapphireXR_App.Models
             hDeviceControlValuePLC = Ads.CreateVariableHandle("GVL_IO.aController_CV");
             //Read Present Value from Device of PLC
             hDeviceCurrentValuePLC = Ads.CreateVariableHandle("GVL_IO.aController_PV");
+            hTempPowerRate = Ads.CreateVariableHandle("GVL_IO.aController_TempPowerRate");
             //Read and Write Max Value of PLC 
             hDeviceMaxValuePLC = Ads.CreateVariableHandle("GVL_IO.aMaxValueController");
 
@@ -182,6 +183,7 @@ namespace SapphireXR_App.Models
             hUserState = Ads.CreateVariableHandle("RCP.userState");
             hRecipeControlPauseTime = Ads.CreateVariableHandle("RCP.Pause_ET");
             hRecipeRunET = Ads.CreateVariableHandle("RCP.RecipeRunET");
+            hCaseSignalTower = Ads.CreateVariableHandle("GVL_IO.nCaseSignalTower");
             //hE3508InputManAuto = Ads.CreateVariableHandle("GVL_IO.nE3508_nInputManAutoBytes");
             //hOutputSetType = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_SetType");
             //hOutputMode = Ads.CreateVariableHandle("GVL_IO.nIQPLUS_Mode");
@@ -212,6 +214,10 @@ namespace SapphireXR_App.Models
             {
                 dControlCurrentValueIssuers.Add(kv.Key, ObservableManager<(float, float)>.Get("FlowControl." + kv.Key + ".ControlTargetValue.CurrentPLCState"));
             }
+            dTempPowerRatePublishers = [ObservableManager<short>.Get("Temperature1.PowerRate"), ObservableManager<short>.Get("Temperature2.PowerRate"),
+                ObservableManager<short>.Get("Temperature3.PowerRate"), ObservableManager<short>.Get("Temperature4.PowerRate"), ObservableManager<short>.Get("Temperature5.PowerRate"),
+                ObservableManager<short>.Get("Temperature6.PowerRate")];
+          
             aMonitoringCurrentValueIssuers = new Dictionary<string, ObservableManager<float>.Publisher>();
             foreach (KeyValuePair<string, int> kv in dMonitoringMeterIndex)
             {
@@ -239,6 +245,7 @@ namespace SapphireXR_App.Models
             dLogicalInterlockStateIssuer = ObservableManager<BitArray>.Get("LogicalInterlockState");
             dPLCConnectionPublisher = ObservableManager<PLCConnection>.Get("PLCService.Connected");
             dOperationModeChangingPublisher = ObservableManager<bool>.Get("OperationModeChanging");
+            dSingalTowerStatePublisher = ObservableManager<short>.Get("SignalTowerLight");
         }
 
         private static void ReadStateFromPLC(object? sender, EventArgs e)
@@ -265,6 +272,13 @@ namespace SapphireXR_App.Models
                     foreach (KeyValuePair<string, int> kv in dIndexController)
                     {
                         dControlCurrentValueIssuers?[kv.Key].Publish((aDeviceCurrentValues[dIndexController[kv.Key]], aDeviceControlValues[dIndexController[kv.Key]]));
+                    }
+                }
+                if(aDeviceTempPowerRates != null)
+                {
+                    for(uint tempControllerIdx = 0; tempControllerIdx < NumFurnaceTempControllers; ++tempControllerIdx)
+                    {
+                        dTempPowerRatePublishers?[tempControllerIdx].Publish(aDeviceTempPowerRates[tempControllerIdx]);
                     }
                 }
 
@@ -297,7 +311,9 @@ namespace SapphireXR_App.Models
                         dValveStateIssuers?[valveID].Publish(baReadValveStatePLC[index]);
                     }
                 }
-             
+
+                dSingalTowerStatePublisher?.Publish(Ads.ReadAny<short>(hCaseSignalTower));
+
                 //dLineHeaterTemperatureIssuers?.Publish(Ads.ReadAny<float[]>(hTemperaturePV, [(int)LineHeaterTemperature]));
 
                 //byte[] digitalOutput = Ads.ReadAny<byte[]>(hDigitalOutput, [4]);
@@ -312,7 +328,7 @@ namespace SapphireXR_App.Models
 
                 //int iterlock1 = Ads.ReadAny<int>(hInterlock[0]);
                 //dLogicalInterlockStateIssuer?.Publish(new BitArray(BitConverter.IsLittleEndian == true ? BitConverter.GetBytes(iterlock1) : BitConverter.GetBytes(iterlock1).Reverse().ToArray()));
-            
+
                 string exceptionStr = string.Empty;
                 if (aDeviceControlValues == null)
                 {

@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Numerics;
-using System.Windows.Media;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SapphireXR_App.Common;
 using SapphireXR_App.Enums;
 using SapphireXR_App.Models;
+using System.Collections;
+using System.Numerics;
+using System.Printing;
+using System.Windows;
+using System.Windows.Media;
 
 namespace SapphireXR_App.ViewModels
 {
@@ -123,11 +125,11 @@ namespace SapphireXR_App.ViewModels
                 {
                     case 0:
                     case 1:
-                        //leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentPLCStateViewModel(leftViewModel);
+                        leftViewModel.CurrentSourceStatusViewModel = leftViewModel.getSourceStatusFromCurrentPLCStateViewModel() ;
                         break;
 
                     case 2:
-                        //leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentRecipeStepViewModel(leftViewModel);
+                        leftViewModel.CurrentSourceStatusViewModel = leftViewModel.getSourceStatusFromCurrentRecipeStepViewModel();
                         break;
                 }
             }
@@ -156,7 +158,7 @@ namespace SapphireXR_App.ViewModels
             {
                 var checkAllSignalOff = (BitArray ioList) =>
                 {
-                    if( ioList[(int)PLCService.IOListIndex.SingalTower_RED] == false &&
+                    if (ioList[(int)PLCService.IOListIndex.SingalTower_RED] == false &&
                            ioList[(int)PLCService.IOListIndex.SingalTower_YELLOW] == false &&
                            ioList[(int)PLCService.IOListIndex.SingalTower_GREEN] == false &&
                            ioList[(int)PLCService.IOListIndex.SingalTower_BLUE] == false &&
@@ -252,10 +254,7 @@ namespace SapphireXR_App.ViewModels
 
             void IObserver<bool>.OnNext(bool value)
             {
-                //if (leftViewModel.CurrentSourceStatusViewModel is SourceStatusFromCurrentRecipeStepViewModel)
-                //{
-                //    leftViewModel.CurrentSourceStatusViewModel = new SourceStatusFromCurrentRecipeStepViewModel(leftViewModel);
-                //}
+                leftViewModel.sourceStatusFromCurrentRecipeStepViewModel?.reset();
             }
 
             private LeftViewModel leftViewModel;
@@ -286,7 +285,7 @@ namespace SapphireXR_App.ViewModels
                     prevValue = newValue;
                 }
             }
-           
+
             void IObserver<BitArray>.OnNext(BitArray value)
             {
                 var getGasState = (BitArray bitArray, int upperBitIndex, int lowerBitIndex) => (byte)(Convert.ToUInt32(bitArray[upperBitIndex]) << 1 | Convert.ToUInt32(bitArray[lowerBitIndex]));
@@ -352,90 +351,69 @@ namespace SapphireXR_App.ViewModels
             {
                 var updateCarrierStatus = (string prevGasName, string gasName) =>
                 {
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.NH3_1Carrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.NH3_1Carrier = gasName;
-                    //}
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.NH3_2Carrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.NH3_2Carrier = gasName;
-                    //}
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.SiH4Carrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.SiH4Carrier = gasName;
-                    //}
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TEBCarrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.TEBCarrier = gasName;
-                    //}
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMAlCarrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.TMAlCarrier = gasName;
-                    //}
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMGaCarrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.TMGaCarrier = gasName;
-                    //}
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.DTMGaCarrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.DTMGaCarrier = gasName;
-                    //}
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.Cp2MgCarrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.Cp2MgCarrier = gasName;
-                    //}
-                    //if (prevGasName == leftViewModel.CurrentSourceStatusViewModel.TMInCarrier)
-                    //{
-                    //    leftViewModel.CurrentSourceStatusViewModel.TMInCarrier = gasName;
-                    //}
+                    void updateGasLabel(string prevGasName, string gasName, SourceStatusViewModel sourceStatusViewModel)
+                    {
+                        if (prevGasName == sourceStatusViewModel.BackFlangeInletGas)
+                        {
+                            sourceStatusViewModel.BackFlangeInletGas = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.AluminuimBoatInletGas)
+                        {
+                            sourceStatusViewModel.AluminuimBoatInletGas = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.AmmoniaInletTubeGas)
+                        {
+                            sourceStatusViewModel.AmmoniaInletTubeGas = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.BackFlangeInletGas)
+                        {
+                            sourceStatusViewModel.BackFlangeInletGas = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.H2O2InletGas)
+                        {
+                            sourceStatusViewModel.H2O2InletGas = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.GaliumBoatInletGas)
+                        {
+                            sourceStatusViewModel.GaliumBoatInletGas = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.EtchingTubeInletGas)
+                        {
+                            sourceStatusViewModel.EtchingTubeInletGas = gasName;
+                        }
+                    }
+                    if(leftViewModel.sourceStatusFromCurrentPLCStateViewModel != null)
+                    {
+                        updateGasLabel(prevGasName, gasName, leftViewModel.sourceStatusFromCurrentPLCStateViewModel);
+                    }
+
+                    if (leftViewModel.sourceStatusFromCurrentRecipeStepViewModel != null)
+                    {
+                        updateGasLabel(prevGasName, gasName, leftViewModel.sourceStatusFromCurrentRecipeStepViewModel);
+                    }
+
                 };
+
                 switch (value.Item1)
                 {
                     case "Gas1":
                         updateCarrierStatus(leftViewModel.Gas1, value.Item2);
                         leftViewModel.Gas1 = value.Item2;
-                        leftViewModel.LogicalInterlockGas1 = LeftViewModel.GetIogicalInterlockLabel(value.Item2);
                         break;
 
                     case "Gas2":
                         updateCarrierStatus(leftViewModel.Gas2, value.Item2);
                         leftViewModel.Gas2 = value.Item2;
-                        leftViewModel.LogicalInterlockGas2 = LeftViewModel.GetIogicalInterlockLabel(value.Item2);
                         break;
 
                     case "Gas3":
-                        leftViewModel.Gas3_1 = LeftViewModel.GetGas3Label(value.Item2, 1);
-                        leftViewModel.Gas3_2 = LeftViewModel.GetGas3Label(value.Item2, 2);
-                        leftViewModel.LogicalInterlockGas3 = LeftViewModel.GetIogicalInterlockLabel(value.Item2);
+                        updateCarrierStatus(leftViewModel.Gas3, value.Item2);
+                        leftViewModel.Gas3 = value.Item2;
                         break;
 
                     case "Gas4":
+                        updateCarrierStatus(leftViewModel.Gas4, value.Item2);
                         leftViewModel.Gas4 = value.Item2;
-                        leftViewModel.LogicalInterlockGas4 = LeftViewModel.GetIogicalInterlockLabel(value.Item2);
-                        break;
-
-                    case "Source1":
-                        leftViewModel.Source1 = value.Item2;
-                        break;
-
-                    case "Source2":
-                        leftViewModel.Source2 = value.Item2;
-                        break;
-
-                    case "Source3":
-                        leftViewModel.Source3 = value.Item2;
-                        break;
-
-                    case "Source4":
-                        leftViewModel.Source4 = value.Item2;
-                        break;
-
-                    case "Source5":
-                        leftViewModel.Source5 = value.Item2;
-                        break;
-
-                    case "Source6":
-                        leftViewModel.Source6 = value.Item2;
                         break;
                 }
             }
@@ -463,6 +441,55 @@ namespace SapphireXR_App.ViewModels
             void IObserver<PLCConnection>.OnNext(PLCConnection value)
             {
                 leftViewModel.setConnectionStatusText(value);
+            }
+
+            private LeftViewModel leftViewModel;
+        }
+
+        private class SignalTowerLightSubscriber : IObserver<short>
+        {
+            internal SignalTowerLightSubscriber(LeftViewModel vm)
+            {
+                leftViewModel = vm;
+            }
+            void IObserver<short>.OnCompleted()
+            {
+                throw new NotImplementedException();
+            }
+
+            void IObserver<short>.OnError(Exception error)
+            {
+                throw new NotImplementedException();
+            }
+
+            void IObserver<short>.OnNext(short value)
+            {
+                switch (value)
+                {
+                    case 1:
+                        leftViewModel.SignalTowerImage = SignalTowerRedPath;
+                        break;
+
+                    case 2:
+                        leftViewModel.SignalTowerImage = SignalTowerYellowPath;
+                        break;
+
+                    case 3:
+                        leftViewModel.SignalTowerImage = SignalTowerGreenath;
+                        break;
+
+                    case 4:
+                        leftViewModel.SignalTowerImage = SignalTowerBluePath;
+                        break;
+
+                    case 5:
+                        leftViewModel.SignalTowerImage = SignalTowerWhitePath;
+                        break;
+
+                    default:
+                        leftViewModel.SignalTowerImage = SignalTowerDefaultPath;
+                        break;
+                }
             }
 
             private LeftViewModel leftViewModel;

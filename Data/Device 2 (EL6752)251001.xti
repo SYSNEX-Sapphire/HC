@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.68" ClassName="CDevEL6752Def" SubType="88">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-000000000038}" TcBaseType="true" HideType="true">USINTARR4</Name>
+			<BitSize>32</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>4</Elements>
+			</ArrayInfo>
+		</DataType>
+	</DataTypes>
+	<Device Id="2" DevType="88" AmsPort="28674" AmsNetId="192.168.0.103.3.1" RemoteName="Device 2 (EL6752)">
+		<Name>Device 2 (EL6752)</Name>
+		<AddressInfo>
+			<Ecat>
+				<EtherCATDeviceId>11</EtherCATDeviceId>
+				<EtherCATDeviceName>TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 11 (EL6752)</EtherCATDeviceName>
+			</Ecat>
+		</AddressInfo>
+		<Image Id="3" AddrType="4" ImageType="3">
+			<Name>Image</Name>
+		</Image>
+		<Box Id="13" BoxType="5203">
+			<Name>CKD-Sol</Name>
+			<Comment><![CDATA[EDS-File: 'OPP6-2D.EDS'
+DescText: OPP6-2D
+Vendor:  CKD Corporation
+Device Type:  Generic Device
+Product Name:  OPP6-2D
+Catalog Number:  ]]></Comment>
+			<ImageId>87</ImageId>
+			<Vars VarGrpType="1" InsertType="2">
+				<Name>Inputs</Name>
+				<Var BoxStateVariable="true">
+					<Name>MacState</Name>
+					<Comment><![CDATA[0 = No error
+1 = Station deactivated
+2 = Station not exists
+11 = Bus physic fault
+18 = Station ready
+31 = only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
+40 = Heartbeat Message not received
+41 = Shutdown Message received
+42 = Electronic Key Fault: Vendor Id
+43 = Electronic Key Fault: Device Type
+44 = Electronic Key Fault: Product Code
+45 = Electronic Key Fault: Revision
+46 = Fault while writing Start-Up Attributs
+47 = wrong Produced IO-Data Size
+48 = wrong Consumed IO-Data Size
+49 = Idle Mode (for Slave Devices): no valid IO-Data is exchanged via DeviceNet]]></Comment>
+					<Type>USINT</Type>
+				</Var>
+				<Var BoxStateVariable="true">
+					<Name>DiagFlag</Name>
+					<Comment><![CDATA[0 = Diagnosis Data unchanged
+1 = Diagnosis Data changed, use ADS-Read to get the data]]></Comment>
+					<Type>BIT</Type>
+					<BitOffs>17</BitOffs>
+				</Var>
+			</Vars>
+			<Vars VarGrpType="2" InsertType="2">
+				<Name>Outputs</Name>
+			</Vars>
+			<DeviceNet MacId="1" BaudSupport="14" DvFlag_Active="true" UcmmGroup="3" FragTimeout="400" CfgConnectionType="1" ProdInhibitTime="2" ExpPacketRate="100" VendorId="201" ProductCode="61" MajorRevision="10" MinorRevision="8" ScanEPR="000000006400" ScanAckTimer="16" ScanAckRetryLimit="1" ValidEdsFile="true" EdsDefault="1">
+				<GeneralStrings>invalid</GeneralStrings>
+				<GeneralStrings>Input Data</GeneralStrings>
+				<GeneralStrings></GeneralStrings>
+				<GeneralStrings>Output Data</GeneralStrings>
+				<GeneralStrings>All</GeneralStrings>
+				<ParamGroup Name="4"/>
+				<TxIoInfo ConnectType="1" Name="1" Comment="2"/>
+				<TxIoInfo ConnectType="2" Name="1" Comment="2"/>
+				<RxIoInfo Size="4" ConnectType="1" Name="3" Comment="2"/>
+				<Connection Flags="1024" ConnectionType="1">
+					<Name>Connection (Poll)</Name>
+					<ImageId>86</ImageId>
+					<Vars VarGrpType="1" InsertType="2">
+						<Name>Inputs</Name>
+					</Vars>
+					<Vars VarGrpType="2" InsertType="2">
+						<Name>Outputs</Name>
+						<Var>
+							<Name>Output Data</Name>
+							<Type GUID="{18071995-0000-0000-0000-000000000038}">USINTARR4</Type>
+						</Var>
+					</Vars>
+				</Connection>
+			</DeviceNet>
+		</Box>
+		<DeviceNet>
+			<Fcxxxx>
+				<DevSettings NetId="c0a800670301" EquiCycleTime="100000"/>
+				<DevParameter CycleTime="100000"/>
+				<EquiParameter RelationShiftCycle="0"/>
+			</Fcxxxx>
+			<BusParameter MacId="63" Baudrate="3" VendorID="108" DeviceType="12" ProductCode="6752" MajorRevision="1" MinorRevision="1" SerialNumber="305419896" IOCycleTime="100"/>
+		</DeviceNet>
+	</Device>
+	<Mappings>
+		<OwnerA Name="__THIS__">
+			<OwnerB Name="TIPC^PLC_HC^PLC_HC Instance">
+				<Link VarA="CKD-Sol^Connection (Poll)^Outputs^Output Data" VarB="PlcTask Outputs^GVL_IO.OutputSolValve"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmItem>

@@ -247,16 +247,22 @@ namespace SapphireXR_App.ViewModels
 
         private void startCommand()
         {
-            if (recipeMode == false)
+            if (ConfirmMessage.Show("시작 확인", "Recipe를 시작할까요?", WindowStartupLocation.CenterScreen) == DialogResult.Ok)
             {
-                PLCService.WriteOperationMode(true);
+                if (recipeMode == false)
+                {
+                    PLCService.WriteOperationMode(true);
+                }
+                SyncPLCState(Start);
             }
-            SyncPLCState(Start);
         }
 
         private void pauseCommand()
         {
-            SyncPLCState(RecipeCommand.Pause);
+            if (ConfirmMessage.Show("일시멈춤 확인", "Recipe를 일시멈출 할까요?", WindowStartupLocation.CenterScreen) == DialogResult.Ok)
+            {
+                SyncPLCState(RecipeCommand.Pause);
+            }
         }
 
         private bool canStartStopCommadExecute()
@@ -296,9 +302,12 @@ namespace SapphireXR_App.ViewModels
         [RelayCommand(CanExecute = nameof(canSkipCommandExecute))]
         void RecipeSkip()
         {
-            PLCService.WriteRCPOperationCommand(60);
-            SkipEnable = false;
-            Task.Delay(TimeSpan.FromSeconds(1)).ContinueWith(task => SkipEnable = true, TaskScheduler.FromCurrentSynchronizationContext());
+            if (ConfirmMessage.Show("Skip 확인", "Recipe를 Skip 할까요?", WindowStartupLocation.CenterScreen) == DialogResult.Ok)
+            {
+                PLCService.WriteRCPOperationCommand(60);
+                SkipEnable = false;
+                Task.Delay(TimeSpan.FromSeconds(1)).ContinueWith(task => SkipEnable = true, TaskScheduler.FromCurrentSynchronizationContext());
+            }
         }
      
         bool canRefreshCommandExecute()
@@ -322,7 +331,10 @@ namespace SapphireXR_App.ViewModels
         [RelayCommand(CanExecute = nameof(canRefreshCommandExecute))]
         void RecipeRefresh()
         {
-            CurrentRecipe.loadPLCSubRangeOfRecipes();
+            if (ConfirmMessage.Show("Refresh 확인", "Recipe를 Refresh할까요?", WindowStartupLocation.CenterScreen) == DialogResult.Ok)
+            {
+                CurrentRecipe.loadPLCSubRangeOfRecipes();
+            }
         }
 
         [RelayCommand]
@@ -346,7 +358,10 @@ namespace SapphireXR_App.ViewModels
         [RelayCommand(CanExecute = nameof(canCommandsExecuteOnActive))]
         private void RecipeStop()
         {
-            SyncPLCState(RecipeCommand.Stop);  
+            if (ConfirmMessage.Show("Stop 확인", "Recipe를 중단할까요?", WindowStartupLocation.CenterScreen) == DialogResult.Ok)
+            {
+                SyncPLCState(RecipeCommand.Stop);
+            }
         }
 
         [RelayCommand]
@@ -369,8 +384,11 @@ namespace SapphireXR_App.ViewModels
         [RelayCommand(CanExecute = nameof(canCleanCommandExecute))]
         private void RecipeClean()
         {
-            SyncPLCState(RecipeCommand.Initiate, false);
-            CurrentRecipe = EmptyRecipeContext;
+            if (ConfirmMessage.Show("Clean 확인", "Recipe를 지울까요?", WindowStartupLocation.CenterScreen) == DialogResult.Ok)
+            {
+                SyncPLCState(RecipeCommand.Initiate, false);
+                CurrentRecipe = EmptyRecipeContext;
+            }
         }
 
         bool canClearEventLogExecute()

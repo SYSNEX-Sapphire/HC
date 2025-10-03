@@ -87,6 +87,26 @@ namespace SapphireXR_App.ViewModels
 
             EventLogs.Instance.EventLogList.CollectionChanged += (object? sender, NotifyCollectionChangedEventArgs args) => ClearEventLogsCommand.NotifyCanExecuteChanged();
             ObservableManager<string>.Get("ViewModelCreated").Publish("HomeViewModel");
+
+            temperatureBarUpdaters = [new TemperatureBarUpdater(tempPV => { int? maxValue = SettingViewModel.ReadMaxValue("Temperature1");if (maxValue != null) { Furnace1Temp = tempPV / maxValue.Value * 100.0f; } }),
+                new TemperatureBarUpdater(tempPV => { int? maxValue = SettingViewModel.ReadMaxValue("Temperature2");if (maxValue != null) { Furnace2Temp = tempPV / maxValue.Value * 100.0f; } }),
+                new TemperatureBarUpdater(tempPV => { int? maxValue = SettingViewModel.ReadMaxValue("Temperature3");if (maxValue != null) { Furnace3Temp = tempPV / maxValue.Value * 100.0f; } }),
+                new TemperatureBarUpdater(tempPV => { int? maxValue = SettingViewModel.ReadMaxValue("Temperature4");if (maxValue != null) { Furnace4Temp = tempPV / maxValue.Value * 100.0f; } }),
+                new TemperatureBarUpdater(tempPV => { int? maxValue = SettingViewModel.ReadMaxValue("Temperature5");if (maxValue != null) { Furnace5Temp = tempPV / maxValue.Value * 100.0f; } }),
+                new TemperatureBarUpdater(tempPV => { int? maxValue = SettingViewModel.ReadMaxValue("Temperature6");if (maxValue != null) { Furnace6Temp = tempPV / maxValue.Value * 100.0f; } })
+            ];
+            for (uint furnaceTemp = 0; furnaceTemp < temperatureBarUpdaters.Length; ++furnaceTemp)
+            {
+                ObservableManager<float>.Subscribe("FlowControl.Temperature" + (furnaceTemp + 1) + ".CurrentValue", temperatureBarUpdaters[furnaceTemp]);
+            }
+
+            temperaturePowerUpdaters = [new TempPowerRateUpdater(powerRate => Furnace1TempPowerRate = powerRate), new TempPowerRateUpdater(powerRate => Furnace2TempPowerRate = powerRate),
+                new TempPowerRateUpdater(powerRate => Furnace3TempPowerRate = powerRate), new TempPowerRateUpdater(powerRate => Furnace4TempPowerRate = powerRate),
+                new TempPowerRateUpdater(powerRate => Furnace5TempPowerRate = powerRate), new TempPowerRateUpdater(powerRate => Furnace6TempPowerRate = powerRate)];
+            for(uint furnaceTempPowerTate = 0; furnaceTempPowerTate < temperaturePowerUpdaters.Length; ++furnaceTempPowerTate)
+            {
+                ObservableManager<short>.Subscribe("Temperature" + (furnaceTempPowerTate + 1) + ".PowerRate", temperaturePowerUpdaters[furnaceTempPowerTate]);
+            }
         }
 
         private void initRightDashBoard()
@@ -420,6 +440,32 @@ namespace SapphireXR_App.ViewModels
         [ObservableProperty]
         private bool _pLCConnected = PLCService.Connected == PLCConnection.Connected ? true: false;
 
+        [ObservableProperty]
+        private float furnace1Temp = 0;
+        [ObservableProperty]
+        private float furnace2Temp = 0;
+        [ObservableProperty]
+        private float furnace3Temp = 0;
+        [ObservableProperty]
+        private float furnace4Temp = 0;
+        [ObservableProperty]
+        private float furnace5Temp = 0;
+        [ObservableProperty]
+        private float furnace6Temp = 0;
+
+        [ObservableProperty]
+        private short furnace1TempPowerRate = 0;
+        [ObservableProperty]
+        private short furnace2TempPowerRate = 0;
+        [ObservableProperty]
+        private short furnace3TempPowerRate = 0;
+        [ObservableProperty]
+        private short furnace4TempPowerRate = 0;
+        [ObservableProperty]
+        private short furnace5TempPowerRate = 0;
+        [ObservableProperty]
+        private short furnace6TempPowerRate = 0;
+
         //private string? prevThrottleValveControlMode = null;
 
         private ManualBatchViewModel manualBatchViewModel = new ManualBatchViewModel();
@@ -449,6 +495,9 @@ namespace SapphireXR_App.ViewModels
         private bool showMsgOnLoadBatchOnRecipeEnd = true;
 
         private bool rightDashboardInitiated = false;
+
+        private TemperatureBarUpdater[] temperatureBarUpdaters;
+        private TempPowerRateUpdater[] temperaturePowerUpdaters;
     }
 }
 

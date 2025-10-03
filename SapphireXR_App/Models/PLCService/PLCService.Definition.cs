@@ -146,6 +146,7 @@ namespace SapphireXR_App.Models
         private static BitArray? baReadValveStatePLC = null;
         private static float[]? aDeviceCurrentValues = null;
         private static float[]? aDeviceControlValues = null;
+        private static short[]? aDeviceTempPowerRates = null;
         //private static float[]? aMonitoring_PVs = null;
         //private static short[]? aInputState = null;
         //private static BitArray? bOutputCmd1 = null;
@@ -155,6 +156,7 @@ namespace SapphireXR_App.Models
 
         private static Dictionary<string, ObservableManager<float>.Publisher>? dCurrentValueIssuers;
         private static Dictionary<string, ObservableManager<float>.Publisher>? dControlValueIssuers;
+        private static ObservableManager<short>.Publisher[]? dTempPowerRatePublishers;
         private static Dictionary<string, ObservableManager<(float, float)>.Publisher>? dControlCurrentValueIssuers;
         private static Dictionary<string, ObservableManager<float>.Publisher>? aMonitoringCurrentValueIssuers;
         private static ObservableManager<BitArray>.Publisher? baHardWiringInterlockStateIssuers;
@@ -175,6 +177,7 @@ namespace SapphireXR_App.Models
         private static ObservableManager<BitArray>.Publisher? dLogicalInterlockStateIssuer;
         private static ObservableManager<PLCConnection>.Publisher? dPLCConnectionPublisher;
         private static ObservableManager<bool>.Publisher? dOperationModeChangingPublisher;
+        private static ObservableManager<short>.Publisher? dSingalTowerStatePublisher;
 
         static Task<bool>? TryConnectAsync = null;
 
@@ -210,10 +213,12 @@ namespace SapphireXR_App.Models
         private static uint hDeviceMaxValuePLC;
         private static uint hDeviceControlValuePLC;
         private static uint hDeviceCurrentValuePLC;
+        private static uint hTempPowerRate;
         private static uint hRcp;
         private static uint hRcpTotalStep;
         private static uint hCmd_RcpOperation;
         private static uint hRcpStepN;
+        private static uint hCaseSignalTower;
         //private static uint hMonitoring_PV;
         //private static uint hInputState;
         //private static uint hInputState4;

@@ -6,10 +6,11 @@ using CommunityToolkit.Mvvm.Input;
 using SapphireXR_App.Enums;
 using SapphireXR_App.Models;
 using SapphireXR_App.WindowServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SapphireXR_App.ViewModels
 {
-    public abstract class ValveViewModel : DependencyObject, INotifyPropertyChanged
+    public abstract partial class ValveViewModel : ObservableObject, INotifyPropertyChanged
     {
         internal abstract class ValveStateUpdater
         {
@@ -216,8 +217,6 @@ namespace SapphireXR_App.ViewModels
             ValveID = valveID;
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         public ICommand OnLoadedCommand { get; set; }
         public RelayCommand OnClickCommand => new RelayCommand(OnClicked, () => PLCService.Connected == PLCConnection.Connected);
 
@@ -225,17 +224,8 @@ namespace SapphireXR_App.ViewModels
 
         public string? ValveID { get; set; }
 
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set
-            {
-                SetValue(IsOpenProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty IsOpenProperty =
-            DependencyProperty.Register("IsOpen", typeof(bool), typeof(ValveViewModel), new PropertyMetadata(default));
+        [ObservableProperty]
+        private bool isOpen = false;
 
         protected struct PopupMessage
         {
@@ -249,11 +239,6 @@ namespace SapphireXR_App.ViewModels
         protected virtual PopupMessage getPopupMessage()
         {
             return new PopupMessage();
-        }
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

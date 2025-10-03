@@ -32,7 +32,7 @@ END_VAR
 		nRcpIndex := 0;
 		Rcp.userState := 0;
 		eRecipeRun := E_RecipeRun.Initial;
-		//GVL_IO.nCaseSignalTower := 5; // White - Idle
+		GVL_IO.nCaseSignalTower := 5; // White - Idle
 
 	10: //RUN
 		IF nRcpIndex = 0 THEN
@@ -47,7 +47,7 @@ END_VAR
 				fbRecipeAnalogControlInputSequencer(rRecipe := RCP.aRecipe[nRcpIndex].rRecipe, rampTime:= TO_UINT(RCP.aRecipe[nRcpIndex].iRecipe[2]));
 				fbSetValves(valveSetting := RCP.aRecipe[nRcpIndex].dRecipe);
 				Rcp.userState := 10;// Recipe Running
-				//GVL_IO.nCaseSignalTower := 3;
+				GVL_IO.nCaseSignalTower := 3;
 				eRecipeRun := E_RecipeRun.Ramp;
 				
 			E_RecipeRun.Ramp: // Ramp 수행
@@ -94,7 +94,7 @@ END_VAR
 		END_IF
 
 		Rcp.userState := 20;
-		//GVL_IO.nCaseSignalTower := 5;
+		GVL_IO.nCaseSignalTower := 5;
 		
 	30: //RESTART
 		Pause_TON(IN:=FALSE);
@@ -109,18 +109,18 @@ END_VAR
 		RCP.Pause_ET := T#0S;
 		Rcp.userState := 10;
 		RCP.cmd_RcpOperation := 10;	
-		//GVL_IO.nCaseSignalTower := 3;
+		GVL_IO.nCaseSignalTower := 3;
 		
 	40: //STOP
 		f_ResetTimersAndRCPTimes(fbPause_TON := Pause_TON, fbRamp_TON := Ramp_TON, fbHold_TON := Hold_TON);
 		Rcp.userState := 40;
-		//GVL_IO.nCaseSignalTower := 5;
+		GVL_IO.nCaseSignalTower := 5;
 		
 	50: //END
 		f_ResetTimersAndRCPTimes(fbPause_TON := Pause_TON, fbRamp_TON := Ramp_TON, fbHold_TON := Hold_TON);
 		Rcp.userState := 50;
 		fbAnalogDeviceRampControl();
-		//GVL_IO.nCaseSignalTower := 5;
+		GVL_IO.nCaseSignalTower := 5;
 		
 	60: //SKIP
 		IF E_RecipeRun.Ramp <= eRecipeRun  AND  eRecipeRun <= E_RecipeRun.CheckHoldTemp THEN
