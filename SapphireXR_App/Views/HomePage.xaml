@@ -353,123 +353,153 @@
                     <!-- User Status-->
                     <!-- Furnace Temperature Controller Status -->
                     <Grid Grid.Row="0">
-                        <Grid.Margin>
-                            <Thickness Top="{StaticResource p_1}" />
-                        </Grid.Margin>
                         <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource Gray_300}">
+                            <Border.Padding>
+                                <Thickness Left="{StaticResource p_2}" Right="{StaticResource p_2}" Bottom="{StaticResource p_4}" />
+                            </Border.Padding>
                             <StackPanel>
-                                <StackPanel.Margin>
-                                    <Thickness Left="{StaticResource p_2}" Right="{StaticResource p_2}" Bottom="{StaticResource p_5}"/>
-                                </StackPanel.Margin>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel.Margin>
                                         <Thickness Bottom="{StaticResource p_1}" />
                                     </StackPanel.Margin>
                                     <Image Source="/Resources/Icons/icon=heater.png" Width="24" Height="24" />
-                                    <Label Foreground="{StaticResource Gray_950}" FontSize="14" HorizontalContentAlignment="Center" FontFamily="Segoe UI">
+                                    <Label Foreground="{StaticResource Gray_950}" FontSize="14" HorizontalContentAlignment="Center" Padding="0" VerticalContentAlignment="Center" FontFamily="Segoe UI">
+                                        <Label.Margin>
+                                            <Thickness Left="{StaticResource p_1}" />
+                                        </Label.Margin>
                                         <Bold>Heater Controller</Bold>
                                     </Label>
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical">
+                                    <StackPanel.Margin>
+                                        <Thickness Top="{StaticResource p_2}" />
+                                    </StackPanel.Margin>
                                     <StackPanel.Resources>
                                         <Style TargetType="{x:Type ProgressBar}">
+                                            <Setter Property="Height" Value="28" />
+                                            <Setter Property="Minimum" Value="0" />
+                                            <Setter Property="Maximum" Value="100" />
+                                            <Setter Property="Foreground" Value="{StaticResource Sapphire_Blue}" />
+                                            <Setter Property="Background" Value="{StaticResource Gray_50}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource Gray_300}" />
+                                            <Setter Property="BorderThickness" Value="1" />
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type ProgressBar}">
                                                         <Grid>
                                                             <Border Name="PART_Track" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                                                    Background="{TemplateBinding Background}" CornerRadius="2" />
-                                                            <Border Name="PART_Indicator"  Background="{TemplateBinding Foreground}" CornerRadius="2"  HorizontalAlignment="Left" />
+                                                                    Background="{TemplateBinding Background}" CornerRadius="4" />
+                                                            <Border Name="PART_Indicator"  Background="{TemplateBinding Foreground}" CornerRadius="4"  HorizontalAlignment="Left" />
 
                                                             <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center"
-                                                                       VerticalAlignment="Top"  FontWeight="Bold"  Foreground="{StaticResource Gray_900}" />
+                                                                       VerticalAlignment="Center" Foreground="{StaticResource Gray_950}" FontSize="12" />
                                                         </Grid>
                                                     </ControlTemplate>
                                                 </Setter.Value>
                                             </Setter>
                                         </Style>
                                     </StackPanel.Resources>
-                                    <Border Height="76">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                                                <Label HorizontalAlignment="Left" Content="Furnace Zone #1" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace1Temp}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"  />
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace1TempPowerRate}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                    <Border Height="76">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                                                <Label HorizontalAlignment="Left" Content="Furnace Zone #2" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace2Temp}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace2TempPowerRate}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                    <Border Height="76">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                                                <Label HorizontalAlignment="Left" Content="Furnace Zone #3" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace3Temp}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace3TempPowerRate}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                    <Border Height="76">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                                                <Label HorizontalAlignment="Left" Content="Furnace Zone #4" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace4Temp}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace4TempPowerRate}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                    <Border Height="76">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                                                <Label HorizontalAlignment="Left" Content="Furnace Zone #5" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace5Temp}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace5TempPowerRate}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                    <Border Height="76">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                                                <Label HorizontalAlignment="Left" Content="Furnace Zone #6" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace6Temp}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" Margin="0, 0, 0, 9"/>
-                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Furnace6TempPowerRate}" Height="20" Width="200" Foreground="{StaticResource Sapphire_Blue}" Background="{StaticResource Gray_200}" />
-                                            </StackPanel>
-                                        </Grid>
+                                    <Border>
+                                        <Border.Padding>
+                                            <Thickness Left="{StaticResource p_8}" />
+                                        </Border.Padding>
+                                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                                            <Label HorizontalAlignment="Left" Content="Furnace Zone #1" Padding="0" HorizontalContentAlignment="Center" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}" />
+                                            <ProgressBar Value="{Binding Furnace1Temp}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <ProgressBar Value="{Binding Furnace1TempPowerRate}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <Label Content="Furnace Zone #2" Padding="0" VerticalContentAlignment="Center" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}">
+                                                <Label.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </Label.Margin>
+                                            </Label>
+                                            <ProgressBar Value="{Binding Furnace2Temp}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <ProgressBar Value="{Binding Furnace2TempPowerRate}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <Label HorizontalAlignment="Left" Content="Furnace Zone #3" Padding="0" VerticalContentAlignment="Center" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}">
+                                                <Label.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </Label.Margin>
+                                            </Label>
+                                            <ProgressBar Value="{Binding Furnace3Temp}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <ProgressBar Value="{Binding Furnace3TempPowerRate}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <Label HorizontalAlignment="Left" Content="Furnace Zone #4" Padding="0" VerticalContentAlignment="Center" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}">
+                                                <Label.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </Label.Margin>
+                                            </Label>
+                                            <ProgressBar Value="{Binding Furnace4Temp}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <ProgressBar Value="{Binding Furnace4TempPowerRate}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <Label HorizontalAlignment="Left" Content="Furnace Zone #5" Padding="0" VerticalContentAlignment="Center" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}">
+                                                <Label.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </Label.Margin>
+                                            </Label>
+                                            <ProgressBar Value="{Binding Furnace5Temp}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <ProgressBar Value="{Binding Furnace5TempPowerRate}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <Label HorizontalAlignment="Left" Content="Furnace Zone #6" Padding="0" VerticalContentAlignment="Center" Foreground="{StaticResource Gray_900}" FontSize="12" FontFamily="Segoe UI" Style="{StaticResource labelOverTextBox}">
+                                                <Label.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </Label.Margin>
+                                            </Label>
+                                            <ProgressBar Value="{Binding Furnace6Temp}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                            <ProgressBar Value="{Binding Furnace6TempPowerRate}">
+                                                <ProgressBar.Margin>
+                                                    <Thickness Top="{StaticResource p_2}" />
+                                                </ProgressBar.Margin>
+                                            </ProgressBar>
+                                        </StackPanel>
                                     </Border>
                                 </StackPanel>
-                                
                             </StackPanel>
                         </Border>
                     </Grid>
                     <!-- Event Log -->
                     <Grid Grid.Row="1" >
                         <Grid.Margin>
-                            <Thickness Top="{StaticResource p_1}" />
+                            <Thickness Top="{StaticResource p_2}" />
                         </Grid.Margin>
                         <StackPanel>
                             <StackPanel.Margin>
@@ -485,7 +515,7 @@
                                 </Label>
                                 <Button Width="134" HorizontalAlignment="Right" Style="{StaticResource DefaultButton}" Content="Clear" Command="{Binding ClearEventLogsCommand}"/>
                             </DockPanel>
-                            <DataGrid x:Name="dgEventLog" ToolTip="상세 윈도우를 뛰우려면 더블클릭 하세요." VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" ItemsSource="{Binding Source={x:Static model:EventLogs.Instance}, Path=EventLogList}" Style="{StaticResource EventLog}" Height="455">
+                            <DataGrid x:Name="dgEventLog" ToolTip="상세 윈도우를 뛰우려면 더블클릭 하세요." VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" ItemsSource="{Binding Source={x:Static model:EventLogs.Instance}, Path=EventLogList}" Style="{StaticResource EventLog}" Height="345">
                                 <DataGrid.Resources>
                                     <Style TargetType="ScrollBar" BasedOn="{StaticResource DefaultScrollbar}" />
                                 </DataGrid.Resources>

@@ -26,20 +26,20 @@
     </Page.Resources>
     <Grid Background="{StaticResource Gray_100}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderBrush="{StaticResource Gray_300}" BorderThickness="0, 0, 0, 1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="29"/>
-                    <RowDefinition Height="23"/>
-                    <RowDefinition Height="0"/>
+                    <RowDefinition Height="14"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="14"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="8" />
-                    <ColumnDefinition Width="34" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="9" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
@@ -52,52 +52,72 @@
                 <Thickness Left="{StaticResource p_3}" Right="{StaticResource p_3}" />
             </Grid.Margin>
 
-            <!-- Machine Information -->
-            <Grid Margin="8,8,8,0" Grid.Row="0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="166" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image Height="300" anim:ImageBehavior.AnimatedSource="{Binding SignalTowerImage, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="4" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="4" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="4" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="4" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+            <Border Style="{StaticResource Tab}" Padding="0 0 0 20">
+                <StackPanel Orientation="Vertical">
+                    <Image Height="270" anim:ImageBehavior.AnimatedSource="{Binding SignalTowerImage, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource Gray_900}" Margin="0" Padding="0"><Run Text="Machine Name"/></TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource Gray_950}"  Margin="0"  Padding="0" FontWeight="Bold"><Run Text="Lumi HVPE"/></TextBlock>
-                        <TextBlock FontFamily="Segoe UI" Grid.Row="12" Grid.Column="0" FontSize="12" Foreground="{DynamicResource Gray_900}" Margin="0" Padding="0"><Run Language="ko-kr" Text="System ID"/></TextBlock>
-                        <TextBlock FontFamily="Segoe UI" Grid.Row="14" Grid.Column="0"  FontSize="12" Foreground="{DynamicResource Gray_950}" Margin="0" Padding="0" FontWeight="Bold"><Run Language="ko-kr" Text="2025 Lumi"/></TextBlock>
-                        <TextBlock FontFamily="Segoe UI" Grid.Row="4" Grid.Column="0" FontSize="12" Foreground="{DynamicResource Gray_900}" Margin="0" Padding="0" ><Run Language="ko-kr" Text="Application"/></TextBlock>
-                        <TextBlock FontFamily="Segoe UI" Grid.Row="6" Grid.Column="0" FontSize="12" Foreground="{DynamicResource Gray_950}" Margin="0" Padding="0" FontWeight="Bold" RenderTransformOrigin="0.563,1.979"><Run Language="ko-kr" Text="GaN"/></TextBlock>
-                        <TextBlock FontFamily="Segoe UI" FontSize="12" Grid.Row="16" Grid.Column="0" Foreground="{DynamicResource Gray_900}" Margin="0" Padding="0" ><Run Language="ko-kr" Text="PLC Address"/></TextBlock>
-                        <TextBlock Text="{Binding PLCAddressText}" Grid.Row="18" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_950}" Margin="0" Padding="0" FontWeight="Bold"><Run Text="Machine Nam"/><Run Language="ko-kr" Text="e"/></TextBlock>
-                        <TextBlock FontFamily="Segoe UI" Grid.Row="8" Grid.Column="0"  FontSize="12" Foreground="{DynamicResource Gray_900}" Margin="0" Padding="0" ><Run Text="PLC "/><Run Language="ko-kr" Text="C"/><Run Text="onnection"/></TextBlock>
-                        <TextBlock Text="{Binding PLCConnectionStatus}" Grid.Row="10" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Margin="0" Padding="0" Foreground="{Binding PLCConnectionStatusColor}" FontWeight="Bold" />
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <TextBlock FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource Gray_900}" Padding="0" Text="Machine Name">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                            <TextBlock FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource Gray_950}" Text="Lumi HVPE" Padding="0" FontWeight="Bold">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" Bottom="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                            <TextBlock FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_900}" Padding="0" Text="PLC Address">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                            <TextBlock Text="{Binding PLCAddressText}" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_950}" Padding="0" FontWeight="Bold">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" Bottom="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                            <TextBlock FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_900}" Text="PLC Connection" Padding="0">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                            <TextBlock Text="{Binding PLCConnectionStatus}" Grid.Row="10" Grid.Column="0" FontFamily="Segoe UI" FontSize="12" Padding="0" Foreground="{Binding PLCConnectionStatusColor}" FontWeight="Bold">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" Bottom="{StaticResource p_1}" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="2">
+                            <TextBlock FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_900}" Padding="0" Text="System ID">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                            <TextBlock FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_950}" Padding="0" Text="2025 Lumi" FontWeight="Bold">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" Bottom="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                            <TextBlock FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_900}" Padding="0" Text="Application">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                            <TextBlock FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource Gray_950}" Padding="0" FontWeight="Bold" RenderTransformOrigin="0.563,1.979" Text="GaN">
+                                <TextBlock.Margin>
+                                    <Thickness Top="2" Bottom="2" />
+                                </TextBlock.Margin>
+                            </TextBlock>
+                        </StackPanel>
                     </Grid>
-                </Grid>
-            </Grid>
+                </StackPanel>
+            </Border>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.Margin>
@@ -108,7 +128,7 @@
                 <Border Style="{StaticResource Tab}">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                         <StackPanel.Margin>
-                            <Thickness Bottom="{StaticResource p_4}" Left="{StaticResource p_2}" Right="{StaticResource p_2}" />
+                            <Thickness Bottom="{StaticResource p_4}" Left="{StaticResource p_2}" />
                         </StackPanel.Margin>
                         <Grid Height="24">
                             <Grid.ColumnDefinitions>
@@ -119,13 +139,13 @@
                             <Image Grid.Column="0" Source="/Resources/icons/icon=control_knobs.png"  Stretch="Fill"/>
                             <TextBlock Grid.Column="2" Foreground="{DynamicResource Gray_950}" FontSize="14" FontFamily="Segoe UI" FontWeight="Bold" HorizontalAlignment="Left"  VerticalAlignment="Center"><Bold><Run Text="Source Status"/></Bold></TextBlock>
                         </Grid>
-                        <Grid VerticalAlignment="Top">
-                            <Grid.Resources>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel.Resources>
                                 <Style TargetType="Border" x:Key="SourceStatusIndicator">
                                     <Setter Property="Background" Value="{StaticResource Gray_300}" />
-                                    <Setter Property="Margin" Value="2" />
                                     <Setter Property="BorderThickness" Value="0" />
                                     <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Height" Value="28" />
                                     <Setter Property="CornerRadius">
                                         <Setter.Value>
                                             <CornerRadius TopLeft="{StaticResource r_1}" TopRight="{StaticResource r_1}" BottomLeft="{StaticResource r_1}" BottomRight="{StaticResource r_1}" />
@@ -144,78 +164,84 @@
                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                     <Setter Property="Padding" Value="0 0 0 3" />
                                 </Style>
-                            </Grid.Resources>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="100"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <!-- Back Groud -->
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="10"/>
-                                <!-- Galium Boat -->
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="10"/>
-                                <!-- Ammonia Tube -->
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="10"/>
-                                <!-- Aluminum Boat -->
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="10"/>
-                                <!-- Etching Tube -->
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="10"/>
-                                <!-- H2 / O2 Tube -->
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="10"/>
-                                <!-- Back Flange Purge -->
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="10"/>
-                            </Grid.RowDefinitions>
-                            
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Back Ground Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Galium Boat Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-
-                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Ammonia Inlet Tube" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-
-                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Aluminum Boat Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-
-                            <TextBlock Grid.Row="12" Grid.Column="0" Text="Etching Tube Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-
-                            <TextBlock Grid.Row="15" Grid.Column="0" Text="H2 / O2 Inlet" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-
-                            <TextBlock Grid.Row="18" Grid.Column="0" Text="Back Flange" HorizontalAlignment="Left" Margin="0,6,0,0" Foreground="{DynamicResource Gray_900}" FontSize="12"/>
-
+                            </StackPanel.Resources>
+                            <StackPanel.Margin>
+                                <Thickness Top="{StaticResource p_2}" Left="{StaticResource p_8}"/>
+                            </StackPanel.Margin>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Back Ground Inlet" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12" />
                             <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}" >
+                                <Border.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </Border.Margin>
                                 <TextBlock Text="{Binding CurrentSourceStatusViewModel.BackgroundInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.BackgroundInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Galium Boat Inlet" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
+                                <TextBlock.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </TextBlock.Margin>
+                            </TextBlock>
                             <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
+                                <Border.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </Border.Margin>
                                 <TextBlock Text="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Ammonia Inlet Tube" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
+                                <TextBlock.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </TextBlock.Margin>
+                            </TextBlock>
                             <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
+                                <Border.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </Border.Margin>
                                 <TextBlock Text="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGas}" Foreground="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
+                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Aluminum Boat Inlet" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
+                                <TextBlock.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </TextBlock.Margin>
+                            </TextBlock>
                             <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
+                                <Border.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </Border.Margin>
                                 <TextBlock Text="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
+                            <TextBlock Grid.Row="12" Grid.Column="0" Text="Etching Tube Inlet" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
+                                <TextBlock.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </TextBlock.Margin>
+                            </TextBlock>
                             <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
+                                <Border.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </Border.Margin>
                                 <TextBlock Text="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
+                            <TextBlock Grid.Row="15" Grid.Column="0" Text="H2 / O2 Inlet" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
+                                <TextBlock.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </TextBlock.Margin>
+                            </TextBlock>
                             <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
+                                <Border.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </Border.Margin>
                                 <TextBlock Text="{Binding CurrentSourceStatusViewModel.H2O2InletGas}" Foreground="{Binding CurrentSourceStatusViewModel.H2O2InletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
+                            <TextBlock Grid.Row="18" Grid.Column="0" Text="Back Flange" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
+                                <TextBlock.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </TextBlock.Margin>
+                            </TextBlock>
                             <Border Grid.Row="19" Grid.Column="1" Style="{StaticResource SourceStatusIndicator}">
+                                <Border.Margin>
+                                    <Thickness Top="{StaticResource p_2}" />
+                                </Border.Margin>
                                 <TextBlock Text="{Binding CurrentSourceStatusViewModel.BackFlangeInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.BackFlangeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
                             </Border>
-                        </Grid>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </Grid>
