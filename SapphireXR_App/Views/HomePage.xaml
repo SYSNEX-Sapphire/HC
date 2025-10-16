@@ -389,10 +389,10 @@
                                                         <Grid>
                                                             <Border Name="PART_Track" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                                                     Background="{TemplateBinding Background}" CornerRadius="4" />
-                                                            <Border Name="PART_Indicator"  Background="{TemplateBinding Foreground}" CornerRadius="4"  HorizontalAlignment="Left" />
+                                                            <Border Name="PART_Indicator"  Background="gray" CornerRadius="4"  HorizontalAlignment="Left" />
 
                                                             <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center"
-                                                                       VerticalAlignment="Center" Foreground="{StaticResource Gray_950}" FontSize="12" />
+                                                                       VerticalAlignment="Center" Foreground="{StaticResource SecondaryFontColor}" FontSize="12" />
                                                         </Grid>
                                                     </ControlTemplate>
                                                 </Setter.Value>
