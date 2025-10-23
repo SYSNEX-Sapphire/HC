@@ -129,12 +129,6 @@ namespace SapphireXR_App.Models
             { "F01", 12 }, { "F02", 13 }, { "F03", 14 }, { "F04", 15 }, { "F05", 16 }, { "F06", 17 }
         };
 
-        //private static readonly Dictionary<string, int> dDigitalDeviceAlarmWarningBit = new Dictionary<string, int>
-        //{
-        //    { "A01", 0 }, { "A02", 1 }, { "A03", 2 },  { "A04", 3 }, { "A05", 4 }, { "A06", 5 },  { "A07", 6 }, { "A08", 7 }, { "A09", 8 }, { "A10", 9 }, { "A11", 10 }, { "A12", 11 },
-        //    { "A13", 12 }, { "A14", 13 }, { "A15", 14 }
-        //};
-
         public const uint LineHeaterTemperature = 8;
         private const uint NumAlarmWarningArraySize = 3;
         private const uint NumInterlockSet = 5;
@@ -147,9 +141,6 @@ namespace SapphireXR_App.Models
         private static float[]? aDeviceCurrentValues = null;
         private static float[]? aDeviceControlValues = null;
         private static short[]? aDeviceTempPowerRates = null;
-        //private static float[]? aMonitoring_PVs = null;
-        //private static short[]? aInputState = null;
-        //private static BitArray? bOutputCmd1 = null;
         private static float?[] aTargetValueMappingFactor = new float?[NumMFCControllers];
         private static int[] InterlockEnables = Enumerable.Repeat<int>(0, (int)NumAlarmWarningArraySize).ToArray();
         private static Memory<byte> userStateBuffer = new Memory<byte>([ 0x00, 0x00 ]);
@@ -219,27 +210,15 @@ namespace SapphireXR_App.Models
         private static uint hCmd_RcpOperation;
         private static uint hRcpStepN;
         private static uint hCaseSignalTower;
-        //private static uint hMonitoring_PV;
-        //private static uint hInputState;
-        //private static uint hInputState4;
-        //private static uint hTemperaturePV;
         private static uint hOperationMode;
         private static uint hUserState;
         private static uint hDigitalOutput;
-       // private static uint hDigitalOutput2;
-        //private static uint hOutputCmd;
-        //private static uint hE3508InputManAuto;
-        //private static uint hOutputCmd1;
-        //private static uint hOutputCmd2;
-        //private static uint hOutputSetType;
-        //private static uint hOutputMode;hDigitalOutput
         private static uint hRecipeRunET;
         private static uint hRecipeControlPauseTime;
         private static uint[] hInterlockEnable = new uint[NumAlarmWarningArraySize];
         private static uint[] hInterlockset = new uint[NumInterlockSet];
         private static uint[] hMFCControllerInput = new uint[NumMFCControllers];
         private static uint[] hFurnaceTempControllerInput = new uint[NumFurnaceTempControllers];
-        //private static uint[] hInterlock = new uint[NumInterlock];
 
         private static bool RecipeRunEndNotified = false;
         private static bool ShowMessageOnOnTick = true;
@@ -250,7 +229,6 @@ namespace SapphireXR_App.Models
         private static HashSet<int> InterlockEnableUpperIndiceToCommit = new HashSet<int>();
         private static HashSet<int> InterlockEnableLowerIndiceToCommit = new HashSet<int>();
         private static Dictionary<int, float> AnalogDeviceInterlockSetIndiceToCommit = new Dictionary<int, float>();
-        //private static (bool, float) DigitalDevicelnterlockSetToCommit = (false, 0.0f);
         private static Dictionary<int, float> InterlockSetIndiceToCommit = new Dictionary<int, float>();
     }
 }

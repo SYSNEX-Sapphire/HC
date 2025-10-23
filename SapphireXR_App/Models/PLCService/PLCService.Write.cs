@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Collections;
 using SapphireXR_App.Common;
-using System.Globalization;
 
 namespace SapphireXR_App.Models
 {
@@ -104,22 +103,6 @@ namespace SapphireXR_App.Models
             Ads.WriteAny(hOperationMode, operatonMode);
         }
 
-        //public static void WriteOutputCmd1(OutputCmd1Index index, bool powerOn)
-        //{
-        //    if (bOutputCmd1 != null)
-        //    {
-        //        bOutputCmd1[(int)index] = powerOn;
-        //        int[] array = new int[1];
-        //        bOutputCmd1.CopyTo(array, 0);
-        //        Ads.WriteAny(hOutputCmd1, (short)array[0]);
-        //    }
-        //}
-
-        //public static void WriteThrottleValveMode(short value)
-        //{
-        //    Ads.WriteAny(hOutputCmd2, value);
-        //}
-
         private static int SetBit(bool bitValue, int bitField, int bit)
         {
             int invMask = ~(1 << bit);
@@ -155,18 +138,6 @@ namespace SapphireXR_App.Models
             InterlockEnableLowerIndiceToCommit.Add(2);
         }
 
-        //public static void WriteDigitalDeviceAlarmState(string deviceID, bool bitValue)
-        //{
-        //    WriteDeviceAlarmWarningSettingState(deviceID, 3, bitValue, dDigitalDeviceAlarmWarningBit);
-        //    InterlockEnableUpperIndiceToCommit.Add(3);
-        //}
-
-        //public static void WriteDigitalDeviceWarningState(string deviceID, bool bitValue)
-        //{
-        //    WriteDeviceAlarmWarningSettingState(deviceID, 4, bitValue, dDigitalDeviceAlarmWarningBit);
-        //    InterlockEnableUpperIndiceToCommit.Add(4);
-        //}
-
         private static void CommitAlarmWarningSettingStateToPLC(HashSet<int> interlockEnableIndiceToCommit)
         {
             foreach (int index in interlockEnableIndiceToCommit)
@@ -185,7 +156,6 @@ namespace SapphireXR_App.Models
         public static void CommitDigitalDeviceAlarmWarningSettingStateToPLC()
         {
             CommitAlarmWarningSettingStateToPLC(InterlockEnableUpperIndiceToCommit);
-            //CommitDigitalDeviceInterlockSettingToPLC();
         }
 
         public static void WriteAlarmWarningSetting(List<AnalogDeviceIO> analogDeviceIOs)
@@ -229,24 +199,10 @@ namespace SapphireXR_App.Models
             AnalogDeviceInterlockSetIndiceToCommit[2] = delayTime;
         }
 
-        //public static void WriteDigitalDeviceDelayTime(float delayTime)
-        //{
-        //    DigitalDevicelnterlockSetToCommit = (false, delayTime);
-        //}
-
         public static void CommitAnalogDeviceInterlockSettingToPLC()
         {
             CommitInterlockSetToPLC(AnalogDeviceInterlockSetIndiceToCommit);
         }
-
-        //public static void CommitDigitalDeviceInterlockSettingToPLC()
-        //{
-        //    if (DigitalDevicelnterlockSetToCommit.Item1 == false)
-        //    {
-        //        Ads.WriteAny(hInterlockset[3], DigitalDevicelnterlockSetToCommit.Item2);
-        //        DigitalDevicelnterlockSetToCommit.Item1 = true;
-        //    }
-        //}
 
         private static void CommitInterlockSetToPLC(Dictionary<int, float> interlockSetIndiceToCommit)
         {
@@ -262,11 +218,6 @@ namespace SapphireXR_App.Models
             InterlockEnables[0] = SetBit(onOff, InterlockEnables[0], bit);
             Ads.WriteAny(hInterlockEnable[0], InterlockEnables[0]);
         }
-
-        //public static void WriteBuzzerOnOff(bool onOff)
-        //{
-        //    WriteFirstInterlockSetting(onOff, 2);
-        //}
 
         public static void WriteInterlockEnableState(bool onOff, InterlockEnableSetting interlockEnableSetting)
         {
