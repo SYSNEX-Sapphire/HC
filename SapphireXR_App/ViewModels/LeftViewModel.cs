@@ -2,7 +2,6 @@
 using SapphireXR_App.Common;
 using System.Windows.Media;
 using System.Windows;
-using System.Collections;
 using System.ComponentModel;
 using TwinCAT.Ads;
 using SapphireXR_App.Enums;
@@ -70,95 +69,148 @@ namespace SapphireXR_App.ViewModels
                         case nameof(V02):
                         case nameof(V03):
                         case nameof(V15):
-                            if (V02 == true && V15 == true)
+                            if(V02 == true && V03 == true &&V15 == true)
                             {
-                                GaliumBoatInletGas = vm.Gas2;
-                                GaliumBoatInletGasColor = Gas2Color;
+                                GaliumBoatInletGas1 = vm.Gas1;
+                                GaliumBoatInletGas1Color = Gas1Color;
+                                GaliumBoatInletGasGasSeparator= " / ";
+                                GaliumBoatInletGas2 = vm.Gas2;
+                                GaliumBoatInletGas2Color = Gas2Color;
+                            }
+                            else if (V02 == true && V15 == true)
+                            {
+                                GaliumBoatInletGas1 = vm.Gas2;
+                                GaliumBoatInletGas1Color = Gas2Color;
+                                GaliumBoatInletGas2 = GaliumBoatInletGasGasSeparator = "";
                             }
                             else if (V03 == true && V15 == true)
                             {
-                                GaliumBoatInletGas = vm.Gas1;
-                                GaliumBoatInletGasColor = Gas1Color;
+                                GaliumBoatInletGas1 = vm.Gas1;
+                                GaliumBoatInletGas1Color = Gas1Color;
+                                GaliumBoatInletGas2 = GaliumBoatInletGasGasSeparator = "";
                             }
                             else
                             {
-                                GaliumBoatInletGas = "";
+                                GaliumBoatInletGas1 = GaliumBoatInletGas2 = GaliumBoatInletGasGasSeparator = "";
                             }
                             break;
 
                         case nameof(V04):
                         case nameof(V05):
                         case nameof(V16):
-                            if (V04 == true && V16 == true)
+                            if(V04 == true && V05 == true && V16 == true)
                             {
-                                AmmoniaInletTubeGas = vm.Gas3;
-                                AmmoniaInletTubeGasColor = Gas3Color;
+                                AmmoniaInletTubeGas1 = vm.Gas1;
+                                AmmoniaInletTubeGas1Color = Gas1Color;
+                                AmmoniaInletTubeGasSeparator = " / ";
+                                AmmoniaInletTubeGas2 = vm.Gas3;
+                                AmmoniaInletTubeGas2Color = Gas3Color;
+                            }
+                            else if (V04 == true && V16 == true)
+                            {
+                                AmmoniaInletTubeGas1 = vm.Gas3;
+                                AmmoniaInletTubeGas1Color = Gas3Color;
+                                AmmoniaInletTubeGas2 = AmmoniaInletTubeGasSeparator = "";
                             }
                             else if (V05 == true && V16 == true)
                             {
-                                AmmoniaInletTubeGas = vm.Gas1;
-                                AmmoniaInletTubeGasColor = Gas1Color;
+                                AmmoniaInletTubeGas1 = vm.Gas1;
+                                AmmoniaInletTubeGas1Color = Gas1Color;
+                                AmmoniaInletTubeGas2 = AmmoniaInletTubeGasSeparator = "";
                             }
                             else
                             {
-                                AmmoniaInletTubeGas = "";
+                                AmmoniaInletTubeGas1 = AmmoniaInletTubeGas2 = AmmoniaInletTubeGasSeparator = "";
                             }
                             break;
 
                         case nameof(V06):
                         case nameof(V07):
                         case nameof(V17):
+                            if(V06 == true && V07 == true && V17 == true)
+                            {
+                                AluminuimBoatInletGas1 = vm.Gas1;
+                                AluminuimBoatInletGas1Color = Gas1Color;
+                                AluminuimBoatInletGasSeperator = " / ";
+                                AluminuimBoatInletGas2 = vm.Gas2;
+                                AluminuimBoatInletGas2Color = Gas2Color;
+                            }
+                            else
                             if (V06 == true && V17 == true)
                             {
-                                AluminuimBoatInletGas = vm.Gas2;
-                                AluminuimBoatInletGasColor = Gas2Color;
+                                AluminuimBoatInletGas1 = vm.Gas2;
+                                AluminuimBoatInletGas1Color = Gas2Color;
+                                AluminuimBoatInletGas2 = AluminuimBoatInletGasSeperator = "";
                             }
                             else if (V07 == true && V17 == true)
                             {
-                                AluminuimBoatInletGas = vm.Gas1;
-                                AluminuimBoatInletGasColor = Gas1Color;
+                                AluminuimBoatInletGas1 = vm.Gas1;
+                                AluminuimBoatInletGas1Color = Gas1Color;
+                                AluminuimBoatInletGas2 = AluminuimBoatInletGasSeperator = "";
                             }
                             else
                             {
-                                AluminuimBoatInletGas = "";
+                                AluminuimBoatInletGas1 = AluminuimBoatInletGas2 = AluminuimBoatInletGasSeperator = "";
                             }
                             break;
 
                         case nameof(V08):
                         case nameof(V09):
                         case nameof(V18):
+                            if(V08 == true && V09 == true && V18 == true)
+                            {
+                                EtchingTubeInletGas1 = vm.Gas1;
+                                EtchingTubeInletGas1Color = Gas1Color;
+                                EtchingTubeInletGasSeperator = " / ";
+                                EtchingTubeInletGas2 = vm.Gas2;
+                                EtchingTubeInletGas2Color = Gas2Color;
+                            }
+                            else
                             if (V08 == true && V18 == true)
                             {
-                                EtchingTubeInletGas = vm.Gas2;
-                                EtchingTubeInletGasColor = Gas2Color;
+                                EtchingTubeInletGas1 = vm.Gas2;
+                                EtchingTubeInletGas1Color = Gas2Color;
+                                EtchingTubeInletGas2 = EtchingTubeInletGasSeperator = "";
                             }
                             else if (V09 == true && V18 == true)
                             {
-                                EtchingTubeInletGas = vm.Gas1;
-                                EtchingTubeInletGasColor = Gas1Color;
+                                EtchingTubeInletGas1 = vm.Gas1;
+                                EtchingTubeInletGas1Color = Gas1Color;
+                                EtchingTubeInletGas2 = EtchingTubeInletGasSeperator = "";
                             }
                             else
                             {
-                                EtchingTubeInletGas = "";
+                                EtchingTubeInletGas1 = EtchingTubeInletGas2 = EtchingTubeInletGasSeperator = "";
                             }
                             break;
 
                         case nameof(V10):
                         case nameof(V11):
                         case nameof(V19):
+                            if(V10 == true && V11 == true && V19 == true)
+                            {
+                                H2O2InletGas1 = vm.Gas1;
+                                H2O2InletGas1Color = Gas1Color;
+                                H2O2InletGasSeperator = " / ";
+                                H2O2InletGas2 = vm.Gas4;
+                                H2O2InletGas2Color = Gas4Color;
+                            }
+                            else
                             if (V10 == true && V19 == true)
                             {
-                                H2O2InletGas = vm.Gas4;
-                                H2O2InletGasColor = Gas4Color;
+                                H2O2InletGas1 = vm.Gas4;
+                                H2O2InletGas1Color = Gas4Color;
+                                H2O2InletGas2 = H2O2InletGasSeperator = "";
                             }
                             else if (V11 == true && V19 == true)
                             {
-                                H2O2InletGas = vm.Gas1;
-                                H2O2InletGasColor = Gas1Color;
+                                H2O2InletGas1 = vm.Gas1;
+                                H2O2InletGas1Color = Gas1Color;
+                                H2O2InletGas2 = H2O2InletGasSeperator = "";
                             }
                             else
                             {
-                                H2O2InletGas = "";
+                                H2O2InletGas1 = H2O2InletGas2 = H2O2InletGasSeperator = "";
                             }
                             break;
 
@@ -307,30 +359,61 @@ namespace SapphireXR_App.ViewModels
             [ObservableProperty]
             private string backgroundInletGas = "";
             [ObservableProperty]
-            private string galiumBoatInletGas = "";
+            private string galiumBoatInletGas1 = "";
             [ObservableProperty]
-            private string ammoniaInletTubeGas = "";
+            private string ammoniaInletTubeGas1 = "";
             [ObservableProperty]
-            private string aluminuimBoatInletGas = "";
+            private string aluminuimBoatInletGas1 = "";
             [ObservableProperty]
-            private string etchingTubeInletGas = "";
+            private string etchingTubeInletGas1 = "";
             [ObservableProperty]
-            private string h2O2InletGas = "";
+            private string h2O2InletGas1 = "";
+            [ObservableProperty]
+            private string galiumBoatInletGas2 = "";
+            [ObservableProperty]
+            private string ammoniaInletTubeGas2 = "";
+            [ObservableProperty]
+            private string aluminuimBoatInletGas2 = "";
+            [ObservableProperty]
+            private string etchingTubeInletGas2 = "";
+            [ObservableProperty]
+            private string h2O2InletGas2 = "";
             [ObservableProperty]
             private string backFlangeInletGas = "";
 
             [ObservableProperty]
+            private string galiumBoatInletGasGasSeparator = "";
+            [ObservableProperty]
+            private string ammoniaInletTubeGasSeparator = "";
+            [ObservableProperty]
+            private string aluminuimBoatInletGasSeperator = "";
+            [ObservableProperty]
+            private string etchingTubeInletGasSeperator = "";
+            [ObservableProperty]
+            private string h2O2InletGasSeperator = "";
+
+            [ObservableProperty]
             private Brush backgroundInletGasColor = Brushes.Transparent;
             [ObservableProperty]
-            private Brush galiumBoatInletGasColor = Brushes.Transparent;
+            private Brush galiumBoatInletGas1Color = Brushes.Transparent;
             [ObservableProperty]
-            private Brush ammoniaInletTubeGasColor = Brushes.Transparent;
+            private Brush ammoniaInletTubeGas1Color = Brushes.Transparent;
             [ObservableProperty]
-            private Brush aluminuimBoatInletGasColor = Brushes.Transparent;
+            private Brush aluminuimBoatInletGas1Color = Brushes.Transparent;
             [ObservableProperty]
-            private Brush etchingTubeInletGasColor = Brushes.Transparent;
+            private Brush etchingTubeInletGas1Color = Brushes.Transparent;
             [ObservableProperty]
-            private Brush h2O2InletGasColor = Brushes.Transparent;
+            private Brush h2O2InletGas1Color = Brushes.Transparent;
+            [ObservableProperty]
+            private Brush galiumBoatInletGas2Color = Brushes.Transparent;
+            [ObservableProperty]
+            private Brush ammoniaInletTubeGas2Color = Brushes.Transparent;
+            [ObservableProperty]
+            private Brush aluminuimBoatInletGas2Color = Brushes.Transparent;
+            [ObservableProperty]
+            private Brush etchingTubeInletGas2Color = Brushes.Transparent;
+            [ObservableProperty]
+            private Brush h2O2InletGas2Color = Brushes.Transparent;
             [ObservableProperty]
             private Brush backFlangeInletGasColor = Brushes.Transparent;
         }
@@ -346,12 +429,22 @@ namespace SapphireXR_App.ViewModels
 
             public void reset()
             {
-                GaliumBoatInletGas = "";
+                GaliumBoatInletGas1 = "";
+                GaliumBoatInletGas2 = "";
+                GaliumBoatInletGasGasSeparator = "";
                 BackFlangeInletGas = "";
-                AmmoniaInletTubeGas = "";
-                AluminuimBoatInletGas = "";
-                EtchingTubeInletGas = "";
-                H2O2InletGas = "";
+                AmmoniaInletTubeGas1 = "";
+                AmmoniaInletTubeGas2 = "";
+                AmmoniaInletTubeGasSeparator = "";
+                AluminuimBoatInletGas1 = "";
+                AluminuimBoatInletGas2 = "";
+                AluminuimBoatInletGasSeperator = "";
+                EtchingTubeInletGas1 = "";
+                EtchingTubeInletGas2 = "";
+                EtchingTubeInletGasSeperator = "";
+                H2O2InletGas1 = "";
+                H2O2InletGas2 = "";
+                H2O2InletGasSeperator = "";
                 BackgroundInletGas = "";
             }
         }

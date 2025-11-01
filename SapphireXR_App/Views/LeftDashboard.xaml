@@ -184,7 +184,11 @@
                                 <Border.Margin>
                                     <Thickness Top="{StaticResource p_2}" />
                                 </Border.Margin>
-                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGas1}" Foreground="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGas1Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGasGasSeparator}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGas2}" Foreground="{Binding CurrentSourceStatusViewModel.GaliumBoatInletGas2Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                </StackPanel>
                             </Border>
                             <TextBlock Grid.Row="6" Grid.Column="0" Text="Ammonia Inlet Tube" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
                                 <TextBlock.Margin>
@@ -195,7 +199,11 @@
                                 <Border.Margin>
                                     <Thickness Top="{StaticResource p_2}" />
                                 </Border.Margin>
-                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGas}" Foreground="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGas1}" Foreground="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGas1Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGasSeparator}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGas2}" Foreground="{Binding CurrentSourceStatusViewModel.AmmoniaInletTubeGas2Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                </StackPanel>
                             </Border>
                             <TextBlock Grid.Row="9" Grid.Column="0" Text="Aluminum Boat Inlet" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
                                 <TextBlock.Margin>
@@ -206,7 +214,11 @@
                                 <Border.Margin>
                                     <Thickness Top="{StaticResource p_2}" />
                                 </Border.Margin>
-                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGas1}" Foreground="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGas1Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGasSeperator}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGas2}" Foreground="{Binding CurrentSourceStatusViewModel.AluminuimBoatInletGas2Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                </StackPanel>
                             </Border>
                             <TextBlock Grid.Row="12" Grid.Column="0" Text="Etching Tube Inlet" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
                                 <TextBlock.Margin>
@@ -217,7 +229,11 @@
                                 <Border.Margin>
                                     <Thickness Top="{StaticResource p_2}" />
                                 </Border.Margin>
-                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGas}" Foreground="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGas1}" Foreground="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGas1Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGasSeperator}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGas2}" Foreground="{Binding CurrentSourceStatusViewModel.EtchingTubeInletGas2Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                </StackPanel>
                             </Border>
                             <TextBlock Grid.Row="15" Grid.Column="0" Text="H2 / O2 Inlet" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
                                 <TextBlock.Margin>
@@ -228,7 +244,11 @@
                                 <Border.Margin>
                                     <Thickness Top="{StaticResource p_2}" />
                                 </Border.Margin>
-                                <TextBlock Text="{Binding CurrentSourceStatusViewModel.H2O2InletGas}" Foreground="{Binding CurrentSourceStatusViewModel.H2O2InletGasColor}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.H2O2InletGas1}" Foreground="{Binding CurrentSourceStatusViewModel.H2O2InletGas1Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.H2O2InletGasSeperator}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                    <TextBlock Text="{Binding CurrentSourceStatusViewModel.H2O2InletGas2}" Foreground="{Binding CurrentSourceStatusViewModel.H2O2InletGas2Color}" Style="{StaticResource SourceStatusIndicatorText}" />
+                                </StackPanel>
                             </Border>
                             <TextBlock Grid.Row="18" Grid.Column="0" Text="Back Flange" HorizontalAlignment="Left" Foreground="{DynamicResource Gray_900}" FontSize="12">
                                 <TextBlock.Margin>
@@ -245,7 +265,6 @@
                     </StackPanel>
                 </Border>
             </Grid>
-
         </Grid>
     </Grid>
 </Page>

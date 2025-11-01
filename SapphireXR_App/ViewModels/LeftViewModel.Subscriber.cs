@@ -353,33 +353,53 @@ namespace SapphireXR_App.ViewModels
                 {
                     void updateGasLabel(string prevGasName, string gasName, SourceStatusViewModel sourceStatusViewModel)
                     {
+                        if (prevGasName == sourceStatusViewModel.BackgroundInletGas)
+                        {
+                            sourceStatusViewModel.BackgroundInletGas = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.AluminuimBoatInletGas1)
+                        {
+                            sourceStatusViewModel.AluminuimBoatInletGas1 = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.AluminuimBoatInletGas2)
+                        {
+                            sourceStatusViewModel.AluminuimBoatInletGas2 = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.AmmoniaInletTubeGas1)
+                        {
+                            sourceStatusViewModel.AmmoniaInletTubeGas1 = gasName;
+                        }
+                        if (prevGasName == sourceStatusViewModel.AmmoniaInletTubeGas2)
+                        {
+                            sourceStatusViewModel.AmmoniaInletTubeGas2 = gasName;
+                        }
                         if (prevGasName == sourceStatusViewModel.BackFlangeInletGas)
                         {
                             sourceStatusViewModel.BackFlangeInletGas = gasName;
                         }
-                        if (prevGasName == sourceStatusViewModel.AluminuimBoatInletGas)
+                        if (prevGasName == sourceStatusViewModel.H2O2InletGas1)
                         {
-                            sourceStatusViewModel.AluminuimBoatInletGas = gasName;
+                            sourceStatusViewModel.H2O2InletGas1 = gasName;
                         }
-                        if (prevGasName == sourceStatusViewModel.AmmoniaInletTubeGas)
+                        if (prevGasName == sourceStatusViewModel.H2O2InletGas2)
                         {
-                            sourceStatusViewModel.AmmoniaInletTubeGas = gasName;
+                            sourceStatusViewModel.H2O2InletGas2 = gasName;
                         }
-                        if (prevGasName == sourceStatusViewModel.BackFlangeInletGas)
+                        if (prevGasName == sourceStatusViewModel.GaliumBoatInletGas1)
                         {
-                            sourceStatusViewModel.BackFlangeInletGas = gasName;
+                            sourceStatusViewModel.GaliumBoatInletGas1 = gasName;
                         }
-                        if (prevGasName == sourceStatusViewModel.H2O2InletGas)
+                        if (prevGasName == sourceStatusViewModel.GaliumBoatInletGas2)
                         {
-                            sourceStatusViewModel.H2O2InletGas = gasName;
+                            sourceStatusViewModel.GaliumBoatInletGas2 = gasName;
                         }
-                        if (prevGasName == sourceStatusViewModel.GaliumBoatInletGas)
+                        if (prevGasName == sourceStatusViewModel.EtchingTubeInletGas1)
                         {
-                            sourceStatusViewModel.GaliumBoatInletGas = gasName;
+                            sourceStatusViewModel.EtchingTubeInletGas1 = gasName;
                         }
-                        if (prevGasName == sourceStatusViewModel.EtchingTubeInletGas)
+                        if (prevGasName == sourceStatusViewModel.EtchingTubeInletGas2)
                         {
-                            sourceStatusViewModel.EtchingTubeInletGas = gasName;
+                            sourceStatusViewModel.EtchingTubeInletGas2 = gasName;
                         }
                     }
                     if(leftViewModel.sourceStatusFromCurrentPLCStateViewModel != null)
